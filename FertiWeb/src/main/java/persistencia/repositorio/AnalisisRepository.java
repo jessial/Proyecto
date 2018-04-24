@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import persistencia.entidad.AnalisisEntidad;
 
-public interface AnalisisRepository extends JpaRepository<AnalisisEntidad, Long> {
+public interface AnalisisRepository extends JpaRepository<AnalisisEntidad, Integer> {
 
 }

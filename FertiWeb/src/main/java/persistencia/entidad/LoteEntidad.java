@@ -2,15 +2,12 @@ package persistencia.entidad;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Lote")
 public class LoteEntidad {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
 	@Column(nullable = false)
 	private String ubicacion;
@@ -18,4 +15,17 @@ public class LoteEntidad {
 	private int area;
 	@Column(nullable = false)
 	private UsuarioEntidad usuario;
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	public String getUbicacion() {
+		return ubicacion;
+	}
+	public int getArea() {
+		return area;
+	}
+	public UsuarioEntidad getUsuario() {
+		return usuario;
+	}
 }

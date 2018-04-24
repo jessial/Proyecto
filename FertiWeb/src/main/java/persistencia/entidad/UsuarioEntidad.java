@@ -8,7 +8,6 @@ import javax.persistence.Id;
 public class UsuarioEntidad {
 
 	@Id
-	@Column(nullable = false)
 	private Long cedula;
 	@Column(nullable = false)
 	private String nombre;
@@ -18,5 +17,21 @@ public class UsuarioEntidad {
 	private Long telefono;
 	@Column
 	private String email;
+	
+	public Long getCedula() {
+		return cedula;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public Long getTelefono() {
+		return telefono;
+	}
+	public String getEmail() {
+		return email;
+	}
 	
 }

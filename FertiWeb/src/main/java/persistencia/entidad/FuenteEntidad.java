@@ -4,18 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "TipoUsuario")
-public class TipoUsuarioEntidad {
-
+@Entity(name = "Fuente")
+public class FuenteEntidad {
+	
 	@Id
 	private int codigo;
 	@Column(nullable = false)
-	private String descripcion;
+	private String producto;
 	
 	public int getCodigo() {
 		return codigo;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getProducto() {
+		return producto;
 	}
 }

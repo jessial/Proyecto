@@ -2,10 +2,10 @@ package dominio;
 
 public class Lote {
 
+	private Usuario usuario;
 	private int codigo;
 	private String ubicacion;
 	private int area;
-	private Usuario usuario;
 	
 	public int getCodigo() {
 		return codigo;

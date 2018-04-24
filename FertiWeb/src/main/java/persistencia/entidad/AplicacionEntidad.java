@@ -4,15 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Aplicacion")
 public class AplicacionEntidad {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
 	@Column(nullable = false)
 	private String producto;
@@ -20,4 +17,18 @@ public class AplicacionEntidad {
 	private Double cantidad;
 	@Column(nullable = false)
 	private Date fechaAplicacion;
+	
+	public int getCodigo() {
+		return codigo;
+	}
+	public String getProducto() {
+		return producto;
+	}
+	public Double getCantidad() {
+		return cantidad;
+	}
+	public Date getFechaAplicacion() {
+		return fechaAplicacion;
+	}
+	
 }
