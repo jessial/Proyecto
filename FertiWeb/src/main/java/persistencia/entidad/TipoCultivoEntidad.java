@@ -8,10 +8,11 @@ import javax.persistence.Id;
 public class TipoCultivoEntidad {
 	
 	@Id
+	@Column(name="tc_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="tc_variedad",nullable = false)
 	private String variedad;
-	@Column(nullable = false)
+	@Column(name="tc_nombre",nullable = false)
 	private String nombre;
 	
 	public int getCodigo() {

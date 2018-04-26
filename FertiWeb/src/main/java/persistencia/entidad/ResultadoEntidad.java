@@ -10,32 +10,23 @@ import javax.persistence.Id;
 public class ResultadoEntidad {
 
 	@Id
+	@Column(name="res_codigo")
 	private int codigo;
-	@Column(nullable = false)
-	private AnalisisEntidad analisis;
-	@Column(nullable = false)
-	private UsuarioEntidad usuario;
-	@Column(nullable = false)
+	@Column(name="res_fechaAnalisis",nullable = false)
 	private Date fechaAnalisis;
-	@Column
+	@Column(name="res_camg")
 	private Double caMg;
-	@Column
+	@Column(name="res_cak")
 	private Double caK;
-	@Column
+	@Column(name="res_mgk")
 	private Double mgK;
-	@Column
+	@Column(name="res_camgk")
 	private Double caMgK;
-	@Column
+	@Column(name="res_satbases")
 	private Double satBases;
 	
 	public int getCodigo() {
 		return codigo;
-	}
-	public AnalisisEntidad getAnalisis() {
-		return analisis;
-	}
-	public UsuarioEntidad getUsuario() {
-		return usuario;
 	}
 	public Date getFechaAnalisis() {
 		return fechaAnalisis;

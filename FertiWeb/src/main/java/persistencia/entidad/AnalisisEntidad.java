@@ -5,66 +5,61 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity(name = "Analisis")
 public class AnalisisEntidad {
 	
 	@Id
+	@Column(name="ana_codigo")
 	private int codigo;
-	@Column(nullable = false)
-	private LoteEntidad lote;
-	@Column(nullable = false)
-	private UsuarioEntidad usuario;
-	@Column(nullable = false)
+	@Column(name="ana_fechaAnalisis",nullable = false)
 	private Date fechaAnalisis;
-	@Column
+	@OneToOne
+	private ResultadoEntidad resultado;
+	@Column(name="ana_ph")
 	private Double ph;
-	@Column
+	@Column(name="ana_mo")
 	private Double mo;
-	@Column
+	@Column(name="ana_n")
 	private Double n;
-	@Column
+	@Column(name="ana_m")
 	private Double m;
-	@Column
+	@Column(name="ana_k")
 	private Double k;
-	@Column
+	@Column(name="ana_mg")
 	private Double mg;
-	@Column
+	@Column(name="ana_ca")
 	private Double ca;
-	@Column
+	@Column(name="ana_al")
 	private Double al;
-	@Column
+	@Column(name="ana_na")
 	private Double na;
-	@Column
+	@Column(name="ana_s")
 	private Double s;
-	@Column
+	@Column(name="ana_fe")
 	private Double fe;
-	@Column
+	@Column(name="ana_b")
 	private Double b;
-	@Column
+	@Column(name="ana_cu")
 	private Double cu;
-	@Column
+	@Column(name="ana_mn")
 	private Double mn;
-	@Column
+	@Column(name="ana_zn")
 	private Double zn;
-	@Column
+	@Column(name="ana_sana")
 	private Double saNa;
-	@Column
+	@Column(name="ana_sak")
 	private Double saK;
-	@Column
+	@Column(name="ana_saca")
 	private Double saCa;
-	@Column
+	@Column(name="ana_samg")
 	private Double saMg;
-	@Column
+	@Column(name="ana_saal")
 	private Double saAl;
+	
 	public int getCodigo() {
 		return codigo;
-	}
-	public LoteEntidad getLote() {
-		return lote;
-	}
-	public UsuarioEntidad getUsuario() {
-		return usuario;
 	}
 	public Date getFechaAnalisis() {
 		return fechaAnalisis;

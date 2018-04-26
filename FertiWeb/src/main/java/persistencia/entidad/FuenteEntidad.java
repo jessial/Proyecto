@@ -8,8 +8,9 @@ import javax.persistence.Id;
 public class FuenteEntidad {
 	
 	@Id
+	@Column(name="fue_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="fue_producto",nullable = false)
 	private String producto;
 	
 	public int getCodigo() {

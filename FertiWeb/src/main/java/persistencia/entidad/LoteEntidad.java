@@ -1,20 +1,27 @@
 package persistencia.entidad;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Lote")
 public class LoteEntidad {
 
 	@Id
+	@Column(name="lot_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="lot_ubicacion",nullable = false)
 	private String ubicacion;
-	@Column(nullable = false)
+	@Column(name="lot_area" ,nullable = false)
 	private int area;
-	@Column(nullable = false)
-	private UsuarioEntidad usuario;
+	@OneToMany(mappedBy="cedula")
+	private List<UsuarioEntidad> usuarioEntidad;
+	@OneToMany(mappedBy="codigo")
+	private List<AnalisisEntidad> analilsisEntidad;
 	
 	public int getCodigo() {
 		return codigo;
@@ -25,7 +32,7 @@ public class LoteEntidad {
 	public int getArea() {
 		return area;
 	}
-	public UsuarioEntidad getUsuario() {
-		return usuario;
+	public List<UsuarioEntidad> getUsuarioEntidad() {
+		return usuarioEntidad;
 	}
 }

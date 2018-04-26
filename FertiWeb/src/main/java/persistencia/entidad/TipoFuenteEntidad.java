@@ -8,10 +8,11 @@ import javax.persistence.Id;
 public class TipoFuenteEntidad {
 	
 	@Id
+	@Column(name="tf_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="tf_nombre",nullable = false)
 	private String nombre;
-	@Column(nullable = false)
+	@Column(name="tf_aporte",nullable = false)
 	private double aporte;
 	
 	public int getCodigo() {

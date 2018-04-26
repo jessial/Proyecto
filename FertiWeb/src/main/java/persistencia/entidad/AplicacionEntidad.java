@@ -10,12 +10,13 @@ import javax.persistence.Id;
 public class AplicacionEntidad {
 
 	@Id
+	@Column(name="apli_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="apli_producto",nullable = false)
 	private String producto;
-	@Column(nullable = false)
+	@Column(name="apli_cantidad",nullable = false)
 	private Double cantidad;
-	@Column(nullable = false)
+	@Column(name="apli_fechaAplicacion",nullable = false)
 	private Date fechaAplicacion;
 	
 	public int getCodigo() {

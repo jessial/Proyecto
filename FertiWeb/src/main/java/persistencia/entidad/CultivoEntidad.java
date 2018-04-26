@@ -6,19 +6,22 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Cultivo")
 public class CultivoEntidad {
 	
 	@Id
+	@Column(name="cul_codigo")
 	private int codigo;
-	@Column(nullable = false)
+	@Column(name="cul_fechaSiembra",nullable = false)
 	private Date fechaSiembra;
-	@Column(nullable = false)
+	@Column(name="cul_fechaCosecha",nullable = false)
 	private Date fechaCosecha;
-	@Column(nullable = false)
+	@ManyToOne
 	private TipoCultivoEntidad tipoCultivo;
-	@Column
+	@OneToMany(mappedBy="codigo")
 	private List<AplicacionEntidad> aplicacionFertilizante;
 	
 	public int getCodigo() {
