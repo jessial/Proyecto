@@ -12,6 +12,7 @@ public class Principal extends AppCompatActivity {
 
     private Button ingresar;
     private Button registrarse;
+    private EditText cedula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,12 @@ public class Principal extends AppCompatActivity {
     private void initComponents() {
         ingresar = findViewById(R.id.btnIngresar);
         registrarse = findViewById(R.id.btnRegistrar);
+        cedula = findViewById(R.id.textCedula);
 
     }
     public void clicIngresar(View view)
     {
-        Intent intent = new Intent(Principal.this, Ingreso.class);
+        Intent intent = new Intent();
         startActivity(intent);
 
     }
