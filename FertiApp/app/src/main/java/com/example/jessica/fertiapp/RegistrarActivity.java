@@ -91,6 +91,7 @@ public class RegistrarActivity extends AppCompatActivity implements AdapterView.
             usuario.setApellido(Apellido);
             usuario.setTelefono(Telefono);
             usuario.setEmail(Email);
+            usuario.setRol(role);
             try {
                 final Dao<Usuario, Integer> usuDao = getHelper().getUsuarioDao();
                 usuDao.create(usuario);
