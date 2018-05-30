@@ -14,6 +14,7 @@ import com.example.jessica.fertiapp.database.Usuario;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.query.In;
 
 import java.sql.SQLException;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
         }
         return databaseHelper;
-
     }
 
     @Override
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Dao<Usuario, Integer> usuarioDao;
     private Usuario usu;
 
     public void OnclickIngresar(View view) throws SQLException {
-        //usu = usuarioDao.queryForId(Integer.parseInt(cedula.getText().toString()));
+        Dao<Usuario, Integer> usuarioDao = getHelper().getUsuarioDao();
+        usu = usuarioDao.queryForId(Integer.parseInt(cedula.getText().toString()));
         if (usu != null) {
             Intent intent = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(intent);

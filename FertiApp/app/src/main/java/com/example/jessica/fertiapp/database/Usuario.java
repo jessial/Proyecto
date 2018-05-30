@@ -1,20 +1,19 @@
 package com.example.jessica.fertiapp.database;
-import android.widget.EditText;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
 public class Usuario {
-    public static final String CEDULA = "usu_cedula";
+    public static final String CEDULA = "_id";
     public static final String NOMBRE = "usu_nombre";
     public static final String APELLIDO = "usu_apellido";
     public static final String TELEFONO = "usu_telefono";
     public static final String EMAIL = "usu_email";
     public static final String ROL = "rol_id";
 
-    @DatabaseField(columnName = CEDULA)
-    public int cedula;
+    @DatabaseField(id = true, columnName = CEDULA)
+    public int id;
     @DatabaseField(columnName = NOMBRE)
     public String nombre;
     @DatabaseField(columnName = APELLIDO)
@@ -31,12 +30,12 @@ public class Usuario {
         super();
     }
 
-    public int getCedula() {
-        return cedula;
+    public int getId() {
+        return id;
     }
 
-    public void setCedula(int cedula) {
-        this.cedula = cedula;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

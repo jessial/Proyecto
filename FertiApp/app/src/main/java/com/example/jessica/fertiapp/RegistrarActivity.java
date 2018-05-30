@@ -1,5 +1,6 @@
 package com.example.jessica.fertiapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +87,7 @@ public class RegistrarActivity extends AppCompatActivity implements AdapterView.
         else if (Apellido.equals(""))Toast.makeText(getApplicationContext(), "Ingrese apellidos", Toast.LENGTH_SHORT).show();
         else {
             final Usuario usuario = new Usuario();
-            usuario.setCedula(Integer.parseInt(Cedula));
+            usuario.setId(Integer.parseInt(Cedula));
             usuario.setNombre(Nombre);
             usuario.setApellido(Apellido);
             usuario.setTelefono(Telefono);
@@ -95,6 +96,9 @@ public class RegistrarActivity extends AppCompatActivity implements AdapterView.
                 final Dao<Usuario, Integer> usuDao = getHelper().getUsuarioDao();
                 usuDao.create(usuario);
                 Toast.makeText(getApplicationContext(), "La información se guardó con éxito", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+                startActivity(intent);
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
