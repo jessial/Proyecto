@@ -1,4 +1,4 @@
-package com.example.jessica.fertiapp.database;
+package com.example.jessica.fertiapp.api;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 

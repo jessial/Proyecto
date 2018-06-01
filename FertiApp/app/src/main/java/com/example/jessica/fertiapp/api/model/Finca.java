@@ -1,4 +1,4 @@
-package com.example.jessica.fertiapp.database;
+package com.example.jessica.fertiapp.api.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

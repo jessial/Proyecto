@@ -1,12 +1,18 @@
-package com.example.jessica.fertiapp.database;
+package com.example.jessica.fertiapp.api;
 
-import java.io.File;
 import java.sql.SQLException;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.jessica.fertiapp.R;
-
+import com.example.jessica.fertiapp.api.model.Analisis;
+import com.example.jessica.fertiapp.api.model.CultivoSembrado;
+import com.example.jessica.fertiapp.api.model.Finca;
+import com.example.jessica.fertiapp.api.model.Parcela;
+import com.example.jessica.fertiapp.api.model.Recomendacion;
+import com.example.jessica.fertiapp.api.model.Requerimiento;
+import com.example.jessica.fertiapp.api.model.Resultado;
+import com.example.jessica.fertiapp.api.model.Rol;
+import com.example.jessica.fertiapp.api.model.Usuario;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;

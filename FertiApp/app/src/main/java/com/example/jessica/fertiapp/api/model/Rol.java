@@ -1,4 +1,4 @@
-package com.example.jessica.fertiapp.database;
+package com.example.jessica.fertiapp.api.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -32,4 +32,8 @@ public class Rol {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 }

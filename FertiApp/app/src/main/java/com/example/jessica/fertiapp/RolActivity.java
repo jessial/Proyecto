@@ -8,9 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.jessica.fertiapp.database.DatabaseHelper;
-import com.example.jessica.fertiapp.database.Rol;
-import com.example.jessica.fertiapp.database.Usuario;
+import com.example.jessica.fertiapp.api.DatabaseHelper;
+import com.example.jessica.fertiapp.api.model.Rol;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 

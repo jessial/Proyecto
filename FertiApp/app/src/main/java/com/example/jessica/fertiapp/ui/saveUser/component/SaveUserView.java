@@ -1,0 +1,138 @@
+package com.example.jessica.fertiapp.ui.saveUser.component;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.jessica.fertiapp.MainActivity;
+import com.example.jessica.fertiapp.R;
+import com.example.jessica.fertiapp.api.DatabaseHelper;
+import com.example.jessica.fertiapp.api.model.Rol;
+import com.example.jessica.fertiapp.api.model.Usuario;
+import com.example.jessica.fertiapp.ui.saveUser.SaveUser;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
+
+/**
+ * Created by Jessica on 31/5/2018.
+ */
+
+public class SaveUserView extends AppCompatActivity implements SaveUser.UserView, AdapterView.OnItemSelectedListener {
+    private SaveUserPresenter presenter = new SaveUserPresenter(new SaveUserRepo(), this) ;
+    private DatabaseHelper databaseHelper = null;
+    private EditText cedula;
+    private EditText nombre;
+    private EditText apellido;
+    private EditText telefono;
+    private EditText email;
+    private Spinner listaSpinnerRol;
+    private String[] listaRol = {"Productor", "Vendedor"};
+    private String rol;
+    private Button registrar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registrar);
+        initComponents();
+    }
+    public void initComponents() {
+        DatabaseHelper databaseHelper = null;
+        presenter =  new SaveUserPresenter(new SaveUserRepo(), this);
+        cedula = findViewById(R.id.cedula);
+        nombre = findViewById(R.id.nombre);
+        apellido = findViewById(R.id.apellido);
+        telefono = findViewById(R.id.telefono);
+        email = findViewById(R.id.email);
+        registrar = findViewById(R.id.registrar);
+        listaSpinnerRol= findViewById(R.id.rol);
+        listaSpinnerRol.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaRol);
+        listaSpinnerRol.setAdapter(arrayAdapter);
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        rol = listaRol[i];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onSaveUser(View view) {
+        Usuario user = getUser();
+        Dao usuDao = null;
+        try{
+            usuDao = getHelper().getUsuarioDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        presenter.saveUser(user, usuDao);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void goToMenuActivity() {
+        Intent intent = new Intent(SaveUserView.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private Usuario getUser() {
+        Rol role = new Rol();
+        role.setNombre(rol);
+        String Cedula = (cedula.getText().toString());
+        String Nombre = nombre.getText().toString();
+        String Apellido = apellido.getText().toString();
+        String Telefono = telefono.getText().toString();
+        String Email = email.getText().toString();
+        Usuario usuario = new Usuario();
+        if (Cedula.equals(""))
+            Toast.makeText(getApplicationContext(), "Ingrese cédula", Toast.LENGTH_SHORT).show();
+        else if (Nombre.equals(""))
+            Toast.makeText(getApplicationContext(), "Ingrese nombres", Toast.LENGTH_SHORT).show();
+        else if (Apellido.equals(""))
+            Toast.makeText(getApplicationContext(), "Ingrese apellidos", Toast.LENGTH_SHORT).show();
+        else {
+            usuario.setId(Integer.parseInt(Cedula));
+            usuario.setNombre(Nombre);
+            usuario.setApellido(Apellido);
+            usuario.setTelefono(Telefono);
+            usuario.setEmail(Email);
+            usuario.setRol(role);
+        }
+        return usuario;
+    }
+
+    private DatabaseHelper getHelper(){
+        if(databaseHelper == null){
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(databaseHelper != null){
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+}

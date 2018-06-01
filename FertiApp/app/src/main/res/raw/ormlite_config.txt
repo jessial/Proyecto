@@ -2,7 +2,7 @@
 # generated on 2018/05/29 09:09:31
 #
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Analisis
+dataClass=com.example.jessica.fertiapp.api.model.Analisis
 tableName=analisis
 # --table-fields-start--
 # --field-start--
@@ -103,7 +103,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.CultivoSembrado
+dataClass=com.example.jessica.fertiapp.api.model.CultivoSembrado
 tableName=cultivosembrado
 # --table-fields-start--
 # --field-start--
@@ -123,7 +123,7 @@ columnName=cus_variedad
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Finca
+dataClass=com.example.jessica.fertiapp.api.model.Finca
 tableName=finca
 # --table-fields-start--
 # --field-start--
@@ -151,7 +151,7 @@ columnName=fin_propietario
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Fuente
+dataClass=com.example.jessica.fertiapp.api.model.Fuente
 tableName=fuente
 # --table-fields-start--
 # --field-start--
@@ -172,7 +172,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Parcela
+dataClass=com.example.jessica.fertiapp.api.model.Parcela
 tableName=parcela
 # --table-fields-start--
 # --field-start--
@@ -198,7 +198,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Recomendacion
+dataClass=com.example.jessica.fertiapp.api.model.Recomendacion
 tableName=recomendacion
 # --table-fields-start--
 # --field-start--
@@ -227,7 +227,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Requerimiento
+dataClass=com.example.jessica.fertiapp.api.model.Requerimiento
 tableName=requerimiento
 # --table-fields-start--
 # --field-start--
@@ -252,7 +252,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Resultado
+dataClass=com.example.jessica.fertiapp.api.model.Resultado
 tableName=resultado
 # --table-fields-start--
 # --field-start--
@@ -289,7 +289,7 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Rol
+dataClass=com.example.jessica.fertiapp.api.model.Rol
 tableName=rol
 # --table-fields-start--
 # --field-start--
@@ -305,7 +305,7 @@ columnName=rol_nombre
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.TipoFuente
+dataClass=com.example.jessica.fertiapp.api.model.TipoFuente
 tableName=tipofuente
 # --table-fields-start--
 # --field-start--
@@ -325,7 +325,7 @@ columnName=tf_aporte
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.example.jessica.fertiapp.database.Usuario
+dataClass=com.example.jessica.fertiapp.api.model.Usuario
 tableName=usuario
 # --table-fields-start--
 # --field-start--
