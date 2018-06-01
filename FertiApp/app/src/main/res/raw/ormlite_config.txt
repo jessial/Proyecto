@@ -1,0 +1,359 @@
+#
+# generated on 2018/05/29 09:09:31
+#
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Analisis
+tableName=analisis
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=ana_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=fecha
+columnName=ana_fecha
+# --field-end--
+# --field-start--
+fieldName=ph
+columnName=ana_ph
+# --field-end--
+# --field-start--
+fieldName=mo
+columnName=ana_mo
+# --field-end--
+# --field-start--
+fieldName=n
+columnName=ana_n
+# --field-end--
+# --field-start--
+fieldName=p
+columnName=ana_p
+# --field-end--
+# --field-start--
+fieldName=k
+columnName=ana_k
+# --field-end--
+# --field-start--
+fieldName=mg
+columnName=ana_mg
+# --field-end--
+# --field-start--
+fieldName=ca
+columnName=ana_ca
+# --field-end--
+# --field-start--
+fieldName=al
+columnName=ana_al
+# --field-end--
+# --field-start--
+fieldName=na
+columnName=ana_na
+# --field-end--
+# --field-start--
+fieldName=s
+columnName=ana_s
+# --field-end--
+# --field-start--
+fieldName=f
+columnName=ana_fe
+# --field-end--
+# --field-start--
+fieldName=b
+columnName=ana_b
+# --field-end--
+# --field-start--
+fieldName=cu
+columnName=ana_cu
+# --field-end--
+# --field-start--
+fieldName=mn
+columnName=ana_mn
+# --field-end--
+# --field-start--
+fieldName=zn
+columnName=ana_zn
+# --field-end--
+# --field-start--
+fieldName=satna
+columnName=ana_satna
+# --field-end--
+# --field-start--
+fieldName=satk
+columnName=ana_satk
+# --field-end--
+# --field-start--
+fieldName=satca
+columnName=ana_satca
+# --field-end--
+# --field-start--
+fieldName=satmg
+columnName=ana_satmg
+# --field-end--
+# --field-start--
+fieldName=satal
+columnName=ana_satal
+# --field-end--
+# --field-start--
+fieldName=parcela
+columnName=parl_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.CultivoSembrado
+tableName=cultivosembrado
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=cus_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+columnName=cus_nombre
+# --field-end--
+# --field-start--
+fieldName=variedad
+columnName=cus_variedad
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Finca
+tableName=finca
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=fin_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=ubicacion
+columnName=fin_ubicacion
+# --field-end--
+# --field-start--
+fieldName=area
+columnName=fin_area
+# --field-end--
+# --field-start--
+fieldName=nombre
+columnName=fin_nombre
+# --field-end--
+# --field-start--
+fieldName=propietario
+columnName=fin_propietario
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Fuente
+tableName=fuente
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=fue_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=producto
+columnName=fue_producto
+# --field-end--
+# --field-start--
+fieldName=tipoFuente
+columnName=tf_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Parcela
+tableName=parcela
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=parl_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=fecha_siembra
+columnName=parl_fecha_siembra
+# --field-end--
+# --field-start--
+fieldName=cultivo_sembrado
+columnName=cus_codigo
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=finca
+columnName=fin_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Recomendacion
+tableName=recomendacion
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=rec_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=producto
+columnName=rec_producto
+# --field-end--
+# --field-start--
+fieldName=cantidad
+columnName=rec_cantidad
+# --field-end--
+# --field-start--
+fieldName=fecha
+columnName=rec_fecha
+# --field-end--
+# --field-start--
+fieldName=parcela
+columnName=parl_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Requerimiento
+tableName=requerimiento
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=req_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nutriente
+columnName=req_nutriente
+# --field-end--
+# --field-start--
+fieldName=cantidad
+columnName=req_cantidad
+# --field-end--
+# --field-start--
+fieldName=cultivoSembrado
+columnName=cus_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Resultado
+tableName=resultado
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=rel_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=camg
+columnName=rel_camg
+# --field-end--
+# --field-start--
+fieldName=cak
+columnName=rel_cak
+# --field-end--
+# --field-start--
+fieldName=mgk
+columnName=rel_mgk
+# --field-end--
+# --field-start--
+fieldName=camgk
+columnName=rel_camgk
+# --field-end--
+# --field-start--
+fieldName=satbases
+columnName=rel_satbases
+# --field-end--
+# --field-start--
+fieldName=parcela
+columnName=parl_codigo
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Rol
+tableName=rol
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=rol_id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+columnName=rol_nombre
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.TipoFuente
+tableName=tipofuente
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=tf_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+columnName=tf_nombre
+# --field-end--
+# --field-start--
+fieldName=aporte
+columnName=tf_aporte
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.jessica.fertiapp.database.Usuario
+tableName=usuario
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=_id
+id=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+columnName=usu_nombre
+# --field-end--
+# --field-start--
+fieldName=apellido
+columnName=usu_apellido
+# --field-end--
+# --field-start--
+fieldName=telefono
+columnName=usu_telefono
+# --field-end--
+# --field-start--
+fieldName=email
+columnName=usu_email
+# --field-end--
+# --field-start--
+fieldName=rol
+columnName=rol_id
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
