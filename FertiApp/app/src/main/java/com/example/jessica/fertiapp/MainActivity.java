@@ -66,4 +66,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, RegistrarActivity.class);
         startActivity(intent);
     }
+    public void OnClicCrearRol(View view){
+        Intent intent = new Intent(MainActivity.this, RolActivity.class );
+        startActivity(intent);
+    }
 }
