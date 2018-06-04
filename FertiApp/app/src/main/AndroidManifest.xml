@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,8 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RolActivity"></activity>
-        <activity android:name=".ui.saveUser.component.SaveUserView"></activity>
+        <activity android:name=".RolActivity" />
+        <activity android:name=".ui.saveUser.component.SaveUserView" />
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".CultivoActivity"></activity>
     </application>
 
 </manifest>

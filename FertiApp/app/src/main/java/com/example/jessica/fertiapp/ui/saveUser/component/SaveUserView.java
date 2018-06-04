@@ -110,7 +110,7 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         else if (Apellido.equals(""))
             Toast.makeText(getApplicationContext(), "Ingrese apellidos", Toast.LENGTH_SHORT).show();
         else {
-            usuario.setId(Integer.parseInt(Cedula));
+            usuario.setCedula(Cedula);
             usuario.setNombre(Nombre);
             usuario.setApellido(Apellido);
             usuario.setTelefono(Telefono);

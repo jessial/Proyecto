@@ -5,20 +5,22 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
 public class Usuario {
-    public static final String CEDULA = "_id";
+    //public static final  String ID = "usu_id";
+    public static final String CEDULA = "usu_cedula";
     public static final String NOMBRE = "usu_nombre";
     public static final String APELLIDO = "usu_apellido";
     public static final String TELEFONO = "usu_telefono";
     public static final String EMAIL = "usu_email";
     public static final String ROL = "rol_id";
 
-    @DatabaseField(id = true, columnName = CEDULA)
-    public int id;
+    /**@DatabaseField(generatedId = true, columnName = ID)
+    private int id; **/
+    @DatabaseField(columnName = CEDULA)
+    public String cedula;
     @DatabaseField(columnName = NOMBRE)
     public String nombre;
     @DatabaseField(columnName = APELLIDO)
     public String apellido;
-
     @DatabaseField(columnName = TELEFONO)
     public String telefono;
     @DatabaseField(columnName = EMAIL)
@@ -30,12 +32,18 @@ public class Usuario {
         super();
     }
 
-    public int getId() {
+   /**public int getId() {
         return id;
-    }
+    }**/
 
-    public void setId(int id) {
+    /**public void setId(int id) {
         this.id = id;
+    }**/
+
+    public String getCedula() {return cedula;}
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getNombre() {

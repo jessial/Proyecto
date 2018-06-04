@@ -13,33 +13,30 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper = null;
     private EditText cedula;
     private Button ingresar;
     private Button registrar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initComponents();
     }
-
     public void initComponents() {
         cedula = findViewById(R.id.cedula);
         ingresar = findViewById(R.id.ingresar);
         registrar = findViewById(R.id.registrar);
     }
-
     private DatabaseHelper getHelper() {
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
         }
         return databaseHelper;
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -49,19 +46,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Usuario usu;
+    private List<Usuario> usu;
 
     public void OnclickIngresar(View view) throws SQLException {
         Dao<Usuario, Integer> usuarioDao = getHelper().getUsuarioDao();
-        usu = usuarioDao.queryForId(Integer.parseInt(cedula.getText().toString()));
-        if (usu != null) {
-            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Por favor registrese", Toast.LENGTH_SHORT).show();
-        }
+        String cedulaConsultar = cedula.getText().toString();
+        try {
+            usu = usuarioDao.queryForEq("usu_cedula", cedulaConsultar);
+            if (usu.size() != 0) {
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Por favor registrese", Toast.LENGTH_SHORT).show();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
     }
-
+    }
     public void OnClickRegistrar(View view){
         Intent intent = new Intent(MainActivity.this, SaveUserView.class);
         startActivity(intent);
