@@ -28,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
 
     }
     public void OnClicCultivo(View view){
-        Intent intent = new Intent(MenuActivity.this, SaveUserView.class);
+        Intent intent = new Intent(MenuActivity.this, MenuCultivoActivity.class);
         startActivity(intent);
     }
     public void OnClicAnalisis(View view){

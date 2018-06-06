@@ -71,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, RolActivity.class );
         startActivity(intent);
     }
+    public void OnClicCrearCultivo(View view){
+        Intent intent = new Intent(MainActivity.this, CrearCultivoActivity.class );
+        startActivity(intent);
+    }
 }

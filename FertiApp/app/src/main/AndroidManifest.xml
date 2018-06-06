@@ -19,7 +19,10 @@
         <activity android:name=".RolActivity" />
         <activity android:name=".ui.saveUser.component.SaveUserView" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".CultivoActivity"></activity>
+        <activity android:name=".MenuCultivoActivity" />
+        <activity android:name=".MenuAnalisisActivity" />
+        <activity android:name=".CrearCultivoActivity" />
+        <activity android:name=".IngresarCultivoActivity"></activity>
     </application>
 
 </manifest>
