@@ -21,6 +21,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by Jessica on 31/5/2018.
@@ -35,8 +36,8 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
     private EditText telefono;
     private EditText email;
     private Spinner listaSpinnerRol;
-    private String[] listaRol = {"Productor", "Vendedor"};
-    private String rol;
+    private Rol[] listaRol;
+    private Rol rol;
     private Button registrar;
 
     @Override
@@ -54,10 +55,26 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         telefono = findViewById(R.id.telefono);
         email = findViewById(R.id.email);
         registrar = findViewById(R.id.registrar);
+        listaRol =  getRoles();
         listaSpinnerRol= findViewById(R.id.rol);
         listaSpinnerRol.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaRol);
         listaSpinnerRol.setAdapter(arrayAdapter);
+    }
+
+    private Rol[] getRoles() {
+        Dao rolDao = null;
+        List listRoles = null;
+        try{
+            rolDao = getHelper().getRolDao();
+            listRoles = rolDao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Rol[] rolesArrar = new Rol[listRoles.size()];
+        rolesArrar = (Rol[]) listRoles.toArray(rolesArrar);
+
+        return rolesArrar;
     }
 
 
@@ -95,8 +112,7 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
     }
 
     private Usuario getUser() {
-        Rol role = new Rol();
-        role.setNombre(rol);
+        Rol role = rol;
         String Cedula = (cedula.getText().toString());
         String Nombre = nombre.getText().toString();
         String Apellido = apellido.getText().toString();
