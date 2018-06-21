@@ -23,7 +23,11 @@
         <activity android:name=".MenuAnalisisActivity" />
         <activity android:name=".CrearCultivoActivity" />
         <activity android:name=".IngresarParcelaActivity" />
-        <activity android:name=".FincaActivity"></activity>
+        <activity android:name=".FincaActivity" />
+        <activity
+            android:name=".IngresarAnalisis"
+            android:label="@string/title_activity_ingresar_analisis"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

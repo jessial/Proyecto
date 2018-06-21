@@ -19,12 +19,13 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngresarParcelaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private DatabaseHelper databaseHelper = null;
     private Spinner listaSpinnercultivo;
-    private CultivoSembrado[] listaCultivo;
+    private List<CultivoSembrado> listaCultivo;
     private CultivoSembrado cultivoSeleccionado;
     private Spinner listaSpinnervariedad;
     private CultivoSembrado[] listaVariedad;
@@ -57,19 +58,17 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         fechaSiembra = findViewById(R.id.fechaSiembra);
         ingresar = findViewById(R.id.ingresar);
     }
-    private CultivoSembrado[] getCultivoSembrados() {
+    private List<CultivoSembrado> getCultivoSembrados() {
         Dao cultivoSembradoDao = null;
-        List listCultivos = null;
+        List<CultivoSembrado> cultivo = new ArrayList<>();
         try{
             cultivoSembradoDao = getHelper().getCultivoSembradoDao();
-            listCultivos = cultivoSembradoDao.queryForAll();
+            cultivo = cultivoSembradoDao.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        CultivoSembrado[] cultivoArrar = new CultivoSembrado[listCultivos.size()];
-        cultivoArrar = (CultivoSembrado[]) listCultivos.toArray(cultivoArrar);
+        return cultivo;
 
-        return cultivoArrar;
     }
     public void OnClicIngresar(View view){
         String Ubicacion = (ubicacion.getText().toString());
@@ -100,7 +99,7 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        cultivoSeleccionado = listaCultivo[i];
+        cultivoSeleccionado = listaCultivo.get(i);
         variedadSeleccionada = listaVariedad[i];
     }
 
