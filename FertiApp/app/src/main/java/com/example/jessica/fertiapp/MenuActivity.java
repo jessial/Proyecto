@@ -43,4 +43,8 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(MenuActivity.this, SaveUserView.class);
         startActivity(intent);
     }
+    public void OnClicFinca(View view){
+        Intent intent = new Intent(MenuActivity.this, FincaActivity.class);
+        startActivity(intent);
+    }
 }

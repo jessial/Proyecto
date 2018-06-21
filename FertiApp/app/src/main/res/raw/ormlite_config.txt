@@ -1,5 +1,5 @@
 #
-# generated on 2018/06/03 04:29:02
+# generated on 2018/06/06 06:17:48
 #
 # --table-start--
 dataClass=com.example.jessica.fertiapp.api.model.Analisis
@@ -136,16 +136,8 @@ fieldName=ubicacion
 columnName=fin_ubicacion
 # --field-end--
 # --field-start--
-fieldName=area
-columnName=fin_area
-# --field-end--
-# --field-start--
 fieldName=nombre
 columnName=fin_nombre
-# --field-end--
-# --field-start--
-fieldName=propietario
-columnName=fin_propietario
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -328,11 +320,6 @@ columnName=tf_aporte
 dataClass=com.example.jessica.fertiapp.api.model.Usuario
 tableName=usuario
 # --table-fields-start--
-# --field-start--
-fieldName=id
-columnName=usu_id
-generatedId=true
-# --field-end--
 # --field-start--
 fieldName=cedula
 columnName=usu_cedula

@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Jessica on 4/5/2018.
  */
 
-public class CultivoSembrado {
+public class  CultivoSembrado {
     public static final String CODIGO = "cus_codigo";
     public static final String VARIEDAD = "cus_variedad";
     public static final String NOMBRE = "cus_nombre";

@@ -23,7 +23,7 @@ public class MenuCultivoActivity extends AppCompatActivity {
         editar = findViewById(R.id.editar);
     }
     public void OnClicIngresar(View view){
-        Intent intent = new Intent(MenuCultivoActivity.this, CrearCultivoActivity.class);
+        Intent intent = new Intent(MenuCultivoActivity.this, IngresarParcelaActivity.class);
         startActivity(intent);
 
     }

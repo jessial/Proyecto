@@ -22,7 +22,8 @@
         <activity android:name=".MenuCultivoActivity" />
         <activity android:name=".MenuAnalisisActivity" />
         <activity android:name=".CrearCultivoActivity" />
-        <activity android:name=".IngresarCultivoActivity"></activity>
+        <activity android:name=".IngresarParcelaActivity" />
+        <activity android:name=".FincaActivity"></activity>
     </application>
 
 </manifest>
