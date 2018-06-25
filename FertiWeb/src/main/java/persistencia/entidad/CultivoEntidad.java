@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+
 @Entity(name = "Cultivo")
+@Getter
 public class CultivoEntidad {
 	
 	@Id
@@ -23,21 +26,5 @@ public class CultivoEntidad {
 	private TipoCultivoEntidad tipoCultivo;
 	@OneToMany(mappedBy="codigo")
 	private List<AplicacionEntidad> aplicacionFertilizante;
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public Date getFechaSiembra() {
-		return fechaSiembra;
-	}
-	public Date getFechaCosecha() {
-		return fechaCosecha;
-	}
-	public TipoCultivoEntidad getTipoCultivo() {
-		return tipoCultivo;
-	}
-	public List<AplicacionEntidad> getAplicacionFertilizante() {
-		return aplicacionFertilizante;
-	}
 	
 }

@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+
 @Entity(name = "Lote")
+@Getter
 public class LoteEntidad {
 
 	@Id
@@ -23,16 +25,4 @@ public class LoteEntidad {
 	@OneToMany(mappedBy="codigo")
 	private List<AnalisisEntidad> analilsisEntidad;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getUbicacion() {
-		return ubicacion;
-	}
-	public int getArea() {
-		return area;
-	}
-	public List<UsuarioEntidad> getUsuarioEntidad() {
-		return usuarioEntidad;
-	}
 }

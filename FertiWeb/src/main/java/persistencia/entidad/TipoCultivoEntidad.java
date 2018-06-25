@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+
 @Entity(name = "TipoCultivo")
+@Getter
 public class TipoCultivoEntidad {
 	
 	@Id
@@ -15,13 +18,4 @@ public class TipoCultivoEntidad {
 	@Column(name="tc_nombre",nullable = false)
 	private String nombre;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getVariedad() {
-		return variedad;
-	}
-	public String getNombre() {
-		return nombre;
-	}
 }

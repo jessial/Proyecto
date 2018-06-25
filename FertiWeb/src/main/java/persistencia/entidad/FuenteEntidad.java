@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+
 @Entity(name = "Fuente")
+@Getter
 public class FuenteEntidad {
 	
 	@Id
@@ -13,10 +16,4 @@ public class FuenteEntidad {
 	@Column(name="fue_producto",nullable = false)
 	private String producto;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getProducto() {
-		return producto;
-	}
 }

@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 @Entity(name = "Usuario")
+@Getter (AccessLevel.PRIVATE)
 public class UsuarioEntidad {
 
 	@Id
@@ -23,21 +27,5 @@ public class UsuarioEntidad {
 	private String email;
 	@OneToMany
 	private List<TipoUsuarioEntidad> tipoUsuario;
-	
-	public Long getCedula() {
-		return cedula;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public Long getTelefono() {
-		return telefono;
-	}
-	public String getEmail() {
-		return email;
-	}
 	
 }

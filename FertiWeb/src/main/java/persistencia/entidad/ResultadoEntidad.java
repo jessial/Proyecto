@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+
 @Entity(name = "Resultado")
+@Getter
 public class ResultadoEntidad {
 
 	@Id
@@ -25,25 +28,4 @@ public class ResultadoEntidad {
 	@Column(name="res_satbases")
 	private Double satBases;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public Date getFechaAnalisis() {
-		return fechaAnalisis;
-	}
-	public Double getCaMg() {
-		return caMg;
-	}
-	public Double getCaK() {
-		return caK;
-	}
-	public Double getMgK() {
-		return mgK;
-	}
-	public Double getCaMgK() {
-		return caMgK;
-	}
-	public Double getSatBases() {
-		return satBases;
-	}
 }

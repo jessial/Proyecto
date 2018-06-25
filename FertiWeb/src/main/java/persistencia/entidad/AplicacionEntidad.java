@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+
 @Entity(name = "Aplicacion")
+@Getter 
 public class AplicacionEntidad {
 
 	@Id
@@ -18,18 +21,5 @@ public class AplicacionEntidad {
 	private Double cantidad;
 	@Column(name="apli_fechaAplicacion",nullable = false)
 	private Date fechaAplicacion;
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getProducto() {
-		return producto;
-	}
-	public Double getCantidad() {
-		return cantidad;
-	}
-	public Date getFechaAplicacion() {
-		return fechaAplicacion;
-	}
 	
 }
