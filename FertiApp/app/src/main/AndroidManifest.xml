@@ -25,9 +25,13 @@
         <activity android:name=".IngresarParcelaActivity" />
         <activity android:name=".FincaActivity" />
         <activity
-            android:name=".IngresarAnalisis"
+            android:name=".IngresarAnalisisActivity"
             android:label="@string/title_activity_ingresar_analisis"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NavegacionPrincipalActivity"
+            android:label="@string/title_activity_navegacion_principal"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

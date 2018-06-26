@@ -1,5 +1,5 @@
 #
-# generated on 2018/06/06 06:17:48
+# generated on 2018/06/25 10:33:32
 #
 # --table-start--
 dataClass=com.example.jessica.fertiapp.api.model.Analisis
@@ -21,6 +21,10 @@ columnName=ana_ph
 # --field-start--
 fieldName=mo
 columnName=ana_mo
+# --field-end--
+# --field-start--
+fieldName=clase
+columnName=ana_clase
 # --field-end--
 # --field-start--
 fieldName=n
@@ -55,7 +59,7 @@ fieldName=s
 columnName=ana_s
 # --field-end--
 # --field-start--
-fieldName=f
+fieldName=fe
 columnName=ana_fe
 # --field-end--
 # --field-start--
@@ -73,26 +77,6 @@ columnName=ana_mn
 # --field-start--
 fieldName=zn
 columnName=ana_zn
-# --field-end--
-# --field-start--
-fieldName=satna
-columnName=ana_satna
-# --field-end--
-# --field-start--
-fieldName=satk
-columnName=ana_satk
-# --field-end--
-# --field-start--
-fieldName=satca
-columnName=ana_satca
-# --field-end--
-# --field-start--
-fieldName=satmg
-columnName=ana_satmg
-# --field-end--
-# --field-start--
-fieldName=satal
-columnName=ana_satal
 # --field-end--
 # --field-start--
 fieldName=parcela
