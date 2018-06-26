@@ -1,5 +1,5 @@
 #
-# generated on 2018/06/25 10:33:32
+# generated on 2018/06/26 12:45:46
 #
 # --table-start--
 dataClass=com.example.jessica.fertiapp.api.model.Analisis

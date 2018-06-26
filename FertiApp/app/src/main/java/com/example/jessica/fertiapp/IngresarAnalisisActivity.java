@@ -85,7 +85,7 @@ public class IngresarAnalisisActivity extends AppCompatActivity {
     }
     public void OnClicIngresar(View view){
         Analisis analisis = new Analisis();
-        analisis.setFecha((Date) fecha.getText());
+        analisis.setFecha(fecha.getText().toString());
         analisis.setPh(Double.parseDouble(ph.getText().toString()));
         analisis.setClase(clase.getText().toString());
         analisis.setMo(Double.parseDouble(mo.getText().toString()));

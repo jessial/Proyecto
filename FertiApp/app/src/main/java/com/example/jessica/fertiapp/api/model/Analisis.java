@@ -30,7 +30,7 @@ public class Analisis {
     @DatabaseField(generatedId = true, columnName = CODIGO)
     private int codigo;
     @DatabaseField(columnName = FECHA)
-    private Date fecha;
+    private String fecha;
     @DatabaseField(columnName = PH)
     private double ph;
     @DatabaseField(columnName = MO)
@@ -74,11 +74,11 @@ public class Analisis {
         this.codigo = codigo;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
