@@ -32,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void OnClicAnalisis(View view){
-        Intent intent = new Intent(MenuActivity.this, SaveUserView.class);
+        Intent intent = new Intent(MenuActivity.this, MenuAnalisisActivity.class);
         startActivity(intent);
     }
     public void OnClicRecomendacion(View view){
@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void OnClicResultado(View view){
-        Intent intent = new Intent(MenuActivity.this, SaveUserView.class);
+        Intent intent = new Intent(MenuActivity.this, NavegacionPrincipalActivity.class);
         startActivity(intent);
     }
     public void OnClicFinca(View view){

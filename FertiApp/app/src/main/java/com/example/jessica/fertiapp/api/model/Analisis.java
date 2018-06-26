@@ -10,6 +10,7 @@ public class Analisis {
     public static final String CODIGO = "ana_codigo";
     public static final String FECHA = "ana_fecha";
     public static final String PH = "ana_ph";
+    public static final String CLASE = "ana_clase";
     public static final String MO = "ana_mo";
     public static final String N = "ana_n";
     public static final String P = "ana_p";
@@ -24,11 +25,6 @@ public class Analisis {
     public static final String CU = "ana_cu";
     public static final String MN = "ana_mn";
     public static final String ZN = "ana_zn";
-    public static final String SATNA = "ana_satna";
-    public static final String SATK = "ana_satk";
-    public static final String SATCA = "ana_satca";
-    public static final String SATMG = "ana_satmg";
-    public static final String SATAL = "ana_satal";
     public static final String PARCELA = "parl_codigo";
 
     @DatabaseField(generatedId = true, columnName = CODIGO)
@@ -39,6 +35,8 @@ public class Analisis {
     private double ph;
     @DatabaseField(columnName = MO)
     private double mo;
+    @DatabaseField(columnName = CLASE)
+    private String clase;
     @DatabaseField(columnName = N)
     private double n;
     @DatabaseField(columnName = P)
@@ -56,7 +54,7 @@ public class Analisis {
     @DatabaseField(columnName = S)
     private double s;
     @DatabaseField(columnName = FE)
-    private double f;
+    private double fe;
     @DatabaseField(columnName = B)
     private double b;
     @DatabaseField(columnName = CU)
@@ -65,16 +63,6 @@ public class Analisis {
     private double mn;
     @DatabaseField(columnName = ZN)
     private double zn;
-    @DatabaseField(columnName = SATNA)
-    private double satna;
-    @DatabaseField(columnName = SATK)
-    private double satk;
-    @DatabaseField(columnName = SATCA)
-    private double satca;
-    @DatabaseField(columnName = SATMG)
-    private double satmg;
-    @DatabaseField(columnName = SATAL)
-    private double satal;
     @DatabaseField(foreign = true, columnName = PARCELA)
     private Parcela parcela;
 
@@ -108,6 +96,14 @@ public class Analisis {
 
     public void setMo(double mo) {
         this.mo = mo;
+    }
+
+    public String getClase() {
+        return clase;
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
     }
 
     public double getN() {
@@ -174,12 +170,12 @@ public class Analisis {
         this.s = s;
     }
 
-    public double getF() {
-        return f;
+    public double getFe() {
+        return fe;
     }
 
-    public void setF(double f) {
-        this.f = f;
+    public void setFe(double f) {
+        this.fe = fe;
     }
 
     public double getB() {
@@ -212,46 +208,6 @@ public class Analisis {
 
     public void setZn(double zn) {
         this.zn = zn;
-    }
-
-    public double getSatna() {
-        return satna;
-    }
-
-    public void setSatna(double satna) {
-        this.satna = satna;
-    }
-
-    public double getSatk() {
-        return satk;
-    }
-
-    public void setSatk(double satk) {
-        this.satk = satk;
-    }
-
-    public double getSatca() {
-        return satca;
-    }
-
-    public void setSatca(double satca) {
-        this.satca = satca;
-    }
-
-    public double getSatmg() {
-        return satmg;
-    }
-
-    public void setSatmg(double satmg) {
-        this.satmg = satmg;
-    }
-
-    public double getSatal() {
-        return satal;
-    }
-
-    public void setSatal(double satal) {
-        this.satal = satal;
     }
 
     public Parcela getParcela() {
