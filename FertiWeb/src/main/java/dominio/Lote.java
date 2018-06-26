@@ -1,5 +1,9 @@
 package dominio;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
+@Getter (AccessLevel.PRIVATE)
 public class Lote {
 
 	private Usuario usuario;
@@ -7,16 +11,4 @@ public class Lote {
 	private String ubicacion;
 	private int area;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getUbicacion() {
-		return ubicacion;
-	}
-	public int getArea() {
-		return area;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
 }

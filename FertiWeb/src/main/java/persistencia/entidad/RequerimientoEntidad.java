@@ -6,9 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import dominio.TipoCultivo;
+import lombok.Getter;
 
 @Entity(name = "Requerimiento")
+@Getter
 public class RequerimientoEntidad {
 	
 	@Id
@@ -17,12 +18,5 @@ public class RequerimientoEntidad {
 	@OneToOne(optional=false)
     @JoinColumn(name="tc_codigo", unique=true, nullable=false)
 	private TipoCultivoEntidad tipoCultivoEntidad;
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public TipoCultivoEntidad getTipoCultivo() {
-		return tipoCultivoEntidad;
-	}
 	
 }

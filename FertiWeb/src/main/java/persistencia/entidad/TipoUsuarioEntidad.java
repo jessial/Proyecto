@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+
 @Entity(name = "TipoUsuario")
+@Getter
 public class TipoUsuarioEntidad {
 
 	@Id
@@ -13,10 +16,4 @@ public class TipoUsuarioEntidad {
 	@Column(name="tu_descripcion",nullable = false)
 	private String descripcion;
 	
-	public int getCodigo() {
-		return codigo;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
 }

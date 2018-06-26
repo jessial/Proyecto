@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+
 @Entity(name = "Analisis")
+@Getter 
 public class AnalisisEntidad {
 	
 	@Id
@@ -57,73 +60,5 @@ public class AnalisisEntidad {
 	private Double saMg;
 	@Column(name="ana_saal")
 	private Double saAl;
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public Date getFechaAnalisis() {
-		return fechaAnalisis;
-	}
-	public Double getPh() {
-		return ph;
-	}
-	public Double getMo() {
-		return mo;
-	}
-	public Double getN() {
-		return n;
-	}
-	public Double getM() {
-		return m;
-	}
-	public Double getK() {
-		return k;
-	}
-	public Double getMg() {
-		return mg;
-	}
-	public Double getCa() {
-		return ca;
-	}
-	public Double getAl() {
-		return al;
-	}
-	public Double getNa() {
-		return na;
-	}
-	public Double getS() {
-		return s;
-	}
-	public Double getFe() {
-		return fe;
-	}
-	public Double getB() {
-		return b;
-	}
-	public Double getCu() {
-		return cu;
-	}
-	public Double getMn() {
-		return mn;
-	}
-	public Double getZn() {
-		return zn;
-	}
-	public Double getSaNa() {
-		return saNa;
-	}
-	public Double getSaK() {
-		return saK;
-	}
-	public Double getSaCa() {
-		return saCa;
-	}
-	public Double getSaMg() {
-		return saMg;
-	}
-	public Double getSaAl() {
-		return saAl;
-	}
-	
 	
 }

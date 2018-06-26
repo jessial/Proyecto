@@ -2,6 +2,10 @@ package dominio;
 
 import java.util.Date;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
+@Getter (AccessLevel.PRIVATE)
 public class Resultado {
 	
 	private int codigo;
@@ -13,33 +17,5 @@ public class Resultado {
 	private Double mgK;
 	private Double caMgK;
 	private Double satBases;
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	public Analisis getAnalisis() {
-		return analisis;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public Date getFechaAnalisis() {
-		return fechaAnalisis;
-	}
-	public Double getCaMg() {
-		return caMg;
-	}
-	public Double getCaK() {
-		return caK;
-	}
-	public Double getMgK() {
-		return mgK;
-	}
-	public Double getCaMgK() {
-		return caMgK;
-	}
-	public Double getSatBases() {
-		return satBases;
-	}
 	
 }
