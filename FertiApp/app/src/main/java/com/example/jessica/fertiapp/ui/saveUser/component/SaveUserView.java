@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.jessica.fertiapp.MainActivity;
+import com.example.jessica.fertiapp.MenuActivity;
 import com.example.jessica.fertiapp.R;
 import com.example.jessica.fertiapp.api.DatabaseHelper;
 import com.example.jessica.fertiapp.api.model.Rol;
@@ -107,7 +108,7 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
 
     @Override
     public void goToMenuActivity() {
-        Intent intent = new Intent(SaveUserView.this, MainActivity.class);
+        Intent intent = new Intent(SaveUserView.this, MenuActivity.class);
         startActivity(intent);
     }
 

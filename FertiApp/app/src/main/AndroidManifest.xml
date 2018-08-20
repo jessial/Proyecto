@@ -28,10 +28,7 @@
             android:name=".IngresarAnalisisActivity"
             android:label="@string/title_activity_ingresar_analisis"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavegacionPrincipalActivity"
-            android:label="@string/title_activity_navegacion_principal"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RecomendacionActivity"></activity>
     </application>
 
 </manifest>

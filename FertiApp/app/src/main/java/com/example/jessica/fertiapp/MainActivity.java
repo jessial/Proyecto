@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Por favor registrese", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SaveUserView.class);
+                startActivity(intent);
+
             }
         } catch (SQLException e){
             e.printStackTrace();

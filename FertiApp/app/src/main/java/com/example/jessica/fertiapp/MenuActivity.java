@@ -12,7 +12,6 @@ public class MenuActivity extends AppCompatActivity {
     private Button cultivo;
     private Button analisis;
     private Button recomendacion;
-    private Button resultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,6 @@ public class MenuActivity extends AppCompatActivity {
         cultivo = findViewById(R.id.cultivos);
         analisis = findViewById(R.id.analisis);
         recomendacion = findViewById(R.id.recomendacion);
-        resultado = findViewById(R.id.resultado);
 
     }
     public void OnClicCultivo(View view){
@@ -36,11 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void OnClicRecomendacion(View view){
-        Intent intent = new Intent(MenuActivity.this, SaveUserView.class);
-        startActivity(intent);
-    }
-    public void OnClicResultado(View view){
-        Intent intent = new Intent(MenuActivity.this, NavegacionPrincipalActivity.class);
+        Intent intent = new Intent(MenuActivity.this, RecomendacionActivity.class);
         startActivity(intent);
     }
     public void OnClicFinca(View view){
