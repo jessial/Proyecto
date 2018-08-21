@@ -25,7 +25,7 @@ import java.util.List;
 public class IngresarParcelaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private DatabaseHelper databaseHelper = null;
     private Spinner listaSpinnercultivo;
-    private List<CultivoSembrado> listaCultivo;
+    private CultivoSembrado[] listaCultivo;
     private CultivoSembrado cultivoSeleccionado;
     private Spinner listaSpinnervariedad;
     private CultivoSembrado[] listaVariedad;
@@ -58,17 +58,18 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         fechaSiembra = findViewById(R.id.fechaSiembra);
         ingresar = findViewById(R.id.ingresar);
     }
-    private List<CultivoSembrado> getCultivoSembrados() {
+    private CultivoSembrado[] getCultivoSembrados() {
         Dao cultivoSembradoDao = null;
-        List<CultivoSembrado> cultivo = new ArrayList<>();
-        try{
+        List listCultivo = null;
+        try {
             cultivoSembradoDao = getHelper().getCultivoSembradoDao();
-            cultivo = cultivoSembradoDao.queryForAll();
+            listCultivo = cultivoSembradoDao.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return cultivo;
-
+        CultivoSembrado[] cultivoSembradoArrar = new CultivoSembrado[listCultivo.size()];
+        cultivoSembradoArrar = (CultivoSembrado[]) listCultivo.toArray(cultivoSembradoArrar);
+        return cultivoSembradoArrar;
     }
     public void OnClicIngresar(View view){
         String Ubicacion = (ubicacion.getText().toString());
@@ -99,7 +100,7 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        cultivoSeleccionado = listaCultivo.get(i);
+        cultivoSeleccionado = listaCultivo[i];
         variedadSeleccionada = listaVariedad[i];
     }
 
