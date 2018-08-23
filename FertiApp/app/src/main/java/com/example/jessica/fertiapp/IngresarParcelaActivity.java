@@ -48,10 +48,6 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         listaSpinnercultivo.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
         listaSpinnercultivo.setAdapter(arrayAdapter);
-        listaSpinnervariedad = findViewById(R.id.spinnerVariedad);
-        listaSpinnervariedad.setOnItemSelectedListener(this);
-        ArrayAdapter arrayAdapterVariedad = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaVariedad);
-        listaSpinnervariedad.setAdapter(arrayAdapterVariedad);
         ubicacion = findViewById(R.id.ubicacion);
         parcela = findViewById(R.id.parcela);
         area = findViewById(R.id.area);
@@ -101,7 +97,6 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         cultivoSeleccionado = listaCultivo[i];
-        variedadSeleccionada = listaVariedad[i];
     }
 
     @Override
