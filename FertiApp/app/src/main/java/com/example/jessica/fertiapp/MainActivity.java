@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public void OnclickIngresar(View view) throws SQLException {
         Dao<Usuario, Integer> usuarioDao = getHelper().getUsuarioDao();
         String cedulaConsultar = cedula.getText().toString();
+        if(cedulaConsultar.equals(""))
+            cedula.setError("Ingrese su cedula");
         try {
             usu = usuarioDao.queryForEq("usu_cedula", cedulaConsultar);
             if (usu.size() != 0) {
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Por favor registrese", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SaveUserView.class);
+                intent.putExtra("usu_cedula1",cedulaConsultar);
                 startActivity(intent);
 
             }

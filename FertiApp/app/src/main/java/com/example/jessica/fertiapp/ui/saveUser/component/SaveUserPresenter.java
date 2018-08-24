@@ -26,7 +26,6 @@ public class SaveUserPresenter implements SaveUser.Presenter{
     @Override
     public void saveUser(Usuario user, Dao usuDao) {
         repo.saveUser(user, usuDao);
-        view.showMessage("La información se guardó con éxito");
-        view.goToMenuActivity();
+
     }
 }

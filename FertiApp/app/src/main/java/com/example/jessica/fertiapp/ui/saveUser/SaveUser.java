@@ -21,8 +21,7 @@ public class SaveUser {
 
     public interface UserView{
         public void onSaveUser(View view);
-        public void showMessage(String message);
-        public void goToMenuActivity();
+
 
     }
 

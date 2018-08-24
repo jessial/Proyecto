@@ -61,6 +61,8 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         listaSpinnerRol.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaRol);
         listaSpinnerRol.setAdapter(arrayAdapter);
+        String id = getIntent().getStringExtra("usu_cedula1");
+        cedula.setText(id);
     }
 
     private Rol[] getRoles() {
@@ -101,18 +103,7 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         presenter.saveUser(user, usuDao);
     }
 
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void goToMenuActivity() {
-        Intent intent = new Intent(SaveUserView.this, MenuActivity.class);
-        startActivity(intent);
-    }
-
-    private Usuario getUser() {
+     private Usuario getUser() {
         Rol role = rol;
         String Cedula = (cedula.getText().toString());
         String Nombre = nombre.getText().toString();
@@ -121,11 +112,11 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         String Email = email.getText().toString();
         Usuario usuario = new Usuario();
         if (Cedula.equals(""))
-            Toast.makeText(getApplicationContext(), "Ingrese cédula", Toast.LENGTH_SHORT).show();
+            cedula.setError("Ingrese cedula");
         else if (Nombre.equals(""))
-            Toast.makeText(getApplicationContext(), "Ingrese nombres", Toast.LENGTH_SHORT).show();
+            nombre.setError("Ingrese cedula");
         else if (Apellido.equals(""))
-            Toast.makeText(getApplicationContext(), "Ingrese apellidos", Toast.LENGTH_SHORT).show();
+            apellido.setError("Ingrese cedula");
         else {
             usuario.setCedula(Cedula);
             usuario.setNombre(Nombre);
@@ -133,6 +124,9 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
             usuario.setTelefono(Telefono);
             usuario.setEmail(Email);
             usuario.setRol(role);
+            Toast.makeText(getApplicationContext(), "Fue guardado con éxito", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SaveUserView.this, MenuActivity.class);
+            startActivity(intent);
         }
         return usuario;
     }
