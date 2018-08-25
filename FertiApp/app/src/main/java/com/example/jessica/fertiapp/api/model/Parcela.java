@@ -12,6 +12,7 @@ public class Parcela {
     public static final String FECHA_SIEMBRA = "parl_fecha_siembra";
     public static final String CULTIVO_SEMBRADO = "cus_codigo";
     public static final String FINCA = "fin_codigo";
+    public static final String LOTE = "lot_codigo";
 
     @DatabaseField(generatedId = true, columnName = CODIGO)
     private int codigo;
@@ -21,6 +22,8 @@ public class Parcela {
     private CultivoSembrado cultivo_sembrado;
     @DatabaseField(foreign = true, columnName = FINCA)
     private Finca finca;
+    @DatabaseField(foreign = true, columnName = LOTE)
+    private Lote lote;
 
     public int getCodigo() {
         return codigo;
@@ -37,16 +40,14 @@ public class Parcela {
     public CultivoSembrado getCultivoSembrado() {
         return cultivo_sembrado;
     }
-
-    public void setCultivoSembrado(CultivoSembrado cultivo_sembrado) {
-        this.cultivo_sembrado = cultivo_sembrado;
-    }
+    public void setCultivoSembrado(CultivoSembrado cultivo_sembrado) { this.cultivo_sembrado = cultivo_sembrado; }
     public Finca getFinca() {
         return finca;
     }
-
     public void setFinca(Finca finca) {
         this.finca = finca;
     }
-
+    public void setLote(Lote lote) { this.lote = lote; }
+    public static String getLOTE() { return LOTE;
+    }
 }

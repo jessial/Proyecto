@@ -41,4 +41,9 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(MenuActivity.this, FincaActivity.class);
         startActivity(intent);
     }
+    public void OnClicLote(View view){
+        Intent intent = new Intent(MenuActivity.this, FincaActivity.class);
+        startActivity(intent);
+
+    }
 }

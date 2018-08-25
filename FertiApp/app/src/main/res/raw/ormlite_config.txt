@@ -1,5 +1,5 @@
 #
-# generated on 2018/08/20 03:37:45
+# generated on 2018/08/25 03:26:47
 #
 # --table-start--
 dataClass=com.example.jessica.fertiapp.api.model.Analisis
@@ -148,6 +148,26 @@ foreign=true
 # --table-end--
 #################################
 # --table-start--
+dataClass=com.example.jessica.fertiapp.api.model.Lote
+tableName=lote
+# --table-fields-start--
+# --field-start--
+fieldName=codigo
+columnName=lot_codigo
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=ubicacion
+columnName=lot_ubicacion
+# --field-end--
+# --field-start--
+fieldName=numero
+columnName=lot_numero
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
 dataClass=com.example.jessica.fertiapp.api.model.Parcela
 tableName=parcela
 # --table-fields-start--
@@ -168,6 +188,11 @@ foreign=true
 # --field-start--
 fieldName=finca
 columnName=fin_codigo
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=lote
+columnName=lot_codigo
 foreign=true
 # --field-end--
 # --table-fields-end--
