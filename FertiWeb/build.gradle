@@ -29,8 +29,8 @@ repositories {
 }
 
 dependencies {
+	compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile ('mysql:mysql-connector-java')
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
