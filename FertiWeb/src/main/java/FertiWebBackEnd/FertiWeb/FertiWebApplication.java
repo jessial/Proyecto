@@ -21,12 +21,12 @@ public class FertiWebApplication {
 	}
 
 	@Bean
-	public ControladorDatos creaControladorDatos() {
+	public ControladorDatos crearControladorDatos() {
 		return new ControladorDatos();
 	}
 	
 	@Bean
-	public DozerBeanMapper creaDozerBeanMapper() {
+	public DozerBeanMapper crearDozerBeanMapper() {
 		return new DozerBeanMapper();
 	}
 	

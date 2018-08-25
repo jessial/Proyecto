@@ -18,6 +18,7 @@ import controladores.ControladorDatos;
 import dominio.Analisis;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
+import persistencia.repositorio.RolRepository;
 
 public class ControladorDatosTest {
 	
@@ -26,6 +27,11 @@ public class ControladorDatosTest {
 	
 	@Mock
 	AnalisisRepository analisisRepository;
+	
+	@Mock
+	RolRepository rolRepository;
+	
+	
 	
 	@Mock
 	DozerBeanMapper mapperDozer;
@@ -38,7 +44,7 @@ public class ControladorDatosTest {
 	@Test
 	public void convertirAnalisisEnEntidad() throws Exception {
 		// Arrange
-		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository);
+		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, rolRepository);
 		ObjectMapper mapperJson = new ObjectMapper();
 		Analisis analisis = mapperJson.readValue(JSON_ANALISIS, Analisis.class);
 		analisis.setFechaAnalisis(new Date());
