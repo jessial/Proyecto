@@ -15,5 +15,7 @@ public class RolEntidad {
 	private int codigo;
 	@Column(name="rol_nombre")
 	private String nombre;
+	@Column(name="rol_estado")
+	private boolean estado;
 	
 }

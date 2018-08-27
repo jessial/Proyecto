@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatos;
+import dominio.Rol;
 import persistencia.entidad.RolEntidad;
 
 @RestController
@@ -18,7 +19,7 @@ public class ServicioRol {
 	ControladorDatos controladorDatos;
 	
 	@GetMapping("/consultaTodos")
-	public List<RolEntidad> consultar() {
+	public List<Rol> consultar() {
 		return controladorDatos.consultarRoles();
 		//return ResponseEntity.status(HttpStatus.CREATED).build();
 	}

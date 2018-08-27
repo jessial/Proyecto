@@ -7,4 +7,5 @@ public class Rol {
 	
 	private int codigo;
 	private String nombre;
+	private boolean estado;
 }
