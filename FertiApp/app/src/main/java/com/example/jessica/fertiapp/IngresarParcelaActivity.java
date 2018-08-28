@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.jessica.fertiapp.api.DatabaseHelper;
 import com.example.jessica.fertiapp.api.model.CultivoSembrado;
+import com.example.jessica.fertiapp.api.model.Finca;
 import com.example.jessica.fertiapp.api.model.Parcela;
 import com.example.jessica.fertiapp.api.model.Rol;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -30,7 +31,9 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     private Spinner listaSpinnervariedad;
     private CultivoSembrado[] listaVariedad;
     private CultivoSembrado variedadSeleccionada;
-    private EditText ubicacion;
+    private Spinner listaSpinnerFinca;
+    private Finca[] listaFinca;
+    private Finca fincaSeleccionada;
     private EditText  parcela;
     private EditText area;
     private EditText fechaSiembra;
@@ -48,7 +51,6 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         listaSpinnercultivo.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
         listaSpinnercultivo.setAdapter(arrayAdapter);
-        ubicacion = findViewById(R.id.ubicacion);
         parcela = findViewById(R.id.parcela);
         area = findViewById(R.id.area);
         fechaSiembra = findViewById(R.id.fechaSiembra);
@@ -68,14 +70,11 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         return cultivoSembradoArrar;
     }
     public void OnClicIngresar(View view){
-        String Ubicacion = (ubicacion.getText().toString());
         String Parcela = parcela.getText().toString();
         String Area = area.getText().toString();
         String FechaSiembra = fechaSiembra.getText().toString();
         Parcela parcela = new Parcela();
-        if (Ubicacion.equals(""))
-            Toast.makeText(getApplicationContext(), "Por favor ingrese una ubicación", Toast.LENGTH_SHORT).show();
-        else if (Parcela.equals(""))
+        if (Parcela.equals(""))
             Toast.makeText(getApplicationContext(), "Por favor ingrese un lote o parcela", Toast.LENGTH_SHORT).show();
         else if (Area.equals(""))
             Toast.makeText(getApplicationContext(), "Por favor ingrese el área del lote o parcela", Toast.LENGTH_SHORT).show();
