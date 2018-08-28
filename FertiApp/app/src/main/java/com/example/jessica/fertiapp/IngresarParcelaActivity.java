@@ -49,8 +49,13 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         listaCultivo = getCultivoSembrados();
         listaSpinnercultivo = findViewById(R.id.spinnerCultivo);
         listaSpinnercultivo.setOnItemSelectedListener(this);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
-        listaSpinnercultivo.setAdapter(arrayAdapter);
+        ArrayAdapter arrayAdapterCultivoSembrado = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
+        listaSpinnercultivo.setAdapter(arrayAdapterCultivoSembrado);
+        listaFinca = getFinca();
+        listaSpinnerFinca = findViewById(R.id.spinnerFinca);
+        listaSpinnerFinca.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapterFinca = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaFinca);
+        listaSpinnerFinca.setAdapter(arrayAdapterFinca);
         parcela = findViewById(R.id.parcela);
         area = findViewById(R.id.area);
         fechaSiembra = findViewById(R.id.fechaSiembra);
@@ -68,6 +73,19 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         CultivoSembrado[] cultivoSembradoArrar = new CultivoSembrado[listCultivo.size()];
         cultivoSembradoArrar = (CultivoSembrado[]) listCultivo.toArray(cultivoSembradoArrar);
         return cultivoSembradoArrar;
+    }
+    private Finca[] getFinca() {
+        Dao fincaDao = null;
+        List listFinca = null;
+        try {
+            fincaDao = getHelper().getFincaDao();
+            listFinca = fincaDao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Finca[] fincaArrar = new Finca[listFinca.size()];
+        fincaArrar = (Finca[]) listFinca.toArray(fincaArrar);
+        return fincaArrar;
     }
     public void OnClicIngresar(View view){
         String Parcela = parcela.getText().toString();
@@ -96,6 +114,7 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         cultivoSeleccionado = listaCultivo[i];
+        fincaSeleccionada = listaFinca[i];
     }
 
     @Override
