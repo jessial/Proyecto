@@ -39,5 +39,10 @@ public class  CultivoSembrado {
     public void setVariedad(String variedad) {
         this.variedad = variedad;
     }
+
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }
 

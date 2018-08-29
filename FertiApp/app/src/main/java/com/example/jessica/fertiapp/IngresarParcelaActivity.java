@@ -13,13 +13,17 @@ import android.widget.Toast;
 
 import com.example.jessica.fertiapp.api.DatabaseHelper;
 import com.example.jessica.fertiapp.api.model.CultivoSembrado;
+import com.example.jessica.fertiapp.api.model.Finca;
 import com.example.jessica.fertiapp.api.model.Parcela;
 import com.example.jessica.fertiapp.api.model.Rol;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class IngresarParcelaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -30,7 +34,9 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     private Spinner listaSpinnervariedad;
     private CultivoSembrado[] listaVariedad;
     private CultivoSembrado variedadSeleccionada;
-    private EditText ubicacion;
+    private Spinner listaSpinnerFinca;
+    private Finca[] listaFinca;
+    private Finca fincaSeleccionada;
     private EditText  parcela;
     private EditText area;
     private EditText fechaSiembra;
@@ -46,9 +52,18 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         listaCultivo = getCultivoSembrados();
         listaSpinnercultivo = findViewById(R.id.spinnerCultivo);
         listaSpinnercultivo.setOnItemSelectedListener(this);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
-        listaSpinnercultivo.setAdapter(arrayAdapter);
-        ubicacion = findViewById(R.id.ubicacion);
+        ArrayAdapter arrayAdapterCultivoSembrado = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCultivo);
+        listaSpinnercultivo.setAdapter(arrayAdapterCultivoSembrado);
+        listaFinca = getFinca();
+        listaSpinnerFinca = findViewById(R.id.spinnerFinca);
+        listaSpinnerFinca.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapterFinca = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaFinca);
+        listaSpinnerFinca.setAdapter(arrayAdapterFinca);
+        listaVariedad = getVariedadDeCultivo();
+        listaSpinnervariedad = findViewById(R.id.spinnerVariedad);
+        listaSpinnervariedad.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapterCultivoSembradoV = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaVariedad);
+        listaSpinnervariedad.setAdapter(arrayAdapterCultivoSembradoV);
         parcela = findViewById(R.id.parcela);
         area = findViewById(R.id.area);
         fechaSiembra = findViewById(R.id.fechaSiembra);
@@ -67,15 +82,45 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         cultivoSembradoArrar = (CultivoSembrado[]) listCultivo.toArray(cultivoSembradoArrar);
         return cultivoSembradoArrar;
     }
+    private CultivoSembrado[] getVariedadDeCultivo() {
+            Dao cultivoSembradoDao = null;
+            List listVariedad = null;
+            try {
+                cultivoSembradoDao = getHelper().getCultivoSembradoDao();
+                final QueryBuilder<CultivoSembrado, Integer> queryBuilder = cultivoSembradoDao.queryBuilder();
+                queryBuilder.where().eq(CultivoSembrado.VARIEDAD, "hass");
+                final PreparedQuery<CultivoSembrado> preparedQuery = queryBuilder.prepare();
+                final Iterator<CultivoSembrado> variedadIt = cultivoSembradoDao.query(preparedQuery).iterator();
+                while (variedadIt.hasNext()) {
+                    final CultivoSembrado variedad = variedadIt.next();
+                    listVariedad.add(variedad.getVariedad());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            CultivoSembrado[] cultivoSembradoVArrar = new CultivoSembrado[listVariedad.size()];
+            cultivoSembradoVArrar = (CultivoSembrado[]) listVariedad.toArray(cultivoSembradoVArrar);
+            return cultivoSembradoVArrar;
+    }
+        private Finca[] getFinca() {
+        Dao fincaDao = null;
+        List listFinca = null;
+        try {
+            fincaDao = getHelper().getFincaDao();
+            listFinca = fincaDao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Finca[] fincaArrar = new Finca[listFinca.size()];
+        fincaArrar = (Finca[]) listFinca.toArray(fincaArrar);
+        return fincaArrar;
+    }
     public void OnClicIngresar(View view){
-        String Ubicacion = (ubicacion.getText().toString());
         String Parcela = parcela.getText().toString();
         String Area = area.getText().toString();
         String FechaSiembra = fechaSiembra.getText().toString();
         Parcela parcela = new Parcela();
-        if (Ubicacion.equals(""))
-            Toast.makeText(getApplicationContext(), "Por favor ingrese una ubicación", Toast.LENGTH_SHORT).show();
-        else if (Parcela.equals(""))
+        if (Parcela.equals(""))
             Toast.makeText(getApplicationContext(), "Por favor ingrese un lote o parcela", Toast.LENGTH_SHORT).show();
         else if (Area.equals(""))
             Toast.makeText(getApplicationContext(), "Por favor ingrese el área del lote o parcela", Toast.LENGTH_SHORT).show();
@@ -96,7 +141,19 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        cultivoSeleccionado = listaCultivo[i];
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.spinnerCultivo)
+        {
+            cultivoSeleccionado = listaCultivo[i];
+        }
+        else if(spinner.getId() == R.id.spinnerFinca)
+        {
+            fincaSeleccionada = listaFinca[i];
+        }
+        else if(spinner.getId() == R.id.spinnerVariedad){
+            variedadSeleccionada = listaVariedad[i];
+
+        }
     }
 
     @Override

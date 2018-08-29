@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.jessica.fertiapp.api.model.Analisis;
 import com.example.jessica.fertiapp.api.model.CultivoSembrado;
 import com.example.jessica.fertiapp.api.model.Finca;
+import com.example.jessica.fertiapp.api.model.Lote;
 import com.example.jessica.fertiapp.api.model.Parcela;
 import com.example.jessica.fertiapp.api.model.Recomendacion;
 import com.example.jessica.fertiapp.api.model.Requerimiento;
@@ -27,6 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Rol, Integer> rolDao;
     private Dao<Parcela, Integer> parcelaDao;
     private Dao<Finca, Integer> fincaDao;
+    private Dao<Lote, Integer> loteDao;
     private Dao<Resultado, Integer> resultadoDao;
     private Dao<CultivoSembrado, Integer> cultivoSembradoDao;
     private Dao<Requerimiento, Integer> requerimientoDao;
@@ -47,6 +49,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Resultado.class);
             TableUtils.createTable(connectionSource, Parcela.class);
             TableUtils.createTable(connectionSource, Finca.class);
+            TableUtils.createTable(connectionSource, Lote.class);
             TableUtils.createTable(connectionSource, CultivoSembrado.class);
             TableUtils.createTable(connectionSource, Requerimiento.class);
             TableUtils.createTable(connectionSource, Recomendacion.class);
@@ -63,6 +66,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Resultado.class, true);
             TableUtils.dropTable(connectionSource, Parcela.class, true);
             TableUtils.dropTable(connectionSource, Finca.class, true);
+            TableUtils.dropTable(connectionSource, Lote.class, true);
             TableUtils.dropTable(connectionSource, CultivoSembrado.class, true);
             TableUtils.dropTable(connectionSource, Requerimiento.class, true);
             TableUtils.dropTable(connectionSource, Recomendacion.class, true);
@@ -104,6 +108,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return fincaDao;
     }
+    public Dao<Lote, Integer> getLoteDao()throws SQLException {
+        if (loteDao == null) {
+            loteDao = getDao(Lote.class);
+        }
+        return loteDao;
+    }
     public Dao<CultivoSembrado, Integer> getCultivoSembradoDao() throws SQLException {
         if (cultivoSembradoDao == null) {
             cultivoSembradoDao = getDao(CultivoSembrado.class);
@@ -136,6 +146,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         resultadoDao = null;
         parcelaDao = null;
         fincaDao = null;
+        loteDao = null;
         usuarioDao = null;
         rolDao = null;
         cultivoSembradoDao = null;

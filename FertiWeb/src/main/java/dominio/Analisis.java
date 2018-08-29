@@ -2,36 +2,37 @@ package dominio;
 
 import java.util.Date;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter (AccessLevel.PRIVATE)
+@Data
 public class Analisis {
 
 	private int codigo;
-	private Lote lote;
-	private Usuario usuario;
+	private int codigoParcela;
 	private Date fechaAnalisis;
-	private Double ph;
-	private Double mo;
-	private Double n;
-	private Double m;
-	private Double k;
-	private Double mg;
-	private Double ca;
-	private Double al;
-	private Double na;
-	private Double s;
-	private Double fe;
-	private Double b;
-	private Double cu;
-	private Double mn;
-	private Double zn;
-	private Double saNa;
-	private Double saK;
-	private Double saCa;
-	private Double saMg;
-	private Double saAl;
-	
+	private double ph;
+	private double mo;
+	private double n;
+	private double m;
+	private double k;
+	private double mg;
+	private double ca;
+	private double al;
+	private double na;
+	private double s;
+	private double fe;
+	private double b;
+	private double cu;
+	private double mn;
+	private double zn;
+	private double saNa;
+	private double saK;
+	private double saCa;
+	private double saMg;
+	private double saAl;
+	private double porcentajeA;
+	private double porcentajeL;
+	private double porcentajeAr;
+	private double cice;
 	
 }

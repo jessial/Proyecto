@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import persistencia.entidad.TipoCultivoEntidad;
 
-public interface TipoCultivoRepository extends JpaRepository<TipoCultivoEntidad, Integer> {
+public interface TipoCultivoRepository extends JpaRepository<TipoCultivoEntidad, Long> {
 
 }
