@@ -38,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void OnClicFinca(View view){
-        Intent intent = new Intent(MenuActivity.this, FincaActivity.class);
+        Intent intent = new Intent(MenuActivity.this, MapsFincaActivity.class);
         startActivity(intent);
     }
 }
