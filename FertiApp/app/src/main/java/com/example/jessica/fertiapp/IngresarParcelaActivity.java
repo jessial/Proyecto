@@ -18,9 +18,12 @@ import com.example.jessica.fertiapp.api.model.Parcela;
 import com.example.jessica.fertiapp.api.model.Rol;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class IngresarParcelaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -56,6 +59,11 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         listaSpinnerFinca.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapterFinca = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaFinca);
         listaSpinnerFinca.setAdapter(arrayAdapterFinca);
+        listaVariedad = getVariedadDeCultivo();
+        listaSpinnervariedad = findViewById(R.id.spinnerVariedad);
+        listaSpinnervariedad.setOnItemSelectedListener(this);
+        ArrayAdapter arrayAdapterCultivoSembradoV = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaVariedad);
+        listaSpinnervariedad.setAdapter(arrayAdapterCultivoSembradoV);
         parcela = findViewById(R.id.parcela);
         area = findViewById(R.id.area);
         fechaSiembra = findViewById(R.id.fechaSiembra);
@@ -74,7 +82,27 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
         cultivoSembradoArrar = (CultivoSembrado[]) listCultivo.toArray(cultivoSembradoArrar);
         return cultivoSembradoArrar;
     }
-    private Finca[] getFinca() {
+    private CultivoSembrado[] getVariedadDeCultivo() {
+            Dao cultivoSembradoDao = null;
+            List listVariedad = null;
+            try {
+                cultivoSembradoDao = getHelper().getCultivoSembradoDao();
+                final QueryBuilder<CultivoSembrado, Integer> queryBuilder = cultivoSembradoDao.queryBuilder();
+                queryBuilder.where().eq(CultivoSembrado.VARIEDAD, "hass");
+                final PreparedQuery<CultivoSembrado> preparedQuery = queryBuilder.prepare();
+                final Iterator<CultivoSembrado> variedadIt = cultivoSembradoDao.query(preparedQuery).iterator();
+                while (variedadIt.hasNext()) {
+                    final CultivoSembrado variedad = variedadIt.next();
+                    listVariedad.add(variedad.getVariedad());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            CultivoSembrado[] cultivoSembradoVArrar = new CultivoSembrado[listVariedad.size()];
+            cultivoSembradoVArrar = (CultivoSembrado[]) listVariedad.toArray(cultivoSembradoVArrar);
+            return cultivoSembradoVArrar;
+    }
+        private Finca[] getFinca() {
         Dao fincaDao = null;
         List listFinca = null;
         try {
@@ -113,8 +141,19 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        cultivoSeleccionado = listaCultivo[i];
-        fincaSeleccionada = listaFinca[i];
+        Spinner spinner = (Spinner) adapterView;
+        if(spinner.getId() == R.id.spinnerCultivo)
+        {
+            cultivoSeleccionado = listaCultivo[i];
+        }
+        else if(spinner.getId() == R.id.spinnerFinca)
+        {
+            fincaSeleccionada = listaFinca[i];
+        }
+        else if(spinner.getId() == R.id.spinnerVariedad){
+            variedadSeleccionada = listaVariedad[i];
+
+        }
     }
 
     @Override
