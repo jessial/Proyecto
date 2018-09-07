@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
+import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
+
 
 @Component({
   selector: 'app-table',
@@ -6,38 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  tiposCultivo: TipoCultivo[];
   i = 1;
   editCache = {};
-  dataSet = [
-    {
-      key    : '0',
-      name   : 'Edward King 0',
-      age    : '32',
-      address: 'London, Park Lane no. 0'
-    },
-    {
-      key    : '1',
-      name   : 'Edward King 1',
-      age    : '32',
-      address: 'London, Park Lane no. 1'
-    }
-  ];
+  dataSet = [];
 
-  constructor() { }
+  constructor(private tipoCultivoService: TipoCultivoService) {}
 
   addRow(): void {
     this.i++;
     this.dataSet = [ ...this.dataSet, {
-      key    : `${this.i}`,
-      name   : ``,
-      age    : '',
-      address: ``
+      codigo    : `${this.i}`,
+      variedad  : ``,
+      nombre    : '',
+      estado    : false
     } ];
-    this.updateEditCache();
+    this.updateEditCache(true);
   }
 
   deleteRow(i: string): void {
-    const dataSet = this.dataSet.filter(d => d.key !== i);
+    const dataSet = this.dataSet.filter(d => d.codigo !== i);
     this.dataSet = dataSet;
   }
 
@@ -47,24 +38,30 @@ export class TableComponent implements OnInit {
 
   finishEdit(key: string): void {
     this.editCache[ key ].edit = false;
-    this.dataSet.find(item => item.key === key).name = this.editCache[ key ].name;
-    this.dataSet.find(item => item.key === key).age = this.editCache[ key ].age;
+    this.dataSet.find(item => item.codigo === key).variedad = this.editCache[ key ].variedad;
+    this.dataSet.find(item => item.codigo === key).nombre = this.editCache[ key ].nombre;
   }
 
-  updateEditCache(): void {
+  updateEditCache(edit: boolean): void {
     this.dataSet.forEach(item => {
-      if (!this.editCache[ item.key ]) {
-        this.editCache[ item.key ] = {
-          edit: false,
-          name: item.name,
-          age: item.age
+      if (!this.editCache[ item.codigo ]) {
+        this.editCache[ item.codigo ] = {
+          edit: edit,
+          data: item
         };
       }
     });
   }
 
   ngOnInit(): void {
-    this.updateEditCache();
+    this.getTiposCultivo();
+    console.log(this.tiposCultivo[0].nombre);
+    this.updateEditCache(false);
+  }
+
+  getTiposCultivo(): void {
+    this.tipoCultivoService.getTiposCultivo()
+    .subscribe(tiposCultivo => this.tiposCultivo = tiposCultivo);
   }
 
 }

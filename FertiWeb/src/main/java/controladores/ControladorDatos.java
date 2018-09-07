@@ -12,6 +12,7 @@ import dominio.TipoCultivo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
+import persistencia.entidad.RolEntidad;
 import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.repositorio.AnalisisRepository;
 import persistencia.repositorio.RolRepository;
@@ -59,6 +60,12 @@ public class ControladorDatos {
 		TipoCultivoEntidad tipoCultivoEntidad = new TipoCultivoEntidad();
 		mapperDozer.map(tipoCultivo, tipoCultivoEntidad);
 		tipoCultivoRepository.save(tipoCultivoEntidad);	
+	}
+
+	public void guardarRol(Rol rol) {
+		RolEntidad rolEntidad = new RolEntidad();
+		mapperDozer.map(rol, rolEntidad);
+		rolRepository.save(rolEntidad);	
 	}
 	
 }

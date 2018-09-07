@@ -10,6 +10,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { MenuComponent } from './menu/menu.component';
 import { TableComponent } from './table/table.component';
+import { TipoCultivoService } from './servicios/tipo-cultivo.service'
 
 registerLocaleData(en);
 
@@ -26,7 +27,7 @@ registerLocaleData(en);
     HttpClientModule,
     NgZorroAntdModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [TipoCultivoService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
