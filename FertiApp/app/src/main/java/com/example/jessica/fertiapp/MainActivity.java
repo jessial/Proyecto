@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Por favor registrese", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SaveUserView.class);
-                intent.putExtra("usu_cedula1",cedulaConsultar);
+                intent.putExtra("usu_cedula",cedulaConsultar);
                 startActivity(intent);
 
             }

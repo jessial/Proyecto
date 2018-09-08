@@ -61,7 +61,7 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         listaSpinnerRol.setOnItemSelectedListener(this);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaRol);
         listaSpinnerRol.setAdapter(arrayAdapter);
-        String id = getIntent().getStringExtra("usu_cedula1");
+        String id = getIntent().getStringExtra("usu_cedula");
         cedula.setText(id);
     }
 
@@ -114,9 +114,9 @@ public class SaveUserView extends AppCompatActivity implements SaveUser.UserView
         if (Cedula.equals(""))
             cedula.setError("Ingrese cedula");
         else if (Nombre.equals(""))
-            nombre.setError("Ingrese cedula");
+            nombre.setError("Ingrese nombre");
         else if (Apellido.equals(""))
-            apellido.setError("Ingrese cedula");
+            apellido.setError("Ingrese apellido");
         else {
             usuario.setCedula(Cedula);
             usuario.setNombre(Nombre);
