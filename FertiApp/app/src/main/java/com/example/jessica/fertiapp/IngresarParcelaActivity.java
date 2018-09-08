@@ -87,14 +87,9 @@ public class IngresarParcelaActivity extends AppCompatActivity implements Adapte
             List listVariedad = null;
             try {
                 cultivoSembradoDao = getHelper().getCultivoSembradoDao();
-                final QueryBuilder<CultivoSembrado, Integer> queryBuilder = cultivoSembradoDao.queryBuilder();
-                queryBuilder.where().eq(CultivoSembrado.VARIEDAD, "hass");
-                final PreparedQuery<CultivoSembrado> preparedQuery = queryBuilder.prepare();
-                final Iterator<CultivoSembrado> variedadIt = cultivoSembradoDao.query(preparedQuery).iterator();
-                while (variedadIt.hasNext()) {
-                    final CultivoSembrado variedad = variedadIt.next();
-                    listVariedad.add(variedad.getVariedad());
-                }
+                QueryBuilder queryBuilder = cultivoSembradoDao.queryBuilder();
+                queryBuilder.setWhere(queryBuilder.where().eq(CultivoSembrado.VARIEDAD, "Hass"));
+                listVariedad = cultivoSembradoDao.query(queryBuilder.prepare());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
