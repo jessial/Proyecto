@@ -14,13 +14,15 @@ public class AnalisisEntidad {
 	
 	@Id
 	@Column(name="ana_codigo")
-	private int codigo;
+	private Long codigoAnalisis;
 	@Column(name="ana_cod_parcela")
-	private int codigoParcela;
+	private Long codigoParcela;
 	@Column(name="ana_fechaAnalisis")
 	private Date fechaAnalisis;
+	@Column(name="ana_base")
+	private String base;
 	@Column(name="ana_ph")
-	private double ph;
+	private String ph;
 	@Column(name="ana_mo")
 	private double mo;
 	@Column(name="ana_n")

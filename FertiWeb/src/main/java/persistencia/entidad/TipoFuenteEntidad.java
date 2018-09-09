@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Getter;
+import lombok.Data;
 
 @Entity(name = "TipoFuente")
-@Getter
+@Data
 public class TipoFuenteEntidad {
 	
 	@Id

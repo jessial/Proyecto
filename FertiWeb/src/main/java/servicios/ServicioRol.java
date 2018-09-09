@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatos;
 import dominio.Rol;
-import dominio.TipoCultivo;
-import persistencia.entidad.RolEntidad;
 
 @RestController
 @RequestMapping("/servicio_rol")

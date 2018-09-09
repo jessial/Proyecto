@@ -1,12 +1,12 @@
 package dominio;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter (AccessLevel.PRIVATE)
+@Data
 public class Fuente {
 	
-	private int codigo;
+	private Long codigoFuente;
+	private Long codigoTipoFuente;
 	private String producto;
 	
 }

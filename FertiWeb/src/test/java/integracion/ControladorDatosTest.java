@@ -3,6 +3,7 @@ package integracion;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.verify;
 
+import java.io.FileReader;
 import java.util.Date;
 
 import org.dozer.DozerBeanMapper;
@@ -18,12 +19,11 @@ import controladores.ControladorDatos;
 import dominio.Analisis;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
+import persistencia.repositorio.CultivoSembradoRepository;
 import persistencia.repositorio.RolRepository;
-import persistencia.repositorio.TipoCultivoRepository;
 
 public class ControladorDatosTest {
 	
-	private static final String JSON_ANALISIS = "{\"codigo\":1,\"codigoParcela\":1,\"fechaAnalisis\":null,\"ph\":0,\"mo\":0,\"n\":0,\"m\":0,\"k\":0,\"mg\":0,\"ca\":0,\"al\":0,\"na\":0,\"s\":0,\"fe\":0,\"b\":0,\"cu\":0,\"mn\":0,\"zn\":0,\"saNa\":0,\"saK\":0,\"saCa\":0,\"saMg\":0,\"saAl\":0,\"porcentajeA\":0,\"porcentajeL\":0,\"porcentajeAr\":0,\"cice\":0}";
 	private ControladorDatos controladorDatos;
 	
 	@Mock
@@ -33,7 +33,7 @@ public class ControladorDatosTest {
 	RolRepository rolRepository;
 	
 	@Mock
-	TipoCultivoRepository tipoCultivoRepository;
+	CultivoSembradoRepository cultivoSembradoRepository;
 	
 	
 	
@@ -48,9 +48,10 @@ public class ControladorDatosTest {
 	@Test
 	public void convertirAnalisisEnEntidad() throws Exception {
 		// Arrange
-		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, rolRepository,tipoCultivoRepository);
+		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, null, null, null, null);
+		FileReader file = new FileReader("src/test/java/jsonTest/JSON_ANALISIS.json");
 		ObjectMapper mapperJson = new ObjectMapper();
-		Analisis analisis = mapperJson.readValue(JSON_ANALISIS, Analisis.class);
+		Analisis analisis = mapperJson.readValue(file, Analisis.class);
 		analisis.setFechaAnalisis(new Date());
 
 		// Act

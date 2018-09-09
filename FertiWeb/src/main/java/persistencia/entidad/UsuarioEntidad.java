@@ -1,22 +1,20 @@
 package persistencia.entidad;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 
 @Entity(name = "Usuario")
-@Getter (AccessLevel.PRIVATE)
+@Data
 public class UsuarioEntidad {
 
 	@Id
 	@Column(name="usu_cedula")
 	private Long cedula;
+	@Column(name="usu_codigo_rol")
+	private Long codigoRol;
 	@Column(name="usu_nombre",nullable = false)
 	private String nombre;
 	@Column(name="usu_apellido" ,nullable = false)
@@ -25,7 +23,5 @@ public class UsuarioEntidad {
 	private Long telefono;
 	@Column(name="usu_email")
 	private String email;
-	@OneToMany
-	private List<TipoUsuarioEntidad> tipoUsuario;
 	
 }

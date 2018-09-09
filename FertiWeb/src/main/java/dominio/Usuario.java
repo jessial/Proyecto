@@ -1,12 +1,12 @@
 package dominio;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter (AccessLevel.PRIVATE)
+@Data
 public class Usuario {
 	
 	private Long cedula;
+	private Long codigoRol;
 	private String nombre;
 	private String apellido;
 	private Long telefono;

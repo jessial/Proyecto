@@ -1,12 +1,12 @@
 package dominio;
 
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter (AccessLevel.PRIVATE)
+@Data
 public class Requerimiento {
 	
-	private int codigo;
-	private TipoCultivo tipoCultivo;
-	
+	private Long codigoCultivoSembrado;
+	private Long codigoRequerimiento;
+	private String nutriente;
+	private Double candtidad;
 }

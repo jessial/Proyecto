@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import controladores.ControladorDatos;
+import controladores.ControladorDatosApp;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "servicios" })
@@ -23,6 +24,11 @@ public class FertiWebApplication {
 	@Bean
 	public ControladorDatos crearControladorDatos() {
 		return new ControladorDatos();
+	}
+	
+	@Bean
+	public ControladorDatosApp crearControladorDatosApp() {
+		return new ControladorDatosApp();
 	}
 	
 	@Bean

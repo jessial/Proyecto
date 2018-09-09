@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 public class Analisis {
 
-	private int codigo;
-	private int codigoParcela;
+	private Long codigoAnalisis;
+	private Long codigoParcela;
 	private Date fechaAnalisis;
-	private double ph;
+	private String base;
+	private String ph;
 	private double mo;
 	private double n;
 	private double m;

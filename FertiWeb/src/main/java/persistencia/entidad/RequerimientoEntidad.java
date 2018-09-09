@@ -3,20 +3,21 @@ package persistencia.entidad;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-import lombok.Getter;
+import lombok.Data;
 
 @Entity(name = "Requerimiento")
-@Getter
+@Data
 public class RequerimientoEntidad {
 	
 	@Id
+	@Column(name="req_codigo_cultivo_sembrado")
+	private Long codigoCultivoSembrado;
 	@Column(name="req_codigo")
-	private int codigo;
-	@OneToOne(optional=false)
-    @JoinColumn(name="tc_codigo", unique=true, nullable=false)
-	private TipoCultivoEntidad tipoCultivoEntidad;
-	
+	private Long codigoRequerimiento;
+	@Column(name="req_nutriente")
+	private String nutriente;
+	@Column(name="req_cantidad")
+	private Double candtidad;
+
 }
