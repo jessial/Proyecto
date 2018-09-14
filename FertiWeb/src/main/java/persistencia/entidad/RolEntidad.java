@@ -12,7 +12,7 @@ public class RolEntidad {
 	
 	@Id
 	@Column(name="rol_codigo")
-	private int codigo;
+	private Long codigo;
 	@Column(name="rol_nombre")
 	private String nombre;
 	@Column(name="rol_estado")

@@ -2,7 +2,10 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,16 +13,23 @@ import dominio.Analisis;
 import dominio.CultivoSembrado;
 import dominio.Lugar;
 import dominio.Parcela;
+import dominio.Recomendacion;
 import dominio.Rol;
 import dominio.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.entidad.CultivoSembradoEntidad;
+import persistencia.entidad.LugarEntidad;
+import persistencia.entidad.ParcelaEntidad;
+import persistencia.entidad.RecomendacionEntidad;
 import persistencia.entidad.RolEntidad;
+import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
 import persistencia.repositorio.CultivoSembradoRepository;
+import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
+import persistencia.repositorio.RecomendacionRepository;
 import persistencia.repositorio.RolRepository;
 import persistencia.repositorio.UsuarioRepository;
 
@@ -44,6 +54,12 @@ public class ControladorDatos {
 
 	@Autowired
 	private ParcelaRepository parcelaRepository;
+	
+	@Autowired
+	private LugarRepository lugarRepository;
+	
+	@Autowired
+	private RecomendacionRepository recomendacionRepository;
 
 	public void guardarAnalisis(Analisis analisisSuelo) {
 		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
@@ -53,7 +69,7 @@ public class ControladorDatos {
 
 	public List<Rol> consultarRoles() {
 		List<Rol> roles = new ArrayList<>();
-		mapperDozer.map(roles, rolRepository.findAll());
+		mapperDozer.map(rolRepository.findAll(), roles);
 		return roles;
 	}
 
@@ -78,44 +94,50 @@ public class ControladorDatos {
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();
-		mapperDozer.map(usuarioRepository.findById(cedula), usuario);
+		mapperDozer.map(Optional.ofNullable(usuarioRepository.findByCedula(cedula)).orElseGet(() -> new UsuarioEntidad()), usuario);
 		return usuario;
-	}
-
-	public Rol consultarRolPorCodigo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Rol consultarRolPorCodigo(Long codigoRol) {
 		Rol rol = new Rol();
-		mapperDozer.map(rolRepository.findById(codigoRol), rol);
+		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
 		return rol;
 	}
 
-	public List<Lugar> consultarLugaresPorUsuario(Long cedula) {
-		// TODO Auto-generated method stub
-		return null;
+	public ImmutablePair<List<Lugar>, List<Long>> consultarLugaresPorUsuario(Long cedula) {
+		return mapearLugares(lugarRepository.findByCodigoUsuario(cedula));
+	}
+	
+	private ImmutablePair<List<Lugar>, List<Long>> mapearLugares(List<LugarEntidad> lugaresEntidad) {
+		List<Lugar> lugares = lugaresEntidad.stream().map(a -> mapperDozer.map(a, Lugar.class)).collect(Collectors.toCollection(ArrayList :: new ));
+		List<Long> codigos = lugares.stream().map(a -> a.getCodigoLugar()).collect(Collectors.toCollection(ArrayList :: new ));
+		return new ImmutablePair<>(lugares, codigos);
 	}
 
-	public List<Parcela> consultarParcelasPorLugares(List<Lugar> lugares) {
-		List<Parcela> parcelas = new ArrayList<>();
-		List<Long> codigos = new ArrayList<>();
-		for (Lugar lugar : lugares) {
-			codigos.add(lugar.getCodigoLugar());
-		}
-		mapperDozer.map(parcelaRepository.findByCodigoParcelaIn(codigos), parcelas);
-		return parcelas;
+	public ImmutablePair<List<Parcela>, List<Long>> consultarParcelasPorLugares(List<Long> codigos) {
+		return mapearParcelas(parcelaRepository.findByCodigoParcelaIn(codigos));	
 	}
 
-	public List<Analisis> consultarAnalisisPorParcela(List<Parcela> parcelas) {
-		List<Analisis> analisis = new ArrayList<>();
-		List<Long> codigos = new ArrayList<>();
-		for (Parcela parcela : parcelas) {
-			codigos.add(parcela.getCodigoParcela());
-		}
-		mapperDozer.map(analisisRepository.findByCodigoParcelaIn(codigos), analisis);
-		return analisis;
+	private ImmutablePair<List<Parcela>, List<Long>> mapearParcelas(List<ParcelaEntidad> parcelasEntidad) {
+		List<Parcela> parcelas = parcelasEntidad.stream().map(a -> mapperDozer.map(a, Parcela.class)).collect(Collectors.toCollection(ArrayList :: new ));
+		List<Long> codigos = parcelas.stream().map(a -> a.getCodigoLugar()).collect(Collectors.toCollection(ArrayList :: new ));
+		return new ImmutablePair<>(parcelas, codigos);
 	}
 
+	public List<Analisis> consultarAnalisisPorParcela(List<Long> codigos) {
+		return mapearAnalisis(analisisRepository.findByCodigoParcelaIn(codigos));
+	}
+
+	private List<Analisis> mapearAnalisis(List<AnalisisEntidad> analisisEntidadList) {
+		return analisisEntidadList.stream().map(a -> mapperDozer.map(a, Analisis.class)).collect(Collectors.toCollection(ArrayList :: new ));
+	}
+
+	public List<Recomendacion> consultarRecomendacionesPorParcela(List<Long> codigos) {
+		return mapearRecomendaciones(recomendacionRepository.findByCodigoParcelaIn(codigos));
+	}
+	
+	private List<Recomendacion> mapearRecomendaciones(List<RecomendacionEntidad> recomendacionesEntidad) {
+		return recomendacionesEntidad.stream().map(a -> mapperDozer.map(a, Recomendacion.class)).collect (Collectors.toCollection(ArrayList :: new ));
+	}
+	
 }

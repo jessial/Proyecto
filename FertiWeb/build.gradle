@@ -40,7 +40,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile ('mysql:mysql-connector-java')
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
-	compile ('org.projectlombok:lombok:1.18.0')
+	compile ('org.projectlombok:lombok:1.16.20')
 	compile("com.h2database:h2")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')

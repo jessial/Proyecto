@@ -6,6 +6,7 @@ import dominio.Analisis;
 import dominio.CultivoSembrado;
 import dominio.Lugar;
 import dominio.Parcela;
+import dominio.Recomendacion;
 import dominio.Resultado;
 import dominio.Rol;
 import dominio.Usuario;
@@ -22,6 +23,7 @@ public class DtoResponse {
 	private List<Resultado> resultados;
 	private List<Analisis> analisis;
 	private List<CultivoSembrado> cultivos;
+	private List<Recomendacion> recomendaciones;
 	
 	
 }

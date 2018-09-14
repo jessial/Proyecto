@@ -19,8 +19,6 @@ import controladores.ControladorDatos;
 import dominio.Analisis;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
-import persistencia.repositorio.CultivoSembradoRepository;
-import persistencia.repositorio.RolRepository;
 
 public class ControladorDatosTest {
 	
@@ -28,14 +26,6 @@ public class ControladorDatosTest {
 	
 	@Mock
 	AnalisisRepository analisisRepository;
-	
-	@Mock
-	RolRepository rolRepository;
-	
-	@Mock
-	CultivoSembradoRepository cultivoSembradoRepository;
-	
-	
 	
 	@Mock
 	DozerBeanMapper mapperDozer;
@@ -48,7 +38,7 @@ public class ControladorDatosTest {
 	@Test
 	public void convertirAnalisisEnEntidad() throws Exception {
 		// Arrange
-		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, null, null, null, null);
+		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, null, null, null, null, null, null);
 		FileReader file = new FileReader("src/test/java/jsonTest/JSON_ANALISIS.json");
 		ObjectMapper mapperJson = new ObjectMapper();
 		Analisis analisis = mapperJson.readValue(file, Analisis.class);
