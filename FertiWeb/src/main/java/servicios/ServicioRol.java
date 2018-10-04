@@ -1,10 +1,9 @@
 package servicios;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +20,16 @@ public class ServicioRol {
 	@Autowired
 	ControladorDatos controladorDatos;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/consultaTodos")
-	public List<Rol> consultar() {
-		return controladorDatos.consultarRoles();
-		//return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<Object> consultar() {
+		return new ResponseEntity<>(controladorDatos.consultarRoles(), HttpStatus.CREATED);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Rol rol) {
 		controladorDatos.guardarRol(rol);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 }

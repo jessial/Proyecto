@@ -14,8 +14,11 @@
       <li nz-submenu>
         <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestionar</span></span>
         <ul>
-          <li nz-menu-item>Tipos de cultivos</li>
-          <li nz-menu-item>Roles</li>
+          <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
+              Tipos de cultivos
+          </li>
+          <li nz-menu-item [routerLink]="['/lista_roles']">
+              Roles</li>
         </ul>
       </li>
       <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
@@ -31,7 +34,7 @@
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div style="padding:24px; background: #fff; min-height: 360px;">
-        <app-table></app-table>
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer style="text-align: center;">FertiWeb Design ©2018 V.0</nz-footer>

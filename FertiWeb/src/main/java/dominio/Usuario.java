@@ -11,5 +11,6 @@ public class Usuario {
 	private String apellido;
 	private Long telefono;
 	private String email;
+	private String password;
 	
 }

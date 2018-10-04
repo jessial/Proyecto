@@ -23,5 +23,7 @@ public class UsuarioEntidad {
 	private Long telefono;
 	@Column(name="usu_email")
 	private String email;
+	@Column(name="usu_password")
+	private String password;
 	
 }

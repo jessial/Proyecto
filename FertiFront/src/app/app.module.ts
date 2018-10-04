@@ -3,14 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { MenuComponent } from './menu/menu.component';
-import { TableComponent } from './table/table.component';
-import { TipoCultivoService } from './servicios/tipo-cultivo.service'
+import { TableComponent } from './table_tipos_cultivo/table.component';
+import { NZ_NOTIFICATION_CONFIG } from 'ng-zorro-antd';
+import { FormComponent } from './form_tipo_cultivo/form.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DrawerComponent } from './drawer/drawer.component';
+import { TableRolComponent } from './table-rol/table-rol.component';
+import { FormRolComponent } from './form-rol/form-rol.component';
+
+
 
 registerLocaleData(en);
 
@@ -18,16 +25,30 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     MenuComponent,
-    TableComponent
+    TableComponent,
+    FormComponent,
+    DrawerComponent,
+    TableRolComponent,
+    FormRolComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [TipoCultivoService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, 
+    { provide: NZ_NOTIFICATION_CONFIG, useValue: { 
+      nzTop         : '24px',
+      nzBottom      : '24px',
+      nzPlacement   : 'topRight',
+      nzDuration    : 9000,
+      nzMaxStack    : 5,
+      nzPauseOnHover: true,
+      nzAnimate     : true }}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

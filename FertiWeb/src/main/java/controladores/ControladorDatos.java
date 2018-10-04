@@ -139,5 +139,18 @@ public class ControladorDatos {
 	private List<Recomendacion> mapearRecomendaciones(List<RecomendacionEntidad> recomendacionesEntidad) {
 		return recomendacionesEntidad.stream().map(a -> mapperDozer.map(a, Recomendacion.class)).collect (Collectors.toCollection(ArrayList :: new ));
 	}
+
+	public void guardarUsuarioNuevo(Usuario usuario) {
+		UsuarioEntidad usuarioEntidad = new UsuarioEntidad();
+		if(!usuarioExisteEnBd(usuario.getCedula())) {
+			mapperDozer.map(usuario, usuarioEntidad);
+			usuarioRepository.save(usuarioEntidad);
+		}
+		
+	}
+
+	public boolean usuarioExisteEnBd(Long cedula) {
+		return null != usuarioRepository.findByCedula(cedula);
+	}
 	
 }
