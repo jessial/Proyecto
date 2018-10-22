@@ -1,8 +1,8 @@
 export class TipoCultivo {
 
-    codigo: number;
-    variedad: string;
-    nombre: string;
-    estado: boolean;
+    public codigoCultivoSembrado: number;
+    public nombre: string;
+    public variedad: string;
+    public estado: boolean;
 
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
-import { catchError, map, tap } from 'rxjs/operators';
 import { UtilidadService } from './utilidad.service';
+import { Observable, of } from 'rxjs';
+import { Rol } from '../calses_dominio/rol';
+import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,22 +12,22 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class TipoCultivoService {
+export class RolService {
 
-  private tipoCultivoUrl = 'http://localhost:8080/servicio_tipo_cultivo';  // URL to web api
+  private rolUrl = 'http://localhost:8080/servicio_rol';  // URL to web api
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
   /** GET TiposCutivo from the server */
-  public getTiposCultivo(): Observable<TipoCultivo[]> {
-    const url = `${this.tipoCultivoUrl}/consultaTodos`;
-    return this.http.get<TipoCultivo[]>(url).pipe(catchError(this.handleError('',[])));
+  public getRoles(): Observable<Rol[]> {
+    const url = `${this.rolUrl}/consultaTodos`;
+    return this.http.get<Rol[]>(url).pipe(catchError(this.handleError('',[])));
   }
 
   /** UPDATE TiposCutivo from the server */
-  public updateTiposCultivo(tipoCultivo: TipoCultivo): Observable<TipoCultivo> {
-    const url = `${this.tipoCultivoUrl}/actualizaRegistro`;
-    return this.http.put<TipoCultivo>(url, tipoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
+  public updateRoles(rol: Rol): Observable<Rol> {
+    const url = `${this.rolUrl}/guardado`;
+    return this.http.put<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
