@@ -27,7 +27,7 @@ export class RolService {
   /** UPDATE TiposCutivo from the server */
   public updateRoles(rol: Rol): Observable<Rol> {
     const url = `${this.rolUrl}/guardado`;
-    return this.http.put<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.post<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

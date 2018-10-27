@@ -28,7 +28,7 @@ export class TableComponent implements OnInit {
   }
 
   cambiarEstado(tipoCultivo: TipoCultivo){
-    this.tipoCultivoService.updateOrCreate(tipoCultivo);
+    this.tipoCultivoService.updateOrCreate(tipoCultivo).subscribe();
   }
 
   editarRegistro(tipoCultivo: TipoCultivo) {
