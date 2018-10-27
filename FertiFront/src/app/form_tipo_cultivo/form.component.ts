@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
+import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
 import {
   AbstractControl,
@@ -7,7 +8,6 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
 @Component({
   selector: 'app-form',
@@ -17,33 +17,36 @@ import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 export class FormComponent implements OnInit {
 
   validateForm: FormGroup;
-
-  @Input() tipoCultivo: TipoCultivo;
+  public tipoCultivo = new TipoCultivo();
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
     }
-    this.ingresarDato();
+    console.log(this.tipoCultivo);
   }
 
   constructor(private fb: FormBuilder, private tipoCultivoService: TipoCultivoService) {
   }
 
   ngOnInit(): void {
-    this.tipoCultivo = new TipoCultivo();
+    this.cargarTipoCultivo();
     this.validateForm = this.fb.group({
       variedad: [ null, [ Validators.required ] ],
       nombre: [ null, [ Validators.required ] ]
     });
   }
 
-  private ingresarDato(){
-    this.tipoCultivoService.updateTiposCultivo(this.tipoCultivo);
+  private cargarTipoCultivo(){
+    this.tipoCultivoService.getCultivo()
+    .subscribe(result => {
+      this.tipoCultivo = result;
+    }
+    );
   }
 
-  editDate(event): void{
-    console.log("event");
+  lllllll(){
+    console.log("fdhgdhfghdg");
   }
 }

@@ -12,9 +12,6 @@ export class DrawerComponent {
   childrenVisible = false;
   formulario: string;
   data: any;
-  
-  @ViewChild(FormComponent) form: FormComponent;
-
 
   open(formulario: string): void {
     this.formulario = formulario;
@@ -31,10 +28,6 @@ export class DrawerComponent {
 
   closeChildren(): void {
     this.childrenVisible = false;
-  }
-
-  submitForm(): void{
-    this.form.submitForm();
   }
 
 }

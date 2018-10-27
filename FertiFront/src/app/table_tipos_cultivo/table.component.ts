@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
@@ -10,51 +10,33 @@ import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 export class TableComponent implements OnInit {
   i = 1;
   editCache = {};
-  dataSet  = [];
-
-  @Output() editDate = new EventEmitter();
+  dataSet = [];
   
   constructor(private tipoCultivoService: TipoCultivoService) {}
 
-  addRow(): void {
-   
-  }
-
-  deleteRow(i: string): void {
-    
-  }
-
-  startEdit(key: string): void {
-   
-  }
-
-  finishEdit(key: string): void {
-    
-  }
-
-  updateEditCache(edit: boolean): void {
-    
-  }
-
   ngOnInit(): void {
+    this.tipoCultivoService.cargarDatos();
     this.getTiposCultivo();
   }
 
   getTiposCultivo(): void {
     this.tipoCultivoService.getTiposCultivo()
-      .subscribe(result => {
-        this.dataSet = result;
-      }
-      );
+    .subscribe(result => {
+      this.dataSet = result;
+    }
+    );
   }
 
-  cambiarRegistro(tipoCultivo: TipoCultivo){
-    this.tipoCultivoService.updateTiposCultivo(tipoCultivo)
-    .subscribe();
+  cambiarEstado(tipoCultivo: TipoCultivo){
+    this.tipoCultivoService.updateOrCreate(tipoCultivo);
   }
 
   editarRegistro(tipoCultivo: TipoCultivo) {
-    this.editDate.emit(tipoCultivo);
+    this.tipoCultivoService.editarCultivo(tipoCultivo);
+  }
+
+  crearRegistro(){
+    this.tipoCultivoService.editarCultivo(new TipoCultivo());
   }
 
 }

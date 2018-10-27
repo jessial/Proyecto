@@ -11,3 +11,5 @@
 .metadata/
 .recommenders/
 .sonarlint/
+/src/main/resources/static
+
