@@ -12,27 +12,7 @@ export class TableRolComponent implements OnInit {
   editCache = {};
   dataSet = [];
 
-  constructor(private rolService: RolService) {}
-
-  addRow(): void {
-    
-  }
-
-  deleteRow(i: string): void {
-   
-  }
-
-  startEdit(key: string): void {
-    
-  }
-
-  finishEdit(key: string): void {
-    
-  }
-
-  updateEditCache(): void {
-    
-  }
+  constructor(private rolService: RolService) { }
 
   ngOnInit(): void {
     this.getRoles();
@@ -46,8 +26,8 @@ export class TableRolComponent implements OnInit {
       );
   }
 
-  cambiarRegistro(rol: Rol){
+  cambiarRegistro(rol: Rol) {
     this.rolService.updateRoles(rol)
-    .subscribe();
+      .subscribe();
   }
 }

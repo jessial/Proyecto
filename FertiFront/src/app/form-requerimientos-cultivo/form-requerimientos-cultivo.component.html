@@ -1,0 +1,27 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-edit">
+        <input type="text" nz-input formControlName="nutriente" placeholder="Nutriente">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('nutriente').dirty && validateForm.get('nutriente').errors">Ingrese un nutriente</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-edit">
+        <input type="text" nz-input formControlName="cantidad" placeholder="Cantidad">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('cantidad').dirty && validateForm.get('cantidad').errors">Ingrese la cantidad</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-tag [nzColor]="'green'">Estado</nz-tag>
+      <nz-switch [(ngModel)]="requerimientoCultivo.estado" [ngModelOptions]="{standalone: true}" nzCheckedChildren="1" nzUnCheckedChildren="0"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+</form>

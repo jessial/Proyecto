@@ -14,6 +14,7 @@ import dominio.CultivoSembrado;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
+import dominio.Requerimiento;
 import dominio.Rol;
 import dominio.Usuario;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import persistencia.entidad.CultivoSembradoEntidad;
 import persistencia.entidad.LugarEntidad;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.entidad.RecomendacionEntidad;
+import persistencia.entidad.RequerimientoEntidad;
 import persistencia.entidad.RolEntidad;
 import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
@@ -30,6 +32,7 @@ import persistencia.repositorio.CultivoSembradoRepository;
 import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
 import persistencia.repositorio.RecomendacionRepository;
+import persistencia.repositorio.RequerimientoRepository;
 import persistencia.repositorio.RolRepository;
 import persistencia.repositorio.UsuarioRepository;
 
@@ -60,6 +63,9 @@ public class ControladorDatos {
 	
 	@Autowired
 	private RecomendacionRepository recomendacionRepository;
+	
+	@Autowired
+	private RequerimientoRepository requerimientoRepository;
 
 	public void guardarAnalisis(Analisis analisisSuelo) {
 		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
@@ -72,7 +78,13 @@ public class ControladorDatos {
 		mapperDozer.map(rolRepository.findAll(), roles);
 		return roles;
 	}
-
+	
+	public List<Requerimiento> consultarRequermientos(){
+		List<Requerimiento> requerimientos = new ArrayList<>();
+		mapperDozer.map(requerimientoRepository.findAll(), requerimientos);
+		return requerimientos;
+	}
+	
 	public List<CultivoSembrado> consultarCultivo() {
 		List<CultivoSembrado> tiposCultivo = new ArrayList<>();
 		List<CultivoSembradoEntidad> tiposCultivoEntidad = cultivoSembradoRepository.findAll();
@@ -90,6 +102,12 @@ public class ControladorDatos {
 		RolEntidad rolEntidad = new RolEntidad();
 		mapperDozer.map(rol, rolEntidad);
 		rolRepository.save(rolEntidad);
+	}
+	
+	public void guardarRequermiento(Requerimiento requerimiento) {
+		RequerimientoEntidad requerimientoEntidad = new RequerimientoEntidad();
+		mapperDozer.map(requerimiento, requerimientoEntidad);
+		requerimientoRepository.save(requerimientoEntidad);
 	}
 
 	public Usuario consultarPorCedula(Long cedula) {

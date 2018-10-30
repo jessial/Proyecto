@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Rol } from '../calses_dominio/rol'
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { Rol } from '../calses_dominio/rol';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-rol',
@@ -18,8 +13,8 @@ export class FormRolComponent implements OnInit {
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
     }
   }
 
@@ -28,7 +23,7 @@ export class FormRolComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      nombre: [ null, [ Validators.required ] ]
+      nombre: [null, [Validators.required]]
     });
   }
 }

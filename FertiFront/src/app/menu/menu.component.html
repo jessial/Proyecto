@@ -15,10 +15,15 @@
         <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestionar</span></span>
         <ul>
           <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
-              Tipos de cultivos
+            Tipos de cultivos
           </li>
           <li nz-menu-item [routerLink]="['/lista_roles']">
-              Roles</li>
+            Roles
+          </li>
+          <li>
+          <li nz-menu-item [routerLink]="['/lista_requerimientos']">
+            Requerimientos
+          </li>
         </ul>
       </li>
       <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
@@ -26,7 +31,8 @@
   </nz-sider>
   <nz-layout>
     <nz-header style="background: #fff; padding:0;">
-      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed"
+        (click)="isCollapsed=!isCollapsed"></i>
     </nz-header>
     <nz-content style="margin:0 16px;">
       <nz-breadcrumb style="margin:16px 0;">

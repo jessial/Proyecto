@@ -16,6 +16,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DrawerComponent } from './drawer/drawer.component';
 import { TableRolComponent } from './table-rol/table-rol.component';
 import { FormRolComponent } from './form-rol/form-rol.component';
+import { FormRequerimientosCultivoComponent } from './form-requerimientos-cultivo/form-requerimientos-cultivo.component';
+import { TableRequerimientosCultivoComponent } from './table-requerimientos-cultivo/table-requerimientos-cultivo.component';
 
 
 
@@ -29,7 +31,9 @@ registerLocaleData(en);
     FormComponent,
     DrawerComponent,
     TableRolComponent,
-    FormRolComponent
+    FormRolComponent,
+    FormRequerimientosCultivoComponent,
+    TableRequerimientosCultivoComponent
   ],
   imports: [
     BrowserModule,
