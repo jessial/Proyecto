@@ -1,6 +1,7 @@
 export class RequerimientoCultivo {
 
-    public codigo: number;
+    public codigoRequerimiento: number;
+    public codigoCultivoSembrado: number;
     public nutriente: string;
     public cantidad: number;
     public estado: boolean;
