@@ -8,5 +8,6 @@ public class Requerimiento {
 	private Long codigoCultivoSembrado;
 	private Long codigoRequerimiento;
 	private String nutriente;
-	private Double candtidad;
+	private Double cantidad;
+	private boolean estado;
 }

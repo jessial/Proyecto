@@ -1,6 +1,7 @@
 <nz-table #basicTable [nzData]="dataSet">
   <thead>
     <tr>
+      <th>Cultivo</th>
       <th>Nutriente</th>
       <th>Cantidad</th>
       <th>Estado</th>
@@ -14,6 +15,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
+      <td>{{data.codigoCultivoSembrado}}</td>
       <td>{{data.nutriente}}</td>
       <td>{{data.cantidad}}</td>
       <td>
