@@ -17,5 +17,7 @@ public class TipoFuenteEntidad {
 	private String nombre;
 	@Column(name="tf_aporte",nullable = false)
 	private double aporte;
+	@Column(name = "tf_estado",nullable = false)
+	private boolean estado;
 	
 }

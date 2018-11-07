@@ -10,6 +10,7 @@ import dominio.Recomendacion;
 import dominio.Requerimiento;
 import dominio.Resultado;
 import dominio.Rol;
+import dominio.TipoFuente;
 import dominio.Usuario;
 import lombok.Data;
 
@@ -27,5 +28,7 @@ public class DtoResponse {
 	private List<Recomendacion> recomendaciones;
 	private Requerimiento requerimientoCultivo;
 	private List<Requerimiento> requerimientos;
+	private TipoFuente tipoFuente;
+	private List<TipoFuente> tiposFuente;
 		
 }

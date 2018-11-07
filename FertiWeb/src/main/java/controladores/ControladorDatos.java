@@ -16,6 +16,7 @@ import dominio.Parcela;
 import dominio.Recomendacion;
 import dominio.Requerimiento;
 import dominio.Rol;
+import dominio.TipoFuente;
 import dominio.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ import persistencia.entidad.ParcelaEntidad;
 import persistencia.entidad.RecomendacionEntidad;
 import persistencia.entidad.RequerimientoEntidad;
 import persistencia.entidad.RolEntidad;
+import persistencia.entidad.TipoFuenteEntidad;
 import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
 import persistencia.repositorio.CultivoSembradoRepository;
@@ -34,6 +36,7 @@ import persistencia.repositorio.ParcelaRepository;
 import persistencia.repositorio.RecomendacionRepository;
 import persistencia.repositorio.RequerimientoRepository;
 import persistencia.repositorio.RolRepository;
+import persistencia.repositorio.TipoFuenteRepository;
 import persistencia.repositorio.UsuarioRepository;
 
 @AllArgsConstructor
@@ -66,6 +69,9 @@ public class ControladorDatos {
 	
 	@Autowired
 	private RequerimientoRepository requerimientoRepository;
+	
+	@Autowired
+	private TipoFuenteRepository tipoFuenteRepository;
 
 	public void guardarAnalisis(Analisis analisisSuelo) {
 		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
@@ -83,6 +89,12 @@ public class ControladorDatos {
 		List<Requerimiento> requerimientos = new ArrayList<>();
 		mapperDozer.map(requerimientoRepository.findAll(), requerimientos);
 		return requerimientos;
+	}
+	
+	public List<TipoFuente> consultarTipoFuente(){
+		List<TipoFuente> tipoFuente = new ArrayList<>();
+		mapperDozer.map(tipoFuenteRepository.findAll(), tipoFuente);
+		return tipoFuente;	
 	}
 	
 	public List<CultivoSembrado> consultarCultivo() {
@@ -108,6 +120,13 @@ public class ControladorDatos {
 		RequerimientoEntidad requerimientoEntidad = new RequerimientoEntidad();
 		mapperDozer.map(requerimiento, requerimientoEntidad);
 		requerimientoRepository.save(requerimientoEntidad);
+	}
+	
+	public void guardarTipoFuente(TipoFuente tipoFuente){
+		TipoFuenteEntidad tipoFuenteEntidad = new TipoFuenteEntidad();
+		mapperDozer.map(tipoFuente, tipoFuenteEntidad);
+		tipoFuenteRepository.save(tipoFuenteEntidad);
+		
 	}
 
 	public Usuario consultarPorCedula(Long cedula) {
