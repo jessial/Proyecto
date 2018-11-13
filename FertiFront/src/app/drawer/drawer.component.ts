@@ -1,5 +1,5 @@
-import { Component, ViewChild  } from '@angular/core';
-import { FormComponent } from '../form_tipo_cultivo/form.component'
+import { Component } from '@angular/core';
+import { LocalService } from '../servicios/local.service';
 
 @Component({
   selector: 'app-drawer',
@@ -12,6 +12,12 @@ export class DrawerComponent {
   childrenVisible = false;
   formulario: string;
   data: any;
+
+  constructor(private servicioLocal: LocalService) { }
+
+  submit() {
+    this.servicioLocal.enviarAccion('clic');
+  }
 
   open(formulario: string): void {
     this.formulario = formulario;

@@ -27,7 +27,7 @@ export class TableRolComponent implements OnInit {
   }
 
   cambiarRegistro(rol: Rol) {
-    this.rolService.updateRoles(rol)
+    this.rolService.saveRoles(rol)
       .subscribe();
   }
 }

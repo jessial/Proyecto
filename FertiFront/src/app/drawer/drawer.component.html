@@ -6,7 +6,7 @@
   </div>
   <div class="footer">
     <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
-    <button type="button" (click)="appForm.submitForm()" class="ant-btn ant-btn-primary"><span>Ingresar</span></button>
+    <button type="button" (click)="submit()" class="ant-btn ant-btn-primary"><span>Ingresar</span></button>
   </div>
   <nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
   </nz-drawer>

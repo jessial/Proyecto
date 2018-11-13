@@ -21,16 +21,16 @@ export class RolService {
   /** GET TiposCutivo from the server */
   public getRoles(): Observable<Rol[]> {
     const url = `${this.rolUrl}/consultaTodos`;
-    return this.http.get<Rol[]>(url).pipe(catchError(this.handleError('',[])));
+    return this.http.get<Rol[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
   /** UPDATE TiposCutivo from the server */
-  public updateRoles(rol: Rol): Observable<Rol> {
+  public saveRoles(rol: Rol): Observable<Rol> {
     const url = `${this.rolUrl}/guardado`;
     return this.http.post<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.utilidad.mensajeError("Error en la respuesta del servicio");
       return of(result as T);
