@@ -30,4 +30,12 @@ export class TableRolComponent implements OnInit {
     this.rolService.saveRoles(rol)
       .subscribe();
   }
+
+  editarRegistro(rol: Rol) {
+    this.rolService.saveRoles(rol);
+  }
+
+  crearRegistro() {
+    this.rolService.saveRoles(new Rol());
+  }
 }

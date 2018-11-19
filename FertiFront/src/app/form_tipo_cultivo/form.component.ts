@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
@@ -8,45 +8,54 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { LocalService } from '../servicios/local.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
 
   validateForm: FormGroup;
   public tipoCultivo = new TipoCultivo();
+  subscription: Subscription;
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.tipoCultivo);
   }
 
-  constructor(private fb: FormBuilder, private tipoCultivoService: TipoCultivoService) {
+  constructor(private fb: FormBuilder,
+    private servicioLocal: LocalService, private tipoCultivoService: TipoCultivoService) {
+    this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
+      this.tipoCultivo.nombre = this.validateForm.value.nombre;
+      this.tipoCultivo.variedad = this.validateForm.value.variedad;
+      this.tipoCultivo.estado = this.validateForm.value.estado;
+      this.tipoCultivoService.updateOrCreate(this.tipoCultivo).subscribe();
+      console.log(this.validateForm);
+    });
   }
 
   ngOnInit(): void {
     this.cargarTipoCultivo();
     this.validateForm = this.fb.group({
-      variedad: [ null, [ Validators.required ] ],
-      nombre: [ null, [ Validators.required ] ]
+      variedad: [null, [Validators.required]],
+      nombre: [null, [Validators.required]]
     });
   }
 
-  private cargarTipoCultivo(){
+  private cargarTipoCultivo() {
     this.tipoCultivoService.getCultivo()
-    .subscribe(result => {
-      this.tipoCultivo = result;
-    }
-    );
+      .subscribe(result => {
+        this.tipoCultivo = result;
+      }
+      );
   }
-
-  lllllll(){
-    console.log("fdhgdhfghdg");
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,14 +1,13 @@
-
 <nz-table #basicTable [nzData]="dataSet">
   <thead>
     <tr>
       <th>Nombre</th>
       <th>Estado</th>
       <th nzWidth="10%">
-          <button nz-button nzType="primary" [nzSize]="size" nzShape="circle" (click)="appDrawer.open('Rol')">
-              <i class="anticon anticon-plus"></i>
-          </button>
-          <app-drawer #appDrawer></app-drawer>
+        <button nz-button nzType="primary" [nzSize]="size" nzShape="circle" (click)="appDrawer.open('Rol')">
+          <i class="anticon anticon-plus"></i>
+        </button>
+        <app-drawer #appDrawer></app-drawer>
       </th>
     </tr>
   </thead>
@@ -16,15 +15,16 @@
     <tr *ngFor="let data of basicTable.data">
       <td>{{data.nombre}}</td>
       <td>
-        <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarRegistro(data)" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate" ></nz-switch>
+        <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarRegistro(data)" [nzCheckedChildren]="checkedTemplate"
+          [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
         <ng-template #checkedTemplate><i class="anticon anticon-check"></i></ng-template>
         <ng-template #unCheckedTemplate><i class="anticon anticon-cross"></i></ng-template>
       </td>
       <td>
-        <a><i class="anticon anticon-edit"></i></a>
+        <a><i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="appDrawer.open('Rol')"> </i></a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a><i class="anticon anticon-delete" ></i></a>
-       </td>
+        <a><i class="anticon anticon-delete"></i></a>
+      </td>
     </tr>
   </tbody>
 </nz-table>

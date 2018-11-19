@@ -15,8 +15,8 @@ const httpOptions = {
 export class TipoCultivoService {
 
   private tipoCultivoUrl = 'http://localhost:8080/servicio_tipo_cultivo';  // URL to web api
-  private tipoSubject = new BehaviorSubject([]); 
-  private editSubject = new BehaviorSubject(new TipoCultivo()); 
+  private tipoSubject = new BehaviorSubject([]);
+  private editSubject = new BehaviorSubject(new TipoCultivo());
   private tiposCultivo: TipoCultivo[];
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
@@ -24,13 +24,20 @@ export class TipoCultivoService {
   /** GET TiposCutivo from the server */
   private getBackTiposCultivo(): Observable<TipoCultivo[]> {
     const url = `${this.tipoCultivoUrl}/consultaTodos`;
-    return this.http.get<TipoCultivo[]>(url).pipe(catchError(this.handleError('',[])));
+    return this.http.get<TipoCultivo[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
   /** UPDATE TiposCutivo from the server */
   public updateOrCreate(tipoCultivo: TipoCultivo): Observable<TipoCultivo> {
     const url = `${this.tipoCultivoUrl}/actualizaRegistro`;
     return this.http.put<TipoCultivo>(url, tipoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
+  }
+
+  /**DELETE TipoCultivo from de server */
+  public deleteTipoCultivo(tipoCultivo: TipoCultivo): Observable<TipoCultivo> {
+    const url = `${this.tipoCultivoUrl}/borrarCultivo`;
+    return this.http.delete<TipoCultivo>(tipoCultivo.codigoCultivoSembrado.toString(), url)
+      .pipe(catchError(this.handleError('', null)));
   }
 
   crearNuevo(tipoCultivo: TipoCultivo) {
@@ -40,11 +47,11 @@ export class TipoCultivoService {
 
   cargarDatos() {
     this.getBackTiposCultivo()
-    .subscribe(result => {
-      this.tiposCultivo = result;
-      this.refresh();
-    }
-    );
+      .subscribe(result => {
+        this.tiposCultivo = result;
+        this.refresh();
+      }
+      );
   }
 
   getTiposCultivo(): Observable<TipoCultivo[]> {
@@ -55,9 +62,9 @@ export class TipoCultivoService {
     this.tipoSubject.next(this.tiposCultivo);
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      this.utilidad.mensajeError("Error en la respuesta del servicio");
+      this.utilidad.mensajeError('Error en la respuesta del servicio');
       return of(result as T);
     };
   }

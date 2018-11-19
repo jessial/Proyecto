@@ -11,8 +11,8 @@ export class TableComponent implements OnInit {
   i = 1;
   editCache = {};
   dataSet = [];
-  
-  constructor(private tipoCultivoService: TipoCultivoService) {}
+
+  constructor(private tipoCultivoService: TipoCultivoService) { }
 
   ngOnInit(): void {
     this.tipoCultivoService.cargarDatos();
@@ -21,13 +21,13 @@ export class TableComponent implements OnInit {
 
   getTiposCultivo(): void {
     this.tipoCultivoService.getTiposCultivo()
-    .subscribe(result => {
-      this.dataSet = result;
-    }
-    );
+      .subscribe(result => {
+        this.dataSet = result;
+      }
+      );
   }
 
-  cambiarEstado(tipoCultivo: TipoCultivo){
+  cambiarEstado(tipoCultivo: TipoCultivo) {
     this.tipoCultivoService.updateOrCreate(tipoCultivo).subscribe();
   }
 
@@ -35,8 +35,12 @@ export class TableComponent implements OnInit {
     this.tipoCultivoService.editarCultivo(tipoCultivo);
   }
 
-  crearRegistro(){
+  crearRegistro() {
     this.tipoCultivoService.editarCultivo(new TipoCultivo());
+  }
+
+  borrarCultivo(tipoCultivo: TipoCultivo) {
+    this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
   }
 
 }
