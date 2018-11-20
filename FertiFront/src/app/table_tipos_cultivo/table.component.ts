@@ -40,6 +40,7 @@ export class TableComponent implements OnInit {
   }
 
   borrarCultivo(tipoCultivo: TipoCultivo) {
+    console.log('llegue aqui');
     this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
   }
 

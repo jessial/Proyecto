@@ -34,10 +34,10 @@ export class TipoCultivoService {
   }
 
   /**DELETE TipoCultivo from de server */
-  public deleteTipoCultivo(tipoCultivo: TipoCultivo): Observable<TipoCultivo> {
-    const url = `${this.tipoCultivoUrl}/borrarCultivo`;
-    return this.http.delete<TipoCultivo>(tipoCultivo.codigoCultivoSembrado.toString(), url)
-      .pipe(catchError(this.handleError('', null)));
+  public deleteTipoCultivo(tipoCultivo: TipoCultivo): void {
+    const url = `${this.tipoCultivoUrl}/borrarCultivo/${tipoCultivo.codigoCultivoSembrado}`;
+    console.log(url);
+    this.http.delete(url).subscribe();
   }
 
   crearNuevo(tipoCultivo: TipoCultivo) {

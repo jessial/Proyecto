@@ -25,8 +25,6 @@ export class FormRolComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private servicioRol: RolService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.rol.nombre = this.validateForm.value.nombre;
-      this.rol.estado = this.validateForm.value.estado;
       this.servicioRol.saveRoles(this.rol).subscribe();
       console.log(this.validateForm);
     });

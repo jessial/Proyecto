@@ -110,10 +110,8 @@ public class ControladorDatos {
 		cultivoSembradoRepository.save(tipoCultivoEntidad);
 	}
 
-	public void eliminarTipoCultivo(CultivoSembrado cultivoSembrado) {
-		CultivoSembradoEntidad tipoCultivoEntidad = new CultivoSembradoEntidad();
-		mapperDozer.map(cultivoSembrado, tipoCultivoEntidad);
-		cultivoSembradoRepository.delete(tipoCultivoEntidad);
+	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
+		cultivoSembradoRepository.deleteById(codigoCultivoSembrado);
 	}
 
 	public void guardarRol(Rol rol) {

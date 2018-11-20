@@ -32,9 +32,6 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private tipoCultivoService: TipoCultivoService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.tipoCultivo.nombre = this.validateForm.value.nombre;
-      this.tipoCultivo.variedad = this.validateForm.value.variedad;
-      this.tipoCultivo.estado = this.validateForm.value.estado;
       this.tipoCultivoService.updateOrCreate(this.tipoCultivo).subscribe();
       console.log(this.validateForm);
     });
