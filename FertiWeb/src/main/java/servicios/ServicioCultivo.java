@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatos;
-import dominio.CultivoSembrado;
+import dominio.TipoCultivo;
 
 @RestController
 @RequestMapping("/servicio_tipo_cultivo")
@@ -34,23 +34,23 @@ public class ServicioCultivo {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/guardado")
 	@ResponseBody
-	public ResponseEntity<Object> grabar(@RequestBody CultivoSembrado cultivoSembrado) {
-		return this.actualizar(cultivoSembrado);
+	public ResponseEntity<Object> grabar(@RequestBody TipoCultivo tipoCultivo) {
+		return this.actualizar(tipoCultivo);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
-	public ResponseEntity<Object> actualizar(@RequestBody CultivoSembrado cultivoSembrado) {
-		controladorDatos.guardarTipoCultivo(cultivoSembrado);
+	public ResponseEntity<Object> actualizar(@RequestBody TipoCultivo tipoCultivo) {
+		controladorDatos.guardarTipoCultivo(tipoCultivo);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("borrarCultivo/{id}")
 	@ResponseBody
-	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigoCultivoSembrado) {
-		controladorDatos.eliminarTipoCultivo(codigoCultivoSembrado);
+	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigoTipoCultivo) {
+		controladorDatos.eliminarTipoCultivo(codigoTipoCultivo);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 }

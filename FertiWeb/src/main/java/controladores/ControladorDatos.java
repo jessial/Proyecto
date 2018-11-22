@@ -10,7 +10,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Analisis;
-import dominio.CultivoSembrado;
+import dominio.TipoCultivo;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
@@ -21,7 +21,7 @@ import dominio.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
-import persistencia.entidad.CultivoSembradoEntidad;
+import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.entidad.LugarEntidad;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.entidad.RecomendacionEntidad;
@@ -30,7 +30,7 @@ import persistencia.entidad.RolEntidad;
 import persistencia.entidad.TipoFuenteEntidad;
 import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
-import persistencia.repositorio.CultivoSembradoRepository;
+import persistencia.repositorio.TipoCultivoRepository;
 import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
 import persistencia.repositorio.RecomendacionRepository;
@@ -53,7 +53,7 @@ public class ControladorDatos {
 	private RolRepository rolRepository;
 
 	@Autowired
-	private CultivoSembradoRepository cultivoSembradoRepository;
+	private TipoCultivoRepository tipoCultivoRepository;
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -97,21 +97,21 @@ public class ControladorDatos {
 		return tipoFuente;
 	}
 
-	public List<CultivoSembrado> consultarCultivo() {
-		List<CultivoSembrado> tiposCultivo = new ArrayList<>();
-		List<CultivoSembradoEntidad> tiposCultivoEntidad = cultivoSembradoRepository.findAll();
+	public List<TipoCultivo> consultarCultivo() {
+		List<TipoCultivo> tiposCultivo = new ArrayList<>();
+		List<TipoCultivoEntidad> tiposCultivoEntidad = tipoCultivoRepository.findAll();
 		mapperDozer.map(tiposCultivoEntidad, tiposCultivo);
 		return tiposCultivo;
 	}
 
-	public void guardarTipoCultivo(CultivoSembrado cultivoSembrado) {
-		CultivoSembradoEntidad tipoCultivoEntidad = new CultivoSembradoEntidad();
-		mapperDozer.map(cultivoSembrado, tipoCultivoEntidad);
-		cultivoSembradoRepository.save(tipoCultivoEntidad);
+	public void guardarTipoCultivo(TipoCultivo tipoCultivo) {
+		TipoCultivoEntidad tipoCultivoEntidad = new TipoCultivoEntidad();
+		mapperDozer.map(tipoCultivo, tipoCultivoEntidad);
+		tipoCultivoRepository.save(tipoCultivoEntidad);
 	}
 
 	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
-		cultivoSembradoRepository.deleteById(codigoCultivoSembrado);
+		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
 	}
 
 	public void guardarRol(Rol rol) {

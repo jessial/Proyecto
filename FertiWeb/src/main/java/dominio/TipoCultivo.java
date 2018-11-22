@@ -3,9 +3,9 @@ package dominio;
 import lombok.Data;
 
 @Data
-public class CultivoSembrado {
+public class TipoCultivo {
 
-	private Long codigoCultivoSembrado;
+	private Long codigoTipoCultivo;
 	private String nombre;
 	private String variedad;
 	private boolean estado;

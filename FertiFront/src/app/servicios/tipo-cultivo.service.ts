@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { UtilidadService } from './utilidad.service';
 
 const httpOptions = {
@@ -35,7 +35,7 @@ export class TipoCultivoService {
 
   /**DELETE TipoCultivo from de server */
   public deleteTipoCultivo(tipoCultivo: TipoCultivo): void {
-    const url = `${this.tipoCultivoUrl}/borrarCultivo/${tipoCultivo.codigoCultivoSembrado}`;
+    const url = `${this.tipoCultivoUrl}/borrarCultivo/${tipoCultivo.codigoTipoCultivo}`;
     console.log(url);
     this.http.delete(url).subscribe();
   }

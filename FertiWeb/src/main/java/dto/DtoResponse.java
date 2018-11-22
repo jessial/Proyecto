@@ -3,7 +3,7 @@ package dto;
 import java.util.List;
 
 import dominio.Analisis;
-import dominio.CultivoSembrado;
+import dominio.TipoCultivo;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
@@ -24,7 +24,7 @@ public class DtoResponse {
 	private List<Parcela> parcelas;
 	private List<Resultado> resultados;
 	private List<Analisis> analisis;
-	private List<CultivoSembrado> cultivos;
+	private List<TipoCultivo> cultivos;
 	private List<Recomendacion> recomendaciones;
 	private Requerimiento requerimientoCultivo;
 	private List<Requerimiento> requerimientos;

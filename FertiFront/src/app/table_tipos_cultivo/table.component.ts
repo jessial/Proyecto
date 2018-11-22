@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
@@ -40,7 +40,6 @@ export class TableComponent implements OnInit {
   }
 
   borrarCultivo(tipoCultivo: TipoCultivo) {
-    console.log('llegue aqui');
     this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
   }
 
