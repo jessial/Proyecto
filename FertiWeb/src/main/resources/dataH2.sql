@@ -10,3 +10,4 @@ MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) 
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (1,'Administrador',true);
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (2,'Productor',true);
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (3,'Almacenista',true);
+--MERGE INTO requerimiento(`REQ_CODIGO`,`REQ_AL`,`REQ_B`,`REQ_CA`, `REQ_CODIGO_TIPO_CULTIVO`, `REQ_CU`, `REQ_ESTADO`, `REQ_FE`, `REQ_K`, `REQ_MG`, `REQ_MN`, `REQ_MO`, `REQ_NA`, `REQ_P`, `REQ_S`, `REQ_ZN`) VALUES (1, 0, 0.547, 1,3.0,true,7.4,3.560,0,474,2.0,3.152,0,0.736,0.183,4.5 ));
