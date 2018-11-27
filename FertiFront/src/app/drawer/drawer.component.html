@@ -3,6 +3,7 @@
   <div [ngSwitch]="formulario">
       <app-form #appForm *ngSwitchCase="'Tipo Cultivo'" ></app-form>
       <app-form-rol *ngSwitchCase="'Rol'" ></app-form-rol>
+      <app-form-tipo-fuente *ngSwitchCase="'Tipo Fuente'"></app-form-tipo-fuente>
   </div>
   <div class="footer">
     <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>

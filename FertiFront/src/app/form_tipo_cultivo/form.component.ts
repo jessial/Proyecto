@@ -2,12 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
 
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LocalService } from '../servicios/local.service';
 

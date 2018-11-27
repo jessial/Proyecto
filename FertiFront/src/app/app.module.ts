@@ -18,6 +18,10 @@ import { TableRolComponent } from './table-rol/table-rol.component';
 import { FormRolComponent } from './form-rol/form-rol.component';
 import { FormRequerimientosCultivoComponent } from './form-requerimientos-cultivo/form-requerimientos-cultivo.component';
 import { TableRequerimientosCultivoComponent } from './table-requerimientos-cultivo/table-requerimientos-cultivo.component';
+import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.component';
+import { FormTipoFuenteComponent } from './form-tipo-fuente/form-tipo-fuente.component';
+import { TableFuenteComponent } from './table-fuente/table-fuente.component';
+import { FormFuenteComponent } from './form-fuente/form-fuente.component';
 
 
 
@@ -33,7 +37,11 @@ registerLocaleData(en);
     TableRolComponent,
     FormRolComponent,
     FormRequerimientosCultivoComponent,
-    TableRequerimientosCultivoComponent
+    TableRequerimientosCultivoComponent,
+    TableTipoFuenteComponent,
+    FormTipoFuenteComponent,
+    TableFuenteComponent,
+    FormFuenteComponent
   ],
   imports: [
     BrowserModule,

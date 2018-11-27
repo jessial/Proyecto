@@ -18,13 +18,13 @@ export class RequerimientoCultivoService {
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
-  /** GET TiposCutivo from the server */
+  /** GET RequerimientosCutivo from the server */
   public getRequerimientos(): Observable<RequerimientoCultivo[]> {
     const url = `${this.requerimientoUrl}/consultaTodos`;
     return this.http.get<RequerimientoCultivo[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
-  /** UPDATE TiposCutivo from the server */
+  /** UPDATE RequerimientosCutivo from the server */
   public updateRequerimientos(requerimientoCultivo: RequerimientoCultivo): Observable<RequerimientoCultivo> {
     const url = `${this.requerimientoUrl}/guardado`;
     return this.http.post<RequerimientoCultivo>(url, requerimientoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
