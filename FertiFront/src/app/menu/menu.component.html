@@ -4,31 +4,28 @@
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu>
-        <span title><i class="anticon anticon-user"></i><span class="nav-text">User</span></span>
+        <span title><i class="anticon anticon-bar-chart"></i><span class="nav-text">Gráficas</span></span>
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
+          <li nz-menu-item>Análisis</li>
         </ul>
       </li>
       <li nz-submenu>
-        <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestionar</span></span>
+        <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestión</span></span>
         <ul>
           <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
-            Tipos de cultivos
+            Tipo de cultivo
           </li>
           <li nz-menu-item [routerLink]="['/lista_roles']">
-            Roles
+            Rol
           </li>
           <li nz-menu-item [routerLink]="['/lista_requerimientos']">
-            Requerimientos
+            Requerimiento nutricional
           </li>
           <li nz-menu-item [routerLink]="['/lista_tipo_fuente']">
-            Tipos de fuente
+            Tipo de fuente
           </li>
         </ul>
       </li>
-      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">File</span></span></li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -38,8 +35,6 @@
     </nz-header>
     <nz-content style="margin:0 16px;">
       <nz-breadcrumb style="margin:16px 0;">
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div style="padding:24px; background: #fff; min-height: 360px;">
         <router-outlet></router-outlet>

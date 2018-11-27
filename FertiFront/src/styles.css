@@ -1,2 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/ng-zorro-antd/src/ng-zorro-antd.css";
+
+.table-scroll{
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.table-content{
+    position: relative;
+    display: table;
+}
+
+.table-lateral{
+    position: relative;
+    z-index: 10;
+}
+
+.table-content th, .table-content td{
+    position: relative;
+    white-space: nowrap;
+}
+
+.table-content th.oculto, .table-content td.oculto{
+    display: none;
+}
+
+.table-control{
+    float: right;
+}
+
+.table-control span{
+    cursor: pointer;
+}

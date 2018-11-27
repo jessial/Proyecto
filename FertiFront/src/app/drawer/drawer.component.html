@@ -1,8 +1,9 @@
 <nz-drawer [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="320" [nzVisible]="visible" nzTitle="Ingresar {{formulario}}"
   (nzOnClose)="close()">
   <div [ngSwitch]="formulario">
-      <app-form #appForm *ngSwitchCase="'Tipo Cultivo'" ></app-form>
-      <app-form-rol *ngSwitchCase="'Rol'" ></app-form-rol>
+    <app-form #appForm *ngSwitchCase="'Tipo Cultivo'"></app-form>
+    <app-form-rol *ngSwitchCase="'Rol'"></app-form-rol>
+    <app-form-requerimientos-cultivo *ngSwitchCase="'Requerimiento Cultivo'"></app-form-requerimientos-cultivo>
   </div>
   <div class="footer">
     <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
