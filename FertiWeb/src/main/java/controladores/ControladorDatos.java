@@ -132,6 +132,10 @@ public class ControladorDatos {
 		tipoFuenteRepository.save(tipoFuenteEntidad);
 
 	}
+	
+	public void eliminarTipoFuente(long codigo) {
+		tipoFuenteRepository.deleteById(codigo);
+	}
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();

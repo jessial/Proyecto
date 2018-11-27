@@ -1,0 +1,37 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()" (editDate)="editDate($event)">
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-edit">
+        <input type="text" nz-input formControlName="nombre" placeholder="Nombre" [(ngModel)]="tipoFuente.nombre">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('nombre').dirty && validateForm.get('nombre').errors">Ingrese el nombre</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-edit">
+        <input type="text" nz-input formControlName="aporte" placeholder="Aporte" [(ngModel)]="tipoFuente.aporte">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('aporte').dirty && validateForm.get('nombre').errors">Ingrese el aporte</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-edit">
+        <input type="text" nz-input formControlName="unidad" placeholder="Unidad" [(ngModel)]="tipoFuente.unidad">
+      </nz-input-group>
+      <nz-form-explain *ngIf=" validateForm.get( 'unidad').dirty && validateForm.get( 'unidad').errors ">Ingrese la unidad</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-tag [nzColor]=" 'green' ">Estado</nz-tag>
+      <nz-switch [(ngModel)]="tipoFuente.estado " [ngModelOptions]="{standalone: true}"  nzCheckedChildren="1
+          " nzUnCheckedChildren="0 "></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+</form>

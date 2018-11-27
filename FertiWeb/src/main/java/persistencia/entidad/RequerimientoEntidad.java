@@ -48,5 +48,7 @@ public class RequerimientoEntidad {
 	private double zn;
 	@Column(name = "req_estado", nullable = false)
 	private boolean estado;
+	@Column(name = "uni_codigo")
+	private Long uniCodigo;
 
 }
