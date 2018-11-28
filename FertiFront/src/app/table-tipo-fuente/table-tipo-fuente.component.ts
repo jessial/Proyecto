@@ -15,7 +15,8 @@ export class TableTipoFuenteComponent implements OnInit {
 
   constructor(private tipoFuenteServicio: TipoFuenteService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.tipoFuenteServicio.cargarDatos();
     this.getTipoFuente();
   }
 

@@ -1,3 +1,6 @@
+
+
+
 package persistencia.entidad;
 
 import javax.persistence.Column;

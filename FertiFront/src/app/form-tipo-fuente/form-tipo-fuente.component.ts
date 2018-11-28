@@ -27,9 +27,9 @@ export class FormTipoFuenteComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private servicioTipoFuente: TipoFuenteService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      console.log(JSON.stringify(this.tipoFuente));
-
-      this.servicioTipoFuente.updateTipoFuente(this.tipoFuente).subscribe();
+      this.servicioTipoFuente.updateTipoFuente(this.tipoFuente).subscribe(accion => {
+        this.servicioTipoFuente.cargarDatos();
+      });
     });
   }
 

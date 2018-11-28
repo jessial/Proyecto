@@ -30,7 +30,7 @@ export class TipoFuenteService {
   /** UPDATE TipoFuente from the server */
   public updateTipoFuente(tipoFuente: TipoFuente): Observable<TipoFuente> {
     const url = `${this.tipoFuenteUrl}/guardado`;
-    return this.http.post<TipoFuente>(url, tipoFuente, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.put<TipoFuente>(url, tipoFuente, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
   crearNuevo(tipoFuente: TipoFuente) {

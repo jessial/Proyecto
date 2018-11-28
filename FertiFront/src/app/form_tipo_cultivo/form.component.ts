@@ -27,7 +27,9 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private tipoCultivoService: TipoCultivoService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.tipoCultivoService.updateOrCreate(this.tipoCultivo).subscribe();
+      this.tipoCultivoService.updateOrCreate(this.tipoCultivo).subscribe(accion => {
+        this.tipoCultivoService.cargarDatos();
+      });
     });
   }
 

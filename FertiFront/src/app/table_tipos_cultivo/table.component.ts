@@ -12,6 +12,7 @@ export class TableComponent implements OnInit {
   editCache = {};
   dataSet = [];
 
+
   constructor(private tipoCultivoService: TipoCultivoService) { }
 
   ngOnInit(): void {
@@ -42,5 +43,6 @@ export class TableComponent implements OnInit {
   borrarCultivo(tipoCultivo: TipoCultivo) {
     this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
   }
+
 
 }

@@ -4,11 +4,11 @@
     <app-form #appForm *ngSwitchCase="'Tipo Cultivo'"></app-form>
     <app-form-rol *ngSwitchCase="'Rol'"></app-form-rol>
     <app-form-requerimientos-cultivo *ngSwitchCase="'Requerimiento Cultivo'"></app-form-requerimientos-cultivo>
-    <app-form-tipo-fuente *ngSwitchCase="'Tipo Fuente'"></app-form-tipo-fuente>
+    <app-form-tipo-fuente #appForm *ngSwitchCase="'Tipo Fuente'"></app-form-tipo-fuente>
   </div>
   <div class="footer">
     <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
-    <button type="button" (click)="submit()" class="ant-btn ant-btn-primary"><span>Ingresar</span></button>
+    <button type="button" (click)="submit();close();" class="ant-btn ant-btn-primary"><span>Ingresar</span></button>
   </div>
   <nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
   </nz-drawer>
