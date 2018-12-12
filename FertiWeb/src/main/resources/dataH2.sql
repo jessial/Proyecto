@@ -10,6 +10,17 @@ MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) 
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (1,'Administrador',true);
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (2,'Productor',true);
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (3,'Almacenista',true);
-MERGE INTO requerimiento(`req_codigo`,`req_al`,`req_b`,`req_ca`, `req_codigo_tipo_cultivo`, `req_cu`, `req_estado`, `req_fe`, `req_k`, `req_mg`, `req_mn`, `req_mo`, `req_na`, `req_p`, `req_s`, `uni_codigo`,`req_zn`) VALUES (1, 0, 0.547, 1,3.0,true,7.4,3.560,0.474,2.0,3.152,0,0.736,0.183,4.5,1,2);
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'gramos/tonelada');
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'kilogramos/tonelada');
+MERGE INTO elementos VALUES (1, 'Nitrogeno'); 
+MERGE INTO elementos VALUES (2, 'Fosforo');
+MERGE INTO elementos VALUES (3, 'Potasio');
+MERGE INTO elementos VALUES (4, 'Calcio');
+MERGE INTO elementos VALUES (5, 'Magnesio');
+MERGE INTO elementos VALUES (6, 'Azufre');
+MERGE INTO elementos VALUES (7, 'Boro');
+MERGE INTO elementos VALUES (8, 'Cobre');
+MERGE INTO elementos VALUES (9, 'Hierro');
+MERGE INTO elementos VALUES (10, 'Manganeso');
+MERGE INTO elementos VALUES (11, 'Molibdeno');
+MERGE INTO elementos VALUES (12, 'Zinc'); 

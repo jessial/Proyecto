@@ -18,6 +18,7 @@ import dominio.Requerimiento;
 import dominio.Rol;
 import dominio.TipoFuente;
 import dominio.Usuario;
+import dto.RequerimientoPorCultivo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
@@ -85,10 +86,8 @@ public class ControladorDatos {
 		return roles;
 	}
 
-	public List<Requerimiento> consultarRequermientos() {
-		List<Requerimiento> requerimientos = new ArrayList<>();
-		mapperDozer.map(requerimientoRepository.findAll(), requerimientos);
-		return requerimientos;
+	public List<RequerimientoPorCultivo> consultarRequermientos() {
+		return requerimientoRepository.getTodos();
 	}
 
 	public List<TipoFuente> consultarTipoFuente() {
