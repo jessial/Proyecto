@@ -12,7 +12,7 @@ import { RolService } from '../servicios/rol.service';
 })
 export class FormRolComponent implements OnInit, OnDestroy {
   validateForm: FormGroup;
-  private rol = new Rol();
+  public rol = new Rol();
   subscription: Subscription;
 
   submitForm(): void {
@@ -25,8 +25,9 @@ export class FormRolComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private servicioRol: RolService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.servicioRol.saveRoles(this.rol).subscribe();
-      console.log(this.validateForm);
+      this.servicioRol.saveRoles(this.rol).subscribe(accion => {
+        this.servicioRol.cargarDatos();
+      });
     });
   }
 

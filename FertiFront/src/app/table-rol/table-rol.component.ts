@@ -15,6 +15,7 @@ export class TableRolComponent implements OnInit {
   constructor(private rolService: RolService) { }
 
   ngOnInit(): void {
+    this.rolService.cargarDatos();
     this.getRoles();
   }
 

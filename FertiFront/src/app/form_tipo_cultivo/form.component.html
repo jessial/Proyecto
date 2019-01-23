@@ -12,7 +12,7 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzPrefixIcon="anticon anticon-edit">
-        <input type="text" nz-input formControlName="nombre" placeholder="Nombre" [(ngModel)]="tipoCultivo.nombre">
+        <input type="text" nz-input formControlName="nombre" placeholder="Cultivo" [(ngModel)]="tipoCultivo.nombre">
       </nz-input-group>
       <nz-form-explain *ngIf="validateForm.get('nombre').dirty && validateForm.get('nombre').errors">Ingrese el nombre</nz-form-explain>
     </nz-form-control>

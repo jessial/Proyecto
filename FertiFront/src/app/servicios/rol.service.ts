@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UtilidadService } from './utilidad.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Rol } from '../calses_dominio/rol';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -15,6 +15,9 @@ const httpOptions = {
 export class RolService {
 
   private rolUrl = 'http://localhost:8080/servicio_rol';  // URL to web api
+  private rol: Rol[];
+  private tipoSubject = new BehaviorSubject([]);
+  private editSubject = new BehaviorSubject(new Rol());
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
@@ -35,5 +38,27 @@ export class RolService {
       this.utilidad.mensajeError("Error en la respuesta del servicio");
       return of(result as T);
     };
+  }
+
+  cargarDatos() {
+    this.getRoles()
+      .subscribe(result => {
+        this.rol = result;
+        this.refresh();
+      }
+      );
+  }
+
+  private refresh() {
+    this.tipoSubject.next(this.rol);
+  }
+
+
+  editarRoles(rol: Rol) {
+    this.editSubject.next(rol);
+  }
+
+  getRol(): Observable<Rol> {
+    return this.editSubject.asObservable();
   }
 }
