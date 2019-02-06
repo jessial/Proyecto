@@ -16,7 +16,7 @@
     <tr *ngFor="let data of basicTable.data">
       <td>{{data.nombre}}</td>
       <td>
-        <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarRegistro(data)" [nzCheckedChildren]="checkedTemplate"
+        <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarEstado(data)" [nzCheckedChildren]="checkedTemplate"
           [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
         <ng-template #checkedTemplate><i class="anticon anticon-check"></i></ng-template>
         <ng-template #unCheckedTemplate><i class="anticon anticon-cross"></i></ng-template>
@@ -24,7 +24,7 @@
       <td>
         <a><i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="appDrawer.open('Rol')"> </i></a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a><i class="anticon anticon-delete"></i></a>
+        <a><i class="anticon anticon-delete" (click)="borrarRol(data)"></i></a>
       </td>
     </tr>
   </tbody>

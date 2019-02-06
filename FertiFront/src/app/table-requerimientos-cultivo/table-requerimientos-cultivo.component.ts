@@ -17,34 +17,27 @@ export class TableRequerimientosCultivoComponent implements OnInit {
   constructor(private requerimientoService: RequerimientoCultivoService) { }
 
   ngOnInit(): void {
+    this.requerimientoService.cargarDatos();
     this.getRequerimientos();
   }
 
-  moverIzquierda(evento): void {
-    const trElements = document.querySelectorAll('.table-content tr')
-    Array.from(trElements).forEach(tr => {
-      (tr.childNodes[this.tableI] as Element).classList.add("oculto");
-    });
-    this.tableI = this.tableI < trElements[0].childNodes.length - 1 ? this.tableI + 1 : this.tableI;
-  }
-
-  moverDerecha(evento): void {
-    Array.from(document.querySelectorAll('.table-content tr')).forEach(tr => {
-      (tr.childNodes[this.tableI] as Element).classList.remove("oculto");
-    });
-    this.tableI = this.tableI > 1 ? this.tableI - 1 : this.tableI;
-  }
-
   getRequerimientos(): void {
-    this.requerimientoService.getRequerimientos()
+    this.requerimientoService.getRequerimientosPorCultivo()
       .subscribe(result => {
         this.dataSet = result;
       }
       );
   }
 
-  cambiarRegistro(requerimiento: RequerimientoCultivo) {
-    this.requerimientoService.updateRequerimientos(requerimiento)
-      .subscribe();
+  cambiarEstado(requerimientoCultivo: RequerimientoCultivo) {
+    this.requerimientoService.updateOrCreate(requerimientoCultivo).subscribe();
+  }
+
+  editarRegistro(requerimientoCultivo: RequerimientoCultivo) {
+    this.requerimientoService.editarRequerimiento(requerimientoCultivo);
+  }
+
+  crearRegistro() {
+    this.requerimientoService.editarRequerimiento(new RequerimientoCultivo());
   }
 }

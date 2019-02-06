@@ -24,3 +24,5 @@ MERGE INTO elementos VALUES (9, 'Hierro');
 MERGE INTO elementos VALUES (10, 'Manganeso');
 MERGE INTO elementos VALUES (11, 'Molibdeno');
 MERGE INTO elementos VALUES (12, 'Zinc'); 
+MERGE INTO tipo_fuente VALUES (1, 14.8, 'true', 'roca fosfórica', 1);
+MERGE INTO tipo_fuente VALUES (2, 13, 'true', 'cloruro de potasio', 1);

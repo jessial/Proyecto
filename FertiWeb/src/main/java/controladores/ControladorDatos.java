@@ -10,34 +10,36 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Analisis;
-import dominio.TipoCultivo;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
 import dominio.Requerimiento;
 import dominio.Rol;
+import dominio.TipoCultivo;
 import dominio.TipoFuente;
+import dominio.Unidad;
 import dominio.Usuario;
 import dto.RequerimientoPorCultivo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
-import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.entidad.LugarEntidad;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.entidad.RecomendacionEntidad;
 import persistencia.entidad.RequerimientoEntidad;
 import persistencia.entidad.RolEntidad;
+import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.entidad.TipoFuenteEntidad;
 import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
-import persistencia.repositorio.TipoCultivoRepository;
 import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
 import persistencia.repositorio.RecomendacionRepository;
 import persistencia.repositorio.RequerimientoRepository;
 import persistencia.repositorio.RolRepository;
+import persistencia.repositorio.TipoCultivoRepository;
 import persistencia.repositorio.TipoFuenteRepository;
+import persistencia.repositorio.UnidadRepository;
 import persistencia.repositorio.UsuarioRepository;
 
 @AllArgsConstructor
@@ -74,6 +76,9 @@ public class ControladorDatos {
 	@Autowired
 	private TipoFuenteRepository tipoFuenteRepository;
 
+	@Autowired
+	private UnidadRepository unidadRepository;
+
 	public void guardarAnalisis(Analisis analisisSuelo) {
 		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
 		mapperDozer.map(analisisSuelo, analisisEntidad);
@@ -96,6 +101,12 @@ public class ControladorDatos {
 		return tipoFuente;
 	}
 
+	public List<Unidad> consultarUnidad() {
+		List<Unidad> unidad = new ArrayList<>();
+		mapperDozer.map(unidadRepository.findAll(), unidad);
+		return unidad;
+	}
+
 	public List<TipoCultivo> consultarCultivo() {
 		List<TipoCultivo> tiposCultivo = new ArrayList<>();
 		List<TipoCultivoEntidad> tiposCultivoEntidad = tipoCultivoRepository.findAll();
@@ -111,6 +122,10 @@ public class ControladorDatos {
 
 	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
 		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
+	}
+
+	public void eliminarRol(long codigoRol) {
+		rolRepository.deleteById(codigoRol);
 	}
 
 	public void guardarRol(Rol rol) {
@@ -131,7 +146,7 @@ public class ControladorDatos {
 		tipoFuenteRepository.save(tipoFuenteEntidad);
 
 	}
-	
+
 	public void eliminarTipoFuente(long codigo) {
 		tipoFuenteRepository.deleteById(codigo);
 	}

@@ -27,16 +27,21 @@ export class TableRolComponent implements OnInit {
       );
   }
 
-  cambiarRegistro(rol: Rol) {
-    this.rolService.saveRoles(rol)
+  cambiarEstado(rol: Rol) {
+    this.rolService.updateOrCreate(rol)
       .subscribe();
   }
 
   editarRegistro(rol: Rol) {
-    this.rolService.saveRoles(rol);
+    this.rolService.editarRoles(rol);
   }
 
   crearRegistro() {
-    this.rolService.saveRoles(new Rol());
+    this.rolService.editarRoles(new Rol());
+  }
+
+  borrarRol(rol: Rol) {
+    this.rolService.deleteRoles(rol);
+
   }
 }

@@ -25,7 +25,7 @@ export class FormRolComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private servicioLocal: LocalService, private servicioRol: RolService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.servicioRol.saveRoles(this.rol).subscribe(accion => {
+      this.servicioRol.updateOrCreate(this.rol).subscribe(accion => {
         this.servicioRol.cargarDatos();
       });
     });
@@ -33,9 +33,17 @@ export class FormRolComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.cargarRol();
     this.validateForm = this.fb.group({
       nombre: [null, [Validators.required]],
       estado: [null, [Validators.required]]
+    });
+  }
+
+  private cargarRol() {
+    this.servicioRol.getRol().subscribe(result => {
+      this.rol = result;
+
     });
   }
 

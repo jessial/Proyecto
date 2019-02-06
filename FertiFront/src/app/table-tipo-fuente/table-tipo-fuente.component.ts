@@ -17,18 +17,18 @@ export class TableTipoFuenteComponent implements OnInit {
 
   ngOnInit(): void {
     this.tipoFuenteServicio.cargarDatos();
-    this.getTipoFuente();
+    this.getTiposFuente();
   }
 
-  getTipoFuente(): void {
-    this.tipoFuenteServicio.getTipoFuenteBack()
+  getTiposFuente(): void {
+    this.tipoFuenteServicio.getTiposFuente()
       .subscribe(result => {
         this.dataSet = result;
       }
       );
   }
-  cambiarRegistro(tipoFuente: TipoFuente) {
-    this.tipoFuenteServicio.updateTipoFuente(tipoFuente)
+  cambiarEstado(tipoFuente: TipoFuente) {
+    this.tipoFuenteServicio.updateOrCreate(tipoFuente)
       .subscribe();
   }
 
@@ -43,6 +43,4 @@ export class TableTipoFuenteComponent implements OnInit {
   borrarTipoFuente(tipoFuente: TipoFuente) {
     this.tipoFuenteServicio.deleteTipoFuente(tipoFuente);
   }
-
-
 }

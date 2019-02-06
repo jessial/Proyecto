@@ -15,44 +15,58 @@ const httpOptions = {
 export class RolService {
 
   private rolUrl = 'http://localhost:8080/servicio_rol';  // URL to web api
-  private rol: Rol[];
+  private roles: Rol[];
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Rol());
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
-  /** GET TiposCutivo from the server */
-  public getRoles(): Observable<Rol[]> {
+  /** GET roles from the server */
+  public geBackRoles(): Observable<Rol[]> {
     const url = `${this.rolUrl}/consultaTodos`;
     return this.http.get<Rol[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
-  /** UPDATE TiposCutivo from the server */
-  public saveRoles(rol: Rol): Observable<Rol> {
-    const url = `${this.rolUrl}/guardado`;
-    return this.http.post<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
+  /** UPDATE roles from the server */
+  public updateOrCreate(rol: Rol): Observable<Rol> {
+    const url = `${this.rolUrl}/actualizaRegistro`;
+    return this.http.put<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      this.utilidad.mensajeError("Error en la respuesta del servicio");
-      return of(result as T);
-    };
+  /**DELETE ROLES from the server */
+  public deleteRoles(rol: Rol): void {
+    const url = `${this.rolUrl}/borrarRol/${rol.codigo}`;
+    this.http.delete(url).subscribe();
+  }
+
+  crearNuevo(rol: Rol) {
+    this.roles = [...this.roles, rol];
+    this.refresh();
   }
 
   cargarDatos() {
-    this.getRoles()
+    this.geBackRoles()
       .subscribe(result => {
-        this.rol = result;
+        this.roles = result;
         this.refresh();
       }
       );
   }
 
-  private refresh() {
-    this.tipoSubject.next(this.rol);
+  getRoles(): Observable<Rol[]> {
+    return this.tipoSubject.asObservable();
   }
 
+  private refresh() {
+    this.tipoSubject.next(this.roles);
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      this.utilidad.mensajeError('Error en la respuesta del servicio');
+      return of(result as T);
+    };
+  }
 
   editarRoles(rol: Rol) {
     this.editSubject.next(rol);

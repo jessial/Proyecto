@@ -22,15 +22,22 @@ export class TipoFuenteService {
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
   /** GET TiposDeFuente from the server */
-  public getTipoFuenteBack(): Observable<TipoFuente[]> {
+  public getBackTipoFuente(): Observable<TipoFuente[]> {
     const url = `${this.tipoFuenteUrl}/consultaTodos`;
     return this.http.get<TipoFuente[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
   /** UPDATE TipoFuente from the server */
-  public updateTipoFuente(tipoFuente: TipoFuente): Observable<TipoFuente> {
+  public updateOrCreate(tipoFuente: TipoFuente): Observable<TipoFuente> {
     const url = `${this.tipoFuenteUrl}/guardado`;
     return this.http.put<TipoFuente>(url, tipoFuente, httpOptions).pipe(catchError(this.handleError('', null)));
+  }
+
+  /**DELETE TipoFuente from the server */
+  public deleteTipoFuente(tipoFuente: TipoFuente): void {
+    const url = `${this.tipoFuenteUrl}/borrarCultivo/${tipoFuente.codigo}`;
+    console.log(url);
+    this.http.delete(url).subscribe();
   }
 
   crearNuevo(tipoFuente: TipoFuente) {
@@ -39,7 +46,7 @@ export class TipoFuenteService {
   }
 
   cargarDatos() {
-    this.getTipoFuenteBack()
+    this.getBackTipoFuente()
       .subscribe(result => {
         this.tiposFuente = result;
         this.refresh();
@@ -50,16 +57,10 @@ export class TipoFuenteService {
     this.tipoSubject.next(this.tiposFuente);
   }
 
-  getTipoFuente(): Observable<TipoFuente> {
-    return this.editSubject.asObservable();
+  getTiposFuente(): Observable<TipoFuente[]> {
+    return this.tipoSubject.asObservable();
   }
 
-   /**DELETE TipoCultivo from de server */
-   public deleteTipoFuente(tipoFuente: TipoFuente): void {
-    const url = `${this.tipoFuenteUrl}/borrar_tipo_fuente/${tipoFuente.codigo}`;
-    console.log(url);
-    this.http.delete(url).subscribe();
-  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -70,6 +71,10 @@ export class TipoFuenteService {
 
   editarTipoFuente(tipoFuente: TipoFuente) {
     this.editSubject.next(tipoFuente);
+  }
+
+  getTipoFuente(): Observable<TipoFuente> {
+    return this.editSubject.asObservable();
   }
 
 }
