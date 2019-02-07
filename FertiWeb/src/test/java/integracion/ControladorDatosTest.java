@@ -21,15 +21,15 @@ import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
 
 public class ControladorDatosTest {
-	
+
 	private ControladorDatos controladorDatos;
-	
+
 	@Mock
 	AnalisisRepository analisisRepository;
-	
+
 	@Mock
 	DozerBeanMapper mapperDozer;
-	
+
 	@Before
 	public void before() throws Exception {
 		MockitoAnnotations.initMocks(this);
@@ -38,7 +38,8 @@ public class ControladorDatosTest {
 	@Test
 	public void convertirAnalisisEnEntidad() throws Exception {
 		// Arrange
-		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, null, null, null, null, null, null, null, null);
+		controladorDatos = new ControladorDatos(new DozerBeanMapper(), analisisRepository, null, null, null, null, null,
+				null, null, null, null, null);
 		FileReader file = new FileReader("src/test/java/jsonTest/JSON_ANALISIS.json");
 		ObjectMapper mapperJson = new ObjectMapper();
 		Analisis analisis = mapperJson.readValue(file, Analisis.class);
@@ -51,5 +52,5 @@ public class ControladorDatosTest {
 		verify(analisisRepository, atMost(1)).save(Mockito.any(AnalisisEntidad.class));
 
 	}
-	
+
 }

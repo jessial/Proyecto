@@ -22,20 +22,8 @@ export class FormRequerimientosCultivoComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      cultivo: [null, [Validators.required]],
-      nitrogeno: [null, [Validators.required]],
-      fosforo: [null, [Validators.required]],
-      potasio: [null, [Validators.required]],
-      magnesio: [null],
-      calcio: [null],
-      aluminio: [null],
-      sodio: [null],
-      azufre: [null],
-      hierro: [null],
-      boro: [null],
-      cobre: [null],
-      manganeso: [null],
-      zinc: [null],
+      cantidad: [null, [Validators.required]],
+      estado: [null, [Validators.required]]
     });
   }
 

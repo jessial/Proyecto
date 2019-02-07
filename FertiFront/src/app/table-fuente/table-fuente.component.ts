@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FuenteService } from '../servicios/fuente.service';
+import { Fuente } from '../calses_dominio/fuente';
 
 @Component({
   selector: 'app-table-fuente',
@@ -7,9 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableFuenteComponent implements OnInit {
 
-  constructor() { }
+  i = 1;
+  editCache = {};
+  dataSet = [];
 
-  ngOnInit() {
+
+  constructor(private fuenteServicio: FuenteService) { }
+
+  ngOnInit(): void {
+    this.fuenteServicio.cargarDatos();
+    this.getFuentes();
   }
+
+  getFuentes(): void {
+    this.fuenteServicio.getFuentes()
+      .subscribe(result => {
+        this.dataSet = result;
+      }
+      );
+  }
+
+  cambiarEstado(fuente: Fuente) {
+    this.fuenteServicio.updateOrCreate(fuente).subscribe();
+  }
+
+  editarRegistro(fuente: Fuente) {
+    this.fuenteServicio.editarFuente(fuente);
+  }
+
+  crearRegistro() {
+    this.fuenteServicio.editarFuente(new Fuente());
+  }
+
+  borrarCultivo(fuente: Fuente) {
+    this.fuenteServicio.deleteFuente(fuente);
+  }
+
 
 }

@@ -4,6 +4,14 @@
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu>
+        <span title><i class="anticon anticon-info"></i><span class="nav-text">Información</span></span>
+        <ul>
+          <li nz-menu-item>Análisis</li>
+          <li nz-menu-item>Fincas</li>
+          <li nz-menu-item>Lotes</li>
+        </ul>
+      </li>
+      <li nz-submenu>
         <span title><i class="anticon anticon-bar-chart"></i><span class="nav-text">Gráficas</span></span>
         <ul>
           <li nz-menu-item>Análisis</li>
@@ -23,6 +31,9 @@
           </li>
           <li nz-menu-item [routerLink]="['/lista_tipo_fuente']">
             Tipos de fuente
+          </li>
+          <li nz-menu-item [routerLink]="['/lista_fuente']">
+            Fuentes
           </li>
         </ul>
       </li>

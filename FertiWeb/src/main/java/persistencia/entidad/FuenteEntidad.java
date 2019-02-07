@@ -20,5 +20,7 @@ public class FuenteEntidad {
 	private Long codigoTipoFuente;
 	@Column(name="fue_producto",nullable = false)
 	private String producto;
+	@Column(name="estado",nullable = false)
+	private boolean estado;
 	
 }

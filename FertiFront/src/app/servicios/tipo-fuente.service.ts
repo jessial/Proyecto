@@ -35,8 +35,7 @@ export class TipoFuenteService {
 
   /**DELETE TipoFuente from the server */
   public deleteTipoFuente(tipoFuente: TipoFuente): void {
-    const url = `${this.tipoFuenteUrl}/borrarCultivo/${tipoFuente.codigo}`;
-    console.log(url);
+    const url = `${this.tipoFuenteUrl}/borrarTipoFuente/${tipoFuente.codigo}`;
     this.http.delete(url).subscribe();
   }
 

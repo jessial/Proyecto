@@ -8,5 +8,6 @@ public class Fuente {
 	private Long codigoFuente;
 	private Long codigoTipoFuente;
 	private String producto;
+	private boolean estado;
 	
 }

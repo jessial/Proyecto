@@ -24,5 +24,10 @@ MERGE INTO elementos VALUES (9, 'Hierro');
 MERGE INTO elementos VALUES (10, 'Manganeso');
 MERGE INTO elementos VALUES (11, 'Molibdeno');
 MERGE INTO elementos VALUES (12, 'Zinc'); 
+MERGE INTO requerimiento VALUES (1, 12.8, 1, true, 2, 1);
+MERGE INTO requerimiento VALUES (2, 14, 1, true, 1, 1);
+MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 1);
 MERGE INTO tipo_fuente VALUES (1, 14.8, 'true', 'roca fosfórica', 1);
 MERGE INTO tipo_fuente VALUES (2, 13, 'true', 'cloruro de potasio', 1);
+MERGE INTO fuente VALUES (1, 1, true, 'Triple 15');
+MERGE INTO fuente VALUES (2, 2, true, 'Cloruro')
