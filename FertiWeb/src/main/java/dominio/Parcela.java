@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class Parcela {
 
+	private Long codigoParcela;
 	private Long codigoLugar;
 	private Long codigoCultivoSembrado;
-	private Long codigoParcela;
-	private int area;
-	private Date fechaSiembra;
-	
+	private double area;
+	private Date fechaPosibleSiembra;
+
 }

@@ -10,6 +10,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Analisis;
+import dominio.Elemento;
 import dominio.Fuente;
 import dominio.Lugar;
 import dominio.Parcela;
@@ -34,6 +35,7 @@ import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.entidad.TipoFuenteEntidad;
 import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.AnalisisRepository;
+import persistencia.repositorio.ElementosRepository;
 import persistencia.repositorio.FuenteRepository;
 import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
@@ -85,7 +87,10 @@ public class ControladorDatos {
 	@Autowired
 	private FuenteRepository fuenteRepository;
 
-	// Consultar
+	@Autowired
+	private ElementosRepository elementoRepository;
+
+	// Consultar para front
 	public List<Rol> consultarRoles() {
 		List<Rol> roles = new ArrayList<>();
 		mapperDozer.map(rolRepository.findAll(), roles);
@@ -119,6 +124,26 @@ public class ControladorDatos {
 		List<TipoCultivoEntidad> tiposCultivoEntidad = tipoCultivoRepository.findAll();
 		mapperDozer.map(tiposCultivoEntidad, tiposCultivo);
 		return tiposCultivo;
+	}
+
+	// consultar para app
+	public List<Rol> consultarRolesParaApp() {
+		List<Rol> roles = new ArrayList<>();
+		boolean estado = true;
+		mapperDozer.map(rolRepository.findByEstado(estado), roles);
+		return roles;
+	}
+
+	public List<Elemento> consultarElementosParaApp() {
+		List<Elemento> elementos = new ArrayList<>();
+		mapperDozer.map(elementoRepository.findAll(), elementos);
+		return elementos;
+	}
+
+	public List<Lugar> consultarLugarParaApp() {
+		List<Lugar> lugar = new ArrayList<>();
+		mapperDozer.map(lugarRepository.findAll(), lugar);
+		return lugar;
 	}
 
 	public Usuario consultarPorCedula(Long cedula) {
@@ -174,6 +199,19 @@ public class ControladorDatos {
 		fuenteRepository.save(fuenteEntidad);
 	}
 
+	public void guardarLugar(Lugar lugar) {
+		LugarEntidad lugarEntidad = new LugarEntidad();
+		mapperDozer.map(lugar, lugarEntidad);
+		lugarRepository.save(lugarEntidad);
+
+	}
+
+	public void guardarParcela(Parcela parcela) {
+		ParcelaEntidad parcelaEntidad = new ParcelaEntidad();
+		mapperDozer.map(parcela, parcelaEntidad);
+		parcelaRepository.save(parcelaEntidad);
+	}
+
 	// Eliminar
 	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
 		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
@@ -189,6 +227,13 @@ public class ControladorDatos {
 
 	public void eliminarFuente(long codigoFuente) {
 		fuenteRepository.deleteById(codigoFuente);
+	}
+
+	public void eliminarLugar(Long codigoLugar) {
+		List<ParcelaEntidad> lugaresAsociados = parcelaRepository.findByCodigoLugar(codigoLugar);
+		if (lugaresAsociados.isEmpty()) {
+			lugarRepository.deleteById(codigoLugar);
+		}
 	}
 
 	public ImmutablePair<List<Lugar>, List<Long>> consultarLugaresPorUsuario(Long cedula) {
