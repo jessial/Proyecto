@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout *ngIf="true">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
     <div class="logo">
     </div>
@@ -14,10 +14,10 @@
       <li nz-submenu>
         <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestionar</span></span>
         <ul>
-          <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
+          <li nz-menu-item  routerLinkActive="active" [routerLink]="['lista_tipo_cultivo']">
               Tipos de cultivos
           </li>
-          <li nz-menu-item [routerLink]="['/lista_roles']">
+          <li nz-menu-item  routerLinkActive="active" [routerLink]="['lista_roles']">
               Roles</li>
         </ul>
       </li>

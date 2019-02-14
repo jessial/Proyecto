@@ -1,4 +1,4 @@
-package FertiWebBackEnd.FertiWeb;
+package configuracion.spring;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.boot.SpringApplication;
@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import controladores.ControladorDatos;
 import controladores.ControladorDatosApp;
+import controladores.ControladorSeguridad;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "servicios" })
+@ComponentScan(basePackages = { "servicios", "configuracion.seguridad"})
 @EntityScan("persistencia.entidad")
 @EnableJpaRepositories("persistencia.repositorio") 
 public class FertiWebApplication {
@@ -29,6 +30,11 @@ public class FertiWebApplication {
 	@Bean
 	public ControladorDatosApp crearControladorDatosApp() {
 		return new ControladorDatosApp();
+	}
+	
+	@Bean
+	public ControladorSeguridad crearControladorSeguridad() {
+		return new ControladorSeguridad();
 	}
 	
 	@Bean
