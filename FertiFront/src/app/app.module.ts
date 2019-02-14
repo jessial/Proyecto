@@ -12,17 +12,11 @@ import { MenuComponent } from './menu/menu.component';
 import { TableComponent } from './table_tipos_cultivo/table.component';
 import { NZ_NOTIFICATION_CONFIG } from 'ng-zorro-antd';
 import { FormComponent } from './form_tipo_cultivo/form.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './routing_menu/app-routing.module';
 import { DrawerComponent } from './drawer/drawer.component';
 import { TableRolComponent } from './table-rol/table-rol.component';
 import { FormRolComponent } from './form-rol/form-rol.component';
-import { FormRequerimientosCultivoComponent } from './form-requerimientos-cultivo/form-requerimientos-cultivo.component';
-import { TableRequerimientosCultivoComponent } from './table-requerimientos-cultivo/table-requerimientos-cultivo.component';
-import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.component';
-import { FormTipoFuenteComponent } from './form-tipo-fuente/form-tipo-fuente.component';
-import { TableFuenteComponent } from './table-fuente/table-fuente.component';
-import { FormFuenteComponent } from './form-fuente/form-fuente.component';
-
+import { SeguridadModule } from './seguridad/seguridad.module'
 
 
 registerLocaleData(en);
@@ -35,13 +29,7 @@ registerLocaleData(en);
     FormComponent,
     DrawerComponent,
     TableRolComponent,
-    FormRolComponent,
-    FormRequerimientosCultivoComponent,
-    TableRequerimientosCultivoComponent,
-    TableTipoFuenteComponent,
-    FormTipoFuenteComponent,
-    TableFuenteComponent,
-    FormFuenteComponent
+    FormRolComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +38,11 @@ registerLocaleData(en);
     HttpClientModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
+    SeguridadModule,
     AppRoutingModule
+  ],
+  exports: [
+    
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, 
     { provide: NZ_NOTIFICATION_CONFIG, useValue: { 

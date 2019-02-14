@@ -13,3 +13,16 @@
 .sonarlint/
 /src/main/resources/static
 
+FertiWeb/src/main/resources/static/vendor.js.map
+FertiWeb/src/main/resources/static/runtime.js.map
+FertiWeb/src/main/resources/static/runtime.js
+FertiWeb/src/main/resources/static/polyfills.js.map
+FertiWeb/src/main/resources/static/polyfills.js
+FertiWeb/src/main/resources/static/3rdpartylicenses.txt
+FertiWeb/src/main/resources/static/styles.js
+FertiWeb/src/main/resources/static/favicon.ico
+RemoteSystemsTempFiles/.project
+FertiWeb/src/main/resources/static/styles.js.map
+FertiWeb/src/main/resources/static/main.js
+FertiWeb/src/main/resources/static/vendor.js
+FertiWeb/src/main/resources/static/main.js.map
