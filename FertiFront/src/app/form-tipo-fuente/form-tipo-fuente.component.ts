@@ -4,7 +4,6 @@ import { TipoFuente } from '../calses_dominio/tipo-fuente';
 import { Subscription } from '../../../node_modules/rxjs';
 import { LocalService } from '../servicios/local.service';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
-import { jsonpCallbackContext } from '../../../node_modules/@angular/common/http/src/module';
 
 @Component({
   selector: 'app-form-tipo-fuente',
