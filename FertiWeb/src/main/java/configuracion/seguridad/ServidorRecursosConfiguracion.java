@@ -13,7 +13,7 @@ public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapt
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		//.antMatchers("/login").permitAll()
-		.anyRequest().permitAll();
+		.anyRequest().permitAll().and().cors();
 	}
 
 }

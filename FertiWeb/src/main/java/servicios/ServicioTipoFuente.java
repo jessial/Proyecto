@@ -3,7 +3,6 @@ package servicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,20 +22,17 @@ public class ServicioTipoFuente {
 	@Autowired
 	ControladorDatos controladorDatos;
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
 		return new ResponseEntity<>(controladorDatos.consultarTipoFuente(), HttpStatus.CREATED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody TipoFuente tipoFuente) {
 		controladorDatos.guardarTipoFuente(tipoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("borrarTipoFuente/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigo) {
@@ -44,7 +40,6 @@ public class ServicioTipoFuente {
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/consultaUnidad")
 	public ResponseEntity<Object> consultarUnidad() {
 		return new ResponseEntity<>(controladorDatos.consultarUnidad(), HttpStatus.CREATED);
