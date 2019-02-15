@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
 import { UtilidadService } from './utilidad.service';
-import { TipoFuente } from '../calses_dominio/tipo-fuente';
+import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { Observable, of, BehaviorSubject } from '../../../node_modules/rxjs';
 import { catchError } from '../../../node_modules/rxjs/operators';
 

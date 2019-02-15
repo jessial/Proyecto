@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequerimientoCultivoService } from '../servicios/requerimiento-cultivo.service';
-import { RequerimientoCultivo } from '../calses_dominio/requerimiento-cultivo';
+import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 
 @Component({
   selector: 'app-table-requerimientos-cultivo',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
-import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
+import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 
 @Component({
   selector: 'app-table',

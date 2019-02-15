@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../../calses_dominio/usuario';
+import { Usuario } from '../../clases_dominio/usuario';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 

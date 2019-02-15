@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
-import { TipoFuente } from '../calses_dominio/tipo-fuente';
+import { TipoFuente } from '../clases_dominio/tipo-fuente';
 
 @Component({
   selector: 'app-table-tipo-fuente',

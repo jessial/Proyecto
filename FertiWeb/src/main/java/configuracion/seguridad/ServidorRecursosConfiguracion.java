@@ -14,6 +14,9 @@ public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapt
 		http.authorizeRequests()
 		//.antMatchers("/login").permitAll()
 		.anyRequest().permitAll().and().cors();
+		
+		 http.headers().frameOptions().disable();
+	     http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 	}
 
 }

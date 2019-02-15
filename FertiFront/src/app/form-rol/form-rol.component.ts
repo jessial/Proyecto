@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Rol } from '../calses_dominio/rol';
+import { Rol } from '../clases_dominio/rol';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LocalService } from '../servicios/local.service';

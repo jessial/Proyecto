@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
+import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
-import { Fuente } from '../calses_dominio/fuente';
+import { Fuente } from '../clases_dominio/fuente';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FuenteService } from '../servicios/fuente.service';
-import { Fuente } from '../calses_dominio/fuente';
+import { Fuente } from '../clases_dominio/fuente';
 
 @Component({
   selector: 'app-table-fuente',

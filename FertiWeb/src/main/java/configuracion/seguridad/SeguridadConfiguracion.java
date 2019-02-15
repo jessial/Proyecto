@@ -44,6 +44,7 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().permitAll().and().csrf()
 				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	    
 	}
 	
 	@Bean

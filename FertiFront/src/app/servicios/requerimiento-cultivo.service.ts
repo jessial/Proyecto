@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UtilidadService } from './utilidad.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { RequerimientoCultivo } from '../calses_dominio/requerimiento-cultivo';
+import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 import { catchError } from 'rxjs/operators';
-import { RequerimientoPorCultivo } from '../calses_dominio/requerimiento-por-cultivo';
-import { TipoCultivo } from '../calses_dominio/tipo-cultivo';
+import { RequerimientoPorCultivo } from '../clases_dominio/requerimiento-por-cultivo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RequerimientoCultivo } from '../calses_dominio/requerimiento-cultivo';
+import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 
 @Component({
   selector: 'app-form-requerimientos-cultivo',

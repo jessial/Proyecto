@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angular/forms';
-import { TipoFuente } from '../calses_dominio/tipo-fuente';
+import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { Subscription } from '../../../node_modules/rxjs';
 import { LocalService } from '../servicios/local.service';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';

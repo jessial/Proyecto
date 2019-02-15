@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UtilidadService } from './utilidad.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { Rol } from '../calses_dominio/rol';
+import { Rol } from '../clases_dominio/rol';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {

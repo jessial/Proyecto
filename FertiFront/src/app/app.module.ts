@@ -20,7 +20,8 @@ import { SeguridadModule } from './seguridad/seguridad.module';
 import { FormRequerimientosCultivoComponent } from './form-requerimientos-cultivo/form-requerimientos-cultivo.component';
 import { FormTipoFuenteComponent } from './form-tipo-fuente/form-tipo-fuente.component';
 import { TableRequerimientosCultivoComponent } from './table-requerimientos-cultivo/table-requerimientos-cultivo.component';
-import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.component'
+import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.component';
+import { TableFuenteComponent } from './table-fuente/table-fuente.component';
 
 registerLocaleData(en);
 
@@ -36,7 +37,8 @@ registerLocaleData(en);
     FormRequerimientosCultivoComponent,
     FormTipoFuenteComponent,
     TableRequerimientosCultivoComponent,
-    TableTipoFuenteComponent
+    TableTipoFuenteComponent,
+    TableFuenteComponent
   ],
   imports: [
     BrowserModule,

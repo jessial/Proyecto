@@ -7,6 +7,8 @@ import { MenuComponent } from '../menu/menu.component';
 import { LoginComponent } from '../seguridad/login/login.component';
 import { TableRequerimientosCultivoComponent } from '../table-requerimientos-cultivo/table-requerimientos-cultivo.component';
 import { TableTipoFuenteComponent } from '../table-tipo-fuente/table-tipo-fuente.component';
+import { TableFuenteComponent } from '../table-fuente/table-fuente.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'login', component: LoginComponent},
   { path: 'lista_requerimientos', component: TableRequerimientosCultivoComponent},
-  { path: 'lista_tipo_fuente', component: TableTipoFuenteComponent}
+  { path: 'lista_tipo_fuente', component: TableTipoFuenteComponent},
+  { path: 'lista_fuente', component: TableFuenteComponent}
+
 ];
 
 @NgModule({
