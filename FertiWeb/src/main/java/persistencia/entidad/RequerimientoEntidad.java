@@ -19,15 +19,14 @@ import lombok.Data;
 @Entity(name = "Requerimiento")
 @Data
 @SequenceGenerator(name = "seq_req", sequenceName = "seq_req", initialValue = 10, allocationSize = 1)
-@NamedNativeQuery(name = "RequerimientoEntidad.getTodos", query = "select \r\n"
-		+ "r.req_codigo as codigoRequerimiento ,\r\n" + " r.req_cantidad as cantidad,\r\n"
-		+ " tc.cul_nombre as cultivo,\r\n" + "tc.cul_variedad as variedad,\r\n" + " r.req_estado as estado,\r\n"
-		+ " e.elemento as elemento,\r\n" + " u.uni_nombre as unidad\r\n"
-		+ " from requerimiento r, tipo_cultivo tc, elementos e, unidad u where r.req_codigo_tipo_cultivo = tc.cul_codigo and r.req_elemento = e.codigo and r.uni_codigo = u.uni_codigo", resultSetMapping = "RequerimientoPorCultivo")
+@NamedNativeQuery(name = "RequerimientoEntidad.getTodos", query = "select r.req_codigo as codigoRequerimiento , r.req_cantidad as cantidad, r.req_codigo_tipo_cultivo as codigoTipoCultivo, tc.cul_nombre as cultivo, tc.cul_variedad as variedad, r.req_estado as estado, e.codigo as codigoElemento, e.elemento as elemento, u.uni_codigo as codigoUnidad,\r\n"
+		+ "u.uni_nombre as unidad from requerimiento r, tipo_cultivo tc, elementos e, unidad u where r.req_codigo_tipo_cultivo = tc.cul_codigo and r.req_elemento = e.codigo and r.uni_codigo = u.uni_codigo;", resultSetMapping = "RequerimientoPorCultivo")
 @SqlResultSetMapping(name = "RequerimientoPorCultivo", classes = @ConstructorResult(targetClass = RequerimientoPorCultivo.class, columns = {
 		@ColumnResult(name = "codigoRequerimiento", type = Long.class), @ColumnResult(name = "cantidad"),
-		@ColumnResult(name = "cultivo"), @ColumnResult(name = "variedad"), @ColumnResult(name = "estado"),
-		@ColumnResult(name = "elemento"), @ColumnResult(name = "unidad") }))
+		@ColumnResult(name = "codigoTipoCultivo", type = Long.class), @ColumnResult(name = "cultivo"),
+		@ColumnResult(name = "variedad"), @ColumnResult(name = "estado"),
+		@ColumnResult(name = "codigoElemento", type = Long.class), @ColumnResult(name = "elemento"),
+		@ColumnResult(name = "codigoUnidad", type = Long.class), @ColumnResult(name = "unidad") }))
 
 public class RequerimientoEntidad implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -102,9 +102,7 @@ public class ControladorDatos {
 	}
 
 	public List<TipoFuente> consultarTipoFuente() {
-		List<TipoFuente> tipoFuente = new ArrayList<>();
-		mapperDozer.map(tipoFuenteRepository.findAll(), tipoFuente);
-		return tipoFuente;
+		return tipoFuenteRepository.getTodos();
 	}
 
 	public List<Unidad> consultarUnidad() {
@@ -114,9 +112,7 @@ public class ControladorDatos {
 	}
 
 	public List<Fuente> consultarFuente() {
-		List<Fuente> fuente = new ArrayList<>();
-		mapperDozer.map(fuenteRepository.findAll(), fuente);
-		return fuente;
+		return fuenteRepository.getTodos();
 	}
 
 	public List<TipoCultivo> consultarCultivo() {
