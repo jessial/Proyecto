@@ -1,7 +1,7 @@
 export class TipoFuente {
-    codigo: number;
-    nombre: string;
-    aporte: number;
-    estado: string;
-    unidad: number;
+    public codigo: number;
+    public nombre: string;
+    public aporte: number;
+    public estado: boolean;
+    public unidad: number;
 }

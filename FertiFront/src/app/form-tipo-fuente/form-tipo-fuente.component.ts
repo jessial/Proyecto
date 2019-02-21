@@ -4,6 +4,8 @@ import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { Subscription } from '../../../node_modules/rxjs';
 import { LocalService } from '../servicios/local.service';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
+import { UnidadService } from '../servicios/unidad.service';
+import { Unidad } from '../clases_dominio/unidad';
 
 @Component({
   selector: 'app-form-tipo-fuente',
@@ -15,6 +17,7 @@ export class FormTipoFuenteComponent implements OnInit, OnDestroy {
   validateForm: FormGroup;
   private tipoFuente = new TipoFuente();
   subscription: Subscription;
+  private unidades: Unidad[];
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -24,7 +27,8 @@ export class FormTipoFuenteComponent implements OnInit, OnDestroy {
   }
 
   constructor(private fb: FormBuilder,
-    private servicioLocal: LocalService, private servicioTipoFuente: TipoFuenteService) {
+    private servicioLocal: LocalService, private servicioTipoFuente: TipoFuenteService,
+    private unidadServicio: UnidadService) {
     this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
       this.servicioTipoFuente.updateOrCreate(this.tipoFuente).subscribe(accion => {
         this.servicioTipoFuente.cargarDatos();
@@ -37,7 +41,10 @@ export class FormTipoFuenteComponent implements OnInit, OnDestroy {
     this.validateForm = this.fb.group({
       nombre: [null, [Validators.required]],
       aporte: [null, [Validators.required]],
-      unidad: [null, [Validators.required]]
+      unidad: [null, [Validators.required]],
+    });
+    this.unidadServicio.getBackUnidad().subscribe(result => {
+      this.unidades = result;
     });
   }
 
