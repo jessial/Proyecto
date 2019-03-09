@@ -2,6 +2,43 @@
 
   <nz-form-item>
     <nz-form-control>
+      <nz-select placeholder="Cultivo" nz-input formControlName="cultivo"
+        [(ngModel)]="requerimientoCultivo.codigoTipoCultivo">
+        <nz-option *ngFor="let cultivo of cultivos" placeholder="Cultivo"
+          [nzLabel]="cultivo.nombre + ' ' + cultivo.variedad" [nzValue]="cultivo.codigoTipoCultivo">
+        </nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf=" validateForm.get( 'cultivo').dirty && validateForm.get( 'cultivo').errors ">Seleccione un
+        cultivo</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select placeholder="Elemento" nz-input formControlName="elemento"
+        [(ngModel)]="requerimientoCultivo.reqCodigoElemento">
+        <nz-option *ngFor="let elemento of elementos" placeholder="Elemento" [nzLabel]="elemento.elemento"
+          [nzValue]="elemento.codigoElemento">
+        </nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf=" validateForm.get( 'elemento').dirty && validateForm.get( 'elemento').errors ">Seleccione
+        un
+        elemento</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select placeholder="Unidad" nz-input formControlName="unidad" [(ngModel)]="requerimientoCultivo.uniCodigo">
+        <nz-option *ngFor="let unidad of unidades" placeholder="Unidad" [nzLabel]="unidad.nombreUnidad"
+          [nzValue]="unidad.codigoUnidad">
+        </nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf=" validateForm.get( 'unidad').dirty && validateForm.get( 'unidad').errors ">Seleccione la
+        unidad</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
       <nz-input-group nzPrefixIcon="anticon anticon-edit">
         <input type="text" nz-input formControlName="cantidad" placeholder="Cantidad">
       </nz-input-group>
@@ -11,10 +48,10 @@
   </nz-form-item>
 
   <nz-form-item>
-      <nz-form-control>
-        <nz-tag [nzColor]="requerimientoCultivo.estado?'green':'red'">Estado</nz-tag>
-        <nz-switch [(ngModel)]="requerimientoCultivo.estado" [ngModelOptions]="{standalone: true}" nzCheckedChildren="1"
-          nzUnCheckedChildren="0"></nz-switch>
-      </nz-form-control>
-    </nz-form-item>
+    <nz-form-control>
+      <nz-tag [nzColor]="requerimientoCultivo.estado?'green':'red'">Estado</nz-tag>
+      <nz-switch [(ngModel)]="requerimientoCultivo.estado" [ngModelOptions]="{standalone: true}" nzCheckedChildren="1"
+        nzUnCheckedChildren="0"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
 </form>

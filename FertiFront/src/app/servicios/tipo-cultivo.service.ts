@@ -22,7 +22,7 @@ export class TipoCultivoService {
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
   /** GET TiposCutivo from the server */
-  private getBackTiposCultivo(): Observable<TipoCultivo[]> {
+  public getBackTiposCultivo(): Observable<TipoCultivo[]> {
     const url = `${this.tipoCultivoUrl}/consultaTodos`;
     return this.http.get<TipoCultivo[]>(url).pipe(catchError(this.handleError('', [])));
   }
