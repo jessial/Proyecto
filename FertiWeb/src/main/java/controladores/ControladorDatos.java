@@ -21,6 +21,7 @@ import dominio.TipoCultivo;
 import dominio.TipoFuente;
 import dominio.Unidad;
 import dominio.Usuario;
+import dto.AnalisisAdministrador;
 import dto.RequerimientoPorCultivo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -103,6 +104,10 @@ public class ControladorDatos {
 
 	public List<TipoFuente> consultarTipoFuente() {
 		return tipoFuenteRepository.getTodos();
+	}
+
+	public List<AnalisisAdministrador> consultarAnalisisParaAdministrador() {
+		return analisisRepository.getTodos();
 	}
 
 	public List<Unidad> consultarUnidad() {

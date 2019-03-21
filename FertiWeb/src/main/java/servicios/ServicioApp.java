@@ -30,6 +30,7 @@ public class ServicioApp {
 	@Autowired
 	ControladorDatos controladorDatos;
 
+	//corregir
 	@GetMapping("/consulta_datos_bd/{cedula}/{password}")
 	public ResponseEntity<DtoResponse> consultar(@PathVariable("cedula") Long cedula,
 			@PathVariable("password") Long password) {
