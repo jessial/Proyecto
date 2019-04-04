@@ -6,4 +6,6 @@ import persistencia.entidad.UnidadEntidad;
 
 public interface UnidadRepository extends JpaRepository<UnidadEntidad, Long> {
 
+	UnidadEntidad findByCodigoUnidad(Long codigoUnidad);
+
 }

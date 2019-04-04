@@ -6,10 +6,10 @@ import lombok.Data;
 public class Requerimiento {
 
 	private Long codigoRequerimiento;
-	private Long codigoTipoCultivo;
-	private Long reqCodigoElemento;
+	private TipoCultivo tipoCultivo;
+	private Elemento elemento;
 	private boolean estado;
 	private double cantidad;
-	private Long uniCodigo;
+	private Unidad unidad;
 
 }

@@ -3,17 +3,13 @@ package controladores;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dominio.Analisis;
 import dominio.Lugar;
 import dominio.Parcela;
 import dto.DtoResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import persistencia.entidad.AnalisisEntidad;
-import persistencia.repositorio.AnalisisRepository;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,19 +19,19 @@ public class ControladorDatosApp {
 	private ControladorDatos controladorDatos;
 
 	@Autowired
-	private DozerBeanMapper mapperDozer;
+	private ControladorDatosRol controladorDatosRol;
 
 	@Autowired
-	private AnalisisRepository analisisRepository;
+	private ControladorDatosTipoCultivo controladorDatosTipoCultivo;
 
 	public DtoResponse consultarDatosPorCedula(Long cedula) {
 		DtoResponse respuesta = new DtoResponse();
 		respuesta.setUsuario(controladorDatos.consultarPorCedula(cedula));
 		if (null == respuesta.getUsuario().getCedula()) {
-			respuesta.setRoles(controladorDatos.consultarRoles());
-			respuesta.setCultivos(controladorDatos.consultarCultivo());
+			respuesta.setRoles(controladorDatosRol.consultarRoles());
+			respuesta.setCultivos(controladorDatosTipoCultivo.consultarCultivo());
 		} else {
-			respuesta.setRolUsuario(controladorDatos.consultarRolPorCodigo(respuesta.getUsuario().getCodigoRol()));
+			respuesta.setRolUsuario(controladorDatosRol.consultarRolPorCodigo(respuesta.getUsuario().getCodigoRol()));
 			ImmutablePair<List<Lugar>, List<Long>> pairLugares = controladorDatos.consultarLugaresPorUsuario(cedula);
 			respuesta.setLugares(pairLugares.getKey());
 			ImmutablePair<List<Parcela>, List<Long>> pairParcelas = controladorDatos

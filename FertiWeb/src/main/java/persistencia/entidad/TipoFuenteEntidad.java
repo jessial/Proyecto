@@ -1,27 +1,14 @@
 package persistencia.entidad;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.SqlResultSetMapping;
-
-import dto.TipoFuentePorUnidad;
-import lombok.Data;
 
 @Entity(name = "TipoFuente")
-@Data
 @SequenceGenerator(name = "seq_tf", sequenceName = "seq_tf", initialValue = 10, allocationSize = 1)
-@NamedNativeQuery(name = "TipoFuenteEntidad.getTodos", query = "select f.tf_codigo as codigoTipoFuente, f.tf_aporte as aporte, f.tf_estado as estado, f.tf_nombre as tipoFuente, u.uni_codigo as codigoUnidad, u.uni_nombre as unidad from tipo_fuente f, unidad u where u.uni_codigo = f.tf_unidad;", resultSetMapping = "TipoFuenteporUnidad")
-@SqlResultSetMapping(name = "TipoFuenteporUnidad", classes = @ConstructorResult(targetClass = TipoFuentePorUnidad.class, columns = {
-		@ColumnResult(name = "codigoTipoFuente", type = Long.class), @ColumnResult(name = "aporte"),
-		@ColumnResult(name = "estado"), @ColumnResult(name = "tipoFuente"),
-		@ColumnResult(name = "codigoUnidad", type = Long.class), @ColumnResult(name = "unidad") }))
 public class TipoFuenteEntidad {
 
 	@Id
@@ -36,5 +23,36 @@ public class TipoFuenteEntidad {
 	private Long unidad;
 	@Column(name = "tf_estado", nullable = false)
 	private boolean estado;
+
+	public TipoFuenteEntidad(Long codigo, String nombre, double aporte, Long unidad, boolean estado) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.aporte = aporte;
+		this.unidad = unidad;
+		this.estado = estado;
+	}
+
+	public TipoFuenteEntidad() {
+	}
+
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public double getAporte() {
+		return aporte;
+	}
+
+	public Long getUnidad() {
+		return unidad;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
 
 }

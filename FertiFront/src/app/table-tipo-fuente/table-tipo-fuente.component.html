@@ -16,9 +16,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.tipoFuente}}</td>
+      <td>{{data.nombre}}</td>
       <td>{{data.aporte}}</td>
-      <td>{{data.unidad}}</td>
+      <td>{{data.unidad.nombreUnidad}}</td>
       <td>
           <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarEstado(data)" [nzCheckedChildren]="checkedTemplate"
             [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>

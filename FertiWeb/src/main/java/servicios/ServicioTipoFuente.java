@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosTipoFuente;
+import controladores.ControladorDatosUnidad;
 import dominio.TipoFuente;
 
 @RestController
@@ -20,29 +21,31 @@ import dominio.TipoFuente;
 public class ServicioTipoFuente {
 
 	@Autowired
-	ControladorDatos controladorDatos;
+	ControladorDatosTipoFuente controladorDatosTipoFuente;
+	@Autowired
+	ControladorDatosUnidad controladorDatosUnidad;
 
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatos.consultarTipoFuente(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosTipoFuente.consultarTipoFuentes(), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody TipoFuente tipoFuente) {
-		controladorDatos.guardarTipoFuente(tipoFuente);
+		controladorDatosTipoFuente.guardarTipoFuente(tipoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("borrarTipoFuente/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigo) {
-		controladorDatos.eliminarTipoFuente(codigo);
+		controladorDatosTipoFuente.eliminarTipoFuente(codigo);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@GetMapping("/consultaUnidad")
 	public ResponseEntity<Object> consultarUnidad() {
-		return new ResponseEntity<>(controladorDatos.consultarUnidad(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosUnidad.consultarUnidad(), HttpStatus.CREATED);
 	}
 
 }

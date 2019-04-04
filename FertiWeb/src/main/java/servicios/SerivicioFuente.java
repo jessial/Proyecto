@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosFuente;
 import dominio.Fuente;
 
 @RestController
@@ -21,12 +21,12 @@ import dominio.Fuente;
 public class SerivicioFuente {
 
 	@Autowired
-	ControladorDatos controladorDatos;
+	ControladorDatosFuente controladorDatosFuente;
 
 	@GetMapping("/consultaTodos")
 	@ResponseBody
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatos.consultarFuente(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosFuente.consultarFuente(), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/guardado")
@@ -38,7 +38,7 @@ public class SerivicioFuente {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Fuente fuente) {
-		controladorDatos.guardarFuente(fuente);
+		controladorDatosFuente.guardarFuente(fuente);
 		;
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
@@ -46,8 +46,7 @@ public class SerivicioFuente {
 	@DeleteMapping("borrarFuente/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigoFuente) {
-		controladorDatos.eliminarFuente(codigoFuente);
+		controladorDatosFuente.eliminarFuente(codigoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
-
 }

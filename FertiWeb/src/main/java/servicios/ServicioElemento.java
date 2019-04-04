@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosElemento;
 
 @RestController
 @RequestMapping("/servicio_elemento")
 public class ServicioElemento {
 
 	@Autowired
-	ControladorDatos controladorDatos;
+	ControladorDatosElemento controladorDatosElemento;
 
 	@GetMapping("/consultaElemento")
 	public ResponseEntity<Object> consultarElementos() {
-		return new ResponseEntity<>(controladorDatos.consultarElementosParaApp(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosElemento.consultarElementosParaApp(), HttpStatus.CREATED);
 	}
 
 }

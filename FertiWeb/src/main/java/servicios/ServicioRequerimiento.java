@@ -9,25 +9,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosRequerimiento;
 import dominio.Requerimiento;
 
 @RestController
 @RequestMapping("/servicio_requerimiento")
 public class ServicioRequerimiento {
-	
+
 	@Autowired
-	ControladorDatos controladorDatos;
-	
+	ControladorDatosRequerimiento controladorDatosRequerimiento;
+
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatos.consultarRequermientos(), HttpStatus.CREATED);	}
-	
+		return new ResponseEntity<>(controladorDatosRequerimiento.consultarRequermientos(), HttpStatus.CREATED);
+	}
+
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Requerimiento requerimiento) {
-		controladorDatos.guardarRequermiento(requerimiento);
+		controladorDatosRequerimiento.guardarRequermiento(requerimiento);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
-		
+
 	}
-	
+
 }

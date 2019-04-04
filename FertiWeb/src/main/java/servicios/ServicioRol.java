@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosRol;
 import dominio.Rol;
 
 @RestController
@@ -21,30 +21,30 @@ import dominio.Rol;
 public class ServicioRol {
 
 	@Autowired
-	ControladorDatos controladorDatos;
+	ControladorDatosRol controladorDatosol;
 
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatos.consultarRoles(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosol.consultarRoles(), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Rol rol) {
-		controladorDatos.guardarRol(rol);
+		controladorDatosol.guardarRol(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Rol rol) {
-		controladorDatos.guardarRol(rol);
+		controladorDatosol.guardarRol(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("borrarRol/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigoRol) {
-		controladorDatos.eliminarRol(codigoRol);
+		controladorDatosol.eliminarRol(codigoRol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 }

@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class Fuente {
-	
+
 	private Long codigoFuente;
-	private Long codigoTipoFuente;
+	private TipoFuente tipoFuente;
 	private String producto;
 	private boolean estado;
-	
+
 }

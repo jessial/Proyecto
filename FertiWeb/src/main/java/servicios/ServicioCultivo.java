@@ -11,32 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import controladores.ControladorDatos;
+import controladores.ControladorDatosTipoCultivo;
 import dominio.TipoCultivo;
 
 @RestController
 @RequestMapping("/servicio_tipo_cultivo")
 public class ServicioCultivo {
-	
-		@Autowired
-		ControladorDatos controladorDatos;
-		
-		@GetMapping("/consultaTodos")
-		@ResponseBody
-		public ResponseEntity<Object> consultar() {
-			return new ResponseEntity<>(controladorDatos.consultarCultivo(), HttpStatus.CREATED);
-		}
-		
-		@PostMapping("/guardado")
-		@ResponseBody
-		public ResponseEntity<Object> grabar(@RequestBody TipoCultivo cultivoSembrado) {
-			return this.actualizar(cultivoSembrado);
-		}
-		
-		@PutMapping("/actualizaRegistro")
-		@ResponseBody
-		public ResponseEntity<Object> actualizar(@RequestBody TipoCultivo cultivoSembrado) {
-			controladorDatos.guardarTipoCultivo(cultivoSembrado);
-			return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
-		}
+
+	@Autowired
+	ControladorDatosTipoCultivo controladorDatosTipoCultivo;
+
+	@GetMapping("/consultaTodos")
+	@ResponseBody
+	public ResponseEntity<Object> consultar() {
+		return new ResponseEntity<>(controladorDatosTipoCultivo.consultarCultivo(), HttpStatus.CREATED);
+	}
+
+	@PostMapping("/guardado")
+	@ResponseBody
+	public ResponseEntity<Object> grabar(@RequestBody TipoCultivo cultivoSembrado) {
+		return this.actualizar(cultivoSembrado);
+	}
+
+	@PutMapping("/actualizaRegistro")
+	@ResponseBody
+	public ResponseEntity<Object> actualizar(@RequestBody TipoCultivo cultivoSembrado) {
+		controladorDatosTipoCultivo.guardarTipoCultivo(cultivoSembrado);
+		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+	}
 }

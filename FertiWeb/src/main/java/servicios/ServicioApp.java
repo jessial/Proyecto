@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatos;
 import controladores.ControladorDatosApp;
+import controladores.ControladorDatosElemento;
+import controladores.ControladorDatosRol;
 import dominio.Analisis;
 import dominio.Lugar;
 import dominio.Parcela;
@@ -30,7 +32,13 @@ public class ServicioApp {
 	@Autowired
 	ControladorDatos controladorDatos;
 
-	//corregir
+	@Autowired
+	ControladorDatosRol controladorDatosRol;
+
+	@Autowired
+	ControladorDatosElemento controladorDatosElemento;
+
+	// corregir
 	@GetMapping("/consulta_datos_bd/{cedula}/{password}")
 	public ResponseEntity<DtoResponse> consultar(@PathVariable("cedula") Long cedula,
 			@PathVariable("password") Long password) {
@@ -51,12 +59,12 @@ public class ServicioApp {
 
 	@GetMapping("/consultaRoles")
 	public ResponseEntity<Object> consultarRoles() {
-		return new ResponseEntity<>(controladorDatos.consultarRolesParaApp(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosRol.consultarRolesParaApp(), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/consultaElementos")
 	public ResponseEntity<Object> consultarElementos() {
-		return new ResponseEntity<>(controladorDatos.consultarElementosParaApp(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosElemento.consultarElementosParaApp(), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/guardadoLugar")
