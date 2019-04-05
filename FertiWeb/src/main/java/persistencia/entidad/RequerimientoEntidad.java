@@ -3,30 +3,14 @@ package persistencia.entidad;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.SqlResultSetMapping;
-
-import dto.RequerimientoPorCultivo;
-import lombok.Data;
 
 @Entity(name = "Requerimiento")
-@Data
 @SequenceGenerator(name = "seq_req", sequenceName = "seq_req", initialValue = 10, allocationSize = 1)
-@NamedNativeQuery(name = "RequerimientoEntidad.getTodos", query = "select r.req_codigo as codigoRequerimiento , r.req_cantidad as cantidad, r.req_codigo_tipo_cultivo as codigoTipoCultivo, tc.cul_nombre as cultivo, tc.cul_variedad as variedad, r.req_estado as estado, e.codigo as codigoElemento, e.elemento as elemento, u.uni_codigo as codigoUnidad,\r\n"
-		+ "u.uni_nombre as unidad from requerimiento r, tipo_cultivo tc, elementos e, unidad u where r.req_codigo_tipo_cultivo = tc.cul_codigo and r.req_elemento = e.codigo and r.uni_codigo = u.uni_codigo;", resultSetMapping = "RequerimientoPorCultivo")
-@SqlResultSetMapping(name = "RequerimientoPorCultivo", classes = @ConstructorResult(targetClass = RequerimientoPorCultivo.class, columns = {
-		@ColumnResult(name = "codigoRequerimiento", type = Long.class), @ColumnResult(name = "cantidad"),
-		@ColumnResult(name = "codigoTipoCultivo", type = Long.class), @ColumnResult(name = "cultivo"),
-		@ColumnResult(name = "variedad"), @ColumnResult(name = "estado"),
-		@ColumnResult(name = "codigoElemento", type = Long.class), @ColumnResult(name = "elemento"),
-		@ColumnResult(name = "codigoUnidad", type = Long.class), @ColumnResult(name = "unidad") }))
 
 public class RequerimientoEntidad implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -44,5 +28,70 @@ public class RequerimientoEntidad implements Serializable {
 	private double cantidad;
 	@Column(name = "uni_codigo")
 	private Long uniCodigo;
+
+	public RequerimientoEntidad(Long codigoRequerimiento, Long codigoTipoCultivo, Long reqCodigoElemento,
+			boolean estado, double cantidad, Long uniCodigo) {
+		this.codigoRequerimiento = codigoRequerimiento;
+		this.codigoTipoCultivo = codigoTipoCultivo;
+		this.reqCodigoElemento = reqCodigoElemento;
+		this.estado = estado;
+		this.cantidad = cantidad;
+		this.uniCodigo = uniCodigo;
+	}
+
+	public RequerimientoEntidad() {
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getCodigoRequerimiento() {
+		return codigoRequerimiento;
+	}
+
+	public Long getCodigoTipoCultivo() {
+		return codigoTipoCultivo;
+	}
+
+	public Long getReqCodigoElemento() {
+		return reqCodigoElemento;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public double getCantidad() {
+		return cantidad;
+	}
+
+	public Long getUniCodigo() {
+		return uniCodigo;
+	}
+
+	public void setCodigoRequerimiento(Long codigoRequerimiento) {
+		this.codigoRequerimiento = codigoRequerimiento;
+	}
+
+	public void setCodigoTipoCultivo(Long codigoTipoCultivo) {
+		this.codigoTipoCultivo = codigoTipoCultivo;
+	}
+
+	public void setReqCodigoElemento(Long reqCodigoElemento) {
+		this.reqCodigoElemento = reqCodigoElemento;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	public void setCantidad(double cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public void setUniCodigo(Long uniCodigo) {
+		this.uniCodigo = uniCodigo;
+	}
 
 }

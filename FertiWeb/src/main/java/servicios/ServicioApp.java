@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatos;
+import controladores.ControladorDatosAnalisis;
 import controladores.ControladorDatosApp;
 import controladores.ControladorDatosElemento;
+import controladores.ControladorDatosLugar;
 import controladores.ControladorDatosRol;
+import controladores.ControladorDatosUsuario;
 import dominio.Analisis;
 import dominio.Lugar;
 import dominio.Parcela;
@@ -38,6 +41,15 @@ public class ServicioApp {
 	@Autowired
 	ControladorDatosElemento controladorDatosElemento;
 
+	@Autowired
+	ControladorDatosAnalisis controladorDatosAnalisis;
+
+	@Autowired
+	ControladorDatosLugar controladorDatosLugar;
+
+	@Autowired
+	ControladorDatosUsuario controladorDatosUsuario;
+
 	// corregir
 	@GetMapping("/consulta_datos_bd/{cedula}/{password}")
 	public ResponseEntity<DtoResponse> consultar(@PathVariable("cedula") Long cedula,
@@ -47,13 +59,13 @@ public class ServicioApp {
 
 	@PostMapping("/guardadoAnalisis")
 	public ResponseEntity<Object> grabarAnalisis(@RequestBody Analisis analisisSuelo) {
-		controladorDatos.guardarAnalisis(analisisSuelo);
+		controladorDatosAnalisis.guardarAnalisis(analisisSuelo);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@PostMapping("/guardadoUsuario")
 	public ResponseEntity<Object> grabarUsuario(@RequestBody Usuario usuario) {
-		controladorDatos.guardarUsuarioNuevo(usuario);
+		controladorDatosUsuario.guardarUsuarioNuevo(usuario);
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
 	}
 
@@ -69,20 +81,20 @@ public class ServicioApp {
 
 	@PostMapping("/guardadoLugar")
 	public ResponseEntity<Object> grabarLugar(@RequestBody Lugar lugar) {
-		controladorDatos.guardarLugar(lugar);
+		controladorDatosLugar.guardarLugar(lugar);
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
 
 	}
 
 	@GetMapping("/consultaLugar/{cedula}")
 	public ResponseEntity<Object> consultarLugar(@PathVariable("cedula") Long cedula) {
-		return new ResponseEntity<>(controladorDatos.consultarLugaresPorUsuario(cedula), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosLugar.consultarLugaresPorUsuario(cedula), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("borrarLugar/{codigo}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "codigo") Long codigoLugar) {
-		controladorDatos.eliminarLugar(codigoLugar);
+		controladorDatosLugar.eliminarLugar(codigoLugar);
 		return new ResponseEntity<>("No se puede borrar", HttpStatus.ACCEPTED);
 	}
 

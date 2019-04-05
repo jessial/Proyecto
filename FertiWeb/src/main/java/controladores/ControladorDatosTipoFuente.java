@@ -3,6 +3,7 @@ package controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.TipoFuente;
@@ -18,19 +19,22 @@ import persistencia.repositorio.TipoFuenteRepository;
 public class ControladorDatosTipoFuente {
 
 	@Autowired
+	private DozerBeanMapper mapperDozer;
+
+	@Autowired
 	private TipoFuenteRepository tipoFuenteRepository;
 
 	@Autowired
 	private ControladorDatosUnidad controladorDatosUnidad;
 
 	public List<TipoFuente> consultarTipoFuentes() {
-		List<TipoFuente> fuentesModelo = new ArrayList<>();
-		List<TipoFuenteEntidad> fuentesEntidad = tipoFuenteRepository.findAll();
-		fuentesEntidad.forEach(fuente -> {
+		List<TipoFuente> tipoFuentesModelo = new ArrayList<>();
+		List<TipoFuenteEntidad> tipoFuenteEntidad = tipoFuenteRepository.findAll();
+		tipoFuenteEntidad.forEach(fuente -> {
 			UnidadEntidad unidadEntidad = controladorDatosUnidad.consultarUnidadPorId(fuente.getUnidad());
-			fuentesModelo.add(convertirTipoFuenteAModelo(fuente, unidadEntidad));
+			tipoFuentesModelo.add(convertirTipoFuenteAModelo(fuente, unidadEntidad));
 		});
-		return fuentesModelo;
+		return tipoFuentesModelo;
 	}
 
 	public void guardarTipoFuente(TipoFuente tipoFuente) {
@@ -39,6 +43,12 @@ public class ControladorDatosTipoFuente {
 
 	public void eliminarTipoFuente(long codigo) {
 		tipoFuenteRepository.deleteById(codigo);
+	}
+
+	public TipoFuenteEntidad consultarTipoFuentePorId(Long id) {
+		TipoFuenteEntidad tipoFuenteEntidad = new TipoFuenteEntidad();
+		mapperDozer.map(tipoFuenteRepository.findByCodigo(id), tipoFuenteEntidad);
+		return tipoFuenteEntidad;
 	}
 
 	private TipoFuente convertirTipoFuenteAModelo(TipoFuenteEntidad tipoFuenteEntidad, UnidadEntidad unidadEntidad) {

@@ -22,22 +22,32 @@ public class ControladorDatosApp {
 	private ControladorDatosRol controladorDatosRol;
 
 	@Autowired
+	private ControladorDatosAnalisis controladorDatosAnalisis;
+
+	@Autowired
 	private ControladorDatosTipoCultivo controladorDatosTipoCultivo;
+
+	@Autowired
+	private ControladorDatosLugar controladorDatosLugar;
+
+	@Autowired
+	private ControladorDatosUsuario controladorDatosUsuario;
 
 	public DtoResponse consultarDatosPorCedula(Long cedula) {
 		DtoResponse respuesta = new DtoResponse();
-		respuesta.setUsuario(controladorDatos.consultarPorCedula(cedula));
+		respuesta.setUsuario(controladorDatosUsuario.consultarPorCedula(cedula));
 		if (null == respuesta.getUsuario().getCedula()) {
 			respuesta.setRoles(controladorDatosRol.consultarRoles());
 			respuesta.setCultivos(controladorDatosTipoCultivo.consultarCultivo());
 		} else {
 			respuesta.setRolUsuario(controladorDatosRol.consultarRolPorCodigo(respuesta.getUsuario().getCodigoRol()));
-			ImmutablePair<List<Lugar>, List<Long>> pairLugares = controladorDatos.consultarLugaresPorUsuario(cedula);
+			ImmutablePair<List<Lugar>, List<Long>> pairLugares = controladorDatosLugar
+					.consultarLugaresPorUsuario(cedula);
 			respuesta.setLugares(pairLugares.getKey());
 			ImmutablePair<List<Parcela>, List<Long>> pairParcelas = controladorDatos
 					.consultarParcelasPorLugares(pairLugares.getValue());
 			respuesta.setParcelas(pairParcelas.getKey());
-			respuesta.setAnalisis(controladorDatos.consultarAnalisisPorParcela(pairParcelas.getValue()));
+			respuesta.setAnalisis(controladorDatosAnalisis.consultarAnalisisPorParcela(pairParcelas.getValue()));
 			respuesta.setRecomendaciones(controladorDatos.consultarRecomendacionesPorParcela(pairParcelas.getValue()));
 
 		}

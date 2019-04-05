@@ -21,7 +21,7 @@ public class ServicioRequerimiento {
 
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatosRequerimiento.consultarRequermientos(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosRequerimiento.consultarRequerimientos(), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/guardado")

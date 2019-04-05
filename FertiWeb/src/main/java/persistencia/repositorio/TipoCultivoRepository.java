@@ -6,4 +6,6 @@ import persistencia.entidad.TipoCultivoEntidad;
 
 public interface TipoCultivoRepository extends JpaRepository<TipoCultivoEntidad, Long> {
 
+	TipoCultivoEntidad findByCodigoTipoCultivo(Long codigoTipoCultivo);
+
 }

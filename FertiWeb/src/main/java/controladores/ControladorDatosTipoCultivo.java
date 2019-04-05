@@ -18,6 +18,7 @@ public class ControladorDatosTipoCultivo {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
+	
 	@Autowired
 	private TipoCultivoRepository tipoCultivoRepository;
 
@@ -36,5 +37,11 @@ public class ControladorDatosTipoCultivo {
 
 	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
 		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
+	}
+
+	public TipoCultivoEntidad consultarTipoCultivoPorId(Long id) {
+		TipoCultivoEntidad tipoCultivoEntidad = new TipoCultivoEntidad();
+		mapperDozer.map(tipoCultivoRepository.findByCodigoTipoCultivo(id), tipoCultivoEntidad);
+		return tipoCultivoEntidad;
 	}
 }

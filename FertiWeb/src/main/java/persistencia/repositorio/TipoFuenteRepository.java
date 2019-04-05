@@ -6,4 +6,5 @@ import persistencia.entidad.TipoFuenteEntidad;
 
 public interface TipoFuenteRepository extends JpaRepository<TipoFuenteEntidad, Long> {
 
+	TipoFuenteEntidad findByCodigo(Long codigo);
 }

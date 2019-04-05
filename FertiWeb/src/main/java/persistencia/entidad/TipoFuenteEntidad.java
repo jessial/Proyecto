@@ -55,4 +55,24 @@ public class TipoFuenteEntidad {
 		return estado;
 	}
 
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setAporte(double aporte) {
+		this.aporte = aporte;
+	}
+
+	public void setUnidad(Long unidad) {
+		this.unidad = unidad;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 }
