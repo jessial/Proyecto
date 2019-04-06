@@ -10,12 +10,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
-      <td>{{data.parcela.area}}</td>
+      <td>{{data.dtoParcela.lugar.nombre + '-' + ' ' + data.dtoParcela.lugar.ubicacion}}</td>
+      <td>{{data.dtoParcela.area}}</td>
       <td *ngFor="let elemento of data.elementos">
         {{elemento.elemento}}
       </td>
-      <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>
+      <td>{{data.dtoParcela.tipoCultivo.nombre + '-' + ' ' + data.dtoParcela.tipoCultivo.variedad}}</td>
       <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
     </tr>
   </tbody>

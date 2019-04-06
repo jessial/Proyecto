@@ -80,4 +80,15 @@ public class ControladorDatosLugar {
 		return new LugarEntidad(lugar.getCodigoLugar(), lugar.getNombre(), lugar.getUsuario().getCedula(),
 				lugar.getUbicacion());
 	}
+
+	public Lugar consultarLugarXId(Long codigoLugar) {
+		Lugar lugar = new Lugar();
+		mapperDozer.map(lugarRepository.findByCodigoLugar(codigoLugar), lugar);
+		return construirObjetoLugar(lugar);
+	}
+
+	private Lugar construirObjetoLugar(Lugar lugar) {
+		lugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
+		return lugar;
+	}
 }
