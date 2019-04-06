@@ -23,7 +23,7 @@ public class ServicioAnalisis {
 
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatosAnalisis.consultarAnalisis(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarTodos(), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/consultaPorParcela")

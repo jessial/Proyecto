@@ -27,8 +27,10 @@ public class ControladorDatosAnalisis {
 	@Autowired
 	private ControladorDatosElementoXAnalisis controladorDatosElementoXAnalisis;
 
-	public List<ElementoXAnalisis> consultarAnalisis() {
-		return new ArrayList<>();
+	public List<Analisis> consultarTodos() {
+		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findAll());
+		consultarElementosPorAnalisis(listAnalisis);
+		return listAnalisis;
 	}
 
 	public void guardarAnalisis(ElementoXAnalisis analisisSuelo) {
