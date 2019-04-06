@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../../clases_dominio/usuario';
+import { UsuarioSeguridad } from '../../clases_dominio/usuarioSeguridad';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -14,24 +14,24 @@ const httpOptions = {
 export class SeguridadService {
 
   private loginUrl = 'http://localhost:8080/login';  // URL to web api
-  private router : Router;
+  private router: Router;
 
   constructor(private http: HttpClient) { }
 
-  public getAuth(usuario: Usuario): void {
+  public getAuth(usuario: UsuarioSeguridad): void {
     this.http.post<Observable<boolean>>(this.loginUrl, usuario).subscribe(isValid => {
       if (isValid) {
-          sessionStorage.setItem(
-            'token', 
-            btoa(usuario.cedula + ':' + usuario.password)
-          );
-      this.router.navigate(['/']);
-      return true;
+        sessionStorage.setItem(
+          'token',
+          btoa(usuario.cedula + ':' + usuario.password)
+        );
+        this.router.navigate(['/']);
+        return true;
       } else {
-          alert("Authentication failed.");
-          return false;
+        alert('Authentication failed.');
+        return false;
       }
-  });
+    });
   }
 
 

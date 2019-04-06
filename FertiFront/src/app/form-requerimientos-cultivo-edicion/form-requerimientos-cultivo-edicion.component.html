@@ -1,4 +1,4 @@
-<nz-drawer [nzClosable]="false" [nzWidth]="320" [nzVisible]="visible" nzTitle="Agregar requerimiento cultivo"
+<nz-drawer [nzClosable]="false" [nzWidth]="320" [nzVisible]="visible" nzTitle="Editar requerimiento cultivo"
   (nzOnClose)="close()">
   <div *ngIf="visible">
     <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioAgregarRequerimiento">
@@ -54,7 +54,7 @@
     </form>
     <div class="footer">
       <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
-      <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Agregar</span></button>
+      <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Editar</span></button>
     </div>
   </div>
 </nz-drawer>

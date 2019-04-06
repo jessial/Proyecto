@@ -28,6 +28,8 @@ import { FormRequerimientosCultivoEdicionComponent } from './form-requerimientos
 import { FormRolEdicionComponent } from './form-rol-edicion/form-rol-edicion.component';
 import { FormTipoCultivoEdicionComponent } from './form-tipo-cultivo-edicion/form-tipo-cultivo-edicion.component';
 import { FormFuenteEdicionComponent } from './form-fuente-edicion/form-fuente-edicion.component';
+import { TableParcelaComponent } from './table-parcela/table-parcela.component';
+import { TableAnalisisComponent } from './table-analisis/table-analisis.component';
 
 registerLocaleData(en);
 
@@ -50,7 +52,9 @@ registerLocaleData(en);
     FormRolEdicionComponent,
     FormTipoCultivoEdicionComponent,
     FormFuenteEdicionComponent,
-    FormFuenteComponent
+    FormFuenteComponent,
+    TableParcelaComponent,
+    TableAnalisisComponent
   ],
   imports: [
     BrowserModule,

@@ -6,15 +6,9 @@
       <li nz-submenu>
         <span title><i class="anticon anticon-info"></i><span class="nav-text">Información</span></span>
         <ul>
-          <li nz-menu-item>Análisis</li>
-          <li nz-menu-item>Fincas</li>
-          <li nz-menu-item>Lotes</li>
-        </ul>
-      </li>
-      <li nz-submenu>
-        <span title><i class="anticon anticon-bar-chart"></i><span class="nav-text">Gráficas</span></span>
-        <ul>
-          <li nz-menu-item>Análisis</li>
+          <li nz-menu-item [routerLink]="['/lista_parcelas']">Cultivos por usuario</li>
+          <li nz-menu-item [routerLink]="['/lista_analisis']">Analisis por finca</li>
+
         </ul>
       </li>
       <li nz-submenu>

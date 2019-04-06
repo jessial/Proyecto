@@ -37,7 +37,7 @@ export class RequerimientoCultivoService {
 
   /**DELETE RequerimientoCultivo from the server */
   public deleteRequerimientoCultivo(requerimientoCultivo: RequerimientoCultivo): void {
-    const url = `${this.requerimientoUrl}/borrarRequerimientoCultivo/${requerimientoCultivo.codigoRequerimiento}`;
+    const url = `${this.requerimientoUrl}/borrarRequerimiento/${requerimientoCultivo.codigoRequerimiento}`;
     this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 

@@ -1,0 +1,21 @@
+<h2>Cultivos por usuario</h2>
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Finca</th>
+      <th>Área sembrada (m²)</th>
+      <th>Cultivo</th>
+      <th>Fecha de siembra</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.lugar.usuario.nombre + ' ' + data.lugar.usuario.apellido}}</td>
+      <td>{{data.lugar.nombre + ' ' + '-' + data.lugar.ubicacion}}</td>
+      <td>{{data.area}}</td>
+      <td>{{data.tipoCultivo.nombre + ' '  + '-' + data.tipoCultivo.variedad }}</td>
+      <td>{{data.fechaSiembra | date: 'dd/MM/yyyy'}}</td>
+    </tr>
+  </tbody>
+</nz-table>

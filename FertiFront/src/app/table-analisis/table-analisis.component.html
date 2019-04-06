@@ -1,0 +1,22 @@
+<h2>Analisis por finca</h2>
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+    <tr>
+      <th>Finca</th>
+      <th>Area</th>
+      <th>Elementos</th>
+      <th>Cultivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
+      <td>{{data.parcela.area}}</td>
+      <td *ngFor="let elemento of data.elemento">
+        {{elemento.elemento}}
+      </td>
+      <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>
+      <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
+    </tr>
+  </tbody>
+</nz-table>

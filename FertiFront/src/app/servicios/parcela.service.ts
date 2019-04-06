@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UtilidadService } from './utilidad.service';
-import { Analisis } from '../clases_dominio/analisis';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Parcela } from '../clases_dominio/parcela';
 import { catchError } from 'rxjs/operators';
-
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,16 +12,17 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AnalisisService {
-  private analisisUrl = 'http://localhost:8080/servicio_analisis';  // URL to web api
-  private analisis: Analisis[];
+export class ParcelaService {
+  private parcelaUrl = 'http://localhost:8080/servicio_parcela';  // URL to web api
+  private parcelas: Parcela[];
   private tipoSubject = new BehaviorSubject([]);
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
-  /** GET Analisis from the server */
-  public getBackAnalisis(): Observable<Analisis[]> {
-    const url = `${this.analisisUrl}/consultaTodos`;
-    return this.http.get<Analisis[]>(url).pipe(catchError(this.handleError('', [])));
+
+  /** GET Parcela from the server */
+  public getBackParcela(): Observable<Parcela[]> {
+    const url = `${this.parcelaUrl}/consultaTodos`;
+    return this.http.get<Parcela[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -33,19 +33,18 @@ export class AnalisisService {
   }
 
   cargarDatos() {
-    this.getBackAnalisis()
+    this.getBackParcela()
       .subscribe(result => {
-        this.analisis = result;
+        this.parcelas = result;
         this.refresh();
       }
       );
   }
   private refresh() {
-    this.tipoSubject.next(this.analisis);
+    this.tipoSubject.next(this.parcelas);
   }
 
-  getAnalisis(): Observable<Analisis[]> {
+  getParcelas(): Observable<Parcela[]> {
     return this.tipoSubject.asObservable();
   }
 }
-

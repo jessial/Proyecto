@@ -8,14 +8,14 @@ public class Parcela {
 	private Lugar lugar;
 	private TipoCultivo tipoCultivo;
 	private double area;
-	private Date fechaPosibleSiembra;
+	private Date fechaSiembra;
 
-	public Parcela(Long codigoParcela, Lugar lugar, TipoCultivo tipoCultivo, double area, Date fechaPosibleSiembra) {
+	public Parcela(Long codigoParcela, Lugar lugar, TipoCultivo tipoCultivo, double area, Date fechaSiembra) {
 		this.codigoParcela = codigoParcela;
 		this.lugar = lugar;
 		this.tipoCultivo = tipoCultivo;
 		this.area = area;
-		this.fechaPosibleSiembra = fechaPosibleSiembra;
+		this.fechaSiembra = fechaSiembra;
 	}
 
 	public Parcela() {
@@ -53,12 +53,12 @@ public class Parcela {
 		this.area = area;
 	}
 
-	public Date getFechaPosibleSiembra() {
-		return fechaPosibleSiembra;
+	public Date getFechaSiembra() {
+		return fechaSiembra;
 	}
 
-	public void setFechaPosibleSiembra(Date fechaPosibleSiembra) {
-		this.fechaPosibleSiembra = fechaPosibleSiembra;
+	public void setFechaSiembra(Date fechaPosibleSiembra) {
+		this.fechaSiembra = fechaPosibleSiembra;
 	}
 
 }
