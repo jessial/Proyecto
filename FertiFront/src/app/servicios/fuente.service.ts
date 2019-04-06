@@ -37,7 +37,7 @@ export class FuenteService {
   /**DELETE Fuente from de server */
   public deleteFuente(fuente: Fuente): void {
     const url = `${this.fuenteUrl}/borrarFuente/${fuente.codigoFuente}`;
-    this.http.delete(url).subscribe();
+    this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 
   crearNuevo(fuente: Fuente) {
