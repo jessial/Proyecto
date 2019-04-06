@@ -9,6 +9,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Lugar;
+import dominio.Parcela;
 import dominio.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -79,5 +80,16 @@ public class ControladorDatosLugar {
 	private Lugar convertirLugarAModelo(LugarEntidad lugarEntidad, Usuario usuario) {
 
 		return new Lugar(lugarEntidad.getCodigoLugar(), lugarEntidad.getNombre(), usuario, lugarEntidad.getUbicacion());
+	}
+
+	public Lugar consultarLugarXId(Long codigoLugar) {
+		Lugar lugar = new  Lugar();
+		mapperDozer.map(parcelaRepository.findByCodigoParcela(codigoLugar), lugar);
+		return construirObjetoLugar(lugar);
+	}
+
+	private Lugar construirObjetoLugar(Lugar lugar) {
+		lugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
+		return lugar;
 	}
 }

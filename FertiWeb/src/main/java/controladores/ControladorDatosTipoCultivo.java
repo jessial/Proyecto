@@ -44,4 +44,10 @@ public class ControladorDatosTipoCultivo {
 		mapperDozer.map(tipoCultivoRepository.findByCodigoTipoCultivo(id), tipoCultivoEntidad);
 		return tipoCultivoEntidad;
 	}
+
+	public TipoCultivo consultarTipoCultivoXId(Long codigoCultivoSembrado) {
+		TipoCultivo tipoCultivo = new TipoCultivo();
+		mapperDozer.map(tipoCultivoRepository.findByCodigoTipoCultivo(codigoCultivoSembrado), tipoCultivo);
+		return tipoCultivo;
+	}
 }

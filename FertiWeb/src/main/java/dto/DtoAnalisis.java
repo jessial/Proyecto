@@ -1,7 +1,10 @@
-package dominio;
+package dto;
 
 import java.util.Date;
+import java.util.List;
 
+import dominio.ElementoXAnalisis;
+import dominio.Parcela;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Analisis {
-
+public class DtoAnalisis {
+	
 	private Long codigoAnalisis;
-	private Parcela parcela;
+	private DtoParcela dtoParcela;
 	private Date fechaAnalisis;
-	private Long codigoParcela;
-
+	private List<ElementoXAnalisis> elementos;
+	
 }

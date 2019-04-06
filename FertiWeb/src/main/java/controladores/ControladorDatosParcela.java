@@ -12,6 +12,7 @@ import dominio.Lugar;
 import dominio.Parcela;
 import dominio.TipoCultivo;
 import dominio.Usuario;
+import dto.DtoParcela;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.LugarEntidad;
@@ -92,8 +93,24 @@ public class ControladorDatosParcela {
 				lugarEntidad.getUbicacion());
 
 		return new Parcela(parcelaEntidad.getCodigoParcela(), lugarDominio, tipoCultivoDominio,
-				parcelaEntidad.getArea(), parcelaEntidad.getFechaPosibleSiembra());
+				parcelaEntidad.getArea(), parcelaEntidad.getFechaSiembra());
 
+	}
+
+	public DtoParcela consultarParcelaXId(Long codigoAnalisis) {
+		Parcela parcela = new  Parcela();
+		mapperDozer.map(parcelaRepository.findByCodigoParcela(codigoAnalisis), parcela);
+		return construirObjetoParcela(parcela);
+	}
+
+	private DtoParcela construirObjetoParcela(Parcela parcela) {
+		DtoParcela dtoParcela = new DtoParcela();
+		dtoParcela.setCodigoParcela(parcela.getCodigoParcela());
+		dtoParcela.setFechaSiembra(parcela.getFechaSiembra());
+		dtoParcela.setArea(parcela.getArea());
+		dtoParcela.setLugar(controladorDatosLugar.consultarLugarXId(parcela.getCodigoLugar()));
+		dtoParcela.setTipoCultivo(controladorDatosTipoCultivo.consultarTipoCultivoXId(parcela.getCodigoCultivoSembrado()));
+		return dtoParcela;
 	}
 
 }

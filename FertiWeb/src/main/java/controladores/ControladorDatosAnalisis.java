@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Analisis;
 import dominio.ElementoXAnalisis;
+import dto.DtoAnalisis;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
@@ -24,6 +25,9 @@ public class ControladorDatosAnalisis {
 	@Autowired
 	private AnalisisRepository analisisRepository;
 
+	@Autowired
+	private ControladorDatosParcela controladorDatosParcela;
+	
 	@Autowired
 	private ControladorDatosElementoXAnalisis controladorDatosElementoXAnalisis;
 
@@ -56,10 +60,16 @@ public class ControladorDatosAnalisis {
 		return listAnalisis;
 	}
 
-	private void consultarElementosPorAnalisis(List<Analisis> listAnalisis) {
+	private List<DtoAnalisis> consultarElementosPorAnalisis(List<Analisis> listAnalisis) {
+		List<DtoAnalisis> listDtoAnalisis = new ArrayList<>();
 		for (Analisis analisis : listAnalisis) {
-			analisis.setElementos(
-					controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+			DtoAnalisis dtoAnalisis = new DtoAnalisis();
+			dtoAnalisis.setCodigoAnalisis(analisis.getCodigoAnalisis());
+			dtoAnalisis.setFechaAnalisis(analisis.getFechaAnalisis());
+			dtoAnalisis.setDtoParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoAnalisis()));
+			dtoAnalisis.setElementos(controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+			listDtoAnalisis.add(dtoAnalisis);
 		}
+		return listDtoAnalisis;
 	}
 }
