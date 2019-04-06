@@ -35,6 +35,12 @@ export class RequerimientoCultivoService {
     return this.http.post<RequerimientoCultivo>(url, requerimientoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
+  /**DELETE RequerimientoCultivo from the server */
+  public deleteRequerimientoCultivo(requerimientoCultivo: RequerimientoCultivo): void {
+    const url = `${this.requerimientoUrl}/borrarRequerimientoCultivo/${requerimientoCultivo.codigoRequerimiento}`;
+    this.http.delete(url).subscribe(_ => this.cargarDatos());
+  }
+
   cargarDatos() {
     this.getBackRequerimientosPorCultivo()
       .subscribe(result => {

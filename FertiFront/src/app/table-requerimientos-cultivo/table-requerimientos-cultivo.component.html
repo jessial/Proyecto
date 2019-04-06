@@ -9,20 +9,22 @@
       <th>Unidad</th>
       <th>Estado</th>
       <th nzWidth="10%">
-        <button nz-button nzType="primary" [nzSize]="size" nzShape="circle" (click)="appDrawer.open('Requerimiento Cultivo')">
+        <button nz-button nzType="primary" nzShape="circle" (click)="requerimientoCreacion.open()"
+          (click)="crearRegistro()">
           <i class="anticon anticon-plus"></i>
         </button>
-        <app-drawer #appDrawer></app-drawer>
+        <app-form-requerimientos-cultivo #requerimientoCreacion></app-form-requerimientos-cultivo>
+        <app-form-requerimientos-cultivo-edicion #requerimientoEdicion></app-form-requerimientos-cultivo-edicion>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.cultivo}}</td>
-      <td>{{data.variedad}}</td>
-      <td>{{data.elemento}}</td>
+      <td>{{data.tipoCultivo.nombre}}</td>
+      <td>{{data.tipoCultivo.variedad}}</td>
+      <td>{{data.elemento.elemento}}</td>
       <td>{{data.cantidad}}</td>
-      <td>{{data.unidad}}</td>
+      <td>{{data.unidad.nombreUnidad}}</td>
       <td>
         <nz-switch [(ngModel)]="data.estado" (ngModelChange)="cambiarEstado(data)" [nzCheckedChildren]="checkedTemplate"
           [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
@@ -35,11 +37,11 @@
       </td>
       <td>
         <a>
-          <i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="appDrawer.open('Requerimiento Cultivo')"></i>
+          <i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="requerimientoEdicion.open()"></i>
         </a>
         <nz-divider nzType="vertical"></nz-divider>
         <a>
-          <i class="anticon anticon-delete" (click)="borrarRequerimiento(data)"></i>
+          <i class="anticon anticon-delete" (click)="borrarRequerimientoCultivo(data)"></i>
         </a>
       </td>
     </tr>

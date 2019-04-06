@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequerimientoCultivoService } from '../servicios/requerimiento-cultivo.service';
 import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
+import { NzModalService, NzModalRef } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-table-requerimientos-cultivo',
@@ -9,12 +10,11 @@ import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 })
 export class TableRequerimientosCultivoComponent implements OnInit {
 
-  i = 1;
-  tableI = 1;
   editCache = {};
   dataSet = [];
+  modalConfirmacionEliminado: NzModalRef;
 
-  constructor(private requerimientoService: RequerimientoCultivoService) { }
+  constructor(private requerimientoService: RequerimientoCultivoService, private modalEliminar: NzModalService) { }
 
   ngOnInit(): void {
     this.requerimientoService.cargarDatos();
@@ -39,5 +39,15 @@ export class TableRequerimientosCultivoComponent implements OnInit {
 
   crearRegistro() {
     this.requerimientoService.editarRequerimiento(new RequerimientoCultivo());
+  }
+
+  borrarRequerimientoCultivo(requerimiento: RequerimientoCultivo) {
+    this.modalConfirmacionEliminado = this.modalEliminar.confirm({
+      nzTitle: 'Eliminar',
+      nzContent: '¿Desea eliminar el requerimiento cultivo?',
+      nzOnOk: () => {
+        this.requerimientoService.deleteRequerimientoCultivo(requerimiento);
+      }
+    });
   }
 }
