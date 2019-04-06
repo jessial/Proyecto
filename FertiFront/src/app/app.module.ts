@@ -24,6 +24,7 @@ import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.
 import { TableFuenteComponent } from './table-fuente/table-fuente.component';
 import { FormTipoFuenteEdicionComponent } from './form-tipo-fuente-edicion/form-tipo-fuente-edicion.component';
 import { FormRequerimientosCultivoEdicionComponent } from './form-requerimientos-cultivo-edicion/form-requerimientos-cultivo-edicion.component';
+import { FormRolEdicionComponent } from './form-rol-edicion/form-rol-edicion.component';
 
 registerLocaleData(en);
 
@@ -42,7 +43,8 @@ registerLocaleData(en);
     TableTipoFuenteComponent,
     TableFuenteComponent,
     FormTipoFuenteEdicionComponent,
-    FormRequerimientosCultivoEdicionComponent
+    FormRequerimientosCultivoEdicionComponent,
+    FormRolEdicionComponent
   ],
   imports: [
     BrowserModule,
