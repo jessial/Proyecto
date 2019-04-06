@@ -12,7 +12,7 @@
     <tr *ngFor="let data of basicTable.data">
       <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
       <td>{{data.parcela.area}}</td>
-      <td *ngFor="let elemento of data.elemento">
+      <td *ngFor="let elemento of data.elementos">
         {{elemento.elemento}}
       </td>
       <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>

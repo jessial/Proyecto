@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ControladorDatosApp {
 
 	@Autowired
-	private ControladorDatos controladorDatos;
+	private ControladorDeDatosRecomendacion controladorDatosRecomendacion;
 
 	@Autowired
 	private ControladorDatosRol controladorDatosRol;
@@ -36,7 +36,7 @@ public class ControladorDatosApp {
 	@Autowired
 	private ControladorDatosParcela controladorDatosParcela;
 
-	public DtoResponse consultarDatosPorCedula(Long cedula) {
+	/*public DtoResponse consultarDatosPorCedula(Long cedula) {
 		DtoResponse respuesta = new DtoResponse();
 		respuesta.setUsuario(controladorDatosUsuario.consultarPorCedula(cedula));
 		if (null == respuesta.getUsuario().getCedula()) {
@@ -51,10 +51,11 @@ public class ControladorDatosApp {
 					.consultarParcelasPorLugares(pairLugares.getValue());
 			respuesta.setParcelas(pairParcelas.getKey());
 			respuesta.setAnalisis(controladorDatosAnalisis.consultarAnalisisPorParcela(pairParcelas.getValue()));
-			respuesta.setRecomendaciones(controladorDatos.consultarRecomendacionesPorParcela(pairParcelas.getValue()));
+			respuesta.setRecomendaciones(
+					controladorDatosRecomendacion.consultarRecomendacionesPorParcela(pairParcelas.getValue()));
 
 		}
 		return respuesta;
 	}
-
+*/
 }

@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import controladores.ControladorDatos;
 import controladores.ControladorDatosAnalisis;
 import controladores.ControladorDatosApp;
 import controladores.ControladorDatosElemento;
@@ -22,6 +21,7 @@ import controladores.ControladorDatosTipoCultivo;
 import controladores.ControladorDatosTipoFuente;
 import controladores.ControladorDatosUnidad;
 import controladores.ControladorDatosUsuario;
+import controladores.ControladorDeDatosRecomendacion;
 import controladores.ControladorSeguridad;
 
 @SpringBootApplication
@@ -32,11 +32,6 @@ public class FertiWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FertiWebApplication.class, args);
-	}
-
-	@Bean
-	public ControladorDatos crearControladorDatos() {
-		return new ControladorDatos();
 	}
 
 	@Bean
@@ -108,10 +103,15 @@ public class FertiWebApplication {
 	public ControladorDatosParcela crearControladorDatosParcela() {
 		return new ControladorDatosParcela();
 	}
-	
+
 	@Bean
 	public ControladorDatosElementoXAnalisis crearControladorDatosElementoXAnalisis() {
 		return new ControladorDatosElementoXAnalisis();
+	}
+
+	@Bean
+	public ControladorDeDatosRecomendacion crearControladorDeDatosRecomendacion() {
+		return new ControladorDeDatosRecomendacion();
 	}
 
 }

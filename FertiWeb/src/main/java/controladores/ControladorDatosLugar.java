@@ -2,9 +2,7 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,18 +34,27 @@ public class ControladorDatosLugar {
 	public List<Lugar> consultarFincas() {
 		List<Lugar> lugaresModelo = new ArrayList<>();
 		List<LugarEntidad> lugaresEntidad = lugarRepository.findAll();
+		completarObjeto(lugaresModelo, lugaresEntidad);
+		return lugaresModelo;
+	}
+
+	public List<Lugar> consultarLugaresPorUsuario(Long cedula) {
+		List<Lugar> lugaresModelo = new ArrayList<>();
+		List<LugarEntidad> lugaresEntidad = lugarRepository.findByCodigoUsuario(cedula);
+		completarObjeto(lugaresModelo, lugaresEntidad);
+		return lugaresModelo;
+	}
+
+	private void completarObjeto(List<Lugar> lugaresModelo, List<LugarEntidad> lugaresEntidad) {
 		lugaresEntidad.forEach(lugar -> {
 			Usuario usuario = controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario());
 			lugaresModelo.add(convertirLugarAModelo(lugar, usuario));
 
 		});
-		return lugaresModelo;
 	}
 
 	public void guardarLugar(Lugar lugar) {
-		LugarEntidad lugarEntidad = new LugarEntidad();
-		mapperDozer.map(lugar, lugarEntidad);
-		lugarRepository.save(lugarEntidad);
+		lugarRepository.save(convertirLugarAEntidad(lugar));
 
 	}
 
@@ -64,20 +71,13 @@ public class ControladorDatosLugar {
 		return lugarEntidad;
 	}
 
-	public ImmutablePair<List<Lugar>, List<Long>> consultarLugaresPorUsuario(Long cedula) {
-		return mapearLugares(lugarRepository.findByCodigoUsuario(cedula));
-	}
-
-	private ImmutablePair<List<Lugar>, List<Long>> mapearLugares(List<LugarEntidad> lugaresEntidad) {
-		List<Lugar> lugares = lugaresEntidad.stream().map(a -> mapperDozer.map(a, Lugar.class))
-				.collect(Collectors.toCollection(ArrayList::new));
-		List<Long> codigos = lugares.stream().map(a -> a.getCodigoLugar())
-				.collect(Collectors.toCollection(ArrayList::new));
-		return new ImmutablePair<>(lugares, codigos);
-	}
-
 	private Lugar convertirLugarAModelo(LugarEntidad lugarEntidad, Usuario usuario) {
 
 		return new Lugar(lugarEntidad.getCodigoLugar(), lugarEntidad.getNombre(), usuario, lugarEntidad.getUbicacion());
+	}
+
+	private LugarEntidad convertirLugarAEntidad(Lugar lugar) {
+		return new LugarEntidad(lugar.getCodigoLugar(), lugar.getNombre(), lugar.getUsuario().getCedula(),
+				lugar.getUbicacion());
 	}
 }

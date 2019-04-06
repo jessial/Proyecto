@@ -15,17 +15,13 @@ import persistencia.repositorio.RecomendacionRepository;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class ControladorDatos {
+public class ControladorDeDatosRecomendacion {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
 
 	@Autowired
 	private RecomendacionRepository recomendacionRepository;
-
-	// Guardar
-
-	
 
 	public List<Recomendacion> consultarRecomendacionesPorParcela(List<Long> codigos) {
 		return mapearRecomendaciones(recomendacionRepository.findByCodigoParcelaIn(codigos));
