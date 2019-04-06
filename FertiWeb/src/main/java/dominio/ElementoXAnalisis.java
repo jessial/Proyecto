@@ -1,8 +1,5 @@
 package dominio;
 
-import java.util.Date;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Analisis {
+public class ElementoXAnalisis {
 
 	private Long codigoAnalisis;
-	private Parcela parcela;
-	private Date fechaAnalisis;
-	private List<ElementoXAnalisis> elementos;
+	private Elemento elemento;
+	private Double cantidad;
+	private Unidad unidad;
 }

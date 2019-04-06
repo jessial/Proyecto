@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeguridadService } from '../servicios/seguridad.service'
 import {
   AbstractControl,
   FormBuilder,
@@ -6,6 +7,8 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
+import { Usuario } from 'src/app/clases_dominio/usuario';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   validateForm: FormGroup;
 
   submitForm(): void {
@@ -20,10 +24,14 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
     }
-    this.router.navigate(['/']);
+    let usuario: Usuario = {
+      cedula : this.validateForm.get('userName').value,
+      password : this.validateForm.get('password').value
+    }
+    this.seguridadService.getAuth(usuario);
   }
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private seguridadService : SeguridadService ) {
   }
 
   ngOnInit(): void {
