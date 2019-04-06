@@ -35,9 +35,9 @@ export class TipoCultivoService {
 
   /**DELETE TipoCultivo from de server */
   public deleteTipoCultivo(tipoCultivo: TipoCultivo): void {
-    const url = `${this.tipoCultivoUrl}/borrarCultivo/${tipoCultivo.codigoTipoCultivo}`;
+    const url = `${this.tipoCultivoUrl}/borrarTipoCultivo/${tipoCultivo.codigoTipoCultivo}`;
     console.log(url);
-    this.http.delete(url).subscribe();
+    this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 
   crearNuevo(tipoCultivo: TipoCultivo) {

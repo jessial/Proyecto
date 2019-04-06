@@ -1,54 +1,62 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { LocalService } from '../servicios/local.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent {
 
-  validateForm: FormGroup;
-  public tipoCultivo = new TipoCultivo();
-  subscription: Subscription;
+  formularioAgregarTipoCultivo: FormGroup;
+  enviado = false;
+  visible = false;
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-  }
 
-  constructor(private fb: FormBuilder,
-    private servicioLocal: LocalService, private tipoCultivoService: TipoCultivoService) {
-    this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.tipoCultivoService.updateOrCreate(this.tipoCultivo).subscribe(accion => {
-        this.tipoCultivoService.cargarDatos();
-      });
-    });
-  }
+  constructor(private fb: FormBuilder, private tipoCultivoService: TipoCultivoService) { }
 
-  ngOnInit(): void {
-    this.cargarTipoCultivo();
-    this.validateForm = this.fb.group({
+  private crearFormulario(): void {
+    this.formularioAgregarTipoCultivo = this.fb.group({
+      nombre: [null, [Validators.required]],
       variedad: [null, [Validators.required]],
-      nombre: [null, [Validators.required]]
+      estado: [false, [Validators.required]],
     });
   }
 
-  private cargarTipoCultivo() {
-    this.tipoCultivoService.getCultivo()
-      .subscribe(result => {
-        this.tipoCultivo = result;
-      }
-      );
+  get f() { return this.formularioAgregarTipoCultivo.controls; }
+
+
+  submit() {
+    this.enviado = true;
+    if (this.formularioAgregarTipoCultivo.invalid) {
+      return null;
+    }
+    const tipoCultivo = new TipoCultivo();
+    tipoCultivo.nombre = this.f.nombre.value;
+    tipoCultivo.variedad = this.f.variedad.value;
+    tipoCultivo.estado = this.f.estado.value;
+
+    this.tipoCultivoService.updateOrCreate(tipoCultivo).subscribe(accion => {
+      this.tipoCultivoService.cargarDatos();
+      this.close();
+    });
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+
+  open(): void {
+    this.crearFormulario();
+    this.visible = true;
+    this.enviado = false;
   }
+
+  close(): void {
+    this.formularioAgregarTipoCultivo.reset();
+    this.visible = false;
+  }
+
+
+
+
 }
