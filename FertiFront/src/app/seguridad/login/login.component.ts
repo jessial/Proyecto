@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { Usuario } from 'src/app/clases_dominio/usuario';
+import { UsuarioSeguridad } from 'src/app/clases_dominio/usuarioSeguridad';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
     }
-    let usuario: Usuario = {
+    let usuario: UsuarioSeguridad = {
       cedula : this.validateForm.get('userName').value,
       password : this.validateForm.get('password').value
     }
