@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Rol } from '../clases_dominio/rol';
 import { RolService } from '../servicios/rol.service'
+import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-table-rol',
@@ -8,11 +9,12 @@ import { RolService } from '../servicios/rol.service'
   styleUrls: ['./table-rol.component.css']
 })
 export class TableRolComponent implements OnInit {
-  i = 1;
+
   editCache = {};
   dataSet = [];
+  modalConfirmacionEliminado: NzModalRef;
 
-  constructor(private rolService: RolService) { }
+  constructor(private rolService: RolService, private modalEliminar: NzModalService) { }
 
   ngOnInit(): void {
     this.rolService.cargarDatos();
@@ -41,7 +43,12 @@ export class TableRolComponent implements OnInit {
   }
 
   borrarRol(rol: Rol) {
-    this.rolService.deleteRoles(rol);
-
+    this.modalConfirmacionEliminado = this.modalEliminar.confirm({
+      nzTitle: 'Eliminar',
+      nzContent: '¿Desea eliminar el rol?',
+      nzOnOk: () => {
+        this.rolService.deleteRoles(rol);
+      }
+    });
   }
 }

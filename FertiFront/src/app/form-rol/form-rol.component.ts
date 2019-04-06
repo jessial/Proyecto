@@ -1,53 +1,55 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Rol } from '../clases_dominio/rol';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { LocalService } from '../servicios/local.service';
 import { RolService } from '../servicios/rol.service';
+import { Rol } from '../clases_dominio/rol';
 
 @Component({
   selector: 'app-form-rol',
   templateUrl: './form-rol.component.html',
   styleUrls: ['./form-rol.component.css']
 })
-export class FormRolComponent implements OnInit, OnDestroy {
-  validateForm: FormGroup;
-  public rol = new Rol();
-  subscription: Subscription;
-
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-  }
-
-  constructor(private fb: FormBuilder,
-    private servicioLocal: LocalService, private servicioRol: RolService) {
-    this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.servicioRol.updateOrCreate(this.rol).subscribe(accion => {
-        this.servicioRol.cargarDatos();
-      });
-    });
-  }
+export class FormRolComponent {
+  formularioAgregarRol: FormGroup;
+  enviado = false;
+  visible = false;
 
 
-  ngOnInit(): void {
-    this.cargarRol();
-    this.validateForm = this.fb.group({
+  constructor(private fb: FormBuilder, private servicioRol: RolService) { }
+
+
+  private crearFormulario(): void {
+    this.formularioAgregarRol = this.fb.group({
       nombre: [null, [Validators.required]],
-      estado: [null, [Validators.required]]
+      estado: [false, [Validators.required]],
     });
   }
 
-  private cargarRol() {
-    this.servicioRol.getRol().subscribe(result => {
-      this.rol = result;
+  get f() { return this.formularioAgregarRol.controls; }
 
+  submit() {
+    this.enviado = true;
+    if (this.formularioAgregarRol.invalid) {
+      return null;
+    }
+    const rol = new Rol();
+    rol.nombre = this.f.nombre.value;
+    rol.estado = this.f.estado.value;
+
+    this.servicioRol.updateOrCreate(rol).subscribe(accion => {
+      this.servicioRol.cargarDatos();
+      this.close();
     });
+
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  open(): void {
+    this.crearFormulario();
+    this.visible = true;
+    this.enviado = false;
+  }
+
+  close(): void {
+    this.formularioAgregarRol.reset();
+    this.visible = false;
   }
 }
