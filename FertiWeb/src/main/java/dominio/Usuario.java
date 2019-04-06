@@ -52,4 +52,32 @@ public class Usuario {
 		return password;
 	}
 
+	public void setCedula(Long cedula) {
+		this.cedula = cedula;
+	}
+
+	public void setCodigoRol(Long codigoRol) {
+		this.codigoRol = codigoRol;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public void setTelefono(Long telefono) {
+		this.telefono = telefono;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

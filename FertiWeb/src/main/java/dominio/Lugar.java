@@ -33,4 +33,20 @@ public class Lugar {
 		return ubicacion;
 	}
 
+	public void setCodigoLugar(Long codigoLugar) {
+		this.codigoLugar = codigoLugar;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
 }

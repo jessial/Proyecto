@@ -58,6 +58,12 @@ public class ControladorDatosLugar {
 		}
 	}
 
+	public LugarEntidad consultarLugarPorId(Long id) {
+		LugarEntidad lugarEntidad = new LugarEntidad();
+		mapperDozer.map(lugarRepository.findByCodigoLugar(id), lugarEntidad);
+		return lugarEntidad;
+	}
+
 	public ImmutablePair<List<Lugar>, List<Long>> consultarLugaresPorUsuario(Long cedula) {
 		return mapearLugares(lugarRepository.findByCodigoUsuario(cedula));
 	}

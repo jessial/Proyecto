@@ -10,4 +10,6 @@ public interface LugarRepository extends JpaRepository<LugarEntidad, Long> {
 
 	List<LugarEntidad> findByCodigoUsuario(Long cedula);
 
+	LugarEntidad findByCodigoLugar(Long codigoLugar);
+
 }

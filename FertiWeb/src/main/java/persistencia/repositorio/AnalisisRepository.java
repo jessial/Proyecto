@@ -10,6 +10,4 @@ public interface AnalisisRepository extends JpaRepository<AnalisisEntidad, Long>
 
 	List<AnalisisEntidad> findByCodigoParcelaIn(List<Long> codigos);
 
-	public List getTodos();
-
 }

@@ -33,4 +33,20 @@ public class TipoCultivo {
 		return estado;
 	}
 
+	public void setCodigoTipoCultivo(Long codigoTipoCultivo) {
+		this.codigoTipoCultivo = codigoTipoCultivo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setVariedad(String variedad) {
+		this.variedad = variedad;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 }
