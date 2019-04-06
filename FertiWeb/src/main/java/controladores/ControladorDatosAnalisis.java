@@ -24,8 +24,7 @@ public class ControladorDatosAnalisis {
 	private AnalisisRepository analisisRepository;
 
 	public List<Analisis> consultarAnalisis() {
-		List<Analisis> listaAnalisis = new ArrayList<>();
-		return listaAnalisis;
+		return new ArrayList<>();
 	}
 
 	public void guardarAnalisis(Analisis analisisSuelo) {
