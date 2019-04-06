@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Analisis;
+import dominio.ElementoXAnalisis;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.AnalisisEntidad;
@@ -23,18 +24,23 @@ public class ControladorDatosAnalisis {
 	@Autowired
 	private AnalisisRepository analisisRepository;
 
-	public List<Analisis> consultarAnalisis() {
+	@Autowired
+	private ControladorDatosElementoXAnalisis controladorDatosElementoXAnalisis;
+
+	public List<ElementoXAnalisis> consultarAnalisis() {
 		return new ArrayList<>();
 	}
 
-	public void guardarAnalisis(Analisis analisisSuelo) {
+	public void guardarAnalisis(ElementoXAnalisis analisisSuelo) {
 		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
 		mapperDozer.map(analisisSuelo, analisisEntidad);
 		analisisRepository.save(analisisEntidad);
 	}
 
 	public List<Analisis> consultarAnalisisPorParcela(List<Long> codigos) {
-		return mapearAnalisis(analisisRepository.findByCodigoParcelaIn(codigos));
+		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findByCodigoParcelaIn(codigos));
+		consultarElementosPorAnalisis(listAnalisis);
+		return listAnalisis;
 	}
 
 	private List<Analisis> mapearAnalisis(List<AnalisisEntidad> analisisEntidadList) {
@@ -42,4 +48,16 @@ public class ControladorDatosAnalisis {
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
+	public List<Analisis> consultarAnalisisPorParcela(long codigoParcela) {
+		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findByCodigoParcela(codigoParcela));
+		consultarElementosPorAnalisis(listAnalisis);
+		return listAnalisis;
+	}
+
+	private void consultarElementosPorAnalisis(List<Analisis> listAnalisis) {
+		for (Analisis analisis : listAnalisis) {
+			analisis.setElementos(
+					controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+		}
+	}
 }

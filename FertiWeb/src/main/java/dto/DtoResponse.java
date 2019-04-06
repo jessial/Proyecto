@@ -3,13 +3,13 @@ package dto;
 import java.util.List;
 
 import dominio.Analisis;
-import dominio.TipoCultivo;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
 import dominio.Requerimiento;
 import dominio.Resultado;
 import dominio.Rol;
+import dominio.TipoCultivo;
 import dominio.TipoFuente;
 import dominio.Usuario;
 import lombok.Data;

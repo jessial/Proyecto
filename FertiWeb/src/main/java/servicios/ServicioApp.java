@@ -20,7 +20,7 @@ import controladores.ControladorDatosLugar;
 import controladores.ControladorDatosParcela;
 import controladores.ControladorDatosRol;
 import controladores.ControladorDatosUsuario;
-import dominio.Analisis;
+import dominio.ElementoXAnalisis;
 import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Usuario;
@@ -62,7 +62,7 @@ public class ServicioApp {
 	}
 
 	@PostMapping("/guardadoAnalisis")
-	public ResponseEntity<Object> grabarAnalisis(@RequestBody Analisis analisisSuelo) {
+	public ResponseEntity<Object> grabarAnalisis(@RequestBody ElementoXAnalisis analisisSuelo) {
 		controladorDatosAnalisis.guardarAnalisis(analisisSuelo);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}

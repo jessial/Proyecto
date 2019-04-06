@@ -9,5 +9,7 @@ import persistencia.entidad.AnalisisEntidad;
 public interface AnalisisRepository extends JpaRepository<AnalisisEntidad, Long> {
 
 	List<AnalisisEntidad> findByCodigoParcelaIn(List<Long> codigos);
+	
+	List<AnalisisEntidad> findByCodigoParcela(Long codigo);
 
 }
