@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FuenteService } from '../servicios/fuente.service';
 import { Fuente } from '../clases_dominio/fuente';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-table-fuente',
@@ -9,12 +10,11 @@ import { Fuente } from '../clases_dominio/fuente';
 })
 export class TableFuenteComponent implements OnInit {
 
-  i = 1;
   editCache = {};
   dataSet = [];
+  modalConfirmacionEliminado: NzModalRef;
 
-
-  constructor(private fuenteServicio: FuenteService) { }
+  constructor(private fuenteServicio: FuenteService, private modalEliminar: NzModalService) { }
 
   ngOnInit(): void {
     this.fuenteServicio.cargarDatos();
@@ -41,8 +41,14 @@ export class TableFuenteComponent implements OnInit {
     this.fuenteServicio.editarFuente(new Fuente());
   }
 
-  borrarCultivo(fuente: Fuente) {
-    this.fuenteServicio.deleteFuente(fuente);
+  borrarFuente(fuente: Fuente) {
+    this.modalConfirmacionEliminado = this.modalEliminar.confirm({
+      nzTitle: 'Eliminar',
+      nzContent: '¿Desea eliminar la fuente?',
+      nzOnOk: () => {
+        this.fuenteServicio.deleteFuente(fuente);
+      }
+    });
   }
 
 

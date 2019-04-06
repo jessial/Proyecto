@@ -36,7 +36,7 @@ export class TipoFuenteService {
   /**DELETE TipoFuente from the server */
   public deleteTipoFuente(tipoFuente: TipoFuente): void {
     const url = `${this.tipoFuenteUrl}/borrarTipoFuente/${tipoFuente.codigo}`;
-    this.http.delete(url).subscribe();
+    this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 
   crearNuevo(tipoFuente: TipoFuente) {

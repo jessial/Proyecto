@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-table',
@@ -8,12 +9,12 @@ import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  i = 1;
+
   editCache = {};
   dataSet = [];
+  modalConfirmacionEliminado: NzModalRef;
 
-
-  constructor(private tipoCultivoService: TipoCultivoService) { }
+  constructor(private tipoCultivoService: TipoCultivoService, private modalEliminar: NzModalService) { }
 
   ngOnInit(): void {
     this.tipoCultivoService.cargarDatos();
@@ -41,7 +42,14 @@ export class TableComponent implements OnInit {
   }
 
   borrarCultivo(tipoCultivo: TipoCultivo) {
-    this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
+    this.modalConfirmacionEliminado = this.modalEliminar.confirm({
+      nzTitle: 'Eliminar',
+      nzContent: '¿Desea eliminar el tipo de fuente?',
+      nzOnOk: () => {
+        this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
+      }
+    });
+
   }
 
 

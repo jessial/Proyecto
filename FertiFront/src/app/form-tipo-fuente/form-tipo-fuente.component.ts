@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angular/forms';
 import { TipoFuente } from '../clases_dominio/tipo-fuente';
-import { Subscription } from '../../../node_modules/rxjs';
-import { LocalService } from '../servicios/local.service';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
 import { UnidadService } from '../servicios/unidad.service';
 import { Unidad } from '../clases_dominio/unidad';
@@ -12,52 +10,57 @@ import { Unidad } from '../clases_dominio/unidad';
   templateUrl: './form-tipo-fuente.component.html',
   styleUrls: ['./form-tipo-fuente.component.css']
 })
-export class FormTipoFuenteComponent implements OnInit, OnDestroy {
+export class FormTipoFuenteComponent {
 
-  validateForm: FormGroup;
-  private tipoFuente = new TipoFuente();
-  subscription: Subscription;
-  private unidades: Unidad[];
+  formularioAgregarTipoFuente: FormGroup;
+  public unidades: Unidad[];
+  enviado = false;
+  visible = false;
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-  }
-
-  constructor(private fb: FormBuilder,
-    private servicioLocal: LocalService, private servicioTipoFuente: TipoFuenteService,
+  constructor(private fb: FormBuilder, private servicioTipoFuente: TipoFuenteService,
     private unidadServicio: UnidadService) {
-    this.subscription = this.servicioLocal.obtenerAccion().subscribe(accion => {
-      this.servicioTipoFuente.updateOrCreate(this.tipoFuente).subscribe(accion => {
-        this.servicioTipoFuente.cargarDatos();
-      });
-    });
   }
 
-  ngOnInit() {
-    this.cargarTipoFuente();
-    this.validateForm = this.fb.group({
+  private crearFormulario(): void {
+    this.formularioAgregarTipoFuente = this.fb.group({
       nombre: [null, [Validators.required]],
       aporte: [null, [Validators.required]],
       unidad: [null, [Validators.required]],
+      estado: [false, [Validators.required]],
     });
+  }
+
+  submit() {
+    this.enviado = true;
+    if (this.formularioAgregarTipoFuente.invalid) {
+      return null;
+    }
+    const tipoFuente = new TipoFuente();
+    tipoFuente.nombre = this.f.nombre.value;
+    tipoFuente.aporte = this.f.aporte.value;
+    tipoFuente.unidad = this.f.unidad.value;
+    tipoFuente.estado = this.f.estado.value;
+
+    this.servicioTipoFuente.updateOrCreate(tipoFuente).subscribe(accion => {
+      this.servicioTipoFuente.cargarDatos();
+      this.close();
+    });
+  }
+
+  get f() { return this.formularioAgregarTipoFuente.controls; }
+
+  open(): void {
+    this.crearFormulario();
     this.unidadServicio.getBackUnidad().subscribe(result => {
       this.unidades = result;
     });
+    this.visible = true;
+    this.enviado = false;
   }
 
-  private cargarTipoFuente() {
-    this.servicioTipoFuente.getTipoFuente()
-      .subscribe(result => {
-        this.tipoFuente = result;
-      }
-      );
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  close(): void {
+    this.formularioAgregarTipoFuente.reset();
+    this.visible = false;
   }
 }
 

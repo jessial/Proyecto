@@ -33,6 +33,9 @@ public class ControladorDatosApp {
 	@Autowired
 	private ControladorDatosUsuario controladorDatosUsuario;
 
+	@Autowired
+	private ControladorDatosParcela controladorDatosParcela;
+
 	public DtoResponse consultarDatosPorCedula(Long cedula) {
 		DtoResponse respuesta = new DtoResponse();
 		respuesta.setUsuario(controladorDatosUsuario.consultarPorCedula(cedula));
@@ -44,7 +47,7 @@ public class ControladorDatosApp {
 			ImmutablePair<List<Lugar>, List<Long>> pairLugares = controladorDatosLugar
 					.consultarLugaresPorUsuario(cedula);
 			respuesta.setLugares(pairLugares.getKey());
-			ImmutablePair<List<Parcela>, List<Long>> pairParcelas = controladorDatos
+			ImmutablePair<List<Parcela>, List<Long>> pairParcelas = controladorDatosParcela
 					.consultarParcelasPorLugares(pairLugares.getValue());
 			respuesta.setParcelas(pairParcelas.getKey());
 			respuesta.setAnalisis(controladorDatosAnalisis.consultarAnalisisPorParcela(pairParcelas.getValue()));

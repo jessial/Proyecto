@@ -5,10 +5,11 @@
       <th>Nombre</th>
       <th>Estado</th>
       <th nzWidth="10%">
-        <button nz-button nzType="primary" [nzSize]="size" nzShape="circle" (click)="crearRegistro()" (click)="appDrawer.open('Rol')">
+        <button nz-button nzType="primary" nzShape="circle" (click)="crearRegistro()" (click)="rolCreacion.open()">
           <i class="anticon anticon-plus"></i>
         </button>
-        <app-drawer #appDrawer></app-drawer>
+        <app-form-rol #rolCreacion></app-form-rol>
+        <app-form-rol-edicion #rolEdicion></app-form-rol-edicion>
       </th>
     </tr>
   </thead>
@@ -22,7 +23,7 @@
         <ng-template #unCheckedTemplate><i class="anticon anticon-cross"></i></ng-template>
       </td>
       <td>
-        <a><i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="appDrawer.open('Rol')"> </i></a>
+        <a><i class="anticon anticon-edit" (click)="editarRegistro(data)" (click)="rolEdicion.open()"> </i></a>
         <nz-divider nzType="vertical"></nz-divider>
         <a><i class="anticon anticon-delete" (click)="borrarRol(data)"></i></a>
       </td>

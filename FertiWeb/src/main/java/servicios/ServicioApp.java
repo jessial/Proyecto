@@ -17,6 +17,7 @@ import controladores.ControladorDatosAnalisis;
 import controladores.ControladorDatosApp;
 import controladores.ControladorDatosElemento;
 import controladores.ControladorDatosLugar;
+import controladores.ControladorDatosParcela;
 import controladores.ControladorDatosRol;
 import controladores.ControladorDatosUsuario;
 import dominio.Analisis;
@@ -49,6 +50,9 @@ public class ServicioApp {
 
 	@Autowired
 	ControladorDatosUsuario controladorDatosUsuario;
+
+	@Autowired
+	ControladorDatosParcela controladorDatosParcela;
 
 	// corregir
 	@GetMapping("/consulta_datos_bd/{cedula}/{password}")
@@ -100,7 +104,7 @@ public class ServicioApp {
 
 	@PostMapping("/guardadoParcela")
 	public ResponseEntity<Object> grabarParcela(@RequestBody Parcela parcela) {
-		controladorDatos.guardarParcela(parcela);
+		controladorDatosParcela.guardarParcela(parcela);
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
 
 	}

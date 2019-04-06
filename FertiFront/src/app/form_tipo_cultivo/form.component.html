@@ -1,28 +1,38 @@
-<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()" (editDate)="editDate($event)">
+<nz-drawer [nzClosable]="false" [nzWidth]="320" [nzVisible]="visible" nzTitle="Agregar tipo de cultivo"
+  (nzOnClose)="close()">
+  <div *ngIf="visible">
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioAgregarTipoCultivo">
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group nzPrefixIcon="anticon anticon-edit">
-        <input type="text" nz-input formControlName="variedad" placeholder="Variedad" [(ngModel)]="tipoCultivo.variedad">
-      </nz-input-group>
-      <nz-form-explain *ngIf="validateForm.get('variedad').dirty && validateForm.get('variedad').errors">Ingrese la variedad</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-edit">
+            <input type="text" nz-input formControlName="nombre" placeholder="Cultivo">
+          </nz-input-group>
+          <nz-form-explain *ngIf="enviado && f.nombre.errors?.required">Ingrese el cultivo
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-input-group nzPrefixIcon="anticon anticon-edit">
-        <input type="text" nz-input formControlName="nombre" placeholder="Cultivo" [(ngModel)]="tipoCultivo.nombre">
-      </nz-input-group>
-      <nz-form-explain *ngIf="validateForm.get('nombre').dirty && validateForm.get('nombre').errors">Ingrese el nombre</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-edit">
+            <input type="text" nz-input formControlName="variedad" placeholder="Variedad">
+          </nz-input-group>
+          <nz-form-explain *ngIf="enviado && f.variedad.errors?.required">Ingrese la variedad
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
 
-  <nz-form-item>
-    <nz-form-control>
-      <nz-tag [nzColor]="tipoCultivo.estado?'green':'red'">Estado</nz-tag>
-      <nz-switch [(ngModel)]="tipoCultivo.estado" [ngModelOptions]="{standalone: true}" nzCheckedChildren="1" nzUnCheckedChildren="0"></nz-switch>
-    </nz-form-control>
-  </nz-form-item>
-  
-</form>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-tag [nzColor]="f.estado.value?'green':'red'">Estado</nz-tag>
+          <nz-switch nzCheckedChildren="1" nzUnCheckedChildren="0" formControlName="estado"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="footer">
+      <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
+      <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Agregar</span></button>
+    </div>
+  </div>
+</nz-drawer>

@@ -1,9 +1,10 @@
+import { FormFuenteComponent } from './form-fuente/form-fuente.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
@@ -22,6 +23,11 @@ import { FormTipoFuenteComponent } from './form-tipo-fuente/form-tipo-fuente.com
 import { TableRequerimientosCultivoComponent } from './table-requerimientos-cultivo/table-requerimientos-cultivo.component';
 import { TableTipoFuenteComponent } from './table-tipo-fuente/table-tipo-fuente.component';
 import { TableFuenteComponent } from './table-fuente/table-fuente.component';
+import { FormTipoFuenteEdicionComponent } from './form-tipo-fuente-edicion/form-tipo-fuente-edicion.component';
+import { FormRequerimientosCultivoEdicionComponent } from './form-requerimientos-cultivo-edicion/form-requerimientos-cultivo-edicion.component';
+import { FormRolEdicionComponent } from './form-rol-edicion/form-rol-edicion.component';
+import { FormTipoCultivoEdicionComponent } from './form-tipo-cultivo-edicion/form-tipo-cultivo-edicion.component';
+import { FormFuenteEdicionComponent } from './form-fuente-edicion/form-fuente-edicion.component';
 
 registerLocaleData(en);
 
@@ -38,7 +44,13 @@ registerLocaleData(en);
     FormTipoFuenteComponent,
     TableRequerimientosCultivoComponent,
     TableTipoFuenteComponent,
-    TableFuenteComponent
+    TableFuenteComponent,
+    FormTipoFuenteEdicionComponent,
+    FormRequerimientosCultivoEdicionComponent,
+    FormRolEdicionComponent,
+    FormTipoCultivoEdicionComponent,
+    FormFuenteEdicionComponent,
+    FormFuenteComponent
   ],
   imports: [
     BrowserModule,
@@ -51,17 +63,20 @@ registerLocaleData(en);
     AppRoutingModule
   ],
   exports: [
-    
+
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, 
-    { provide: NZ_NOTIFICATION_CONFIG, useValue: { 
-      nzTop         : '24px',
-      nzBottom      : '24px',
-      nzPlacement   : 'topRight',
-      nzDuration    : 9000,
-      nzMaxStack    : 5,
+  providers: [{ provide: NZ_I18N, useValue: en_US },
+  {
+    provide: NZ_NOTIFICATION_CONFIG, useValue: {
+      nzTop: '24px',
+      nzBottom: '24px',
+      nzPlacement: 'topRight',
+      nzDuration: 9000,
+      nzMaxStack: 5,
       nzPauseOnHover: true,
-      nzAnimate     : true }}],
+      nzAnimate: true
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

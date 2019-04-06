@@ -1,0 +1,40 @@
+<nz-drawer [nzClosable]="false" [nzWidth]="320" [nzVisible]="visible" nzTitle="Agregar tipo de fuente"
+  (nzOnClose)="close()">
+  <div *ngIf="visible">
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioEditarFuente">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select placeholder="Tipo fuente" nz-input formControlName="tipoFuente">
+            <nz-option *ngFor="let tipoFuente of tipoFuentes" placeholder="Unidad" [nzLabel]="tipoFuente.nombre"
+              [nzValue]="tipoFuente.codigo">
+            </nz-option>
+          </nz-select>
+          <nz-form-explain *ngIf="enviado && f.tipoFuente.errors?.required">Seleccione
+            la unidad</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-edit">
+            <input type="text" nz-input formControlName="producto" placeholder="Producto">
+          </nz-input-group>
+          <nz-form-explain *ngIf="enviado && f.producto.errors?.required">Ingrese el
+            producto
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <nz-tag [nzColor]="f.estado.value?'green':'red'">Estado</nz-tag>
+          <nz-switch nzCheckedChildren="1" nzUnCheckedChildren="0" formControlName="estado"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="footer">
+      <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
+      <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Agregar</span></button>
+    </div>
+  </div>
+</nz-drawer>

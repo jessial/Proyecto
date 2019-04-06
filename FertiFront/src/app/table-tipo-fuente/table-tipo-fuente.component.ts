@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
 import { TipoFuente } from '../clases_dominio/tipo-fuente';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-table-tipo-fuente',
@@ -8,12 +9,12 @@ import { TipoFuente } from '../clases_dominio/tipo-fuente';
   styleUrls: ['./table-tipo-fuente.component.css']
 })
 export class TableTipoFuenteComponent implements OnInit {
-  i = 1;
+
   editCache = {};
   dataSet = [];
+  modalConfirmacionEliminado: NzModalRef;
 
-
-  constructor(private tipoFuenteServicio: TipoFuenteService) { }
+  constructor(private tipoFuenteServicio: TipoFuenteService, private modalEliminar: NzModalService) { }
 
   ngOnInit(): void {
     this.tipoFuenteServicio.cargarDatos();
@@ -41,6 +42,13 @@ export class TableTipoFuenteComponent implements OnInit {
   }
 
   borrarTipoFuente(tipoFuente: TipoFuente) {
-    this.tipoFuenteServicio.deleteTipoFuente(tipoFuente);
+    this.modalConfirmacionEliminado = this.modalEliminar.confirm({
+      nzTitle: 'Eliminar',
+      nzContent: '¿Desea eliminar el tipo de fuente?',
+      nzOnOk: () => {
+        this.tipoFuenteServicio.deleteTipoFuente(tipoFuente);
+      }
+    });
+
   }
 }

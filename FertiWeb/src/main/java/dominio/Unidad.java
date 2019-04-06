@@ -21,4 +21,12 @@ public class Unidad {
 		return nombreUnidad;
 	}
 
+	public void setCodigoUnidad(Long codigoUnidad) {
+		this.codigoUnidad = codigoUnidad;
+	}
+
+	public void setNombreUnidad(String nombreUnidad) {
+		this.nombreUnidad = nombreUnidad;
+	}
+
 }

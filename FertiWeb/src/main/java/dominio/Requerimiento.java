@@ -46,4 +46,28 @@ public class Requerimiento {
 		return unidad;
 	}
 
+	public void setCodigoRequerimiento(Long codigoRequerimiento) {
+		this.codigoRequerimiento = codigoRequerimiento;
+	}
+
+	public void setTipoCultivo(TipoCultivo tipoCultivo) {
+		this.tipoCultivo = tipoCultivo;
+	}
+
+	public void setElemento(Elemento elemento) {
+		this.elemento = elemento;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	public void setCantidad(double cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public void setUnidad(Unidad unidad) {
+		this.unidad = unidad;
+	}
+
 }

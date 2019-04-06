@@ -39,4 +39,24 @@ public class TipoFuente {
 		return estado;
 	}
 
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setAporte(Double aporte) {
+		this.aporte = aporte;
+	}
+
+	public void setUnidad(Unidad unidad) {
+		this.unidad = unidad;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
 }
