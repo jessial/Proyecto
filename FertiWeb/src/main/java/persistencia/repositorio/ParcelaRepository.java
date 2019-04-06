@@ -12,4 +12,6 @@ public interface ParcelaRepository extends JpaRepository<ParcelaEntidad, Long> {
 
 	List<ParcelaEntidad> findByCodigoLugar(Long codigoLugar);
 
+	ParcelaEntidad findByCodigoParcela(Long codigoParcela);
+
 }

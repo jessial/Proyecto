@@ -14,6 +14,7 @@ import controladores.ControladorDatosApp;
 import controladores.ControladorDatosElemento;
 import controladores.ControladorDatosFuente;
 import controladores.ControladorDatosLugar;
+import controladores.ControladorDatosParcela;
 import controladores.ControladorDatosRequerimiento;
 import controladores.ControladorDatosRol;
 import controladores.ControladorDatosTipoCultivo;
@@ -100,6 +101,11 @@ public class FertiWebApplication {
 	@Bean
 	public ControladorDatosAnalisis crearControladorDatosAnalisis() {
 		return new ControladorDatosAnalisis();
+	}
+
+	@Bean
+	public ControladorDatosParcela crearControladorDatosParcela() {
+		return new ControladorDatosParcela();
 	}
 
 }

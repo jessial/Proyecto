@@ -3,26 +3,15 @@ package persistencia.entidad;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.SqlResultSetMapping;
-
-import dto.AnalisisAdministrador;
-import lombok.Data;
 
 @Entity(name = "Analisis")
 @SequenceGenerator(name = "seq_analisis", sequenceName = "seq_analisis", initialValue = 10, allocationSize = 1)
-@NamedNativeQuery(name = "AnalisisEntidad.getTodos", query = "select a.ana_cantidad as cantidad , a.ana_fecha_analisis as fechaAnalisis, e.elemento as elemento, u.uni_nombre as unidad , l.lug_nombre as lugar from analisis a, elementos e, unidad u, lugar l, parcela p where a.ana_codigo_elemento = e.codigo and ana_codigo_unidad = u.uni_codigo and  p.par_codigo = a.ana_cod_parcela and  p.par_codigo_lugar = l.lug_codigo;", resultSetMapping = "AnalisisAdministrador")
-@SqlResultSetMapping(name = "AnalisisAdministrador", classes = @ConstructorResult(targetClass = AnalisisAdministrador.class, columns = {
-		@ColumnResult(name = "cantidad", type = Double.class), @ColumnResult(name = "fechaAnalisis"),
-		@ColumnResult(name = "elemento"), @ColumnResult(name = "unidad"), @ColumnResult(name = "lugar") }))
-@Data
+
 public class AnalisisEntidad {
 
 	@Id
@@ -39,5 +28,66 @@ public class AnalisisEntidad {
 	private Double cantidad;
 	@Column(name = "ana_codigo_unidad")
 	private Long codigoUnidad;
+
+	public AnalisisEntidad(Long codigoAnalisis, Long codigoParcela, Date fechaAnalisis, Long codigoElemento,
+			Double cantidad, Long codigoUnidad) {
+		this.codigoAnalisis = codigoAnalisis;
+		this.codigoParcela = codigoParcela;
+		this.fechaAnalisis = fechaAnalisis;
+		this.codigoElemento = codigoElemento;
+		this.cantidad = cantidad;
+		this.codigoUnidad = codigoUnidad;
+	}
+
+	public AnalisisEntidad() {
+	}
+
+	public Long getCodigoAnalisis() {
+		return codigoAnalisis;
+	}
+
+	public void setCodigoAnalisis(Long codigoAnalisis) {
+		this.codigoAnalisis = codigoAnalisis;
+	}
+
+	public Long getCodigoParcela() {
+		return codigoParcela;
+	}
+
+	public void setCodigoParcela(Long codigoParcela) {
+		this.codigoParcela = codigoParcela;
+	}
+
+	public Date getFechaAnalisis() {
+		return fechaAnalisis;
+	}
+
+	public void setFechaAnalisis(Date fechaAnalisis) {
+		this.fechaAnalisis = fechaAnalisis;
+	}
+
+	public Long getCodigoElemento() {
+		return codigoElemento;
+	}
+
+	public void setCodigoElemento(Long codigoElemento) {
+		this.codigoElemento = codigoElemento;
+	}
+
+	public Double getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Double cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public Long getCodigoUnidad() {
+		return codigoUnidad;
+	}
+
+	public void setCodigoUnidad(Long codigoUnidad) {
+		this.codigoUnidad = codigoUnidad;
+	}
 
 }

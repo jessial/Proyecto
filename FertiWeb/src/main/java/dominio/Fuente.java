@@ -33,4 +33,20 @@ public class Fuente {
 		return estado;
 	}
 
+	public void setCodigoFuente(Long codigoFuente) {
+		this.codigoFuente = codigoFuente;
+	}
+
+	public void setTipoFuente(TipoFuente tipoFuente) {
+		this.tipoFuente = tipoFuente;
+	}
+
+	public void setProducto(String producto) {
+		this.producto = producto;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 }
