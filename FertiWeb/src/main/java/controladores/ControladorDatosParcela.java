@@ -40,9 +40,7 @@ public class ControladorDatosParcela {
 	private ControladorDatosTipoCultivo controladorDatosTipoCultivo;
 
 	public void guardarParcela(Parcela parcela) {
-		ParcelaEntidad parcelaEntidad = new ParcelaEntidad();
-		mapperDozer.map(parcela, parcelaEntidad);
-		parcelaRepository.save(parcelaEntidad);
+		parcelaRepository.save(convertirParcelaAEntidad(parcela));
 	}
 
 	public List<Parcela> consultarParcela() {
@@ -98,7 +96,7 @@ public class ControladorDatosParcela {
 	}
 
 	public DtoParcela consultarParcelaXId(Long codigoAnalisis) {
-		Parcela parcela = new  Parcela();
+		Parcela parcela = new Parcela();
 		mapperDozer.map(parcelaRepository.findByCodigoParcela(codigoAnalisis), parcela);
 		return construirObjetoParcela(parcela);
 	}
@@ -109,8 +107,19 @@ public class ControladorDatosParcela {
 		dtoParcela.setFechaSiembra(parcela.getFechaSiembra());
 		dtoParcela.setArea(parcela.getArea());
 		dtoParcela.setLugar(controladorDatosLugar.consultarLugarXId(parcela.getCodigoLugar()));
-		dtoParcela.setTipoCultivo(controladorDatosTipoCultivo.consultarTipoCultivoXId(parcela.getCodigoCultivoSembrado()));
+		dtoParcela.setTipoCultivo(
+				controladorDatosTipoCultivo.consultarTipoCultivoXId(parcela.getCodigoCultivoSembrado()));
 		return dtoParcela;
 	}
 
+	public void eliminarParcela(Long codigoParcela) {
+		parcelaRepository.deleteById(codigoParcela);
+
+	}
+
+	private ParcelaEntidad convertirParcelaAEntidad(Parcela parcela) {
+		return new ParcelaEntidad(parcela.getCodigoParcela(), parcela.getTipoCultivo().getCodigoTipoCultivo(),
+				parcela.getLugar().getCodigoLugar(), parcela.getArea(), parcela.getFechaSiembra());
+
+	}
 }

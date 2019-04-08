@@ -18,7 +18,7 @@ public class ServicioElemento {
 
 	@GetMapping("/consultaElemento")
 	public ResponseEntity<Object> consultarElementos() {
-		return new ResponseEntity<>(controladorDatosElemento.consultarElementosParaApp(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosElemento.consultarElementos(), HttpStatus.CREATED);
 	}
 
 }

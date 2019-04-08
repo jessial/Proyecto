@@ -18,14 +18,23 @@ public class ControladorDatosTipoCultivo {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
-	
+
 	@Autowired
 	private TipoCultivoRepository tipoCultivoRepository;
 
+	// consulta para front
 	public List<TipoCultivo> consultarCultivo() {
 		List<TipoCultivo> tiposCultivo = new ArrayList<>();
 		List<TipoCultivoEntidad> tiposCultivoEntidad = tipoCultivoRepository.findAll();
 		mapperDozer.map(tiposCultivoEntidad, tiposCultivo);
+		return tiposCultivo;
+	}
+
+	// consultar para app
+	public List<TipoCultivo> consultarCultivoParaApp() {
+		List<TipoCultivo> tiposCultivo = new ArrayList<>();
+		boolean estado = true;
+		mapperDozer.map(tipoCultivoRepository.findByEstado(estado), tiposCultivo);
 		return tiposCultivo;
 	}
 

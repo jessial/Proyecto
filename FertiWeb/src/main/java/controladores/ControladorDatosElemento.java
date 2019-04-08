@@ -22,7 +22,7 @@ public class ControladorDatosElemento {
 	@Autowired
 	private ElementosRepository elementoRepository;
 
-	public List<Elemento> consultarElementosParaApp() {
+	public List<Elemento> consultarElementos() {
 		List<Elemento> elementos = new ArrayList<>();
 		mapperDozer.map(elementoRepository.findAll(), elementos);
 		return elementos;
