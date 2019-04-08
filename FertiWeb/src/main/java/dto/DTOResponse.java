@@ -15,7 +15,7 @@ import dominio.Usuario;
 import lombok.Data;
 
 @Data
-public class DtoResponse {
+public class DTOResponse {
 	
 	private Usuario usuario;
 	private Rol rolUsuario;

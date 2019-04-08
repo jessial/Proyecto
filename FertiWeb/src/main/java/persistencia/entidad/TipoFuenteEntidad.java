@@ -7,8 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity(name = "TipoFuente")
 @SequenceGenerator(name = "seq_tf", sequenceName = "seq_tf", initialValue = 10, allocationSize = 1)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class TipoFuenteEntidad {
 
 	@Id
@@ -23,56 +30,5 @@ public class TipoFuenteEntidad {
 	private Long unidad;
 	@Column(name = "tf_estado", nullable = false)
 	private boolean estado;
-
-	public TipoFuenteEntidad(Long codigo, String nombre, double aporte, Long unidad, boolean estado) {
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.aporte = aporte;
-		this.unidad = unidad;
-		this.estado = estado;
-	}
-
-	public TipoFuenteEntidad() {
-	}
-
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public double getAporte() {
-		return aporte;
-	}
-
-	public Long getUnidad() {
-		return unidad;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public void setAporte(double aporte) {
-		this.aporte = aporte;
-	}
-
-	public void setUnidad(Long unidad) {
-		this.unidad = unidad;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
 
 }

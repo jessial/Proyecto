@@ -4,14 +4,10 @@ import java.util.Date;
 
 import dominio.Lugar;
 import dominio.TipoCultivo;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class DtoParcela {
+public class DTOParcela {
 	
 	private Long codigoParcela;
 	private Lugar lugar;

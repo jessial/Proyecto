@@ -1,23 +1,40 @@
 <h2>Análisis por finca</h2>
-<nz-table #basicTable [nzData]="dataSet">
-  <thead>
-    <tr>
-      <th>Finca</th>
-      <th>Área</th>
-      <th>Elementos</th>
-      <th>Cultivo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of basicTable.data">
-      <td>{{data.dtoParcela.lugar.nombre + '-' + ' ' + data.dtoParcela.lugar.ubicacion}}</td>
-      <td>{{data.dtoParcela.area}}</td>
-      <td>{{data.dtoParcela.tipoCultivo.nombre + '-' + ' ' + data.dtoParcela.tipoCultivo.variedad}}</td>
-      <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
-      <td *ngFor="let elemento of data.elementos">
-        {{elemento.elemento}}
-      </td>
+<nz-row>
+  <nz-col class="table-scroll">
+    <nz-table #basicTable [nzData]="dataSet">
+      <thead>
+        <tr>
+          <th>Finca</th>
+          <th>Área</th>
+          <th>Cultivo</th>
+          <th>Fecha análisis</th>
+          <th class="table-lateral" colspan="3">
+            <div>
+              Elementos
+              <div class="table-control">
+                <span class="table-control-izquierda" (click)="moverIzquierda($event)">
+                  <i class="anticon anticon-caret-left"></i>
+                </span>
+                <span class="table-control-derecha" (click)="moverDerecha($event)">
+                  <i class="anticon anticon-caret-right"></i>
+                </span>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
+          <td>{{data.parcela.area}}</td>
+          <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>
+          <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
+          <td class="table-lateral" *ngFor="let elemento of data.elementos">
+            {{elemento.elemento.elemento + ' ' + elemento.cantidad + ' ' + elemento.unidad.nombreUnidad}}
+          </td>
 
-    </tr>
-  </tbody>
-</nz-table>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-col>
+</nz-row>

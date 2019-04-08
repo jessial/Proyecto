@@ -4,7 +4,7 @@ import { ElementoXAnalisis } from './elemento-x-analisis';
 export class Analisis {
 
     public codigoAnalisis: number;
-    public dtoParcela: Parcela;
+    public parcela: Parcela;
     public fechaAnalisis: Date;
     public elementos: ElementoXAnalisis[];
 }

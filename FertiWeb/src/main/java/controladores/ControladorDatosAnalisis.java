@@ -6,18 +6,14 @@ import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Analisis;
-import dominio.ElementoXAnalisis;
-import dto.DtoAnalisis;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import dto.DTOAnalisis;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class ControladorDatosAnalisis {
+public class ControladorDatosAnalisis extends ControladorDatos{
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
@@ -31,43 +27,58 @@ public class ControladorDatosAnalisis {
 	@Autowired
 	private ControladorDatosElementoXAnalisis controladorDatosElementoXAnalisis;
 
-	public List<DtoAnalisis> consultarTodos() {
-		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findAll());
-		return consultarElementosPorAnalisis(listAnalisis);
-	}
-
-	public void guardarAnalisis(ElementoXAnalisis analisisSuelo) {
-		AnalisisEntidad analisisEntidad = new AnalisisEntidad();
-		mapperDozer.map(analisisSuelo, analisisEntidad);
-		analisisRepository.save(analisisEntidad);
-	}
-
-	public List<DtoAnalisis> consultarAnalisisPorParcela(List<Long> codigos) {
-		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findByCodigoParcelaIn(codigos));
-		return consultarElementosPorAnalisis(listAnalisis);
-	}
-
-	private List<Analisis> mapearAnalisis(List<AnalisisEntidad> analisisEntidadList) {
-		return analisisEntidadList.stream().map(a -> mapperDozer.map(a, Analisis.class))
-				.collect(Collectors.toCollection(ArrayList::new));
+	public List<DTOAnalisis> consultarTodos() {
+		List<Analisis> listAnalisis = mapearListaADominio(analisisRepository.findAll());
+		return construirListaDTO(listAnalisis);
 	}
 
 	public List<Analisis> consultarAnalisisPorParcela(long codigoParcela) {
-		List<Analisis> listAnalisis = mapearAnalisis(analisisRepository.findByCodigoParcela(codigoParcela));
-		consultarElementosPorAnalisis(listAnalisis);
+		List<Analisis> listAnalisis = mapearListaADominio(analisisRepository.findByCodigoParcela(codigoParcela));
+		construirDTO(listAnalisis);
 		return listAnalisis;
 	}
+	
+	private List<Analisis> mapearListaADominio(List<AnalisisEntidad> analisisEntidadList) {
+		return analisisEntidadList.stream().map(a -> mapearADominio(a))
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
 
-	private List<DtoAnalisis> consultarElementosPorAnalisis(List<Analisis> listAnalisis) {
-		List<DtoAnalisis> listDtoAnalisis = new ArrayList<>();
+	private List<DTOAnalisis> construirListaDTO(List<Analisis> listAnalisis) {
+		List<DTOAnalisis> listDtoAnalisis = new ArrayList<>();
 		for (Analisis analisis : listAnalisis) {
-			DtoAnalisis dtoAnalisis = new DtoAnalisis();
-			dtoAnalisis.setCodigoAnalisis(analisis.getCodigoAnalisis());
-			dtoAnalisis.setFechaAnalisis(analisis.getFechaAnalisis());
-			dtoAnalisis.setDtoParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoAnalisis()));
-			dtoAnalisis.setElementos(controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
-			listDtoAnalisis.add(dtoAnalisis);
+			listDtoAnalisis.add(construirDTO(analisis));
 		}
 		return listDtoAnalisis;
 	}
+
+	@Override
+	protected DTOAnalisis construirDTO(Object object) {
+		Analisis analisis = (Analisis) object;
+		DTOAnalisis dtoAnalisis = new DTOAnalisis();
+		dtoAnalisis.setCodigoAnalisis(analisis.getCodigoAnalisis());
+		dtoAnalisis.setFechaAnalisis(analisis.getFechaAnalisis());
+		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoAnalisis()));
+		dtoAnalisis.setElementos(controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+		return dtoAnalisis;
+	}
+
+	@Override
+	protected Analisis mapearADominio(Object object) {
+		AnalisisEntidad analisisEntidad = (AnalisisEntidad) object;
+		return mapperDozer.map(analisisEntidad, Analisis.class);
+	}
+
+	@Override
+	protected AnalisisEntidad mapearAEntidad(Object object) {
+		Analisis analisis = (Analisis) object;
+		return mapperDozer.map(analisis, AnalisisEntidad.class);
+	}
+
+	@Transactional
+	@Override
+	public void guardar(Object object) {
+		Analisis analisis = (Analisis) object;
+		analisisRepository.save(mapearAEntidad(analisis));
+	}
+	
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Lugar;
 import dominio.Parcela;
-import dto.DtoResponse;
+import dto.DTOResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

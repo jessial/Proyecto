@@ -38,7 +38,7 @@ public class SerivicioFuente {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Fuente fuente) {
-		controladorDatosFuente.guardarFuente(fuente);
+		controladorDatosFuente.guardar(fuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

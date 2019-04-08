@@ -2,65 +2,79 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Fuente;
-import dominio.TipoFuente;
-import dominio.Unidad;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import dto.DTOFuente;
 import persistencia.entidad.FuenteEntidad;
-import persistencia.entidad.TipoFuenteEntidad;
-import persistencia.entidad.UnidadEntidad;
 import persistencia.repositorio.FuenteRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class ControladorDatosFuente {
+public class ControladorDatosFuente extends ControladorDatos{
 
+	@Autowired
+	private DozerBeanMapper mapperDozer;
+	
 	@Autowired
 	private FuenteRepository fuenteRepository;
 
 	@Autowired
 	private ControladorDatosTipoFuente controladorDatosTipoFuente;
 
-	@Autowired
-	private ControladorDatosUnidad controladorDatosUnidad;
-
-	public List<Fuente> consultarFuentes() {
-		List<Fuente> fuentesModelo = new ArrayList<>();
-		List<FuenteEntidad> fuentesEntidad = fuenteRepository.findAll();
-		fuentesEntidad.forEach(fuente -> {
-			TipoFuenteEntidad tipoFuenteEntidad = controladorDatosTipoFuente
-					.consultarTipoFuentePorId(fuente.getCodigoTipoFuente());
-			UnidadEntidad unidadEntidad = controladorDatosUnidad.consultarUnidadPorId(tipoFuenteEntidad.getUnidad());
-			fuentesModelo.add(convertirFuenteAModelo(fuente, tipoFuenteEntidad, unidadEntidad));
-		});
-		return fuentesModelo;
+	public List<DTOFuente> consultarFuentes() {
+		List<Fuente> fuentes = mapearListaADominio(fuenteRepository.findAll());
+		return construirListaDTO(fuentes);
 	}
 
-	public void guardarFuente(Fuente fuente) {
-		fuenteRepository.save(convertirFuenteAEntidad(fuente));
+	private List<Fuente> mapearListaADominio(List<FuenteEntidad> fuenteEntidadList) {
+		return fuenteEntidadList.stream().map(f -> mapearADominio(f))
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	protected List<DTOFuente> construirListaDTO(List<Fuente> listFuentes) {
+		List<DTOFuente> listDtoFuentes = new ArrayList<>();
+		for (Fuente fuente : listFuentes) {
+			listDtoFuentes.add(construirDTO(fuente));
+		}
+		return listDtoFuentes;
 	}
 
+	@Override
+	protected DTOFuente construirDTO(Object object) {
+		Fuente fuente = (Fuente) object;
+		DTOFuente dtoFuente = new DTOFuente();
+		dtoFuente.setCodigoFuente(fuente.getCodigoFuente());
+		dtoFuente.setEstado(fuente.isEstado());
+		dtoFuente.setProducto(fuente.getProducto());
+		dtoFuente.setTipoFuente(controladorDatosTipoFuente.consultarTipoFuenteXId(fuente.getCodigoTipoFuente()));
+		return dtoFuente;
+	}
+
+	@Override
+	protected Fuente mapearADominio(Object object) {
+		FuenteEntidad fuenteEntidad = (FuenteEntidad) object;
+		return mapperDozer.map(fuenteEntidad, Fuente.class);
+	}
+
+	@Override
+	protected FuenteEntidad mapearAEntidad(Object object) {
+		Fuente fuente = (Fuente) object;
+		return mapperDozer.map(fuente, FuenteEntidad.class);
+	}
+
+	@Transactional
+	@Override
+	public void guardar(Object object) {
+		Fuente fuente = (Fuente) object;
+		fuenteRepository.save(mapearAEntidad(fuente));
+	}
+	
+	@Transactional
 	public void eliminarFuente(long codigoFuente) {
 		fuenteRepository.deleteById(codigoFuente);
-	}
-
-	private Fuente convertirFuenteAModelo(FuenteEntidad fuenteEntidad, TipoFuenteEntidad tipoFuenteEntidad,
-			UnidadEntidad unidadEntidad) {
-		Unidad unidadDominio = new Unidad(unidadEntidad.getCodigoUnidad(), unidadEntidad.getNombreUnidad());
-		TipoFuente tipoFuenteDominio = new TipoFuente(tipoFuenteEntidad.getCodigo(), tipoFuenteEntidad.getNombre(),
-				tipoFuenteEntidad.getAporte(), unidadDominio, tipoFuenteEntidad.isEstado());
-
-		return new Fuente(fuenteEntidad.getCodigoFuente(), tipoFuenteDominio, fuenteEntidad.getProducto(),
-				fuenteEntidad.isEstado());
-	}
-
-	private FuenteEntidad convertirFuenteAEntidad(Fuente fuente) {
-		return new FuenteEntidad(fuente.getCodigoFuente(), fuente.getTipoFuente().getCodigo(), fuente.getProducto(),
-				fuente.isEstado());
 	}
 
 }

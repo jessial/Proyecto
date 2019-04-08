@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ElementoXAnalisis {
 
+	private Long elementoXAnalisisCodigo;
 	private Long codigoAnalisis;
-	private Elemento elemento;
+	private Long codigoElemento;
 	private Double cantidad;
-	private Unidad unidad;
+	private Long codigoUnidad;
 }
