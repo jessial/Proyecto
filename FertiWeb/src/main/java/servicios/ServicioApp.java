@@ -3,8 +3,6 @@ package servicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +15,6 @@ import controladores.ControladorDatosParcela;
 import controladores.ControladorDatosRol;
 import controladores.ControladorDatosUsuario;
 import dominio.ElementoXAnalisis;
-import dominio.Parcela;
-import dto.DtoResponse;
 
 @RestController
 @RequestMapping("/servicio_app")
@@ -42,12 +38,16 @@ public class ServicioApp {
 	@Autowired
 	ControladorDatosParcela controladorDatosParcela;
 
-/*	// corregir
-	@GetMapping("/consulta_datos_bd/{cedula}/{password}")
-	public ResponseEntity<DtoResponse> consultar(@PathVariable("cedula") Long cedula,
-			@PathVariable("password") Long password) {
-		return new ResponseEntity<>(controladorDatosApp.consultarDatosPorCedula(cedula), HttpStatus.CREATED);
-	}*/
+	/*
+	 * // corregir
+	 * 
+	 * @GetMapping("/consulta_datos_bd/{cedula}/{password}") public
+	 * ResponseEntity<DtoResponse> consultar(@PathVariable("cedula") Long cedula,
+	 * 
+	 * @PathVariable("password") Long password) { return new
+	 * ResponseEntity<>(controladorDatosApp.consultarDatosPorCedula(cedula),
+	 * HttpStatus.CREATED); }
+	 */
 
 	@PostMapping("/guardadoAnalisis")
 	public ResponseEntity<Object> grabarAnalisis(@RequestBody ElementoXAnalisis analisisSuelo) {
@@ -55,20 +55,4 @@ public class ServicioApp {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	@GetMapping("/consultaRoles")
-	public ResponseEntity<Object> consultarRoles() {
-		return new ResponseEntity<>(controladorDatosRol.consultarRolesParaApp(), HttpStatus.CREATED);
-	}
-
-	@GetMapping("/consultaElementos")
-	public ResponseEntity<Object> consultarElementos() {
-		return new ResponseEntity<>(controladorDatosElemento.consultarElementosParaApp(), HttpStatus.CREATED);
-	}
-
-	@PostMapping("/guardadoParcela")
-	public ResponseEntity<Object> grabarParcela(@RequestBody Parcela parcela) {
-		controladorDatosParcela.guardarParcela(parcela);
-		return new ResponseEntity<>(null, HttpStatus.CREATED);
-
-	}
 }

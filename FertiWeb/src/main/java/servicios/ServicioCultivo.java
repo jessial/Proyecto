@@ -48,4 +48,9 @@ public class ServicioCultivo {
 		controladorDatosTipoCultivo.eliminarTipoCultivo(codigoCultivoSembrado);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
+
+	@GetMapping("/consultaTipoCultivo")
+	public ResponseEntity<Object> consultarTipoCultivoParaApp() {
+		return new ResponseEntity<>(controladorDatosTipoCultivo.consultarCultivoParaApp(), HttpStatus.CREATED);
+	}
 }

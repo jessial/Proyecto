@@ -21,30 +21,35 @@ import dominio.Rol;
 public class ServicioRol {
 
 	@Autowired
-	ControladorDatosRol controladorDatosol;
+	ControladorDatosRol controladorDatosRol;
 
 	@GetMapping("/consultaTodos")
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatosol.consultarRoles(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosRol.consultarRoles(), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Rol rol) {
-		controladorDatosol.guardarRol(rol);
+		controladorDatosRol.guardarRol(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Rol rol) {
-		controladorDatosol.guardarRol(rol);
+		controladorDatosRol.guardarRol(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("borrarRol/{id}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "id") Long codigoRol) {
-		controladorDatosol.eliminarRol(codigoRol);
+		controladorDatosRol.eliminarRol(codigoRol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+	}
+
+	@GetMapping("/consultaRoles")
+	public ResponseEntity<Object> consultarRolesParaApp() {
+		return new ResponseEntity<>(controladorDatosRol.consultarRolesParaApp(), HttpStatus.CREATED);
 	}
 }
