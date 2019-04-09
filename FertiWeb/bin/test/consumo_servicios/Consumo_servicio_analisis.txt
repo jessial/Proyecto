@@ -1,0 +1,33 @@
+curl --request POST \
+  --url http://localhost:8080/servicio_analisis/guardado \
+  --header 'content-type: application/json' \
+  --cookie JSESSIONID=47014E2680CB1B032612A1165BF13CA0 \
+  --data '{
+  "codigo": 12354,
+  "codigoParcela": 1,
+  "fechaAnalisis": null,
+  "ph": 0.5,
+  "mo": 0.5,
+  "n": 0.5,
+  "m": 0.5,
+  "k": 0.5,
+  "mg": 0.5,
+  "ca": 0.5,
+  "al": 0.5,
+  "na": 0.5,
+  "s": 0.5,
+  "fe": 0.5,
+  "b": 0.5,
+  "cu": 0.5,
+  "mn": 0.5,
+  "zn": 0.5,
+  "saNa": 0.5,
+  "saK": 0.5,
+  "saCa": 0.5,
+  "saMg": 0.5,
+  "saAl": 0.5,
+  "porcentajeA": 0.5,
+  "porcentajeL": 0.5,
+  "porcentajeAr": 0.5,
+  "cice": 0.5
+}'

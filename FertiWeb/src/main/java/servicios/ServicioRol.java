@@ -30,14 +30,14 @@ public class ServicioRol {
 
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Rol rol) {
-		controladorDatosRol.guardarRol(rol);
+		controladorDatosRol.guardar(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Rol rol) {
-		controladorDatosRol.guardarRol(rol);
+		controladorDatosRol.guardar(rol);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

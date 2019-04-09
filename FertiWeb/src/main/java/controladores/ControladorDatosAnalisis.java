@@ -60,8 +60,17 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoParcela()));
 		dtoAnalisis.setElementos(
 				controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
-
 		return dtoAnalisis;
+	}
+	
+	@Override
+	protected Analisis construirDominio(Object object) {
+		DTOAnalisis dtoAnalisis = (DTOAnalisis) object;
+		Analisis analisis = new Analisis();
+		analisis.setCodigoAnalisis(dtoAnalisis.getCodigoAnalisis());
+		analisis.setCodigoParcela(dtoAnalisis.getParcela().getCodigoParcela());
+		analisis.setFechaAnalisis(dtoAnalisis.getFechaAnalisis());
+		return analisis;
 	}
 
 	@Override
@@ -82,5 +91,7 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		Analisis analisis = (Analisis) object;
 		analisisRepository.save(mapearAEntidad(analisis));
 	}
+
+	
 
 }

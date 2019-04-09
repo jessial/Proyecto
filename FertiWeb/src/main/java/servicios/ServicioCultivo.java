@@ -38,7 +38,7 @@ public class ServicioCultivo {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody TipoCultivo cultivoSembrado) {
-		controladorDatosTipoCultivo.guardarTipoCultivo(cultivoSembrado);
+		controladorDatosTipoCultivo.guardar(cultivoSembrado);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

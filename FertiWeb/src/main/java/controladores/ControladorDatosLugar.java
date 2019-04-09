@@ -2,22 +2,20 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Lugar;
-import dominio.Usuario;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import dto.DTOLugar;
 import persistencia.entidad.LugarEntidad;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.repositorio.LugarRepository;
 import persistencia.repositorio.ParcelaRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class ControladorDatosLugar {
+public class ControladorDatosLugar extends ControladorDatos {
 
 	@Autowired
 	private LugarRepository lugarRepository;
@@ -31,38 +29,27 @@ public class ControladorDatosLugar {
 	@Autowired
 	private ParcelaRepository parcelaRepository;
 
-	public List<Lugar> consultarFincas() {
-		List<Lugar> lugaresModelo = new ArrayList<>();
-		List<LugarEntidad> lugaresEntidad = lugarRepository.findAll();
-		completarObjeto(lugaresModelo, lugaresEntidad);
-		return lugaresModelo;
+	public List<DTOLugar> consultarFincas() {
+		List<Lugar> lugaresModelo = mapearListaADominio(lugarRepository.findAll());
+		return construirListaDTO(lugaresModelo);
 	}
 
-	public List<Lugar> consultarLugaresPorUsuario(Long cedula) {
-		List<Lugar> lugaresModelo = new ArrayList<>();
-		List<LugarEntidad> lugaresEntidad = lugarRepository.findByCodigoUsuario(cedula);
-		completarObjeto(lugaresModelo, lugaresEntidad);
-		return lugaresModelo;
+	public List<DTOLugar> consultarLugaresPorUsuario(Long cedula) {
+		List<Lugar> lugaresModelo = mapearListaADominio(lugarRepository.findByCodigoUsuario(cedula));
+		return construirListaDTO(lugaresModelo);
 	}
 
-	private void completarObjeto(List<Lugar> lugaresModelo, List<LugarEntidad> lugaresEntidad) {
-		lugaresEntidad.forEach(lugar -> {
-			Usuario usuario = controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario());
-			lugaresModelo.add(convertirLugarAModelo(lugar, usuario));
-
-		});
-	}
-
-	public void guardarLugar(Lugar lugar) {
-		lugarRepository.save(convertirLugarAEntidad(lugar));
-
-	}
-
-	public void eliminarLugar(Long codigoLugar) {
-		List<ParcelaEntidad> lugaresAsociados = parcelaRepository.findByCodigoLugar(codigoLugar);
-		if (lugaresAsociados.isEmpty()) {
-			lugarRepository.deleteById(codigoLugar);
+	private List<DTOLugar> construirListaDTO(List<Lugar> listLugar) {
+		List<DTOLugar> listDtoLugar = new ArrayList<>();
+		for (Lugar lugar : listLugar) {
+			listDtoLugar.add(construirDTO(lugar));
 		}
+		return listDtoLugar;
+	}
+	
+	private List<Lugar> mapearListaADominio(List<LugarEntidad> lugarEntidadList) {
+		return lugarEntidadList.stream().map(a -> mapearADominio(a))
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public LugarEntidad consultarLugarPorId(Long id) {
@@ -71,24 +58,56 @@ public class ControladorDatosLugar {
 		return lugarEntidad;
 	}
 
-	private Lugar convertirLugarAModelo(LugarEntidad lugarEntidad, Usuario usuario) {
-
-		return new Lugar(lugarEntidad.getCodigoLugar(), lugarEntidad.getNombre(), usuario, lugarEntidad.getUbicacion());
+	public DTOLugar consultarLugarXId(Long codigoLugar) {
+		return construirDTO(mapearADominio(lugarRepository.findByCodigoLugar(codigoLugar)));
 	}
 
-	private LugarEntidad convertirLugarAEntidad(Lugar lugar) {
-		return new LugarEntidad(lugar.getCodigoLugar(), lugar.getNombre(), lugar.getUsuario().getCedula(),
-				lugar.getUbicacion());
+	@Override
+	protected DTOLugar construirDTO(Object object) {
+		Lugar lugar = (Lugar) object;
+		DTOLugar dtoLugar = new DTOLugar();
+		dtoLugar.setCodigoLugar(lugar.getCodigoLugar());
+		dtoLugar.setNombre(lugar.getNombre());
+		dtoLugar.setUbicacion(lugar.getUbicacion());
+		dtoLugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
+		return dtoLugar;
 	}
-
-	public Lugar consultarLugarXId(Long codigoLugar) {
+	
+	@Override
+	protected Lugar construirDominio(Object object) {
+		DTOLugar dtoLugar = (DTOLugar) object;
 		Lugar lugar = new Lugar();
-		mapperDozer.map(lugarRepository.findByCodigoLugar(codigoLugar), lugar);
-		return construirObjetoLugar(lugar);
+		lugar.setCodigoLugar(dtoLugar.getCodigoLugar());
+		lugar.setNombre(dtoLugar.getNombre());
+		lugar.setUbicacion(dtoLugar.getUbicacion());
+		lugar.setCodigoUsuario(dtoLugar.getUsuario().getCedula());
+		return lugar;
 	}
 
-	private Lugar construirObjetoLugar(Lugar lugar) {
-		lugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
-		return lugar;
+	@Override
+	protected Lugar mapearADominio(Object object) {
+		LugarEntidad lugarEntidad = (LugarEntidad) object;
+		return mapperDozer.map(lugarEntidad, Lugar.class);
+	}
+
+	@Override
+	protected LugarEntidad mapearAEntidad(Object object) {
+		Lugar lugar = (Lugar) object;
+		return mapperDozer.map(lugar, LugarEntidad.class);
+	}
+	
+	@Transactional
+	@Override
+	public void guardar(Object object) {
+		Lugar lugar = (Lugar) object;
+		lugarRepository.save(mapearAEntidad(lugar));
+	}
+	
+	@Transactional
+	public void eliminarLugar(Long codigoLugar) {
+		List<ParcelaEntidad> lugaresAsociados = parcelaRepository.findByCodigoLugar(codigoLugar);
+		if (lugaresAsociados.isEmpty()) {
+			lugarRepository.deleteById(codigoLugar);
+		}
 	}
 }

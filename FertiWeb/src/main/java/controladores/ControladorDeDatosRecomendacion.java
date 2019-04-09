@@ -8,13 +8,9 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Recomendacion;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import persistencia.entidad.RecomendacionEntidad;
 import persistencia.repositorio.RecomendacionRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class ControladorDeDatosRecomendacion {
 
 	@Autowired

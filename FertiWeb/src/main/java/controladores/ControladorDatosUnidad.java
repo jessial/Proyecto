@@ -20,30 +20,25 @@ public class ControladorDatosUnidad extends ControladorDatos{
 	private UnidadRepository unidadRepository;
 
 	public List<Unidad> consultarUnidad() {
-		List<Unidad> listUnidad = mapearListaADominio(unidadRepository.findAll());
-		return construirListaDTO(listUnidad);
+		return mapearListaADominio(unidadRepository.findAll());
 	}
 
 	public Unidad consultarUnidadXId(Long unidad) {
 		return mapearADominio(unidadRepository.findByCodigoUnidad(unidad));
 	}
 	
-	private List<Unidad> mapearListaADominio(List<UnidadEntidad> UnidadEntidadList) {
-		return UnidadEntidadList.stream().map(a -> mapearADominio(a))
+	private List<Unidad> mapearListaADominio(List<UnidadEntidad> unidadEntidadList) {
+		return unidadEntidadList.stream().map(a -> mapearADominio(a))
 				.collect(Collectors.toCollection(ArrayList::new));
-	}
-	
-	private List<Unidad> construirListaDTO(List<Unidad> listUnidadEntidad) {
-		List<Unidad> listUnidad = new ArrayList<>();
-		for (Unidad unidad : listUnidadEntidad) {
-			listUnidad.add(construirDTO(unidad));
-		}
-		return listUnidad;
 	}
 
 	@Override
 	protected Unidad construirDTO(Object object) {
-		return (Unidad) object;
+		throw new UnsupportedOperationException();
+	}
+	
+	protected Unidad construirDominio(Object object) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -60,7 +55,7 @@ public class ControladorDatosUnidad extends ControladorDatos{
 
 	@Override
 	void guardar(Object object) {
-		// Do nothing because of X and Y.
+		throw new UnsupportedOperationException();
 	}
 
 	public UnidadEntidad consultarUnidadPorId(Long uniCodigo) {

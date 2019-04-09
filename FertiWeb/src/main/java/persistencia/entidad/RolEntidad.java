@@ -7,6 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity(name = "Rol")
 @SequenceGenerator(name = "seq_rol", sequenceName = "seq_rol", initialValue = 10, allocationSize = 1)
 public class RolEntidad {
@@ -19,38 +26,5 @@ public class RolEntidad {
 	private String nombre;
 	@Column(name = "rol_estado")
 	private boolean estado;
-
-	public RolEntidad(Long codigo, String nombre, boolean estado) {
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.estado = estado;
-	}
-
-	public RolEntidad() {
-	}
-
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
 
 }

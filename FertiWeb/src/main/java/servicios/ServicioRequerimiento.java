@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatosRequerimiento;
 import dominio.Requerimiento;
+import dto.DTORequerimiento;
 
 @RestController
 @RequestMapping("/servicio_requerimiento")
@@ -28,8 +29,9 @@ public class ServicioRequerimiento {
 	}
 
 	@PostMapping("/guardado")
-	public ResponseEntity<Object> grabar(@RequestBody Requerimiento requerimiento) {
-		controladorDatosRequerimiento.guardarRequermiento(requerimiento);
+	public ResponseEntity<Object> grabar(@RequestBody DTORequerimiento dtoRequerimiento) {
+		Requerimiento requerimiento = controladorDatosRequerimiento.construirDominio(dtoRequerimiento);
+		controladorDatosRequerimiento.guardar(requerimiento);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 
 	}
