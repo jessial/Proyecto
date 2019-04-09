@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngFor="let parcela of parcelas">
     <ion-item>
-      <ion-label>{{parcela.tipoCultivo.nombre}}</ion-label>
+      <ion-label>{{parcela.tipoCultivo.nombre}} {{parcela.tipoCultivo.variedad}}</ion-label>
       <ion-icon name="more" slot="end" (click)="mostrarPopover($event, parcela)"></ion-icon>
     </ion-item>
     <ion-card-content>

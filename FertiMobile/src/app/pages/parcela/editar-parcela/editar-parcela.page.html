@@ -1,9 +1,57 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>editar-parcela</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar parcela</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <form [formGroup]="formularioEditarParcela">
 
+      <ion-item>
+        <ion-label>Lugar</ion-label>
+        <ion-select placeholder="Lugar" formControlName="lugar">
+          <ion-select-option *ngFor="let lugar of lugares" [value]="lugar.codigoLugar">
+            {{lugar.nombre}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="enviado && f.lugar.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Tipo cultivo</ion-label>
+        <ion-select placeholder="Tipo cultibo" formControlName="tipoCultivo">
+          <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo.codigoTipoCultivo">
+            {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="enviado && f.tipoCultivo.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Área</ion-label>
+        <ion-input formControlName="area" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="enviado && f.area.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+
+      <ion-item>
+        <ion-label>Fecha siembra</ion-label>
+        <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra"></ion-datetime>
+      </ion-item>
+      <div *ngIf="enviado && f.fechaSiembra.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+    </form>
+  </ion-list>
+  <br>
+  <ion-button expand="block" (click)="editar()">Editar</ion-button>
 </ion-content>

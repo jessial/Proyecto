@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>agregar-parcela</ion-title>
+    <ion-title>Agregar parcela</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +27,7 @@
         <ion-label>Tipo cultivo</ion-label>
         <ion-select placeholder="Tipo cultibo" formControlName="tipoCultivo">
           <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo">
-            {{tipoCultivo.nombre}}
+            {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
           </ion-select-option>
         </ion-select>
       </ion-item>
@@ -44,8 +44,8 @@
       </div>
 
       <ion-item>
-        <ion-label>Date</ion-label>
-        <ion-datetime display-format="MMM DD, YYYY" formControlName="fechaSiembra"></ion-datetime>
+        <ion-label>Fecha siembra</ion-label>
+        <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra"></ion-datetime>
       </ion-item>
       <div *ngIf="enviado && f.fechaSiembra.errors?.required">
         <p class="error-message">Campo obligatorio.</p>

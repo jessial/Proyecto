@@ -21,12 +21,14 @@ export class AgregarParcelaPage implements OnInit {
   carga: any;
   lugares: Lugar[];
   tiposCultivo: TipoCultivo[];
+  fechaMaximaSiembra: string;
 
   constructor(private fb: FormBuilder, private location: Location, private lugarServicio: LugarService,
     public loadingController: LoadingController, private parcelaServicio: ParcelaService,
     private tipoCultivoServicio: TipoCultivoService) { }
 
   ngOnInit() {
+    this.fechaMaximaSiembra = new Date().toISOString();
     this.formularioAgregarParcela = this.fb.group({
       lugar: [null, Validators.required],
       tipoCultivo: [null, Validators.required],

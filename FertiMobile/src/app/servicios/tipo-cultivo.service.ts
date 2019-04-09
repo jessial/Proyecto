@@ -14,7 +14,7 @@ export class TipoCultivoService {
 
   /** GET tipoCultivo from the server */
   public geBackTiposCultivo(): Observable<TipoCultivo[]> {
-    const url = `${this.tipoCultivoURL}/consultaTodos`;
+    const url = `${this.tipoCultivoURL}/consultaTipoCultivo`;
     return this.http.get<TipoCultivo[]>(url);
   }
 }
