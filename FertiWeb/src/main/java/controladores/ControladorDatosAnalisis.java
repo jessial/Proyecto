@@ -13,7 +13,7 @@ import dto.DTOAnalisis;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
 
-public class ControladorDatosAnalisis extends ControladorDatos{
+public class ControladorDatosAnalisis extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
@@ -23,7 +23,7 @@ public class ControladorDatosAnalisis extends ControladorDatos{
 
 	@Autowired
 	private ControladorDatosParcela controladorDatosParcela;
-	
+
 	@Autowired
 	private ControladorDatosElementoXAnalisis controladorDatosElementoXAnalisis;
 
@@ -37,7 +37,7 @@ public class ControladorDatosAnalisis extends ControladorDatos{
 		construirDTO(listAnalisis);
 		return listAnalisis;
 	}
-	
+
 	private List<Analisis> mapearListaADominio(List<AnalisisEntidad> analisisEntidadList) {
 		return analisisEntidadList.stream().map(a -> mapearADominio(a))
 				.collect(Collectors.toCollection(ArrayList::new));
@@ -57,8 +57,9 @@ public class ControladorDatosAnalisis extends ControladorDatos{
 		DTOAnalisis dtoAnalisis = new DTOAnalisis();
 		dtoAnalisis.setCodigoAnalisis(analisis.getCodigoAnalisis());
 		dtoAnalisis.setFechaAnalisis(analisis.getFechaAnalisis());
-		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoAnalisis()));
-		dtoAnalisis.setElementos(controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoParcela()));
+		dtoAnalisis.setElementos(
+				controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
 		return dtoAnalisis;
 	}
 
@@ -80,5 +81,5 @@ public class ControladorDatosAnalisis extends ControladorDatos{
 		Analisis analisis = (Analisis) object;
 		analisisRepository.save(mapearAEntidad(analisis));
 	}
-	
+
 }
