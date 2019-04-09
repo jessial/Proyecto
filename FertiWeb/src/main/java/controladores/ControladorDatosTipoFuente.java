@@ -57,6 +57,18 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		dtoTipoFuente.setUnidad(controladorDatosUnidad.consultarUnidadXId(tipoFuente.getUnidad()));
 		return dtoTipoFuente;
 	}
+	
+	@Override
+	public TipoFuente construirDominio(Object object) {
+		DTOTipoFuente dtoTipoFuente = (DTOTipoFuente) object;
+		TipoFuente tipoFuente = new TipoFuente();
+		tipoFuente.setAporte(dtoTipoFuente.getAporte());
+		tipoFuente.setCodigo(dtoTipoFuente.getCodigo());
+		tipoFuente.setEstado(dtoTipoFuente.getEstado());
+		tipoFuente.setNombre(dtoTipoFuente.getNombre());
+		tipoFuente.setUnidad(dtoTipoFuente.getUnidad().getCodigoUnidad());
+		return tipoFuente;
+	}
 
 	@Override
 	protected TipoFuente mapearADominio(Object object) {

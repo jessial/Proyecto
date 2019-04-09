@@ -55,7 +55,18 @@ public class ControladorDatosElementoXAnalisis extends ControladorDatos {
 		dtoElementoXAnalisis.setUnidad(controladorDatosUnidad.consultarUnidadXId(elementoXAnalisis.getCodigoUnidad()));
 		return dtoElementoXAnalisis;
 	}
-
+	
+	@Override
+	protected ElementoXAnalisis construirDominio(Object object) {
+		DTOElementoXAnalisis dtoElementoXAnalisis = (DTOElementoXAnalisis) object;
+		ElementoXAnalisis elementoXAnalisis = new ElementoXAnalisis();
+		elementoXAnalisis.setCantidad(dtoElementoXAnalisis.getCantidad());
+		elementoXAnalisis.setCodigoAnalisis(dtoElementoXAnalisis.getCodigoAnalisis());
+		elementoXAnalisis.setCodigoElemento(dtoElementoXAnalisis.getElemento().getCodigoElemento());
+		elementoXAnalisis.setCodigoUnidad(dtoElementoXAnalisis.getUnidad().getCodigoUnidad());
+		return elementoXAnalisis;
+	}
+	
 	@Override
 	protected ElementoXAnalisis mapearADominio(Object object) {
 		ElementoXAnalisisEntidad elementoXAnalisisEntidad = (ElementoXAnalisisEntidad) object;

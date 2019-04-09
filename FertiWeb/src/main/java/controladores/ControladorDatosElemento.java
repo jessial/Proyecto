@@ -39,8 +39,13 @@ public class ControladorDatosElemento extends ControladorDatos{
 	}
 
 	@Override
-	protected Elemento construirDTO(Object object) {
-		return (Elemento) object;
+	protected Object construirDTO(Object object) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	protected Object construirDominio(Object object) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

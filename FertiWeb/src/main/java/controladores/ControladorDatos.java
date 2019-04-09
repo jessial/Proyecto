@@ -4,6 +4,8 @@ public abstract class ControladorDatos {
 	
 	protected abstract Object construirDTO(Object object);
 	
+	protected abstract Object construirDominio(Object object);
+	
 	protected abstract Object mapearADominio(Object object);
 	
 	protected abstract Object mapearAEntidad(Object object);

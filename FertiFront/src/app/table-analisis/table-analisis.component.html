@@ -20,7 +20,7 @@
       </tr>
       <tr [nzExpand]="mapOfExpandData[data.codigoAnalisis]">
         <td></td>
-        <td colspan="3">
+        <td colspan="4">
           <h4>Elementos</h4>
           <div *ngFor="let elemento of data.elementos">
             {{elemento.elemento.elemento + ' ' + elemento.cantidad + ' ' + elemento.unidad.nombreUnidad}}

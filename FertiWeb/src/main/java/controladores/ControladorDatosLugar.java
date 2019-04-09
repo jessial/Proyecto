@@ -62,7 +62,6 @@ public class ControladorDatosLugar extends ControladorDatos {
 		return construirDTO(mapearADominio(lugarRepository.findByCodigoLugar(codigoLugar)));
 	}
 
-
 	@Override
 	protected DTOLugar construirDTO(Object object) {
 		Lugar lugar = (Lugar) object;
@@ -72,6 +71,17 @@ public class ControladorDatosLugar extends ControladorDatos {
 		dtoLugar.setUbicacion(lugar.getUbicacion());
 		dtoLugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
 		return dtoLugar;
+	}
+	
+	@Override
+	protected Lugar construirDominio(Object object) {
+		DTOLugar dtoLugar = (DTOLugar) object;
+		Lugar lugar = new Lugar();
+		lugar.setCodigoLugar(dtoLugar.getCodigoLugar());
+		lugar.setNombre(dtoLugar.getNombre());
+		lugar.setUbicacion(dtoLugar.getUbicacion());
+		lugar.setCodigoUsuario(dtoLugar.getUsuario().getCedula());
+		return lugar;
 	}
 
 	@Override

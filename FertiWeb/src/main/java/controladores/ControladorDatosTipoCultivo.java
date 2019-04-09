@@ -40,8 +40,13 @@ public class ControladorDatosTipoCultivo extends ControladorDatos {
 	}
 
 	@Override
-	protected TipoCultivo construirDTO(Object object) {
-		return (TipoCultivo) object;
+	protected Object construirDTO(Object object) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	protected Object construirDominio(Object object) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

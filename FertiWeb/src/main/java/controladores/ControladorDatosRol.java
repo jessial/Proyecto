@@ -41,8 +41,13 @@ public class ControladorDatosRol  extends ControladorDatos{
 	}
 	
 	@Override
-	protected Rol construirDTO(Object object) {
-		return (Rol) object;
+	protected Object construirDTO(Object object) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	protected Object construirDominio(Object object) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

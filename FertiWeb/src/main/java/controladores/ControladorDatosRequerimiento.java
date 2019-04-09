@@ -61,6 +61,19 @@ public class ControladorDatosRequerimiento extends ControladorDatos {
 		dtoRequerimiento.setUnidad(controladorDatosUnidad.consultarUnidadXId(requerimiento.getUniCodigo()));
 		return dtoRequerimiento;
 	}
+	
+	@Override
+	public Requerimiento construirDominio(Object object) {
+		DTORequerimiento dtoRequerimiento = (DTORequerimiento) object ;
+		Requerimiento requerimiento = new Requerimiento();
+		requerimiento.setCantidad(dtoRequerimiento.getCantidad());
+		requerimiento.setCodigoRequerimiento(dtoRequerimiento.getCodigoRequerimiento());
+		requerimiento.setReqCodigoElemento(dtoRequerimiento.getElemento().getCodigoElemento());
+		requerimiento.setEstado(dtoRequerimiento.isEstado());
+		requerimiento.setCodigoTipoCultivo(dtoRequerimiento.getTipoCultivo().getCodigoTipoCultivo());
+		requerimiento.setUniCodigo(dtoRequerimiento.getUnidad().getCodigoUnidad());
+		return requerimiento;
+	}
 
 	@Override
 	protected Requerimiento mapearADominio(Object object) {

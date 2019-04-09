@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import controladores.ControladorDatosTipoFuente;
 import controladores.ControladorDatosUnidad;
 import dominio.TipoFuente;
+import dto.DTOTipoFuente;
 
 @RestController
 @RequestMapping("/servicio_tipoFuente")
@@ -31,7 +32,8 @@ public class ServicioTipoFuente {
 	}
 
 	@PutMapping("/guardado")
-	public ResponseEntity<Object> grabar(@RequestBody TipoFuente tipoFuente) {
+	public ResponseEntity<Object> grabar(@RequestBody DTOTipoFuente dtoTipoFuente) {
+		TipoFuente tipoFuente = controladorDatosTipoFuente.construirDominio(dtoTipoFuente);
 		controladorDatosTipoFuente.guardar(tipoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}

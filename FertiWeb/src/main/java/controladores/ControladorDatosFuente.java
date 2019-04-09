@@ -52,6 +52,17 @@ public class ControladorDatosFuente extends ControladorDatos{
 		dtoFuente.setTipoFuente(controladorDatosTipoFuente.consultarTipoFuenteXId(fuente.getCodigoTipoFuente()));
 		return dtoFuente;
 	}
+	
+	@Override
+	protected Fuente construirDominio(Object object) {
+		DTOFuente dtoFuente = (DTOFuente) object;
+		Fuente fuente = new Fuente();
+		fuente.setCodigoFuente(dtoFuente.getCodigoFuente());
+		fuente.setEstado(dtoFuente.isEstado());
+		fuente.setProducto(dtoFuente.getProducto());
+		fuente.setCodigoTipoFuente(dtoFuente.getTipoFuente().getCodigo());
+		return fuente;
+	}
 
 	@Override
 	protected Fuente mapearADominio(Object object) {

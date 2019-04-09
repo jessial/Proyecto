@@ -67,6 +67,18 @@ public class ControladorDatosParcela extends ControladorDatos{
 				controladorDatosTipoCultivo.consultarTipoCultivoXId(parcela.getCodigoCultivoSembrado()));
 		return dtoParcela;
 	}
+	
+	@Override
+	protected Parcela construirDominio(Object object) {
+		DTOParcela dtoParcela = (DTOParcela) object;
+		Parcela parcela = new Parcela();
+		parcela.setCodigoParcela(dtoParcela.getCodigoParcela());
+		parcela.setFechaSiembra(dtoParcela.getFechaSiembra());
+		parcela.setArea(dtoParcela.getArea());
+		parcela.setCodigoLugar(dtoParcela.getLugar().getCodigoLugar());
+		parcela.setCodigoCultivoSembrado(dtoParcela.getTipoCultivo().getCodigoTipoCultivo());
+		return parcela;
+	}
 
 	@Override
 	protected Parcela mapearADominio(Object object) {
