@@ -1,17 +1,16 @@
-import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opciones.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ParcelaPage } from './parcela.page';
+import { AgregarParcelaPage } from './agregar-parcela.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ParcelaPage
+    component: AgregarParcelaPage
   }
 ];
 
@@ -20,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
-  declarations: [ParcelaPage]
+  declarations: [AgregarParcelaPage]
 })
-export class ParcelaPageModule { }
+export class AgregarParcelaPageModule { }

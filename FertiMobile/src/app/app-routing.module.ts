@@ -24,7 +24,9 @@ const routes: Routes = [
     loadChildren: './pages/analisis/lista-analisis/analisis.module#AnalisisPageModule'
   },
   { path: 'agregar-lugar', loadChildren: './pages/lugar/agregar-lugar/agregar-lugar.module#AgregarLugarPageModule' },
-  { path: 'editar-lugar', loadChildren: './pages/lugar/editar-lugar/editar-lugar.module#EditarLugarPageModule' }
+  { path: 'editar-lugar', loadChildren: './pages/lugar/editar-lugar/editar-lugar.module#EditarLugarPageModule' },
+  { path: 'agregar-parcela', loadChildren: './pages/parcela/agregar-parcela/agregar-parcela.module#AgregarParcelaPageModule' },
+  { path: 'editar-parcela', loadChildren: './pages/parcela/editar-parcela/editar-parcela.module#EditarParcelaPageModule' }
 ];
 
 @NgModule({

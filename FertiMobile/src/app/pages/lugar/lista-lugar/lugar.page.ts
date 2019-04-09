@@ -38,7 +38,6 @@ export class LugarPage implements OnInit {
       this.lugarServicio.editarLugar(lugar);
       this.router.navigateByUrl('editar-lugar');
     } else if (data && data.accion === 'eliminar') {
-      // this.lugarServicio.deleteLugar(lugar);
       this.confirmarEliminacion(lugar);
     }
   }
@@ -53,15 +52,11 @@ export class LugarPage implements OnInit {
       message: '¿Desea eliminar el lugar?',
       buttons: [{ text: 'Cancelar' }, {
         text: 'Aceptar', handler: () => {
-          this.eliminarLugar(lugar);
+          this.lugarServicio.deleteLugar(lugar);
         }
       }]
     });
     await alert.present();
-  }
-
-  eliminarLugar(lugar: Lugar) {
-    this.lugarServicio.deleteLugar(lugar);
   }
 
 }

@@ -57,7 +57,7 @@ public class ControladorDatosAnalisis extends ControladorDatos{
 		DTOAnalisis dtoAnalisis = new DTOAnalisis();
 		dtoAnalisis.setCodigoAnalisis(analisis.getCodigoAnalisis());
 		dtoAnalisis.setFechaAnalisis(analisis.getFechaAnalisis());
-		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoAnalisis()));
+		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoParcela()));
 		dtoAnalisis.setElementos(controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
 		return dtoAnalisis;
 	}
