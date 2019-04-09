@@ -23,7 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LugarPage, PopoverOpcionesComponent],
-  entryComponents: [PopoverOpcionesComponent]
+  declarations: [LugarPage]
 })
 export class LugarPageModule { }

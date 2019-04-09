@@ -11,7 +11,7 @@
   <ion-list>
     <form [formGroup]="formularioEditarLugar">
       <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
+        <ion-label position="floating">Finca</ion-label>
         <ion-input formControlName="nombre"></ion-input>
       </ion-item>
       <div *ngIf="enviado && f.nombre.errors?.required">

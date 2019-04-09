@@ -60,6 +60,7 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		dtoAnalisis.setParcela(controladorDatosParcela.consultarParcelaXId(analisis.getCodigoParcela()));
 		dtoAnalisis.setElementos(
 				controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
+
 		return dtoAnalisis;
 	}
 

@@ -1,4 +1,3 @@
-import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opciones.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ParcelaPage } from './parcela.page';
+import { EditarParcelaPage } from './editar-parcela.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ParcelaPage
+    component: EditarParcelaPage
   }
 ];
 
@@ -22,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ParcelaPage]
+  declarations: [EditarParcelaPage]
 })
-export class ParcelaPageModule { }
+export class EditarParcelaPageModule {}
