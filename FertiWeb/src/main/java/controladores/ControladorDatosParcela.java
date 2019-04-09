@@ -12,7 +12,7 @@ import dominio.Lugar;
 import dominio.Parcela;
 import dominio.TipoCultivo;
 import dominio.Usuario;
-import dto.DtoParcela;
+import dto.DTOParcela;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.LugarEntidad;
@@ -95,14 +95,14 @@ public class ControladorDatosParcela {
 
 	}
 
-	public DtoParcela consultarParcelaXId(Long codigoAnalisis) {
+	public DTOParcela consultarParcelaXId(Long codigoAnalisis) {
 		Parcela parcela = new Parcela();
 		mapperDozer.map(parcelaRepository.findByCodigoParcela(codigoAnalisis), parcela);
 		return construirObjetoParcela(parcela);
 	}
 
-	private DtoParcela construirObjetoParcela(Parcela parcela) {
-		DtoParcela dtoParcela = new DtoParcela();
+	private DTOParcela construirObjetoParcela(Parcela parcela) {
+		DTOParcela dtoParcela = new DTOParcela();
 		dtoParcela.setCodigoParcela(parcela.getCodigoParcela());
 		dtoParcela.setFechaSiembra(parcela.getFechaSiembra());
 		dtoParcela.setArea(parcela.getArea());

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class Analisis {
 
 	private Long codigoAnalisis;
-	private Parcela parcela;
 	private Date fechaAnalisis;
 	private Long codigoParcela;
 

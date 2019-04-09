@@ -4,8 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "Unidad")
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity(name = "Unidad")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class UnidadEntidad {
 
 	@Id
@@ -13,29 +19,5 @@ public class UnidadEntidad {
 	private Long codigoUnidad;
 	@Column(name = "uni_nombre")
 	private String nombreUnidad;
-
-	public UnidadEntidad(Long codigoUnidad, String nombreUnidad) {
-		this.codigoUnidad = codigoUnidad;
-		this.nombreUnidad = nombreUnidad;
-	}
-
-	public UnidadEntidad() {
-	}
-
-	public Long getCodigoUnidad() {
-		return codigoUnidad;
-	}
-
-	public void setCodigoUnidad(Long codigoUnidad) {
-		this.codigoUnidad = codigoUnidad;
-	}
-
-	public String getNombreUnidad() {
-		return nombreUnidad;
-	}
-
-	public void setNombreUnidad(String nombreUnidad) {
-		this.nombreUnidad = nombreUnidad;
-	}
 
 }

@@ -32,7 +32,7 @@ public class ServicioTipoFuente {
 
 	@PutMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody TipoFuente tipoFuente) {
-		controladorDatosTipoFuente.guardarTipoFuente(tipoFuente);
+		controladorDatosTipoFuente.guardar(tipoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

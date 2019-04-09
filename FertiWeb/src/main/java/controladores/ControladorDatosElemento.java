@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 import persistencia.entidad.ElementosEntidad;
 import persistencia.repositorio.ElementosRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class ControladorDatosElemento {
 
 	@Autowired
@@ -32,6 +30,10 @@ public class ControladorDatosElemento {
 		ElementosEntidad elementosEntidad = new ElementosEntidad();
 		mapperDozer.map(elementoRepository.findByCodigoElemento(id), elementosEntidad);
 		return elementosEntidad;
+	}
+
+	public Elemento consultarElementosXId(Long codigoElemento) {
+		return mapperDozer.map(elementoRepository.findByCodigoElemento(codigoElemento), Elemento.class);
 	}
 
 }
