@@ -2,19 +2,17 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import dominio.TipoCultivo;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import persistencia.entidad.TipoCultivoEntidad;
 import persistencia.repositorio.TipoCultivoRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class ControladorDatosTipoCultivo {
+public class ControladorDatosTipoCultivo extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
@@ -22,41 +20,51 @@ public class ControladorDatosTipoCultivo {
 	@Autowired
 	private TipoCultivoRepository tipoCultivoRepository;
 
-	// consulta para front
+
 	public List<TipoCultivo> consultarCultivo() {
-		List<TipoCultivo> tiposCultivo = new ArrayList<>();
-		List<TipoCultivoEntidad> tiposCultivoEntidad = tipoCultivoRepository.findAll();
-		mapperDozer.map(tiposCultivoEntidad, tiposCultivo);
-		return tiposCultivo;
+		return mapearListaADominio(tipoCultivoRepository.findAll());
 	}
 
-	// consultar para app
 	public List<TipoCultivo> consultarCultivoParaApp() {
-		List<TipoCultivo> tiposCultivo = new ArrayList<>();
 		boolean estado = true;
-		mapperDozer.map(tipoCultivoRepository.findByEstado(estado), tiposCultivo);
-		return tiposCultivo;
-	}
-
-	public void guardarTipoCultivo(TipoCultivo tipoCultivo) {
-		TipoCultivoEntidad tipoCultivoEntidad = new TipoCultivoEntidad();
-		mapperDozer.map(tipoCultivo, tipoCultivoEntidad);
-		tipoCultivoRepository.save(tipoCultivoEntidad);
-	}
-
-	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
-		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
-	}
-
-	public TipoCultivoEntidad consultarTipoCultivoPorId(Long id) {
-		TipoCultivoEntidad tipoCultivoEntidad = new TipoCultivoEntidad();
-		mapperDozer.map(tipoCultivoRepository.findByCodigoTipoCultivo(id), tipoCultivoEntidad);
-		return tipoCultivoEntidad;
+		return mapearListaADominio(tipoCultivoRepository.findByEstado(estado));
 	}
 
 	public TipoCultivo consultarTipoCultivoXId(Long codigoCultivoSembrado) {
-		TipoCultivo tipoCultivo = new TipoCultivo();
-		mapperDozer.map(tipoCultivoRepository.findByCodigoTipoCultivo(codigoCultivoSembrado), tipoCultivo);
-		return tipoCultivo;
+		return mapearADominio(tipoCultivoRepository.findByCodigoTipoCultivo(codigoCultivoSembrado));
+	}
+	
+	private List<TipoCultivo> mapearListaADominio(List<TipoCultivoEntidad> tipoCultivoEntidadList) {
+		return tipoCultivoEntidadList.stream().map(a -> mapearADominio(a))
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	@Override
+	protected TipoCultivo construirDTO(Object object) {
+		return (TipoCultivo) object;
+	}
+
+	@Override
+	protected TipoCultivo mapearADominio(Object object) {
+		TipoCultivoEntidad tipoCultivoEntidad = (TipoCultivoEntidad) object;
+		return mapperDozer.map(tipoCultivoEntidad, TipoCultivo.class);
+	}
+
+	@Override
+	protected TipoCultivoEntidad mapearAEntidad(Object object) {
+		TipoCultivo tipoCultivo = (TipoCultivo) object;
+		return mapperDozer.map(tipoCultivo, TipoCultivoEntidad.class);
+	}
+
+	@Transactional
+	@Override
+	public void guardar(Object object) {
+		TipoCultivo tipoCultivo = (TipoCultivo) object;
+		tipoCultivoRepository.save(mapearAEntidad(tipoCultivo));
+	}
+	
+	@Transactional
+	public void eliminarTipoCultivo(long codigoCultivoSembrado) {
+		tipoCultivoRepository.deleteById(codigoCultivoSembrado);
 	}
 }

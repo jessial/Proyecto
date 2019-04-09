@@ -8,9 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity(name = "Fuente")
 @SequenceGenerator(name = "seq_fuente", sequenceName = "seq_fuente", initialValue = 10, allocationSize = 1)
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class FuenteEntidad {
 
 	@Id
@@ -23,48 +29,5 @@ public class FuenteEntidad {
 	private String producto;
 	@Column(name = "estado", nullable = false)
 	private boolean estado;
-
-	public FuenteEntidad() {
-
-	}
-
-	public FuenteEntidad(Long codigoFuente, Long codigoTipoFuente, String producto, boolean estado) {
-		this.codigoFuente = codigoFuente;
-		this.codigoTipoFuente = codigoTipoFuente;
-		this.producto = producto;
-		this.estado = estado;
-	}
-
-	public Long getCodigoFuente() {
-		return codigoFuente;
-	}
-
-	public Long getCodigoTipoFuente() {
-		return codigoTipoFuente;
-	}
-
-	public String getProducto() {
-		return producto;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setCodigoFuente(Long codigoFuente) {
-		this.codigoFuente = codigoFuente;
-	}
-
-	public void setCodigoTipoFuente(Long codigoTipoFuente) {
-		this.codigoTipoFuente = codigoTipoFuente;
-	}
-
-	public void setProducto(String producto) {
-		this.producto = producto;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
 
 }

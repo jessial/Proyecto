@@ -2,7 +2,6 @@ package dto;
 
 import java.util.Date;
 
-import dominio.Lugar;
 import dominio.TipoCultivo;
 import lombok.Data;
 
@@ -10,7 +9,7 @@ import lombok.Data;
 public class DTOParcela {
 	
 	private Long codigoParcela;
-	private Lugar lugar;
+	private DTOLugar lugar;
 	private TipoCultivo tipoCultivo;
 	private double area;
 	private Date fechaSiembra;

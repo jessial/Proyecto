@@ -4,6 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity(name = "Elementos")
 public class ElementosEntidad {
 
@@ -12,29 +19,5 @@ public class ElementosEntidad {
 	private Long codigoElemento;
 	@Column(name = "elemento")
 	private String elemento;
-
-	public ElementosEntidad() {
-	}
-
-	public ElementosEntidad(Long codigoElemento, String elemento) {
-		this.codigoElemento = codigoElemento;
-		this.elemento = elemento;
-	}
-
-	public void setCodigoElemento(Long codigoElemento) {
-		this.codigoElemento = codigoElemento;
-	}
-
-	public void setElemento(String elemento) {
-		this.elemento = elemento;
-	}
-
-	public Long getCodigoElemento() {
-		return codigoElemento;
-	}
-
-	public String getElemento() {
-		return elemento;
-	}
 
 }

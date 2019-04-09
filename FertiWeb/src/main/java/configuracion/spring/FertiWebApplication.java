@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import controladores.ControladorDatosAnalisis;
-import controladores.ControladorDatosApp;
 import controladores.ControladorDatosElemento;
 import controladores.ControladorDatosElementoXAnalisis;
 import controladores.ControladorDatosFuente;
@@ -32,11 +31,6 @@ public class FertiWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FertiWebApplication.class, args);
-	}
-
-	@Bean
-	public ControladorDatosApp crearControladorDatosApp() {
-		return new ControladorDatosApp();
 	}
 
 	@Bean

@@ -37,7 +37,7 @@ public class ServicioParcela {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Parcela parcela) {
-		controladorDatosParcela.guardarParcela(parcela);
+		controladorDatosParcela.guardar(parcela);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

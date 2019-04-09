@@ -38,7 +38,7 @@ public class ServicioLugar {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Lugar lugar) {
-		controladorDatosLugar.guardarLugar(lugar);
+		controladorDatosLugar.guardar(lugar);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 

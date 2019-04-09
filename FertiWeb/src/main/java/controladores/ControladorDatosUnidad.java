@@ -60,7 +60,7 @@ public class ControladorDatosUnidad extends ControladorDatos{
 
 	@Override
 	void guardar(Object object) {
-		// Do nothing because of X and Y.
+		throw new UnsupportedOperationException();
 	}
 
 	public UnidadEntidad consultarUnidadPorId(Long uniCodigo) {

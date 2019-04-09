@@ -29,7 +29,7 @@ public class ServicioRequerimiento {
 
 	@PostMapping("/guardado")
 	public ResponseEntity<Object> grabar(@RequestBody Requerimiento requerimiento) {
-		controladorDatosRequerimiento.guardarRequermiento(requerimiento);
+		controladorDatosRequerimiento.guardar(requerimiento);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 
 	}

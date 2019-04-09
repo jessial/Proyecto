@@ -2,38 +2,31 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Rol;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import persistencia.entidad.RolEntidad;
 import persistencia.repositorio.RolRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class ControladorDatosRol {
+public class ControladorDatosRol  extends ControladorDatos{
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
+	
 	@Autowired
 	private RolRepository rolRepository;
 
-	// Consultar para front
 	public List<Rol> consultarRoles() {
-		List<Rol> roles = new ArrayList<>();
-		mapperDozer.map(rolRepository.findAll(), roles);
-		return roles;
+		return mapearListaADominio(rolRepository.findAll());
 	}
 
-	// consultar para app
 	public List<Rol> consultarRolesParaApp() {
-		List<Rol> roles = new ArrayList<>();
 		boolean estado = true;
-		mapperDozer.map(rolRepository.findByEstado(estado), roles);
-		return roles;
+		return mapearListaADominio(rolRepository.findByEstado(estado));
 	}
 
 	public Rol consultarRolPorCodigo(Long codigoRol) {
@@ -41,15 +34,40 @@ public class ControladorDatosRol {
 		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
 		return rol;
 	}
-
-	public void guardarRol(Rol rol) {
-		RolEntidad rolEntidad = new RolEntidad();
-		mapperDozer.map(rol, rolEntidad);
-		rolRepository.save(rolEntidad);
+	
+	private List<Rol> mapearListaADominio(List<RolEntidad> rolEntidadList) {
+		return rolEntidadList.stream().map(a -> mapearADominio(a))
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	@Override
+	protected Rol construirDTO(Object object) {
+		return (Rol) object;
 	}
 
+	@Override
+	protected Rol mapearADominio(Object object) {
+		RolEntidad rolEntidad = (RolEntidad) object;
+		return mapperDozer.map(rolEntidad, Rol.class);
+	}
+
+	@Override
+	protected RolEntidad mapearAEntidad(Object object) {
+		Rol rol = (Rol) object;
+		return mapperDozer.map(rol, RolEntidad.class);
+	}
+
+	@Transactional
+	@Override
+	public void guardar(Object object) {
+		Rol rol = (Rol) object;
+		rolRepository.save(mapearAEntidad(rol));
+	}
+	
+	@Transactional
 	public void eliminarRol(long codigoRol) {
 		rolRepository.deleteById(codigoRol);
 	}
+
 
 }

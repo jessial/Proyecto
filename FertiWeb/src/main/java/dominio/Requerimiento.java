@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class Requerimiento {
 
 	private Long codigoRequerimiento;
-	private TipoCultivo tipoCultivo;
-	private Elemento elemento;
+	private Long codigoTipoCultivo;
+	private Long reqCodigoElemento;
 	private boolean estado;
 	private double cantidad;
-	private Unidad unidad;
+	private Long uniCodigo;
 
 }
