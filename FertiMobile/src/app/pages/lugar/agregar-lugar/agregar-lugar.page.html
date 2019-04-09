@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar finca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="formularioAgregarLugar">
+      <ion-item>
+        <ion-label position="floating">Finca</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <div *ngIf="enviado && f.nombre.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Ubicación</ion-label>
+        <ion-input formControlName="ubicacion" type="text"></ion-input>
+      </ion-item>
+      <div *ngIf="enviado && f.ubicacion.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+    </form>
+  </ion-list>
+  <br>
+  <ion-button expand="block" (click)="agregar()">Agregar</ion-button>
+</ion-content>

@@ -7,8 +7,6 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Elemento;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import persistencia.entidad.ElementosEntidad;
 import persistencia.repositorio.ElementosRepository;
 

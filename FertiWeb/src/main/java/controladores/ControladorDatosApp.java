@@ -1,13 +1,7 @@
 package controladores;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import dominio.Lugar;
-import dominio.Parcela;
-import dto.DTOResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
