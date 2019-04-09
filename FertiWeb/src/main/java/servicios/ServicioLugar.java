@@ -42,13 +42,13 @@ public class ServicioLugar {
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("borrarLugar/{codigo}")
+	@DeleteMapping("/borrarLugar/{codigo}")
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "codigo") Long codigoLugar) {
 		controladorDatosLugar.eliminarLugar(codigoLugar);
-		return new ResponseEntity<>("No se puede borrar", HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@GetMapping("/consultaLugar/{cedula}")
 	public ResponseEntity<Object> consultarLugarPorUsuarioParaApp(@PathVariable("cedula") Long cedula) {
 		return new ResponseEntity<>(controladorDatosLugar.consultarLugaresPorUsuario(cedula), HttpStatus.CREATED);

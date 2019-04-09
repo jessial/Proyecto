@@ -45,7 +45,7 @@ public class ServicioParcela {
 	@ResponseBody
 	public ResponseEntity<Object> eliminar(@PathVariable(value = "codigo") Long codigoParcela) {
 		controladorDatosParcela.eliminarParcela(codigoParcela);
-		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Parcela</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let parcela of parcelas">
+    <ion-item>
+      <ion-label>{{parcela.tipoCultivo.nombre}}</ion-label>
+      <ion-icon name="more" slot="end" (click)="mostrarPopover($event, parcela)"></ion-icon>
+    </ion-item>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <strong>Lugar:</strong> {{parcela.lugar.nombre}}
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <strong>Fecha:</strong> {{parcela.fechaSiembra | date: 'dd/MM/yyyy'}}
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <strong>Área:</strong> {{parcela.area}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregarParcela()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

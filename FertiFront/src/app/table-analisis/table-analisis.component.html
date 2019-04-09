@@ -1,40 +1,32 @@
 <h2>Análisis por finca</h2>
-<nz-row>
-  <nz-col class="table-scroll">
-    <nz-table #basicTable [nzData]="dataSet">
-      <thead>
-        <tr>
-          <th>Finca</th>
-          <th>Área</th>
-          <th>Cultivo</th>
-          <th>Fecha análisis</th>
-          <th class="table-lateral" colspan="3">
-            <div>
-              Elementos
-              <div class="table-control">
-                <span class="table-control-izquierda" (click)="moverIzquierda($event)">
-                  <i class="anticon anticon-caret-left"></i>
-                </span>
-                <span class="table-control-derecha" (click)="moverDerecha($event)">
-                  <i class="anticon anticon-caret-right"></i>
-                </span>
-              </div>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
-          <td>{{data.parcela.area}}</td>
-          <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>
-          <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
-          <td class="table-lateral" *ngFor="let elemento of data.elementos">
+<nz-table #nzTable [nzData]="dataSet">
+  <thead>
+    <tr>
+      <th nzShowExpand></th>
+      <th>Finca</th>
+      <th>Área</th>
+      <th>Cultivo</th>
+      <th>Fecha análisis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="nzTable.data">
+      <tr>
+        <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.codigoAnalisis]"></td>
+        <td>{{data.parcela.lugar.nombre + '-' + ' ' + data.parcela.lugar.ubicacion}}</td>
+        <td>{{data.parcela.area}}</td>
+        <td>{{data.parcela.tipoCultivo.nombre + '-' + ' ' + data.parcela.tipoCultivo.variedad}}</td>
+        <td>{{data.fechaAnalisis | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr [nzExpand]="mapOfExpandData[data.codigoAnalisis]">
+        <td></td>
+        <td colspan="3">
+          <h4>Elementos</h4>
+          <div *ngFor="let elemento of data.elementos">
             {{elemento.elemento.elemento + ' ' + elemento.cantidad + ' ' + elemento.unidad.nombreUnidad}}
-          </td>
-
-        </tr>
-      </tbody>
-    </nz-table>
-  </nz-col>
-</nz-row>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>
