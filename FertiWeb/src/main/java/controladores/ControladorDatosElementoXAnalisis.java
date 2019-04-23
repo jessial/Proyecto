@@ -85,4 +85,12 @@ public class ControladorDatosElementoXAnalisis extends ControladorDatos {
 		ElementoXAnalisis elementoXAnalisis = (ElementoXAnalisis) object;
 		elementoXAnalisisRepository.save(mapearAEntidad(elementoXAnalisis));	
 	}
+
+	public void guardarLista(List<DTOElementoXAnalisis> elementos, Long codigoAnalisis) {
+		for (DTOElementoXAnalisis dtoElementoXAnalisis : elementos) {
+			ElementoXAnalisis elementoXAnalisis = construirDominio(dtoElementoXAnalisis);
+			elementoXAnalisis.setCodigoAnalisis(codigoAnalisis);
+			guardar(elementoXAnalisis);
+		}
+	}
 }
