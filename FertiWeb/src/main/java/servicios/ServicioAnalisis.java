@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatosAnalisis;
-import dominio.Analisis;
+import dto.DTOAnalisis;
 
 @RestController
 @RequestMapping("/servicio_analisis")
@@ -24,6 +24,11 @@ public class ServicioAnalisis {
 	public ResponseEntity<Object> consultar() {
 		return new ResponseEntity<>(controladorDatosAnalisis.consultarTodos(), HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/consulta_por_usuario/{codigoUsuario}")
+	public ResponseEntity<Object> consultarXUsuario(@PathVariable long codigoUsuario) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarXUsuario(codigoUsuario), HttpStatus.CREATED);
+	}
 
 	@GetMapping("/consultaPorParcela")
 	public ResponseEntity<Object> consultarPorParcela(@PathVariable long codigoParcela) {
@@ -32,9 +37,9 @@ public class ServicioAnalisis {
 	}
 	
 	@PostMapping("/guardadoAnalisis")
-	public ResponseEntity<Object> grabarAnalisis(@RequestBody Analisis analisis) {
-		controladorDatosAnalisis.guardar(analisis);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<Object> grabarAnalisis(@RequestBody DTOAnalisis dtoAnalisis) {
+		controladorDatosAnalisis.guardarAnalisis(dtoAnalisis);
+		return new ResponseEntity<>(null, HttpStatus.CREATED);
 	}
 
 }
