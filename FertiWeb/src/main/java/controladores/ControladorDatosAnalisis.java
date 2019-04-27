@@ -91,7 +91,21 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		Analisis analisis = (Analisis) object;
 		analisisRepository.save(mapearAEntidad(analisis));
 	}
-
 	
+	@Transactional
+	public Analisis guardarAnalisis(Analisis analisis) {
+		return mapearADominio(analisisRepository.save(mapearAEntidad(analisis)));
+	}
+
+	public void guardarAnalisis(DTOAnalisis dtoAnalisis) {
+		Analisis analisis = construirDominio(dtoAnalisis);
+		Long codigoAnalisis = guardarAnalisis(analisis).getCodigoAnalisis();
+		controladorDatosElementoXAnalisis.guardarLista(dtoAnalisis.getElementos(), codigoAnalisis);
+	}
+
+	public List<DTOAnalisis> consultarXUsuario(Long codigoUsuario) {
+		List<Analisis> listAnalisis = mapearListaADominio(analisisRepository.findAllByCodigoUsuario(codigoUsuario));
+		return construirListaDTO(listAnalisis);
+	}
 
 }

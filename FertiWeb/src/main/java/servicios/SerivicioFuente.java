@@ -26,7 +26,7 @@ public class SerivicioFuente {
 	@GetMapping("/consultaTodos")
 	@ResponseBody
 	public ResponseEntity<Object> consultar() {
-		return new ResponseEntity<>(controladorDatosFuente.consultarFuentes(), HttpStatus.CREATED);
+		return new ResponseEntity<>(controladorDatosFuente.consultarFuentes(), HttpStatus.OK);
 	}
 
 	@PostMapping("/guardado")
