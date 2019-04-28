@@ -30,4 +30,12 @@ MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 1);
 MERGE INTO tipo_fuente VALUES (1, 14.8, 'true', 'roca fosfórica', 1);
 MERGE INTO tipo_fuente VALUES (2, 13, 'true', 'cloruro de potasio', 1);
 MERGE INTO fuente VALUES (1, 1, true, 'Triple 15');
-MERGE INTO fuente VALUES (2, 2, true, 'Cloruro')
+MERGE INTO fuente VALUES (2, 2, true, 'Cloruro');
+MERGE INTO usuario VALUES(1036926701, 'Sánchez', 1,'juan.sanchez@ceiba.com.co', 'Juan', 'juan123',6148084);
+MERGE INTO usuario VALUES(1047969124, 'Alarcón', 1,'jessica.alarcon@ceiba.com.co', 'Jessica', 'jessica123',3233986371);
+MERGE INTO analisis VALUES(1,1, Sysdate);
+MERGE INTO parcela VALUES(1,10000,1,1,Sysdate);
+MERGE INTO  lugar VALUES(1,1036926701,'La Honda', 'Rio abajo');
+MERGE INTO elementoxanalisis VALUES(1,4,1,1,1);
+MERGE INTO elementoxanalisis VALUES(2,6,1,2,2);
+MERGE INTO elementoxanalisis VALUES(3,8,1,3,1);
