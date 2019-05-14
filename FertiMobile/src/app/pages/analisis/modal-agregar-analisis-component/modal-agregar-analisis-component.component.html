@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar análisis</ion-title>
+    <ion-buttons slot="end" (click)="cerrarModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="formularioAgregarAnalisis">
+      <ion-item>
+        <ion-label>Elemento</ion-label>
+        <ion-select placeholder="Seleccione..." formControlName="elemento">
+          <ion-select-option *ngFor="let elemento of elementos" [value]="elemento">
+            {{elemento.elemento}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="enviado && f.elemento.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Cantidad</ion-label>
+        <ion-input formControlName="cantidad" type="number"></ion-input>
+      </ion-item>
+      <div *ngIf="enviado && f.cantidad.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+      <ion-item>
+        <ion-label>Unidad</ion-label>
+        <ion-select placeholder="Seleccione..." formControlName="unidad">
+          <ion-select-option *ngFor="let unidad of unidades" [value]="unidad">
+            {{unidad.nombreUnidad}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="enviado && f.unidad.errors?.required">
+        <p class="error-message">Campo obligatorio.</p>
+      </div>
+    </form>
+  </ion-list>
+  <br>
+  <ion-button expand="block" (click)="agregarElemento()">Agregar elemento</ion-button>
+</ion-content>

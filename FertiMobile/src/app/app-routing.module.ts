@@ -28,7 +28,8 @@ const routes: Routes = [
   { path: 'agregar-parcela', loadChildren: './pages/parcela/agregar-parcela/agregar-parcela.module#AgregarParcelaPageModule' },
   { path: 'editar-parcela', loadChildren: './pages/parcela/editar-parcela/editar-parcela.module#EditarParcelaPageModule' },
   { path: 'inicio-sesion', loadChildren: './pages/inicio-sesion/inicio-sesion.module#InicioSesionPageModule' },
-  { path: 'registro-usuario', loadChildren: './pages/registro-usuario/registro-usuario.module#RegistroUsuarioPageModule' }
+  { path: 'registro-usuario', loadChildren: './pages/registro-usuario/registro-usuario.module#RegistroUsuarioPageModule' },  { path: 'agregar-analisis', loadChildren: './pages/analisis/agregar-analisis/agregar-analisis.module#AgregarAnalisisPageModule' }
+
 ];
 
 @NgModule({
