@@ -6,8 +6,9 @@ import lombok.Data;
 public class Recomendacion {
 	
 	private Long codigoRecomendacion;
-	private Long codigoParcela;
-	private String producto;
 	private Double cantidad;
+	private Long codigoFuente;
+	private Long codigoAnalisis;
+	private Long codigoUnidad;
 	
 }

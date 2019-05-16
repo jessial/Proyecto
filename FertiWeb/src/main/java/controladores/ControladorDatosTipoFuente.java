@@ -23,6 +23,10 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 
 	@Autowired
 	private ControladorDatosUnidad controladorDatosUnidad;
+	
+	@Autowired
+	private ControladorDatosElemento controladorDatosElemento;
+
 
 	public List<DTOTipoFuente> consultarTipoFuentes() {
 		List<TipoFuente> listTipoFuente = mapearListaADominio(tipoFuenteRepository.findAll());
@@ -55,6 +59,7 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		dtoTipoFuente.setEstado(tipoFuente.isEstado());
 		dtoTipoFuente.setNombre(tipoFuente.getNombre());
 		dtoTipoFuente.setUnidad(controladorDatosUnidad.consultarUnidadXId(tipoFuente.getUnidad()));
+		dtoTipoFuente.setElemento(controladorDatosElemento.consultarElementosXId(tipoFuente.getCodigoElemento()));
 		return dtoTipoFuente;
 	}
 	
@@ -67,6 +72,7 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		tipoFuente.setEstado(dtoTipoFuente.getEstado());
 		tipoFuente.setNombre(dtoTipoFuente.getNombre());
 		tipoFuente.setUnidad(dtoTipoFuente.getUnidad().getCodigoUnidad());
+		tipoFuente.setCodigoElemento(dtoTipoFuente.getElemento().getCodigoElemento());
 		return tipoFuente;
 	}
 

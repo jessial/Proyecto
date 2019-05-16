@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Rol;
@@ -20,15 +22,18 @@ public class ControladorDatosRol  extends ControladorDatos{
 	@Autowired
 	private RolRepository rolRepository;
 
+	@Cacheable("GlobalCacheConstant.CACHE_ROLES")
 	public List<Rol> consultarRoles() {
 		return mapearListaADominio(rolRepository.findAll());
 	}
 
+	@Cacheable("GlobalCacheConstant.CACHE_ROLES_APP")
 	public List<Rol> consultarRolesParaApp() {
 		boolean estado = true;
 		return mapearListaADominio(rolRepository.findByEstado(estado));
 	}
 
+	@Cacheable("GlobalCacheConstant.CACHE_ROL")
 	public Rol consultarRolPorCodigo(Long codigoRol) {
 		Rol rol = new Rol();
 		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
@@ -64,15 +69,20 @@ public class ControladorDatosRol  extends ControladorDatos{
 
 	@Transactional
 	@Override
+	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
+			"GlobalCacheConstant.CACHE_ROLES_APP", 
+			"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
 	public void guardar(Object object) {
 		Rol rol = (Rol) object;
 		rolRepository.save(mapearAEntidad(rol));
 	}
 	
 	@Transactional
+	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
+						"GlobalCacheConstant.CACHE_ROLES_APP", 
+						"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
 	public void eliminarRol(long codigoRol) {
 		rolRepository.deleteById(codigoRol);
 	}
-
 
 }

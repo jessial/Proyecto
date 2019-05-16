@@ -1,11 +1,27 @@
 <h2>Análisis por finca</h2>
-<nz-table #nzTable [nzData]="dataSet">
+<nz-table #nzTable [nzData]="dataSet" [nzPageIndex]="numeroPagina" [nzTotal]="totalElementos" [nzFooter]="piePagina"
+ (nzPageIndexChange)="nzPageIndexChange($event)" [nzFrontPagination]="false">
   <thead>
     <tr>
       <th nzShowExpand></th>
-      <th>Finca</th>
-      <th>Área</th>
-      <th>Cultivo</th>
+      <th nzCustomFilter>Finca
+          <nz-dropdown nzTrigger="click" nzPlacement="bottomLeft" [nzClickHide]="false" nzTableFilter #dropdown>
+              <i nz-icon
+                nzType="search"
+                class="anticon anticon-plus"
+                [class.ant-table-filter-open]="dropdown.nzVisible"
+                nz-dropdown ></i>
+              <div class="search-box" >
+                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                  Search
+                </button>
+                <button nz-button nzSize="small" (click)="reset()">Reset</button>
+              </div>
+            </nz-dropdown>
+      </th>
+      <th >Área</th>
+      <th nzShowFilter [nzFilters]="tiposCultivo" (nzFilterChange)="filterAddressChange($event)">Cultivo</th>
       <th>Fecha análisis</th>
     </tr>
   </thead>
@@ -21,10 +37,22 @@
       <tr [nzExpand]="mapOfExpandData[data.codigoAnalisis]">
         <td></td>
         <td colspan="4">
-          <h4>Elementos</h4>
-          <div *ngFor="let elemento of data.elementos">
-            {{elemento.elemento.elemento + ' ' + elemento.cantidad + ' ' + elemento.unidad.nombreUnidad}}
-          </div>
+            <nz-table #innerTable  nzSize="middle" [nzShowPagination]="false" [nzData]="dataSet">
+                <thead>
+                    <tr>
+                      <th >Elemento</th>
+                      <th >Cantidad</th>
+                      <th >Unidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let elemento of data.elementos">
+                          <td>{{elemento.elemento.elemento}}</td>
+                          <td>{{elemento.cantidad}}</td>
+                          <td>{{elemento.unidad.nombreUnidad}}</td>
+                      </tr>
+                  </tbody>
+            </nz-table>
         </td>
       </tr>
     </ng-template>

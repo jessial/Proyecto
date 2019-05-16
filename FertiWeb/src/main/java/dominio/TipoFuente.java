@@ -14,5 +14,6 @@ public class TipoFuente {
 	private double aporte;
 	private Long unidad;
 	private boolean estado;
+	private Long codigoElemento;
 
 }

@@ -14,11 +14,12 @@ public class RecomendacionEntidad {
 	@Column(name="rec_codigo")
 	private Long codigoRequerimiento;
 	@Column(name="rec_codigo_parcela")
-	private Long codigoParcela;
-	@Column(name="rec_producto")
-	private String producto;
+	private Long codigoAnalisis;
+	@Column(name="rec_codigoFuente")
+	private Long codigoFuente;
 	@Column(name="rec_cantidad")
 	private Double cantidad;
-	
+	@Column(name="rec_Unidad")
+	private Long codigoUnidad;
 	
 }

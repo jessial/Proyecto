@@ -12,5 +12,6 @@ public class DTOAnalisis {
 	private DTOParcela parcela;
 	private Date fechaAnalisis;
 	private List<DTOElementoXAnalisis> elementos;
+	private Long cantidadRegistros;
 	
 }

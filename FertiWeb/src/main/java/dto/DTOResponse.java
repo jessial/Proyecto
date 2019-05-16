@@ -7,7 +7,6 @@ import dominio.Lugar;
 import dominio.Parcela;
 import dominio.Recomendacion;
 import dominio.Requerimiento;
-import dominio.Resultado;
 import dominio.Rol;
 import dominio.TipoCultivo;
 import dominio.TipoFuente;
@@ -22,7 +21,6 @@ public class DTOResponse {
 	private List<Rol> roles;
 	private List<Lugar> lugares;
 	private List<Parcela> parcelas;
-	private List<Resultado> resultados;
 	private List<Analisis> analisis;
 	private List<TipoCultivo> cultivos;
 	private List<Recomendacion> recomendaciones;

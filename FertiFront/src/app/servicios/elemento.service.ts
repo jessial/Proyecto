@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Elemento } from '../clases_dominio/elemento';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
@@ -15,10 +15,7 @@ const httpOptions = {
 })
 export class ElementoService {
 
-  private elementoUrl = 'http://localhost:8080/servicio_elemento';  // URL to web api
-  private tipoSubject = new BehaviorSubject([]);
-  private editSubject = new BehaviorSubject(new Elemento());
-  private elementos: Elemento[];
+  private elementoUrl = 'http://localhost:8080/servicio_elemento';  // URL to web app
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 

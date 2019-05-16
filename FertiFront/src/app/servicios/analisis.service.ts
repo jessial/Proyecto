@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UtilidadService } from './utilidad.service';
-import { Analisis } from '../clases_dominio/analisis';
+import { AnalisisPaginado } from '../clases_dominio/analisis-paginado';
 import { catchError } from 'rxjs/operators';
-
+import { Filtro } from '../clases_dominio/filtro';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,14 +15,19 @@ const httpOptions = {
 })
 export class AnalisisService {
   private analisisUrl = 'http://localhost:8080/servicio_analisis';  // URL to web api
-  private analisis: Analisis[];
-  private tipoSubject = new BehaviorSubject([]);
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
   /** GET Analisis from the server */
-  public getBackAnalisis(): Observable<Analisis[]> {
-    const url = `${this.analisisUrl}/consultaTodos`;
-    return this.http.get<Analisis[]>(url).pipe(catchError(this.handleError('', [])));
+  private getBackAnalisisPaginado(filtro: Filtro): Observable<AnalisisPaginado> {
+    let pagina = filtro.pagina - 1;
+    const url = `${this.analisisUrl}/consultaTodosPaginado/${pagina}`;
+    return this.http.get<AnalisisPaginado>(url).pipe(catchError(this.handleError('', null)));
+  }
+
+  private getBackAnalisisFiltro1(filtro: Filtro): Observable<AnalisisPaginado> {
+    let pagina = filtro.pagina - 1;
+    const url = `${this.analisisUrl}/consultaTodosFiltro1/${filtro.valor}/${pagina}`;
+    return this.http.get<AnalisisPaginado>(url).pipe(catchError(this.handleError('', null)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -32,20 +37,14 @@ export class AnalisisService {
     };
   }
 
-  cargarDatos() {
-    this.getBackAnalisis()
-      .subscribe(result => {
-        this.analisis = result;
-        this.refresh();
-      }
-      );
-  }
-  private refresh() {
-    this.tipoSubject.next(this.analisis);
-  }
-
-  getAnalisis(): Observable<Analisis[]> {
-    return this.tipoSubject.asObservable();
+  public getBackAnalisis(filtro: Filtro): Observable<AnalisisPaginado> {
+    switch(filtro.numeroFiltro) { 
+      case 0: { 
+         return this.getBackAnalisisPaginado(filtro);
+      } 
+      case 1: { 
+        return this.getBackAnalisisFiltro1(filtro);
+      } 
+   } 
   }
 }
-

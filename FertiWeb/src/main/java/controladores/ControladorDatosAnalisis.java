@@ -6,10 +6,15 @@ import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Analisis;
 import dto.DTOAnalisis;
+import dto.DTOAnalisisPaginado;
+import dto.Paginador;
 import persistencia.entidad.AnalisisEntidad;
 import persistencia.repositorio.AnalisisRepository;
 
@@ -108,4 +113,35 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		return construirListaDTO(listAnalisis);
 	}
 
+	private DTOAnalisisPaginado construirDTO(Page<AnalisisEntidad> resultado) {
+		Paginador paginador = new Paginador();
+		paginador.setNumeroPagina(resultado.getNumber());
+		paginador.setTamano(resultado.getNumberOfElements());
+		paginador.setTotalElementos(resultado.getTotalElements());
+		paginador.setTotalPaginas(resultado.getTotalPages());
+		DTOAnalisisPaginado dtoAnalisisPaginado = new DTOAnalisisPaginado();
+		dtoAnalisisPaginado.setAnalisis(construirListaDTO(mapearListaADominio(resultado.getContent())));
+		dtoAnalisisPaginado.setPaginador(paginador);
+		return dtoAnalisisPaginado;
+	}
+
+	public DTOAnalisisPaginado consultarTodosPaginado(int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTO(analisisRepository.findAll(paginador));
+	}
+	
+	public DTOAnalisisPaginado consultarXUsuarioPaginado(Long codigoUsuario, int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTO(analisisRepository.findAllByCodigoUsuario(codigoUsuario, paginador));
+	}
+
+	public DTOAnalisisPaginado consultarAnalisisPorParcelaPaginado(long codigoParcela, int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTO(analisisRepository.findByCodigoParcela(codigoParcela, paginador));
+	}
+
+	public DTOAnalisisPaginado consultarConFiltro1(String filtro, int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTO(analisisRepository.findAllLikeLugarNombreUbicacion(filtro, paginador));
+	}
 }
