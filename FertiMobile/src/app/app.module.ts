@@ -1,3 +1,4 @@
+import { UtilitarioComponent } from './pages/utilitario/utilitario.component';
 import { PopoverOpcionesComponent } from './pages/popover-opciones/popover-opciones.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

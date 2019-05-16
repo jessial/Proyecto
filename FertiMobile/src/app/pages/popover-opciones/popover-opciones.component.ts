@@ -1,4 +1,4 @@
-import { NavParams, PopoverController } from '@ionic/angular';
+import { NavParams, PopoverController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopoverOpcionesComponent implements OnInit {
 
-  constructor(private popoverController: PopoverController) { }
+  constructor(private popoverController: PopoverController, private toastController: ToastController) { }
 
   ngOnInit() {
   }

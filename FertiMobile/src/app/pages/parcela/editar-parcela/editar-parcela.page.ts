@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Lugar } from 'src/app/dominio/lugar';
 import { TipoCultivo } from 'src/app/dominio/tipo-cultivo';
 import { LugarService } from 'src/app/servicios/lugar.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { ParcelaService } from 'src/app/servicios/parcela.service';
 import { TipoCultivoService } from 'src/app/servicios/tipo-cultivo.service';
 import { Parcela } from 'src/app/dominio/parcela';
@@ -26,7 +26,7 @@ export class EditarParcelaPage implements OnInit {
 
   constructor(private fb: FormBuilder, private location: Location, private lugarServicio: LugarService,
     public loadingController: LoadingController, private parcelaServicio: ParcelaService,
-    private tipoCultivoServicio: TipoCultivoService) { }
+    private tipoCultivoServicio: TipoCultivoService, private toastController: ToastController) { }
 
   ngOnInit() {
     this.fechaMaximaSiembra = new Date().toISOString();
@@ -67,12 +67,26 @@ export class EditarParcelaPage implements OnInit {
         tipoCultivo => tipoCultivo.codigoTipoCultivo === this.f.tipoCultivo.value);
       this.parcelaSubject.area = this.f.area.value;
       this.parcelaSubject.fechaSiembra = this.f.fechaSiembra.value;
-      this.parcelaServicio.updateOrCreate(this.parcelaSubject).subscribe(resp => {
-        this.parcelaServicio.cargarDatos();
-        this.location.back();
-        this.ocultarCarga();
-      });
+      this.parcelaServicio.updateOrCreate(this.parcelaSubject).subscribe(
+        resp => {
+          this.mostrarToast('Éxito registrando parcela');
+          this.parcelaServicio.cargarDatos();
+          this.location.back();
+          this.ocultarCarga();
+        },
+        error => {
+          this.mostrarToast('Error registrando parcela');
+        }
+      );
     });
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async mostrarCarga() {

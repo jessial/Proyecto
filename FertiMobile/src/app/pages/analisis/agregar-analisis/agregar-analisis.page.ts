@@ -3,7 +3,7 @@ import { ModalAgregarAnalisisComponent } from './../modal-agregar-analisis-compo
 import { Unidad } from './../../../dominio/unidad';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ParcelaService } from 'src/app/servicios/parcela.service';
 import { Parcela } from 'src/app/dominio/parcela';
 import { DTOElementoXAnalisis } from 'src/app/dto/dto-elemento';
@@ -28,7 +28,7 @@ export class AgregarAnalisisPage implements OnInit {
 
   constructor(private fb: FormBuilder, private location: Location, public loadingController: LoadingController,
     private parcelaServicio: ParcelaService, private analisisServicio: AnalisisService,
-    private modalController: ModalController) { }
+    private modalController: ModalController, private toastController: ToastController) { }
 
   ngOnInit() {
     this.fechaMaximaAnalisis = new Date().toISOString();
@@ -70,12 +70,27 @@ export class AgregarAnalisisPage implements OnInit {
       analisis.elementos = this.elementosXAnalisis;
       analisis.fechaAnalisis = this.f.fechaAnalisis.value;
       analisis.parcela = this.f.parcela.value;
-      this.analisisServicio.updateOrCreate(analisis).subscribe(resp => {
-        this.location.back();
-      });
+      this.analisisServicio.updateOrCreate(analisis).subscribe(
+        resp => {
+          this.mostrarToast('Éxito registrando análisis');
+          this.location.back();
+        },
+        error => {
+          this.mostrarToast('Error registrando análisis');
+        }
+      );
       this.ocultarCarga();
     });
   }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
+
 
   async mostrarCarga() {
     this.carga = await this.loadingController.create({

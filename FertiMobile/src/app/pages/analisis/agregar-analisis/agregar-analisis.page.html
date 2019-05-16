@@ -8,37 +8,50 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="formularioAgregarAnalisis">
-    <ion-item>
-      <ion-label>Parcela</ion-label>
-      <ion-select placeholder="Seleccione..." formControlName="parcela">
-        <ion-select-option *ngFor="let parcela of parcelas" [value]="parcela">
-          {{parcela.lugar.nombre}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div *ngIf="enviado && f.parcela.errors?.required">
-      <p class="error-message">Campo obligatorio.</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <div padding>
+          <form [formGroup]="formularioAgregarAnalisis">
+            <ion-item>
+              <ion-label>Parcela</ion-label>
+              <ion-select placeholder="Seleccione..." formControlName="parcela">
+                <ion-select-option *ngFor="let parcela of parcelas" [value]="parcela">
+                  {{parcela.lugar.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.parcela.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+            <ion-item>
+              <ion-label>Fecha análisis</ion-label>
+              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaAnalisis" [max]="fechaMaximaAnalisis">
+              </ion-datetime>
+            </ion-item>
+            <div *ngIf="enviado && f.fechaAnalisis.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+          </form>
+          <ion-button expand="block" (click)="abrirModalAgregarElemento()" vertical="bottom">Agregar elemento
+          </ion-button>
+          <div *ngIf="enviado && elementosXAnalisis.length < 1">
+            <p class="error-message">Debe agregar por lo menos un elemento.</p>
+          </div>
+          <ion-list>
+            <ion-item *ngFor="let elementoXAnalisis of elementosXAnalisis">
+              <ion-label>{{elementoXAnalisis.elemento.elemento}} -
+                {{elementoXAnalisis.cantidad}} {{elementoXAnalisis.unidad.nombreUnidad}}</ion-label>
+              <ion-icon side="end" name="trash" (click)="eliminarElementoPorAnalisis(elementoXAnalisis)"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="position: absolute; bottom: 0px; width: 100%">
+    <div padding style="text-align: center">
+      <ion-button expand="block" (click)="agregar()" vertical="bottom">Guardar análisis</ion-button>
     </div>
-    <ion-item>
-      <ion-label>Fecha análisis</ion-label>
-      <ion-datetime display-format="DD MMM YYYY" formControlName="fechaAnalisis" [max]="fechaMaximaAnalisis">
-      </ion-datetime>
-    </ion-item>
-    <div *ngIf="enviado && f.fechaAnalisis.errors?.required">
-      <p class="error-message">Campo obligatorio.</p>
-    </div>
-  </form>
-  <ion-button expand="block" (click)="abrirModalAgregarElemento()" vertical="bottom">Agregar elemento</ion-button>
-  <div *ngIf="enviado && elementosXAnalisis.length < 1">
-    <p class="error-message">Debe agregar por lo menos un elemento.</p>
   </div>
-  <ion-list>
-    <ion-item *ngFor="let elementoXAnalisis of elementosXAnalisis">
-      <ion-label>{{elementoXAnalisis.elemento.elemento}} -
-        {{elementoXAnalisis.cantidad}} {{elementoXAnalisis.unidad.nombreUnidad}}</ion-label>
-      <ion-icon side="end" name="trash" (click)="eliminarElementoPorAnalisis(elementoXAnalisis)"></ion-icon>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="block" (click)="agregar()" vertical="bottom">Agregar</ion-button>
 </ion-content>

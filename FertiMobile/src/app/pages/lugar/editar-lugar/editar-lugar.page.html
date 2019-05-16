@@ -8,24 +8,33 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <form [formGroup]="formularioEditarLugar">
-      <ion-item>
-        <ion-label position="floating">Finca</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
-      </ion-item>
-      <div *ngIf="enviado && f.nombre.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
-      <ion-item>
-        <ion-label position="floating">Ubicación</ion-label>
-        <ion-input formControlName="ubicacion" type="text"></ion-input>
-      </ion-item>
-      <div *ngIf="enviado && f.ubicacion.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
-    </form>
-  </ion-list>
-  <br>
-  <ion-button expand="block" (click)="editar()">Editar</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <div padding>
+          <form [formGroup]="formularioEditarLugar">
+            <ion-item>
+              <ion-label position="floating">Finca</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.nombre.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+            <ion-item>
+              <ion-label position="floating">Ubicación</ion-label>
+              <ion-input formControlName="ubicacion" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.ubicacion.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="position: absolute; bottom: 0px; width: 100%">
+    <div padding style="text-align: center">
+      <ion-button expand="block" (click)="editar()">Editar</ion-button>
+    </div>
+  </div>
 </ion-content>

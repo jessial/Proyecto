@@ -8,7 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <h1>Lista análisis</h1>
+  <ion-list class="md list-md hydrated">
+    <ng-container *ngFor="let analisis of analisis">
+      <ion-item button="" (click)="mostrarDetalle(analisis)"
+        class="item md in-list ion-activatable ion-focusable item-label hydrated">
+        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+          <h3>{{analisis.parcela.lugar.nombre}} - {{analisis.fechaAnalisis | date: 'dd/MM/yyyy'}}</h3>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="agregarAnalisis()">
       <ion-icon name="add"></ion-icon>

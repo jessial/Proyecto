@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LugarService } from './../../../servicios/lugar.service';
 import { Location } from '@angular/common';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Lugar } from 'src/app/dominio/lugar';
 
@@ -17,7 +17,7 @@ export class EditarLugarPage implements OnInit {
   carga: any;
   lugarSubject: Lugar;
 
-  constructor(private fb: FormBuilder, private location: Location,
+  constructor(private fb: FormBuilder, private location: Location, private toastController: ToastController,
     public loadingController: LoadingController, private lugarServicio: LugarService) { }
 
   ngOnInit() {
@@ -47,12 +47,26 @@ export class EditarLugarPage implements OnInit {
     this.mostrarCarga().then(_ => {
       this.lugarSubject.nombre = this.f.nombre.value;
       this.lugarSubject.ubicacion = this.f.ubicacion.value;
-      this.lugarServicio.updateOrCreate(this.lugarSubject).subscribe(resp => {
-        this.lugarServicio.cargarDatos();
-        this.location.back();
-        this.ocultarCarga();
-      });
+      this.lugarServicio.updateOrCreate(this.lugarSubject).subscribe(
+        resp => {
+          this.lugarServicio.cargarDatos();
+          this.location.back();
+          this.mostrarToast('Éxito registrando finca');
+          this.ocultarCarga();
+        },
+        error => {
+          this.mostrarToast('Error registrando finca');
+        }
+      );
     });
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async mostrarCarga() {

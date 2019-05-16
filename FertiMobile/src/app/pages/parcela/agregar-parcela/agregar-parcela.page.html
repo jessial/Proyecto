@@ -8,50 +8,60 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <form [formGroup]="formularioAgregarParcela">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <div padding>
+          <form [formGroup]="formularioAgregarParcela">
 
-      <ion-item>
-        <ion-label>Lugar</ion-label>
-        <ion-select placeholder="Lugar" formControlName="lugar">
-          <ion-select-option *ngFor="let lugar of lugares" [value]="lugar">
-            {{lugar.nombre}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="enviado && f.lugar.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
+            <ion-item>
+              <ion-label>Lugar</ion-label>
+              <ion-select placeholder="Lugar" formControlName="lugar">
+                <ion-select-option *ngFor="let lugar of lugares" [value]="lugar">
+                  {{lugar.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.lugar.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
 
-      <ion-item>
-        <ion-label>Tipo cultivo</ion-label>
-        <ion-select placeholder="Tipo cultibo" formControlName="tipoCultivo">
-          <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo">
-            {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="enviado && f.tipoCultivo.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
+            <ion-item>
+              <ion-label>Tipo cultivo</ion-label>
+              <ion-select placeholder="Tipo cultibo" formControlName="tipoCultivo">
+                <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo">
+                  {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.tipoCultivo.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
 
-      <ion-item>
-        <ion-label position="floating">Área</ion-label>
-        <ion-input formControlName="area" type="number"></ion-input>
-      </ion-item>
-      <div *ngIf="enviado && f.area.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
+            <ion-item>
+              <ion-label position="floating">Área</ion-label>
+              <ion-input formControlName="area" type="number"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.area.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
 
-      <ion-item>
-        <ion-label>Fecha siembra</ion-label>
-        <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra"></ion-datetime>
-      </ion-item>
-      <div *ngIf="enviado && f.fechaSiembra.errors?.required">
-        <p class="error-message">Campo obligatorio.</p>
-      </div>
-    </form>
-  </ion-list>
-  <br>
-  <ion-button expand="block" (click)="agregar()">Agregar</ion-button>
+            <ion-item>
+              <ion-label>Fecha siembra</ion-label>
+              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra">
+              </ion-datetime>
+            </ion-item>
+            <div *ngIf="enviado && f.fechaSiembra.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="position: absolute; bottom: 0px; width: 100%">
+    <div padding style="text-align: center">
+      <ion-button expand="block" (click)="agregar()">Agregar parcela</ion-button>
+    </div>
+  </div>
 </ion-content>

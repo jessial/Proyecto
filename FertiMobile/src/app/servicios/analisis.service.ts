@@ -20,4 +20,10 @@ export class AnalisisService {
     const url = `${this.analisisUrl}/guardadoAnalisis`;
     return this.http.post<DTOAnalisis>(url, lugar, httpOptions);
   }
+
+  /** GET parcelas from the server */
+  public geBackParcelas(): Observable<DTOAnalisis[]> {
+    const url = `${this.analisisUrl}/consultaTodos`;
+    return this.http.get<DTOAnalisis[]>(url);
+  }
 }

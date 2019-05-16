@@ -12,5 +12,5 @@
 .recommenders/
 .sonarlint/
 FertiWeb/src/main/resources/static
-FertiWeb/bin/*
+FertiWeb/bin/
 RemoteSystemsTempFiles/.project
