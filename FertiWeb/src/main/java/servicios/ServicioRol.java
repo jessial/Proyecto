@@ -37,8 +37,7 @@ public class ServicioRol {
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
 	public ResponseEntity<Object> actualizar(@RequestBody Rol rol) {
-		controladorDatosRol.guardar(rol);
-		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+		return grabar(rol);
 	}
 
 	@DeleteMapping("borrarRol/{id}")

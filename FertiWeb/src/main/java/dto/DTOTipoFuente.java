@@ -1,5 +1,6 @@
 package dto;
 
+import dominio.Elemento;
 import dominio.Unidad;
 import lombok.Data;
 
@@ -11,4 +12,5 @@ public class DTOTipoFuente {
 	private Double aporte;
 	private Unidad unidad;
 	private Boolean estado;
+	private Elemento elemento;
 }

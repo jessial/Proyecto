@@ -30,5 +30,7 @@ public class TipoFuenteEntidad {
 	private Long unidad;
 	@Column(name = "tf_estado", nullable = false)
 	private boolean estado;
+	@Column(name = "tf_codigoElemento", nullable = false)
+	private Long codigoElemento;
 
 }

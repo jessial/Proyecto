@@ -4,6 +4,8 @@ import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
 import { UnidadService } from '../servicios/unidad.service';
 import { Unidad } from '../clases_dominio/unidad';
+import { Elemento } from '../clases_dominio/elemento';
+import { ElementoService } from '../servicios/elemento.service';
 
 @Component({
   selector: 'app-form-tipo-fuente',
@@ -14,16 +16,18 @@ export class FormTipoFuenteComponent {
 
   formularioAgregarTipoFuente: FormGroup;
   public unidades: Unidad[];
+  public elementos: Elemento[];
   enviado = false;
   visible = false;
 
   constructor(private fb: FormBuilder, private servicioTipoFuente: TipoFuenteService,
-    private unidadServicio: UnidadService) {
+    private unidadServicio: UnidadService, private elementoServicio: ElementoService) {
   }
 
   private crearFormulario(): void {
     this.formularioAgregarTipoFuente = this.fb.group({
       nombre: [null, [Validators.required]],
+      elemento: [null, [Validators.required]],
       aporte: [null, [Validators.required]],
       unidad: [null, [Validators.required]],
       estado: [false, [Validators.required]],
@@ -40,7 +44,7 @@ export class FormTipoFuenteComponent {
     tipoFuente.aporte = this.f.aporte.value;
     tipoFuente.unidad = this.f.unidad.value;
     tipoFuente.estado = this.f.estado.value;
-
+    tipoFuente.elemento = this.f.elemento.value;
     this.servicioTipoFuente.updateOrCreate(tipoFuente).subscribe(accion => {
       this.servicioTipoFuente.cargarDatos();
       this.close();
@@ -54,6 +58,9 @@ export class FormTipoFuenteComponent {
     this.unidadServicio.getBackUnidad().subscribe(result => {
       this.unidades = result;
     });
+    this.elementoServicio.getBackElementos().subscribe(result => {
+      this.elementos = result;
+    });
     this.visible = true;
     this.enviado = false;
   }
@@ -62,5 +69,8 @@ export class FormTipoFuenteComponent {
     this.formularioAgregarTipoFuente.reset();
     this.visible = false;
   }
+
+  
+
 }
 

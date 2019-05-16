@@ -8,8 +8,8 @@ import persistencia.entidad.RolEntidad;
 
 public interface RolRepository extends JpaRepository<RolEntidad, Long> {
 
-	RolEntidad findByCodigo(Long codigoRol);
-
 	List<RolEntidad> findByEstado(boolean estado);
 
+	RolEntidad findByCodigo(Long codigoRol);
+	
 }

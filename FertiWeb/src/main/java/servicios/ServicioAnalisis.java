@@ -30,7 +30,7 @@ public class ServicioAnalisis {
 		return new ResponseEntity<>(controladorDatosAnalisis.consultarXUsuario(codigoUsuario), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/consultaPorParcela")
+	@GetMapping("/consultaPorParcela/{codigoParcela}")
 	public ResponseEntity<Object> consultarPorParcela(@PathVariable long codigoParcela) {
 		return new ResponseEntity<>(controladorDatosAnalisis.consultarAnalisisPorParcela(codigoParcela),
 				HttpStatus.CREATED);
@@ -40,6 +40,27 @@ public class ServicioAnalisis {
 	public ResponseEntity<Object> grabarAnalisis(@RequestBody DTOAnalisis dtoAnalisis) {
 		controladorDatosAnalisis.guardarAnalisis(dtoAnalisis);
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/consultaTodosPaginado/{pagina}")
+	public ResponseEntity<Object> consultar(@PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarTodosPaginado(pagina), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/consultaTodosFiltro1/{filtro}/{pagina}")
+	public ResponseEntity<Object> consultarConFiltro1(@PathVariable String filtro, @PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarConFiltro1(filtro, pagina), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/consultaPorUsuarioPaginado/{codigoUsuario}/{pagina}")
+	public ResponseEntity<Object> consultarXUsuario(@PathVariable long codigoUsuario, @PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarXUsuarioPaginado(codigoUsuario, pagina), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/consultaPorParcela/{codigoParcela}/{pagina}")
+	public ResponseEntity<Object> consultarPorParcela(@PathVariable long codigoParcela,  @PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarAnalisisPorParcelaPaginado(codigoParcela, pagina),
+				HttpStatus.CREATED);
 	}
 
 }

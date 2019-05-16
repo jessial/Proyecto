@@ -4,6 +4,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,6 +25,7 @@ import controladores.ControladorDeDatosRecomendacion;
 import controladores.ControladorSeguridad;
 
 @SpringBootApplication
+@EnableCaching
 @ComponentScan(basePackages = { "servicios", "configuracion.seguridad" })
 @EntityScan("persistencia.entidad")
 @EnableJpaRepositories("persistencia.repositorio")
