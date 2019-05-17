@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatosLugar;
 import dominio.Lugar;
+import dto.DTOLugar;
 
 @RestController
 @RequestMapping("/servicio_lugar")
@@ -31,13 +32,14 @@ public class ServicioLugar {
 
 	@PostMapping("/guardado")
 	@ResponseBody
-	public ResponseEntity<Object> grabarFincaDesdeApp(@RequestBody Lugar lugar) {
-		return this.actualizar(lugar);
+	public ResponseEntity<Object> grabarFincaDesdeApp(@RequestBody DTOLugar dtoLugar) {
+		return this.actualizar(dtoLugar);
 	}
 
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
-	public ResponseEntity<Object> actualizar(@RequestBody Lugar lugar) {
+	public ResponseEntity<Object> actualizar(@RequestBody DTOLugar dtoLugar) {
+		Lugar lugar = controladorDatosLugar.construirDominio(dtoLugar);
 		controladorDatosLugar.guardar(lugar);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}

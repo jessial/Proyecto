@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatosParcela;
 import dominio.Parcela;
+import dto.DTOParcela;
 
 @RestController
 @RequestMapping("/servicio_parcela")
@@ -30,13 +31,14 @@ public class ServicioParcela {
 
 	@PostMapping("/guardado")
 	@ResponseBody
-	public ResponseEntity<Object> grabarParcelDesdeApp(@RequestBody Parcela parcela) {
-		return this.actualizar(parcela);
+	public ResponseEntity<Object> grabarParcelDesdeApp(@RequestBody DTOParcela dtoParcela) {
+		return this.actualizar(dtoParcela);
 	}
 
 	@PutMapping("/actualizaRegistro")
 	@ResponseBody
-	public ResponseEntity<Object> actualizar(@RequestBody Parcela parcela) {
+	public ResponseEntity<Object> actualizar(@RequestBody DTOParcela dtoParcela) {
+		Parcela parcela = controladorDatosParcela.construirDominio(dtoParcela);
 		controladorDatosParcela.guardar(parcela);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
