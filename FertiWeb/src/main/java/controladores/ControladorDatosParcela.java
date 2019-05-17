@@ -13,7 +13,7 @@ import dto.DTOParcela;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.repositorio.ParcelaRepository;
 
-public class ControladorDatosParcela extends ControladorDatos{
+public class ControladorDatosParcela extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
@@ -31,10 +31,9 @@ public class ControladorDatosParcela extends ControladorDatos{
 		List<Parcela> listaParcela = mapearListaADominio(parcelaRepository.findAll());
 		return construirListaDTO(listaParcela);
 	}
-	
+
 	private List<Parcela> mapearListaADominio(List<ParcelaEntidad> parcelaEntidadList) {
-		return parcelaEntidadList.stream().map(a -> mapearADominio(a))
-				.collect(Collectors.toCollection(ArrayList::new));
+		return parcelaEntidadList.stream().map(a -> mapearADominio(a)).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public ParcelaEntidad consultarParcelaPorId(Long id) {
@@ -46,7 +45,7 @@ public class ControladorDatosParcela extends ControladorDatos{
 	public DTOParcela consultarParcelaXId(Long codigoAnalisis) {
 		return construirDTO(mapearADominio(parcelaRepository.findByCodigoParcela(codigoAnalisis)));
 	}
-	
+
 	private List<DTOParcela> construirListaDTO(List<Parcela> listParcela) {
 		List<DTOParcela> listDtoParcela = new ArrayList<>();
 		for (Parcela parcela : listParcela) {
@@ -67,9 +66,9 @@ public class ControladorDatosParcela extends ControladorDatos{
 				controladorDatosTipoCultivo.consultarTipoCultivoXId(parcela.getCodigoCultivoSembrado()));
 		return dtoParcela;
 	}
-	
+
 	@Override
-	protected Parcela construirDominio(Object object) {
+	public Parcela construirDominio(Object object) {
 		DTOParcela dtoParcela = (DTOParcela) object;
 		Parcela parcela = new Parcela();
 		parcela.setCodigoParcela(dtoParcela.getCodigoParcela());
@@ -98,7 +97,7 @@ public class ControladorDatosParcela extends ControladorDatos{
 		Parcela parcela = (Parcela) object;
 		parcelaRepository.save(mapearAEntidad(parcela));
 	}
-	
+
 	@Transactional
 	public void eliminarParcela(Long codigoParcela) {
 		parcelaRepository.deleteById(codigoParcela);

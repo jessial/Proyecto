@@ -74,7 +74,7 @@ public class ControladorDatosLugar extends ControladorDatos {
 	}
 	
 	@Override
-	protected Lugar construirDominio(Object object) {
+	public Lugar construirDominio(Object object) {
 		DTOLugar dtoLugar = (DTOLugar) object;
 		Lugar lugar = new Lugar();
 		lugar.setCodigoLugar(dtoLugar.getCodigoLugar());
