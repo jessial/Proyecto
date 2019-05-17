@@ -12,10 +12,10 @@ export class AnalisisPage implements OnInit {
 
   analisis: DTOAnalisis[] = [];
 
-  constructor(private router: Router, private elementoPorAnalisisServicio: AnalisisService) { }
+  constructor(private router: Router, private analisisServicio: AnalisisService) { }
 
   ngOnInit() {
-    this.elementoPorAnalisisServicio.geBackParcelas().subscribe(analisis => {
+    this.analisisServicio.geBackAnalisis().subscribe(analisis => {
       this.analisis = analisis;
     });
   }
@@ -25,8 +25,8 @@ export class AnalisisPage implements OnInit {
   }
 
   mostrarDetalle(analisis: DTOAnalisis) {
+    this.analisisServicio.setDetalleAnalisis(analisis);
     this.router.navigateByUrl('detalle-analisis');
-    console.log(JSON.stringify(analisis));
   }
 
 }

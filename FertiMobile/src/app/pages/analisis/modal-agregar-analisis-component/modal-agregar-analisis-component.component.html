@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Agregar análisis</ion-title>
+    <ion-title>Agregar elemento</ion-title>
     <ion-buttons slot="end" (click)="cerrarModal()">
       <ion-icon name="close"></ion-icon>
     </ion-buttons>
@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col align-self-center>
         <div padding>
-          <form [formGroup]="formularioAgregarAnalisis">
+          <form [formGroup]="formularioAgregarElemento">
             <ion-item>
               <ion-label>Elemento</ion-label>
               <ion-select placeholder="Seleccione..." formControlName="elemento">

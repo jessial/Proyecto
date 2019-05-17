@@ -10,12 +10,16 @@
 <ion-content>
   <ion-list class="md list-md hydrated">
     <ng-container *ngFor="let analisis of analisis">
-      <ion-item button="" (click)="mostrarDetalle(analisis)"
-        class="item md in-list ion-activatable ion-focusable item-label hydrated">
-        <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-          <h3>{{analisis.parcela.lugar.nombre}} - {{analisis.fechaAnalisis | date: 'dd/MM/yyyy'}}</h3>
-        </ion-label>
-      </ion-item>
+      <ion-card (click)="mostrarDetalle(analisis)">
+        <ion-card-header>
+          <ion-card-title>{{analisis.parcela.lugar.nombre}} {{analisis.parcela.area | number}} (m²)
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>{{analisis.parcela.tipoCultivo.nombre}} {{analisis.parcela.tipoCultivo.variedad}} -
+            {{analisis.fechaAnalisis | date: 'dd/MM/yyyy'}}</ion-label>
+        </ion-card-content>
+      </ion-card>
     </ng-container>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

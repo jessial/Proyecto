@@ -15,7 +15,7 @@ import { ElementoService } from 'src/app/servicios/elemento.service';
 export class ModalAgregarAnalisisComponent implements OnInit {
 
   @Input() elementosXAnalisis: DTOElementoXAnalisis[];
-  formularioAgregarAnalisis: FormGroup;
+  formularioAgregarElemento: FormGroup;
   enviado = false;
   unidades: Unidad[];
   elementos: Elemento[] = [];
@@ -24,7 +24,7 @@ export class ModalAgregarAnalisisComponent implements OnInit {
     private unidadServicio: UnidadService, private elementoServicio: ElementoService) { }
 
   ngOnInit() {
-    this.formularioAgregarAnalisis = this.fb.group({
+    this.formularioAgregarElemento = this.fb.group({
       elemento: [null, Validators.required],
       unidad: [null, Validators.required],
       cantidad: [null, Validators.required]
@@ -46,7 +46,7 @@ export class ModalAgregarAnalisisComponent implements OnInit {
 
   agregarElemento() {
     this.enviado = true;
-    if (this.formularioAgregarAnalisis.invalid) {
+    if (this.formularioAgregarElemento.invalid) {
       return null;
     }
     const elementoPorAnalisis: DTOElementoXAnalisis = new DTOElementoXAnalisis();
@@ -60,6 +60,6 @@ export class ModalAgregarAnalisisComponent implements OnInit {
     this.modalController.dismiss({ 'resultado': elementoPorAnalisis });
   }
 
-  get f() { return this.formularioAgregarAnalisis.controls; }
+  get f() { return this.formularioAgregarElemento.controls; }
 
 }

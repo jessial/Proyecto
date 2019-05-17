@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar análsis</ion-title>
+    <ion-title>Agregar análisis</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
               <ion-label>Parcela</ion-label>
               <ion-select placeholder="Seleccione..." formControlName="parcela">
                 <ion-select-option *ngFor="let parcela of parcelas" [value]="parcela">
-                  {{parcela.lugar.nombre}}
+                  {{parcela.lugar.nombre}} {{parcela.area | number}} (m²)
                 </ion-select-option>
               </ion-select>
             </ion-item>

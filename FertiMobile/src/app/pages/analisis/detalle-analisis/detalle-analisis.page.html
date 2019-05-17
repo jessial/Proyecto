@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detalle-analisis</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle análisis</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}} - {{analisisADetallar.parcela.area | number}} (m²)
+      </ion-card-title>
+      <ion-card-subtitle>{{analisisADetallar.fechaAnalisis | date: 'dd/MM/yyyy'}}</ion-card-subtitle>
+    </ion-card-header>
 
+    <ion-card-content>
+      <h2>Elementos: </h2>
+      <ion-list>
+        <ion-item *ngFor="let elemento of analisisADetallar.elementos">
+          <ion-label>{{elemento.elemento.elemento}} - {{elemento.cantidad}} {{elemento.unidad.nombreUnidad}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,4 +1,7 @@
+import { AnalisisService } from './../../../servicios/analisis.service';
+import { DTOAnalisis } from 'src/app/dto/dto-analisis';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-analisis',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleAnalisisPage implements OnInit {
 
-  constructor() { }
+  analisisADetallar: DTOAnalisis;
+
+  constructor(private analisisServicio: AnalisisService, private router: Router) { }
 
   ngOnInit() {
+    this.analisisADetallar = this.analisisServicio.getDetalleAnalisis();
   }
 
 }

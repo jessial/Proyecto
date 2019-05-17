@@ -28,7 +28,7 @@
 
             <ion-item>
               <ion-label>Tipo cultivo</ion-label>
-              <ion-select placeholder="Tipo cultibo" formControlName="tipoCultivo">
+              <ion-select placeholder="Tipo cultivo" formControlName="tipoCultivo">
                 <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo">
                   {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
                 </ion-select-option>
@@ -39,7 +39,7 @@
             </div>
 
             <ion-item>
-              <ion-label position="floating">Área</ion-label>
+              <ion-label position="floating">Área (m²)</ion-label>
               <ion-input formControlName="area" type="number"></ion-input>
             </ion-item>
             <div *ngIf="enviado && f.area.errors?.required">
@@ -61,7 +61,7 @@
   </ion-grid>
   <div style="position: absolute; bottom: 0px; width: 100%">
     <div padding style="text-align: center">
-      <ion-button expand="block" (click)="agregar()">Agregar parcela</ion-button>
+      <ion-button expand="block" (click)="agregar()">Guardar parcela</ion-button>
     </div>
   </div>
 </ion-content>
