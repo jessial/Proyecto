@@ -15,7 +15,7 @@ export class InicioSesionPage implements OnInit {
   formularioInicioSesion: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router,
-    public menu: MenuController, private toastController: ToastController) {
+    private menu: MenuController, private toastController: ToastController) {
     this.menu.enable(false);
   }
 

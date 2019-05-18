@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Generar recomendación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <div padding>
+          <form [formGroup]="formularioGenerarRecomendacion">
+            <ion-item>
+              <ion-label>Potasio</ion-label>
+              <ion-select formControlName="potasio">
+                <ion-select-option *ngFor="let fuentePotasio of listaFuentesPotasio" [value]="fuentePotasio">
+                  {{fuentePotasio.producto}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.potasio.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label>Fósforo</ion-label>
+              <ion-select formControlName="fosforo">
+                <ion-select-option *ngFor="let fuenteFosforo of listaFuentesFosforo" [value]="fuenteFosforo">
+                  {{fuenteFosforo.producto}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.fosforo.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label>Nitrógeno</ion-label>
+              <ion-select formControlName="nitrogeno">
+                <ion-select-option *ngFor="let fuenteNitrogeno of listaFuentesNitrogeno" [value]="fuenteNitrogeno">
+                  {{fuenteNitrogeno.producto}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.nitrogeno.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="position: absolute; bottom: 0px; width: 100%">
+    <div padding style="text-align: center">
+      <ion-button expand="block" (click)="agregar()">Generar recomendación</ion-button>
+    </div>
+  </div>
+</ion-content>

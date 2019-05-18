@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +28,9 @@ export class AppComponent {
     }
   ];
 
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
+  constructor(private platform: Platform, private splashScreen: SplashScreen,
+    private statusBar: StatusBar, private alertController: AlertController,
+    private router: Router, public menu: MenuController) {
     this.initializeApp();
   }
 
@@ -40,5 +39,23 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  cerrarSesion() {
+    this.menu.close();
+    this.confirmarCerrarSesion();
+  }
+
+  async confirmarCerrarSesion() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar sesión',
+      message: '¿Desea finalizar la sesión?',
+      buttons: [{ text: 'Cancelar' }, {
+        text: 'Aceptar', handler: () => {
+          this.router.navigateByUrl('/');
+        }
+      }]
+    });
+    await alert.present();
   }
 }

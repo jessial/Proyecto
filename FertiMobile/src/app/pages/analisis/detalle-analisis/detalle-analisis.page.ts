@@ -18,4 +18,8 @@ export class DetalleAnalisisPage implements OnInit {
     this.analisisADetallar = this.analisisServicio.getDetalleAnalisis();
   }
 
+  generarRecomendacion() {
+    this.router.navigateByUrl('generar-recomendacion');
+  }
+
 }

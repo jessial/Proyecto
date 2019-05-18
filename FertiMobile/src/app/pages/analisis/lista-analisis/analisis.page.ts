@@ -15,7 +15,8 @@ export class AnalisisPage implements OnInit {
   constructor(private router: Router, private analisisServicio: AnalisisService) { }
 
   ngOnInit() {
-    this.analisisServicio.geBackAnalisis().subscribe(analisis => {
+    this.analisisServicio.cargarDatos();
+    this.analisisServicio.getAnalisis().subscribe(analisis => {
       this.analisis = analisis;
     });
   }

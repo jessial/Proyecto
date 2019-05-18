@@ -24,4 +24,40 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+  <br>
+  <ion-list>
+    <ion-list-header>Histórico recomendaciones</ion-list-header>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>Recomendación</h2>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>Recomendación</h2>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>Recomendación</h2>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
+<div style="position: fixed; bottom: 0px; width: 100%">
+  <div padding style="text-align: center">
+    <ion-button expand="block" vertical="bottom" (click)="generarRecomendacion()">Generar recomendación</ion-button>
+  </div>
+</div>

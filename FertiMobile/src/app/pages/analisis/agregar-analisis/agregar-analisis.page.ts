@@ -73,7 +73,7 @@ export class AgregarAnalisisPage implements OnInit {
       this.analisisServicio.updateOrCreate(analisis).subscribe(
         resp => {
           this.mostrarToast('Éxito registrando análisis');
-          this.analisisServicio.geBackAnalisis();
+          this.analisisServicio.cargarDatos();
           this.location.back();
         },
         error => {
