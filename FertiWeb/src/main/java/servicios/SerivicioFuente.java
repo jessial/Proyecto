@@ -48,4 +48,22 @@ public class SerivicioFuente {
 		controladorDatosFuente.eliminarFuente(codigoFuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
 	}
+
+	@GetMapping("/consultaNitrogeno")
+	@ResponseBody
+	public ResponseEntity<Object> consultarFuentesParaNitrogeno() {
+		return new ResponseEntity<>(controladorDatosFuente.consultarFuentesParaNitrogeno(), HttpStatus.OK);
+	}
+
+	@GetMapping("/consultaFosforo")
+	@ResponseBody
+	public ResponseEntity<Object> consultarFuentesParaFosforo() {
+		return new ResponseEntity<>(controladorDatosFuente.consultarFuentesParaFosforo(), HttpStatus.OK);
+	}
+
+	@GetMapping("/consultaPotasio")
+	@ResponseBody
+	public ResponseEntity<Object> consultarFuentesParaPotasio() {
+		return new ResponseEntity<>(controladorDatosFuente.consultarFuentesParaPotasio(), HttpStatus.OK);
+	}
 }
