@@ -2,7 +2,7 @@ import { UsuarioSeguridad } from './../../dominio/usuario-seguridad';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ToastController, MenuController } from '@ionic/angular';
+import { ToastController, MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -14,7 +14,7 @@ export class InicioSesionPage implements OnInit {
   enviado = false;
   formularioInicioSesion: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router,
+  constructor(private fb: FormBuilder, private router: Router, private navCtrl: NavController,
     private menu: MenuController, private toastController: ToastController) {
     this.menu.enable(false);
   }
@@ -37,7 +37,8 @@ export class InicioSesionPage implements OnInit {
     // TODO: Consumir servicio incio de sesión...
     if (usuario.nombreUsuario === 'admin' && usuario.password === 'admin') {
       this.menu.enable(true);
-      this.router.navigateByUrl('home');
+      // this.router.navigateByUrl('home', { replaceUrl: true });
+      this.navCtrl.navigateRoot('home');
     } else {
       this.presentToast();
     }

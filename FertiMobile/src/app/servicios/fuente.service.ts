@@ -20,7 +20,7 @@ export class FuenteService {
 
   /** GET fuentes nitróngeno from the server */
   public geBackFuentesNitrogeno(): Observable<Fuente[]> {
-    const url = `${this.fuenteURL}/consultaTodos`;
+    const url = `${this.fuenteURL}/consultaNitrogeno`;
     return this.http.get<Fuente[]>(url);
   }
 
@@ -42,7 +42,7 @@ export class FuenteService {
 
   /** GET fuentes potasio from the server */
   public geBackFuentesPotasio(): Observable<Fuente[]> {
-    const url = `${this.fuenteURL}/consultaTodos`;
+    const url = `${this.fuenteURL}/consultaPotasio`;
     return this.http.get<Fuente[]>(url);
   }
 
@@ -64,7 +64,7 @@ export class FuenteService {
 
   /** GET fuentes fosforo from the server */
   public geBackFuentesFosforo(): Observable<Fuente[]> {
-    const url = `${this.fuenteURL}/consultaTodos`;
+    const url = `${this.fuenteURL}/consultaFosforo`;
     return this.http.get<Fuente[]>(url);
   }
 

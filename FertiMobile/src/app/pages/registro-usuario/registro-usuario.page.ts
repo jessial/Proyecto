@@ -1,8 +1,9 @@
+import { Rol } from './../../dominio/rol';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { UsuarioSeguridad } from 'src/app/dominio/usuario-seguridad';
+import { RolService } from 'src/app/servicios/rol.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -13,11 +14,21 @@ export class RegistroUsuarioPage implements OnInit {
 
   enviado = false;
   formularioRegistroUsuario: FormGroup;
+  roles: Rol[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private rolServicio: RolService) { }
 
   ngOnInit() {
+    this.rolServicio.cargarDatos();
+    this.rolServicio.getRoles().subscribe(roles => {
+      this.roles = roles;
+    });
     this.formularioRegistroUsuario = this.fb.group({
+      numeroIdentificacion: [null, Validators.required],
+      nombre: [null, Validators.required],
+      apellido: [null, Validators.required],
+      correo: [null, Validators.required],
+      rol: [null, Validators.required],
       nombreUsuario: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
@@ -37,7 +48,4 @@ export class RegistroUsuarioPage implements OnInit {
 
   get f() { return this.formularioRegistroUsuario.controls; }
 
-  redireccionRegistrarUsuario() {
-    this.router.navigateByUrl('registro-usuario');
-  }
 }
