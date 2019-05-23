@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ParcelaService {
-  private parcelaUrl = 'https://fetiweb.herokuapp.com/servicio_parcela';  // URL to web api
+  private parcelaUrl = 'https://fertiweb.herokuapp.com/servicio_parcela';  // URL to web api
   private parcelas: Parcela[];
   private tipoSubject = new BehaviorSubject([]);
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }

@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class FuenteService {
 
-  private fuenteUrl = 'https://fetiweb.herokuapp.com/servicio_fuente';  // URL to web api
+  private fuenteUrl = 'https://fertiweb.herokuapp.com/servicio_fuente';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Fuente());
   private fuentes: Fuente[];

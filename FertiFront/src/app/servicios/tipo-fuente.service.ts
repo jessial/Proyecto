@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class TipoFuenteService {
 
-  private tipoFuenteUrl = 'https://fetiweb.herokuapp.com/servicio_tipoFuente';  // URL to web api
+  private tipoFuenteUrl = 'https://fertiweb.herokuapp.com/servicio_tipoFuente';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new TipoFuente());
   private tiposFuente: TipoFuente[];
