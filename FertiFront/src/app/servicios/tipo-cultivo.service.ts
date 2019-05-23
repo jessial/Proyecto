@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class TipoCultivoService {
 
-  private tipoCultivoUrl = 'http://localhost:8080/servicio_tipo_cultivo';  // URL to web api
+  private tipoCultivoUrl = 'https://fetiweb.herokuapp.com/servicio_tipo_cultivo';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new TipoCultivo());
   private tiposCultivo: TipoCultivo[];

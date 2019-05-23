@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class ElementoService {
 
-  private elementoUrl = 'http://localhost:8080/servicio_elemento';  // URL to web app
+  private elementoUrl = 'https://fetiweb.herokuapp.com/servicio_elemento';  // URL to web app
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 

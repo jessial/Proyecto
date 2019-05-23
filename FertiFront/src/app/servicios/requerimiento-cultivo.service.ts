@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class RequerimientoCultivoService {
 
-  private requerimientoUrl = 'http://localhost:8080/servicio_requerimiento';  // URL to web api
+  private requerimientoUrl = 'https://fetiweb.herokuapp.com/servicio_requerimiento';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new RequerimientoCultivo());
   private requerimientosPorCultivo: RequerimientoPorCultivo[];

@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AnalisisService {
-  private analisisUrl = 'http://localhost:8080/servicio_analisis';  // URL to web api
+  private analisisUrl = 'https://fetiweb.herokuapp.com/servicio_analisis';  // URL to web api
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
   /** GET Analisis from the server */

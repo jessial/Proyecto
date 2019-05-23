@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class RolService {
 
-  private rolUrl = 'http://localhost:8080/servicio_rol';  // URL to web api
+  private rolUrl = 'https://fetiweb.herokuapp.com/servicio_rol';  // URL to web api
   private roles: Rol[];
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Rol());

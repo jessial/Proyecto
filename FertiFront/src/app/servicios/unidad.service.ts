@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class UnidadService {
 
-  private unidadUrl = 'http://localhost:8080/servicio_tipoFuente';  // URL to web api
+  private unidadUrl = 'https://fetiweb.herokuapp.com/servicio_tipoFuente';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Unidad());
   private tiposFuente: Unidad[];

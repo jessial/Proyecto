@@ -13,6 +13,7 @@ export class TableComponent implements OnInit {
   editCache = {};
   dataSet = [];
   modalConfirmacionEliminado: NzModalRef;
+  size: any = 10;
 
   constructor(private tipoCultivoService: TipoCultivoService, private modalEliminar: NzModalService) { }
 

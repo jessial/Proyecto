@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class FuenteService {
 
-  private fuenteUrl = 'http://localhost:8080/servicio_fuente';  // URL to web api
+  private fuenteUrl = 'https://fetiweb.herokuapp.com/servicio_fuente';  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Fuente());
   private fuentes: Fuente[];
@@ -30,8 +30,8 @@ export class FuenteService {
 
   /** UPDATE Fuente from the server */
   public updateOrCreate(fuente: Fuente): Observable<Fuente> {
-    const url = `${this.fuenteUrl}/actualizaRegistro`;
-    return this.http.put<TipoCultivo>(url, fuente, httpOptions).pipe(catchError(this.handleError('', null)));
+    const url = `${this.fuenteUrl}/guardado`;
+    return this.http.post<TipoCultivo>(url, fuente, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE Fuente from de server */
