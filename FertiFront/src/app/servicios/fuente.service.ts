@@ -1,52 +1,48 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Fuente } from '../clases_dominio/fuente';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
-import { Fuente } from '../clases_dominio/fuente';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 @Injectable({
   providedIn: 'root'
 })
 export class FuenteService {
 
   private fuenteUrl = 'http://localhost:8080/servicio_fuente';  // URL to web api
+  private fuentes: Fuente[];
+  private fuente: Fuente[];
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Fuente());
-  private fuentes: Fuente[];
 
   constructor(private http: HttpClient, private utilidad: UtilidadService) { }
 
-  /** GET Fuentes from the server */
-  private getBackFuente(): Observable<Fuente[]> {
+  /** GET fuentes from the server */
+  public geBackFuentes(): Observable<Fuente[]> {
     const url = `${this.fuenteUrl}/consultaTodos`;
     return this.http.get<Fuente[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
-  /** UPDATE Fuente from the server */
+  /** UPDATE RequerimientosCutivo from the server */
   public updateOrCreate(fuente: Fuente): Observable<Fuente> {
-    const url = `${this.fuenteUrl}/actualizaRegistro`;
-    return this.http.put<TipoCultivo>(url, fuente, httpOptions).pipe(catchError(this.handleError('', null)));
+    const url = `${this.fuenteUrl}/guardado`;
+    return this.http.post<Fuente>(url, fuente, httpOptions).pipe(catchError(this.handleError('', null)));
   }
 
-  /**DELETE Fuente from de server */
+  /**DELETE RequerimientoCultivo from the server */
   public deleteFuente(fuente: Fuente): void {
     const url = `${this.fuenteUrl}/borrarFuente/${fuente.codigoFuente}`;
     this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 
-  crearNuevo(fuente: Fuente) {
-    this.fuentes = [...this.fuentes, fuente];
-    this.refresh();
-  }
-
   cargarDatos() {
-    this.getBackFuente()
+    this.geBackFuentes()
       .subscribe(result => {
         this.fuentes = result;
         this.refresh();
@@ -54,12 +50,13 @@ export class FuenteService {
       );
   }
 
-  getFuentes(): Observable<Fuente[]> {
-    return this.tipoSubject.asObservable();
-  }
-
   private refresh() {
     this.tipoSubject.next(this.fuentes);
+  }
+
+  crearNuevo(fuente: Fuente) {
+    this.fuente = [...this.fuente, fuente];
+    this.refresh();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -69,6 +66,10 @@ export class FuenteService {
     };
   }
 
+  getFuentes(): Observable<Fuente[]> {
+    return this.tipoSubject.asObservable();
+  }
+
   editarFuente(fuente: Fuente) {
     this.editSubject.next(fuente);
   }
@@ -76,4 +77,5 @@ export class FuenteService {
   getFuente(): Observable<Fuente> {
     return this.editSubject.asObservable();
   }
+
 }

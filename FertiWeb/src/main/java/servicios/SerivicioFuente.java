@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controladores.ControladorDatosFuente;
 import dominio.Fuente;
+import dto.DTOFuente;
 
 @RestController
 @RequestMapping("/servicio_fuente")
@@ -30,16 +30,11 @@ public class SerivicioFuente {
 	}
 
 	@PostMapping("/guardado")
-	@ResponseBody
-	public ResponseEntity<Object> grabar(@RequestBody Fuente fuente) {
-		return this.actualizar(fuente);
-	}
-
-	@PutMapping("/actualizaRegistro")
-	@ResponseBody
-	public ResponseEntity<Object> actualizar(@RequestBody Fuente fuente) {
+	public ResponseEntity<Object> grabar(@RequestBody DTOFuente dtoFuente) {
+		Fuente fuente = controladorDatosFuente.construirDominio(dtoFuente);
 		controladorDatosFuente.guardar(fuente);
 		return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+
 	}
 
 	@DeleteMapping("borrarFuente/{id}")
