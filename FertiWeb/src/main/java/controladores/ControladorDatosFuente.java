@@ -68,7 +68,7 @@ public class ControladorDatosFuente extends ControladorDatos {
 	}
 
 	@Override
-	protected Fuente construirDominio(Object object) {
+	public Fuente construirDominio(Object object) {
 		DTOFuente dtoFuente = (DTOFuente) object;
 		Fuente fuente = new Fuente();
 		fuente.setCodigoFuente(dtoFuente.getCodigoFuente());
