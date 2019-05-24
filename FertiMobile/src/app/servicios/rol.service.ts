@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Rol } from '../dominio/rol';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+import { Rol } from '../dominio/rol';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  private rolURL = 'http://localhost:8080/servicio_rol';  // URL to web api
+  private rolURL = `${environment.URL_BASE}/servicio_rol`;  // URL to web api
+
   private roles: Rol[];
   private rolSubject = new BehaviorSubject([]);
 

@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Elemento } from '../dominio/elemento';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+import { Elemento } from '../dominio/elemento';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementoService {
 
-  private elementoUrl = 'http://localhost:8080/servicio_elemento';  // URL to web api
+  private elementoUrl = `${environment.URL_BASE}/servicio_elemento`;  // URL to web api
 
   constructor(private http: HttpClient) { }
 

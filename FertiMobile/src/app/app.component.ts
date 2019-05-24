@@ -39,6 +39,16 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
+    this.platform.backButton.subscribe(() => {
+      if (this.router.routerState.snapshot.url === '/inicio-sesion') {
+        this.confirmarCerrarAplicacion();
+      } else if (this.router.routerState.snapshot.url === '/registro-usuario') {
+        this.navCtrl.navigateRoot('inicio-sesion');
+      } else {
+        this.navCtrl.navigateRoot('home');
+      }
+    });
   }
 
   cerrarSesion() {
@@ -54,6 +64,20 @@ export class AppComponent {
         text: 'Aceptar', handler: () => {
           // this.router.navigateByUrl('/', { replaceUrl: true });
           this.navCtrl.navigateRoot('/');
+        }
+      }]
+    });
+    await alert.present();
+  }
+
+  async confirmarCerrarAplicacion() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar aplicación',
+      message: '¿Desea cerrar la aplicación?',
+      buttons: [{ text: 'Cancelar' }, {
+        text: 'Aceptar', handler: () => {
+          // this.router.navigateByUrl('/', { replaceUrl: true });
+          navigator['app'].exitApp();
         }
       }]
     });

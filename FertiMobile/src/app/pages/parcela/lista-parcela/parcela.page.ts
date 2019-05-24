@@ -1,9 +1,9 @@
-import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opciones.component';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { Parcela } from 'src/app/dominio/parcela';
-import { PopoverController, AlertController } from '@ionic/angular';
 import { ParcelaService } from 'src/app/servicios/parcela.service';
+import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opciones.component';
 
 @Component({
   selector: 'app-parcela',
