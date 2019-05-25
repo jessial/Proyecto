@@ -12,18 +12,18 @@ MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (2,'Productor',tr
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (3,'Almacenista',true);
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'gramos/tonelada');
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'kilogramos/tonelada');
-MERGE INTO elementos VALUES (1, 'Nitrogeno'); 
-MERGE INTO elementos VALUES (2, 'Fosforo');
-MERGE INTO elementos VALUES (3, 'Potasio');
-MERGE INTO elementos VALUES (4, 'Calcio');
-MERGE INTO elementos VALUES (5, 'Magnesio');
-MERGE INTO elementos VALUES (6, 'Azufre');
-MERGE INTO elementos VALUES (7, 'Boro');
-MERGE INTO elementos VALUES (8, 'Cobre');
-MERGE INTO elementos VALUES (9, 'Hierro');
-MERGE INTO elementos VALUES (10, 'Manganeso');
-MERGE INTO elementos VALUES (11, 'Molibdeno');
-MERGE INTO elementos VALUES (12, 'Zinc'); 
+MERGE INTO elementos VALUES (1, 'Nitrogeno', 14.006, 5); 
+MERGE INTO elementos VALUES (2, 'Fosforo', 30.973, 5);
+MERGE INTO elementos VALUES (3, 'Potasio', 39.102, 1);
+MERGE INTO elementos VALUES (4, 'Calcio', 40.08, 2);
+MERGE INTO elementos VALUES (5, 'Magnesio', 24.312, 2);
+MERGE INTO elementos VALUES (6, 'Azufre', 32.064, 6);
+MERGE INTO elementos VALUES (7, 'Boro', 10.811, 3);
+MERGE INTO elementos VALUES (8, 'Cobre', 63.54, 1);
+MERGE INTO elementos VALUES (9, 'Hierro', 55.847, 3);
+MERGE INTO elementos VALUES (10, 'Manganeso', 54.938, 3);
+MERGE INTO elementos VALUES (11, 'Molibdeno', 95.94, 6);
+MERGE INTO elementos VALUES (12, 'Zinc', 65.37, 2); 
 MERGE INTO requerimiento VALUES (1, 12.8, 1, true, 2, 1);
 MERGE INTO requerimiento VALUES (2, 14, 1, true, 1, 1);
 MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 1);
@@ -31,7 +31,6 @@ MERGE INTO tipo_fuente VALUES (1, 14.8, 1, 'true', 'roca fosfórica', 1);
 MERGE INTO tipo_fuente VALUES (2, 13, 2, 'true', 'cloruro de potasio', 1);
 MERGE INTO fuente VALUES (1, 1, true, 'Triple 15');
 MERGE INTO fuente VALUES (2, 2, true, 'Cloruro');
-<<<<<<< HEAD
 
 MERGE INTO fuente VALUES (2, 2, true, 'Cloruro');
 MERGE INTO usuario VALUES(1036926701, 'Sanchez', 1,'juan.sanchez@ceiba.com.co', 'Juan', 'juan123',6148084);
@@ -39,13 +38,6 @@ MERGE INTO usuario VALUES(1047969124, 'Alarcon', 1,'jessica.alarcon@ceiba.com.co
 MERGE INTO analisis VALUES(1,1, Sysdate);
 MERGE INTO parcela VALUES(1,10000,1,1,Sysdate);
 MERGE INTO lugar VALUES(1,1036926701,'La Honda', 'Rio abajo');
-=======
-MERGE INTO usuario VALUES(1036926701, 'Sánchez', 1,'juan.sanchez@ceiba.com.co', 'Juan', 'juan123',6148084);
-MERGE INTO usuario VALUES(1047969124, 'Alarcón', 1,'jessica.alarcon@ceiba.com.co', 'Jessica', 'jessica123',3233986371);
-MERGE INTO analisis VALUES(1,1, Sysdate);
-MERGE INTO parcela VALUES(1,10000,1,1,Sysdate);
-MERGE INTO  lugar VALUES(1,1036926701,'La Honda', 'Rio abajo');
->>>>>>> d7ed9f16bb4cfa80016bf8ae2a5833a865760237
 MERGE INTO elementoxanalisis VALUES(1,4,1,1,1);
 MERGE INTO elementoxanalisis VALUES(2,6,1,2,2);
 MERGE INTO elementoxanalisis VALUES(3,8,1,3,1);

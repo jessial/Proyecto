@@ -11,5 +11,7 @@ public class Elemento {
 
 	private Long codigoElemento;
 	private String elemento;
+	private Double pesoAtomico;
+	private Integer valencia;
 
 }

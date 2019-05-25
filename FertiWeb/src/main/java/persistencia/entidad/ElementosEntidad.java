@@ -19,5 +19,9 @@ public class ElementosEntidad {
 	private Long codigoElemento;
 	@Column(name = "elemento")
 	private String elemento;
+	@Column(name = "peso_atomico")
+	private Double pesoAtomico;
+	@Column(name = "valencia")
+	private Integer valencia;
 
 }
