@@ -9,6 +9,8 @@ import persistencia.entidad.FuenteEntidad;
 
 public interface FuenteRepository extends JpaRepository<FuenteEntidad, Long> {
 
+	FuenteEntidad findBycodigoFuente(Long codigoFuente);
+
 	@Query(value = "SELECT DISTINCT F.* " + "	FROM FUENTE F, TIPO_FUENTE TF"
 			+ "	WHERE F.FUE_CODIGO_TIPO_FUENTE = TF.TF_CODIGO " + "	AND TF.TF_CODIGO_ELEMENTO = 1 ", nativeQuery = true)
 	List<FuenteEntidad> findAllByNitrogeno();

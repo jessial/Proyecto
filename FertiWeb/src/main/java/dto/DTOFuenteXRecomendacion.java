@@ -1,6 +1,5 @@
 package dto;
 
-import dominio.Fuente;
 import dominio.Unidad;
 import lombok.Data;
 
@@ -8,7 +7,7 @@ import lombok.Data;
 public class DTOFuenteXRecomendacion {
 	
 	private Long codigoFuenteXRecomendacion;
-	private Fuente fuente;
+	private DTOFuente fuente;
 	private Double cantidad;
 	private Unidad unidad;
 	private Long codigoRecomendacion;

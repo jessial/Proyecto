@@ -27,7 +27,7 @@ MERGE INTO elementos VALUES (12, 'Zinc', 65.37, 2);
 MERGE INTO requerimiento VALUES (1, 12.8, 1, true, 2, 1);
 MERGE INTO requerimiento VALUES (2, 14, 1, true, 1, 1);
 MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 1);
-MERGE INTO tipo_fuente VALUES (1, 14.8, 1, 'true', 'roca fosfórica', 1);
+MERGE INTO tipo_fuente VALUES (1, 14.8, 1, 'true', 'Nitritos', 1);
 MERGE INTO tipo_fuente VALUES (2, 13, 2, 'true', 'cloruro de potasio', 1);
 MERGE INTO fuente VALUES (1, 1, true, 'Triple 15');
 MERGE INTO fuente VALUES (2, 2, true, 'Cloruro');
@@ -41,3 +41,5 @@ MERGE INTO lugar VALUES(1,1036926701,'La Honda', 'Rio abajo');
 MERGE INTO elementoxanalisis VALUES(1,4,1,1,1);
 MERGE INTO elementoxanalisis VALUES(2,6,1,2,2);
 MERGE INTO elementoxanalisis VALUES(3,8,1,3,1);
+MERGE INTO recomendacion VALUES(1, 1, Sysdate);
+MERGE INTO fuentexrecomendacion VALUES(1, 23.0, 1, 1, 1)

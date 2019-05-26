@@ -29,6 +29,10 @@ public class ControladorDatosFuente extends ControladorDatos {
 		return construirListaDTO(fuentes);
 	}
 
+	public DTOFuente consultarFuenteXId(Long codigoFuente) {
+		return construirDTO(mapearADominio(fuenteRepository.findBycodigoFuente(codigoFuente)));
+	}
+
 	public List<DTOFuente> consultarFuentesParaNitrogeno() {
 		List<Fuente> fuentes = mapearListaADominio(fuenteRepository.findAllByNitrogeno());
 		return construirListaDTO(fuentes);
