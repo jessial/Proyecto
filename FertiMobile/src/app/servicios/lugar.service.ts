@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment.prod';
 import { Lugar } from './../dominio/lugar';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +13,8 @@ const httpOptions = {
 })
 export class LugarService {
 
-  private lugarURL = 'http://localhost:8080/servicio_lugar';  // URL to web api
+  private lugarURL = `${environment.URL_BASE}/servicio_lugar`;  // URL to web api
+
   private lugares: Lugar[];
   private lugarSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Lugar());

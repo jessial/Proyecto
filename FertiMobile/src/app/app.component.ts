@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, AlertController, MenuController } from '@ionic/angular';
+import { Platform, AlertController, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -30,7 +30,7 @@ export class AppComponent {
 
   constructor(private platform: Platform, private splashScreen: SplashScreen,
     private statusBar: StatusBar, private alertController: AlertController,
-    private router: Router, public menu: MenuController) {
+    private router: Router, private navCtrl: NavController, public menu: MenuController) {
     this.initializeApp();
   }
 
@@ -38,6 +38,16 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    });
+
+    this.platform.backButton.subscribe(() => {
+      if (this.router.routerState.snapshot.url === '/inicio-sesion') {
+        this.confirmarCerrarAplicacion();
+      } else if (this.router.routerState.snapshot.url === '/registro-usuario') {
+        this.navCtrl.navigateRoot('inicio-sesion');
+      } else {
+        this.navCtrl.navigateRoot('home');
+      }
     });
   }
 
@@ -52,7 +62,22 @@ export class AppComponent {
       message: '¿Desea finalizar la sesión?',
       buttons: [{ text: 'Cancelar' }, {
         text: 'Aceptar', handler: () => {
-          this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/', { replaceUrl: true });
+          this.navCtrl.navigateRoot('/');
+        }
+      }]
+    });
+    await alert.present();
+  }
+
+  async confirmarCerrarAplicacion() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar aplicación',
+      message: '¿Desea cerrar la aplicación?',
+      buttons: [{ text: 'Cancelar' }, {
+        text: 'Aceptar', handler: () => {
+          // this.router.navigateByUrl('/', { replaceUrl: true });
+          navigator['app'].exitApp();
         }
       }]
     });

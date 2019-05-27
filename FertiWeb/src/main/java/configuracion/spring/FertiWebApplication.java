@@ -13,15 +13,16 @@ import controladores.ControladorDatosAnalisis;
 import controladores.ControladorDatosElemento;
 import controladores.ControladorDatosElementoXAnalisis;
 import controladores.ControladorDatosFuente;
+import controladores.ControladorDatosFuenteXRecomendacion;
 import controladores.ControladorDatosLugar;
 import controladores.ControladorDatosParcela;
+import controladores.ControladorDatosRecomendacion;
 import controladores.ControladorDatosRequerimiento;
 import controladores.ControladorDatosRol;
 import controladores.ControladorDatosTipoCultivo;
 import controladores.ControladorDatosTipoFuente;
 import controladores.ControladorDatosUnidad;
 import controladores.ControladorDatosUsuario;
-import controladores.ControladorDeDatosRecomendacion;
 import controladores.ControladorSeguridad;
 
 @SpringBootApplication
@@ -106,8 +107,13 @@ public class FertiWebApplication {
 	}
 
 	@Bean
-	public ControladorDeDatosRecomendacion crearControladorDeDatosRecomendacion() {
-		return new ControladorDeDatosRecomendacion();
+	public ControladorDatosRecomendacion crearControladorDeDatosRecomendacion() {
+		return new ControladorDatosRecomendacion();
+	}
+
+	@Bean
+	public ControladorDatosFuenteXRecomendacion crearControladorDeDatosFuentesXRecomendacion() {
+		return new ControladorDatosFuenteXRecomendacion();
 	}
 
 }

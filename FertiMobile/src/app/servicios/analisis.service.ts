@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DTOAnalisis } from '../dto/dto-analisis';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,7 +12,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AnalisisService {
-  private analisisUrl = 'http://localhost:8080/servicio_analisis';  // URL to web api
+
+  private analisisUrl = `${environment.URL_BASE}/servicio_analisis`;  // URL to web api
   private detalleAnalisis: DTOAnalisis;
   private analisis: DTOAnalisis[];
   private analisisSubject = new BehaviorSubject([]);

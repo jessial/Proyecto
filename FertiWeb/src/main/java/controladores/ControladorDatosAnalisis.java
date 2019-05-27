@@ -67,7 +67,11 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 				controladorDatosElementoXAnalisis.consultarElementoPorAnalisis(analisis.getCodigoAnalisis()));
 		return dtoAnalisis;
 	}
-	
+
+	public DTOAnalisis consultarAnalisisXId(Long codigoAnalisis) {
+		return construirDTO(mapearADominio(analisisRepository.findByCodigoAnalisis(codigoAnalisis)));
+	}
+
 	@Override
 	protected Analisis construirDominio(Object object) {
 		DTOAnalisis dtoAnalisis = (DTOAnalisis) object;
@@ -96,7 +100,7 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		Analisis analisis = (Analisis) object;
 		analisisRepository.save(mapearAEntidad(analisis));
 	}
-	
+
 	@Transactional
 	public Analisis guardarAnalisis(Analisis analisis) {
 		return mapearADominio(analisisRepository.save(mapearAEntidad(analisis)));
@@ -129,7 +133,7 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		Pageable paginador = PageRequest.of(pagina, 10);
 		return construirDTO(analisisRepository.findAll(paginador));
 	}
-	
+
 	public DTOAnalisisPaginado consultarXUsuarioPaginado(Long codigoUsuario, int pagina) {
 		Pageable paginador = PageRequest.of(pagina, 10);
 		return construirDTO(analisisRepository.findAllByCodigoUsuario(codigoUsuario, paginador));

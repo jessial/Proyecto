@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { TipoCultivo } from './../dominio/tipo-cultivo';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+import { TipoCultivo } from './../dominio/tipo-cultivo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoCultivoService {
 
-  private tipoCultivoURL = 'http://localhost:8080/servicio_tipo_cultivo';
+  private tipoCultivoURL = `${environment.URL_BASE}/servicio_tipo_cultivo`;  // URL to web api
 
   constructor(private http: HttpClient) { }
 

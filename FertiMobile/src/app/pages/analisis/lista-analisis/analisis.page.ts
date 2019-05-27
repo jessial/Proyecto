@@ -1,7 +1,7 @@
-import { DTOAnalisis } from './../../../dto/dto-analisis';
-import { AnalisisService } from './../../../servicios/analisis.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DTOAnalisis } from './../../../dto/dto-analisis';
+import { AnalisisService } from './../../../servicios/analisis.service';
 
 @Component({
   selector: 'app-analisis',

@@ -14,4 +14,6 @@ public interface ParcelaRepository extends JpaRepository<ParcelaEntidad, Long> {
 
 	ParcelaEntidad findByCodigoParcela(Long codigoParcela);
 
+	List<ParcelaEntidad> findByCodigoCultivoSembrado(Long codigoTipoCultivo);
+
 }

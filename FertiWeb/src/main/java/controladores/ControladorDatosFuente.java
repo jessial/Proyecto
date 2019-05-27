@@ -13,11 +13,11 @@ import dto.DTOFuente;
 import persistencia.entidad.FuenteEntidad;
 import persistencia.repositorio.FuenteRepository;
 
-public class ControladorDatosFuente extends ControladorDatos{
+public class ControladorDatosFuente extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
-	
+
 	@Autowired
 	private FuenteRepository fuenteRepository;
 
@@ -29,11 +29,29 @@ public class ControladorDatosFuente extends ControladorDatos{
 		return construirListaDTO(fuentes);
 	}
 
-	private List<Fuente> mapearListaADominio(List<FuenteEntidad> fuenteEntidadList) {
-		return fuenteEntidadList.stream().map(f -> mapearADominio(f))
-				.collect(Collectors.toCollection(ArrayList::new));
+	public DTOFuente consultarFuenteXId(Long codigoFuente) {
+		return construirDTO(mapearADominio(fuenteRepository.findBycodigoFuente(codigoFuente)));
 	}
-	
+
+	public List<DTOFuente> consultarFuentesParaNitrogeno() {
+		List<Fuente> fuentes = mapearListaADominio(fuenteRepository.findAllByNitrogeno());
+		return construirListaDTO(fuentes);
+	}
+
+	public List<DTOFuente> consultarFuentesParaFosforo() {
+		List<Fuente> fuentes = mapearListaADominio(fuenteRepository.findAllByFosforo());
+		return construirListaDTO(fuentes);
+	}
+
+	public List<DTOFuente> consultarFuentesParaPotasio() {
+		List<Fuente> fuentes = mapearListaADominio(fuenteRepository.findAllByPotasio());
+		return construirListaDTO(fuentes);
+	}
+
+	private List<Fuente> mapearListaADominio(List<FuenteEntidad> fuenteEntidadList) {
+		return fuenteEntidadList.stream().map(f -> mapearADominio(f)).collect(Collectors.toCollection(ArrayList::new));
+	}
+
 	protected List<DTOFuente> construirListaDTO(List<Fuente> listFuentes) {
 		List<DTOFuente> listDtoFuentes = new ArrayList<>();
 		for (Fuente fuente : listFuentes) {
@@ -52,9 +70,9 @@ public class ControladorDatosFuente extends ControladorDatos{
 		dtoFuente.setTipoFuente(controladorDatosTipoFuente.consultarTipoFuenteXId(fuente.getCodigoTipoFuente()));
 		return dtoFuente;
 	}
-	
+
 	@Override
-	protected Fuente construirDominio(Object object) {
+	public Fuente construirDominio(Object object) {
 		DTOFuente dtoFuente = (DTOFuente) object;
 		Fuente fuente = new Fuente();
 		fuente.setCodigoFuente(dtoFuente.getCodigoFuente());
@@ -82,7 +100,7 @@ public class ControladorDatosFuente extends ControladorDatos{
 		Fuente fuente = (Fuente) object;
 		fuenteRepository.save(mapearAEntidad(fuente));
 	}
-	
+
 	@Transactional
 	public void eliminarFuente(long codigoFuente) {
 		fuenteRepository.deleteById(codigoFuente);

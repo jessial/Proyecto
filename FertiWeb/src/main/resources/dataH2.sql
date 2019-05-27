@@ -1,8 +1,8 @@
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'ppm');
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'cmol/kg');
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (3,'kg/ha');
-MERGE INTO elementos VALUES (1, 'Nitrógeno'); 
-MERGE INTO elementos VALUES (2, 'Fósforo');
+MERGE INTO elementos VALUES (1, 'Nitrï¿½geno'); 
+MERGE INTO elementos VALUES (2, 'Fï¿½sforo');
 MERGE INTO elementos VALUES (3, 'Potasio');
 MERGE INTO elementos VALUES (4, 'Calcio');
 MERGE INTO elementos VALUES (5, 'Magnesio');

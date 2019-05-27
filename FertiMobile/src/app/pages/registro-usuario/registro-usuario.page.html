@@ -8,25 +8,78 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid style="margin-bottom: 20px">
     <ion-row justify-content-center>
       <ion-col align-self-center>
         <div padding>
           <form [formGroup]="formularioRegistroUsuario">
             <ion-item>
-              <ion-label position="floating">Nombre usuario</ion-label>
+              <ion-label position="floating">Número de identificación</ion-label>
+              <ion-input formControlName="numeroIdentificacion" type="number"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.numeroIdentificacion.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input formControlName="nombre" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.nombre.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input formControlName="apellido" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.apellido.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Correo electrónico</ion-label>
+              <ion-input formControlName="correo" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.correo.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label>Rol</ion-label>
+              <ion-select placeholder="Rol" formControlName="rol">
+                <ion-select-option *ngFor="let rol of roles" [value]="rol">
+                  {{rol.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div *ngIf="enviado && f.rol.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Nombre de usuario</ion-label>
               <ion-input formControlName="nombreUsuario" type="text"></ion-input>
             </ion-item>
+            <div *ngIf="enviado && f.nombreUsuario.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="password" type="password"></ion-input>
             </ion-item>
+            <div *ngIf="enviado && f.password.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
           </form>
-        </div>
-        <div padding>
-          <ion-button expand="block" (click)="registrarUsuario()">Registrar</ion-button>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div style="position: fixed; bottom: 0px; width: 100%">
+    <div padding style="text-align: center">
+      <ion-button expand="block" (click)="registrarUsuario()">Registrar usuario</ion-button>
+    </div>
+  </div>
 </ion-content>

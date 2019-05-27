@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, AlertController } from '@ionic/angular';
-import { Lugar } from 'src/app/dominio/lugar';
-import { PopoverOpcionesComponent } from '../../popover-opciones/popover-opciones.component';
 import { Router } from '@angular/router';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { Lugar } from 'src/app/dominio/lugar';
 import { LugarService } from 'src/app/servicios/lugar.service';
+import { PopoverOpcionesComponent } from '../../popover-opciones/popover-opciones.component';
 
 @Component({
   selector: 'app-lugar',

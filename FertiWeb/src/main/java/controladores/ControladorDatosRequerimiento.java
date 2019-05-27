@@ -97,6 +97,5 @@ public class ControladorDatosRequerimiento extends ControladorDatos {
 	@Transactional
 	public void eliminarRequerimiento(Long codigoRequerimiento) {
 		requerimientoRepository.deleteById(codigoRequerimiento);
-
 	}
 }

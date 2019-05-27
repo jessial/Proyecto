@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { Parcela } from '../dominio/parcela';
 
 const httpOptions = {
@@ -12,7 +13,8 @@ const httpOptions = {
 })
 export class ParcelaService {
 
-  private parcelaURL = 'http://localhost:8080/servicio_parcela';  // URL to web api
+  private parcelaURL = `${environment.URL_BASE}/servicio_parcela`;  // URL to web api
+
   private parcelas: Parcela[];
   private parcelaSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Parcela());

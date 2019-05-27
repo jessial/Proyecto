@@ -13,7 +13,7 @@ import dto.DTOTipoFuente;
 import persistencia.entidad.TipoFuenteEntidad;
 import persistencia.repositorio.TipoFuenteRepository;
 
-public class ControladorDatosTipoFuente extends ControladorDatos{
+public class ControladorDatosTipoFuente extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
@@ -23,10 +23,9 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 
 	@Autowired
 	private ControladorDatosUnidad controladorDatosUnidad;
-	
+
 	@Autowired
 	private ControladorDatosElemento controladorDatosElemento;
-
 
 	public List<DTOTipoFuente> consultarTipoFuentes() {
 		List<TipoFuente> listTipoFuente = mapearListaADominio(tipoFuenteRepository.findAll());
@@ -37,7 +36,7 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		return listTipoFuenteEntidad.stream().map(a -> mapearADominio(a))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
-	
+
 	protected List<DTOTipoFuente> construirListaDTO(List<TipoFuente> listTipoFuente) {
 		List<DTOTipoFuente> listDTOTipoFuente = new ArrayList<>();
 		for (TipoFuente tipoFuente : listTipoFuente) {
@@ -46,8 +45,8 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		return listDTOTipoFuente;
 	}
 
-	public TipoFuente consultarTipoFuenteXId(Long codigoTipoFuente) {
-		return mapearADominio(tipoFuenteRepository.findByCodigo(codigoTipoFuente));
+	public DTOTipoFuente consultarTipoFuenteXId(Long codigoTipoFuente) {
+		return construirDTO(mapearADominio(tipoFuenteRepository.findByCodigo(codigoTipoFuente)));
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		dtoTipoFuente.setElemento(controladorDatosElemento.consultarElementosXId(tipoFuente.getCodigoElemento()));
 		return dtoTipoFuente;
 	}
-	
+
 	@Override
 	public TipoFuente construirDominio(Object object) {
 		DTOTipoFuente dtoTipoFuente = (DTOTipoFuente) object;
@@ -94,7 +93,7 @@ public class ControladorDatosTipoFuente extends ControladorDatos{
 		TipoFuente tipoFuente = (TipoFuente) object;
 		tipoFuenteRepository.save(mapearAEntidad(tipoFuente));
 	}
-	
+
 	@Transactional
 	public void eliminarTipoFuente(long codigo) {
 		tipoFuenteRepository.deleteById(codigo);
