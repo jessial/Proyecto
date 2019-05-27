@@ -1,55 +1,65 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { UsuarioSeguridad } from '../dominio/usuario-seguridad';
-import { Observable, throwError } from 'rxjs';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
-import { NavController, MenuController } from '@ionic/angular';
+import { UsuarioSeguridad } from '../dominio/usuario-seguridad';
 
+const credenciales = btoa('FertiFront' + ':' + 'fertipass');
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': 'Basic ' + credenciales
+  })
 };
-
 @Injectable({
   providedIn: 'root'
 })
 export class SeguridadService {
 
-  private loginUrl = `${environment.URL_BASE}/login`;
-  private router: Router;
+  private loginUrl = `${environment.URL_BASE}/oauth/token`;
+  private _isLogged = false;
+  private _token: string;
 
-  constructor(private http: HttpClient, private navCtrl: NavController,
-    private menu: MenuController) { }
+  constructor(private http: HttpClient, private navCtrl: NavController) { }
 
-  public getAuth(usuario: UsuarioSeguridad): void {
-    this.http.post<Observable<boolean>>(this.loginUrl, usuario).subscribe(isValid => {
-      if (isValid) {
-        sessionStorage.setItem(
-          'token',
-          btoa(usuario.cedula + ':' + usuario.password)
-        );
-        this.menu.enable(true);
-        this.navCtrl.navigateRoot('home');
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }
-  public getAuth1(usuario: UsuarioSeguridad): void {
-    this.http.post<Observable<boolean>>(this.loginUrl, usuario, httpOptions).pipe(catchError(e => {
-      this.noAutorizado(e);
-      return throwError(e);
-    }));
+  public getAuth(usuario: UsuarioSeguridad): any {
+    const params = new URLSearchParams();
+    params.set('grant_type', 'password');
+    params.set('username', usuario.nombreUsuario);
+    params.set('password', usuario.password);
+    return this.http.post<Observable<any>>(this.loginUrl, params.toString(), httpOptions);
   }
 
-  private noAutorizado(e): boolean {
-    if (e.status === 401 || e.status === 403) {
-      this.router.navigate(['/login']);
-      return true;
+  isAuthenticated(): boolean {
+    return this._isLogged;
+  }
+
+  obtenerDatosToken(token: string): any {
+    if (token != null) {
+      return JSON.parse(atob(token.split('.')[1]));
     }
-    return false;
+    return null;
+  }
+
+  guardarToken(token: string): void {
+    this._token = token;
+    this._isLogged = true;
+    sessionStorage.setItem('token', token);
+  }
+
+  logout(): void {
+    this._token = null;
+    this._isLogged = false;
+    sessionStorage.clear();
+    this.navCtrl.navigateRoot('/');
+  }
+
+  agregarAuthorization(httpHeaders: HttpHeaders) {
+    if (this._token != null) {
+      return httpHeaders.append('Authorization', 'Bearer ' + this._token);
+    }
+    return httpHeaders;
   }
 
 }

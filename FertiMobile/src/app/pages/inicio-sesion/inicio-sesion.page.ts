@@ -1,9 +1,9 @@
-import { SeguridadService } from './../../servicios/seguridad.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, NavController, ToastController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { UsuarioSeguridad } from './../../dominio/usuario-seguridad';
+import { SeguridadService } from './../../servicios/seguridad.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,14 +15,14 @@ export class InicioSesionPage implements OnInit {
   enviado = false;
   formularioInicioSesion: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router,
+  constructor(private fb: FormBuilder, private router: Router, private navCtrl: NavController,
     private menu: MenuController, private seguridadService: SeguridadService) {
     this.menu.enable(false);
   }
 
   ngOnInit() {
     this.formularioInicioSesion = this.fb.group({
-      cedula: [null, [Validators.required]],
+      nombreUsuario: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
   }
@@ -33,9 +33,18 @@ export class InicioSesionPage implements OnInit {
       return null;
     }
     const usuario = new UsuarioSeguridad();
-    usuario.cedula = this.f.cedula.value;
+    usuario.nombreUsuario = this.f.nombreUsuario.value;
     usuario.password = this.f.password.value;
-    this.seguridadService.getAuth(usuario);
+    this.seguridadService.getAuth(usuario).subscribe(response => {
+      this.seguridadService.guardarToken(response.access_token);
+      this.menu.enable(true);
+      this.navCtrl.navigateRoot('home');
+      // this.utilidad.mensajeExito('Éxito', 'Bienvenido');
+    }, err => {
+      if (err.status === 400) {
+        // this.utilidad.mensajeAlerta('Error', 'Usuario o clave incorrecta');
+      }
+    });
   }
 
   get f() { return this.formularioInicioSesion.controls; }
