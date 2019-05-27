@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,14 @@ export class UtilidadService {
   }
 
   public mensajeError(mensaje: string) {
-    this.mensajeComponent.error('Ocurrio un Error', 'Ocurrio un error consultando el servidor por favor verifique su conexion a internet');
+    this.mensajeComponent.error('Ocurrió un error', 'Ocurrió un error consultando el servidor por favor verifique su conexion a internet');
   }
 
   public mensajeAlerta(titulo: string, mensaje: string) {
     this.mensajeComponent.warning(titulo, mensaje);
+  }
+
+  public mensajeErrorEliminar(mensaje: any): void {
+    this.mensajeComponent.error('Ocurrió un error', mensaje);
   }
 }

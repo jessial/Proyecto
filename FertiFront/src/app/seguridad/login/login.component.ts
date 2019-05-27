@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       else{
         this.seguridadService.guardarToken(response.access_token);
         this.router.navigate(['/lista_parcelas']);
-        this.utilidad.mensajeExito('Exito', 'Bienvenido');
+        this.utilidad.mensajeExito('Éxito', 'Bienvenido');
       }
     }, err => {
       if(err.status == 400){

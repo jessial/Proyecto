@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 import { catchError } from 'rxjs/operators';
+import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
 import { UtilidadService } from './utilidad.service';
-import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class TipoCultivoService {
   /**DELETE TipoCultivo from de server */
   public deleteTipoCultivo(tipoCultivo: TipoCultivo): void {
     const url = `${this.tipoCultivoUrl}/borrarTipoCultivo/${tipoCultivo.codigoTipoCultivo}`;
-    this.http.delete(url).subscribe(_ => this.cargarDatos());
+    this.http.delete(url).subscribe(_ => this.cargarDatos(), error => this.utilidad.mensajeErrorEliminar(error.error.message));
   }
 
   crearNuevo(tipoCultivo: TipoCultivo) {
