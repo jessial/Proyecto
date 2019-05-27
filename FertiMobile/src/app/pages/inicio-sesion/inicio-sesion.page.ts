@@ -1,3 +1,4 @@
+import { SeguridadService } from './../../servicios/seguridad.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,14 +15,14 @@ export class InicioSesionPage implements OnInit {
   enviado = false;
   formularioInicioSesion: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private navCtrl: NavController,
-    private menu: MenuController, private toastController: ToastController) {
+  constructor(private fb: FormBuilder, private router: Router,
+    private menu: MenuController, private seguridadService: SeguridadService) {
     this.menu.enable(false);
   }
 
   ngOnInit() {
     this.formularioInicioSesion = this.fb.group({
-      nombreUsuario: [null, [Validators.required]],
+      cedula: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
   }
@@ -32,23 +33,9 @@ export class InicioSesionPage implements OnInit {
       return null;
     }
     const usuario = new UsuarioSeguridad();
-    usuario.nombreUsuario = this.f.nombreUsuario.value;
+    usuario.cedula = this.f.cedula.value;
     usuario.password = this.f.password.value;
-    // TODO: Consumir servicio incio de sesión...
-    if (usuario.nombreUsuario === 'admin' && usuario.password === 'admin') {
-      this.menu.enable(true);
-      this.navCtrl.navigateRoot('home');
-    } else {
-      this.presentToast();
-    }
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Usuario o contraseña incorrectos.',
-      duration: 2000
-    });
-    toast.present();
+    this.seguridadService.getAuth(usuario);
   }
 
   get f() { return this.formularioInicioSesion.controls; }

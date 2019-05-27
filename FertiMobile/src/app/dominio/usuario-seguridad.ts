@@ -1,4 +1,4 @@
 export class UsuarioSeguridad {
-    nombreUsuario: string;
-    password: string;
+    public cedula: number;
+    public password: string;
 }
