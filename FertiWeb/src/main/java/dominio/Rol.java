@@ -12,5 +12,6 @@ public class Rol {
 	private Long codigo;
 	private String nombre;
 	private boolean estado;
+	private String tipoRol;
 
 }

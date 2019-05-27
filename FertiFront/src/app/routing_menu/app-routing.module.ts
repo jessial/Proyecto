@@ -10,20 +10,21 @@ import { TableTipoFuenteComponent } from '../table-tipo-fuente/table-tipo-fuente
 import { TableFuenteComponent } from '../table-fuente/table-fuente.component';
 import { TableParcelaComponent } from '../table-parcela/table-parcela.component';
 import { TableAnalisisComponent } from '../table-analisis/table-analisis.component';
+import { GuardSeguridadGuard } from '../seguridad/guards/guard-seguridad.guard';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'ingreso_tipo_cultivo', component: FormComponent },
-  { path: 'lista_tipo_cultivo', component: TableComponent },
-  { path: 'lista_roles', component: TableRolComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: 'ingreso_tipo_cultivo', component: FormComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'lista_tipo_cultivo', component: TableComponent , canActivate:[GuardSeguridadGuard] },
+  { path: 'lista_roles', component: TableRolComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'menu', component: MenuComponent , canActivate:[GuardSeguridadGuard]},
   { path: 'login', component: LoginComponent },
-  { path: 'lista_requerimientos', component: TableRequerimientosCultivoComponent },
-  { path: 'lista_tipo_fuente', component: TableTipoFuenteComponent },
-  { path: 'lista_fuente', component: TableFuenteComponent },
-  { path: 'lista_parcelas', component: TableParcelaComponent },
-  { path: 'lista_analisis', component: TableAnalisisComponent }
+  { path: 'lista_requerimientos', component: TableRequerimientosCultivoComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'lista_tipo_fuente', component: TableTipoFuenteComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'lista_fuente', component: TableFuenteComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'lista_parcelas', component: TableParcelaComponent , canActivate:[GuardSeguridadGuard]},
+  { path: 'lista_analisis', component: TableAnalisisComponent , canActivate:[GuardSeguridadGuard]}
 
 ];
 

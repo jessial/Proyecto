@@ -7,9 +7,12 @@ MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) 
 MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) VALUES (7,'Aguacate','Pinkerton',true);
 MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) VALUES (8,'Aguacate','Reed',true);
 MERGE INTO tipo_cultivo (`cul_codigo`,`cul_nombre`,`cul_variedad`,`cul_estado`) VALUES (9,'Aguacate','Zutano',true);
-MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (1,'Administrador',true);
-MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (2,'Productor',true);
-MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`) VALUES (3,'Almacenista',true);
+
+MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (1,'Administrador',true, 'ROLE_ADMIN');
+MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (2,'Productor',true, 'ROLE_USER');
+MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (3,'Almacenista',true, 'ROLE_USER');
+
+
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'gramos/tonelada');
 Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'kilogramos/tonelada');
 MERGE INTO elementos VALUES (1, 'Nitrogeno'); 
@@ -41,3 +44,5 @@ MERGE INTO lugar VALUES(1,1036926701,'La Honda', 'Rio abajo');
 MERGE INTO elementoxanalisis VALUES(1,4,1,1,1);
 MERGE INTO elementoxanalisis VALUES(2,6,1,2,2);
 MERGE INTO elementoxanalisis VALUES(3,8,1,3,1);
+MERGE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(1, 'Administrador', '$2a$10$OErv.iLt03pww2NcIyTgWu3kmUc5mapfOzrNTdEae9KKFfYOw.Kqa', true, 1);
+MERGE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(2, 'Productor', '$2a$10$Hn49HhvxMX.NWuyQM5iJ6.511X/g6f0fL0R3GJ4Wv0hrbn5J8ExQ.', true, 2);

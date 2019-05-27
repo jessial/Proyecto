@@ -4,10 +4,7 @@ import { UtilidadService } from './utilidad.service';
 import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { Observable, of, BehaviorSubject } from '../../../node_modules/rxjs';
 import { catchError } from '../../../node_modules/rxjs/operators';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,7 @@ export class TipoFuenteService {
   private editSubject = new BehaviorSubject(new TipoFuente());
   private tiposFuente: TipoFuente[];
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET TiposDeFuente from the server */
   public getBackTipoFuente(): Observable<TipoFuente[]> {
@@ -30,7 +27,7 @@ export class TipoFuenteService {
   /** UPDATE TipoFuente from the server */
   public updateOrCreate(tipoFuente: TipoFuente): Observable<TipoFuente> {
     const url = `${this.tipoFuenteUrl}/guardado`;
-    return this.http.put<TipoFuente>(url, tipoFuente, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.put<TipoFuente>(url, tipoFuente).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE TipoFuente from the server */

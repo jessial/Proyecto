@@ -22,5 +22,7 @@ public class UsuarioSeguridadEntidad {
 	private String password;
 	
 	private boolean estado;
+	
+	private Long codigorol;
 
 }

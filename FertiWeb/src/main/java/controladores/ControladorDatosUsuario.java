@@ -6,6 +6,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Usuario;
+import dominio.UsuarioSeguridad;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.UsuarioEntidad;
@@ -20,6 +21,10 @@ public class ControladorDatosUsuario {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private ControladorSeguridad controladorSeguridad;
+	
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();
@@ -34,8 +39,19 @@ public class ControladorDatosUsuario {
 		if (!usuarioExisteEnBd(usuario.getCedula())) {
 			mapperDozer.map(usuario, usuarioEntidad);
 			usuarioRepository.save(usuarioEntidad);
+			crearUsuarioSeguridad(usuario);
+			
+			
 		}
 
+	}
+
+	private void crearUsuarioSeguridad(Usuario usuario) {
+		UsuarioSeguridad usuarioSeguridad = new UsuarioSeguridad();
+		usuarioSeguridad.setNombreUsuario(usuario.getCedula().toString());
+		usuarioSeguridad.setPassword(usuario.getPassword());
+		usuarioSeguridad.setEstado(true);
+		controladorSeguridad.guardarUsuario(usuarioSeguridad);
 	}
 
 	public boolean usuarioExisteEnBd(Long cedula) {

@@ -5,17 +5,15 @@ import { UtilidadService } from './utilidad.service';
 import { AnalisisPaginado } from '../clases_dominio/analisis-paginado';
 import { catchError } from 'rxjs/operators';
 import { Filtro } from '../clases_dominio/filtro';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalisisService {
   private analisisUrl = 'http://localhost:8080/servicio_analisis';  // URL to web api
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET Analisis from the server */
   private getBackAnalisisPaginado(filtro: Filtro): Observable<AnalisisPaginado> {

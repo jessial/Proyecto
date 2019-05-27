@@ -4,10 +4,7 @@ import { UtilidadService } from './utilidad.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Rol } from '../clases_dominio/rol';
 import { catchError, map, tap } from 'rxjs/operators';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,7 @@ export class RolService {
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Rol());
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET roles from the server */
   public geBackRoles(): Observable<Rol[]> {
@@ -30,7 +27,7 @@ export class RolService {
   /** UPDATE roles from the server */
   public updateOrCreate(rol: Rol): Observable<Rol> {
     const url = `${this.rolUrl}/actualizaRegistro`;
-    return this.http.put<Rol>(url, rol, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.put<Rol>(url, rol).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE ROLES from the server */

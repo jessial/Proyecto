@@ -4,11 +4,7 @@ import { Fuente } from '../clases_dominio/fuente';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +17,7 @@ export class FuenteService {
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Fuente());
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET fuentes from the server */
   public geBackFuentes(): Observable<Fuente[]> {
@@ -32,7 +28,7 @@ export class FuenteService {
   /** UPDATE RequerimientosCutivo from the server */
   public updateOrCreate(fuente: Fuente): Observable<Fuente> {
     const url = `${this.fuenteUrl}/guardado`;
-    return this.http.post<Fuente>(url, fuente, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.post<Fuente>(url, fuente).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE RequerimientoCultivo from the server */
