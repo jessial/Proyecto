@@ -4,10 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 import { catchError } from 'rxjs/operators';
 import { UtilidadService } from './utilidad.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,7 @@ export class TipoCultivoService {
   private editSubject = new BehaviorSubject(new TipoCultivo());
   private tiposCultivo: TipoCultivo[];
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET TiposCutivo from the server */
   public getBackTiposCultivo(): Observable<TipoCultivo[]> {
@@ -30,13 +27,12 @@ export class TipoCultivoService {
   /** UPDATE TiposCutivo from the server */
   public updateOrCreate(tipoCultivo: TipoCultivo): Observable<TipoCultivo> {
     const url = `${this.tipoCultivoUrl}/actualizaRegistro`;
-    return this.http.put<TipoCultivo>(url, tipoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.put<TipoCultivo>(url, tipoCultivo).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE TipoCultivo from de server */
   public deleteTipoCultivo(tipoCultivo: TipoCultivo): void {
     const url = `${this.tipoCultivoUrl}/borrarTipoCultivo/${tipoCultivo.codigoTipoCultivo}`;
-    console.log(url);
     this.http.delete(url).subscribe(_ => this.cargarDatos());
   }
 

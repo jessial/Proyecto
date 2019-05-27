@@ -1,5 +1,5 @@
 export class UsuarioSeguridad {
 
-    public cedula: number;
+    public nombreUsuario: string;
     public password: string;
 }

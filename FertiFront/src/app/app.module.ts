@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -30,6 +30,7 @@ import { FormTipoCultivoEdicionComponent } from './form-tipo-cultivo-edicion/for
 import { FormFuenteEdicionComponent } from './form-fuente-edicion/form-fuente-edicion.component';
 import { TableParcelaComponent } from './table-parcela/table-parcela.component';
 import { TableAnalisisComponent } from './table-analisis/table-analisis.component';
+import { TokenInterceptor } from './interceptores/http-interceptor';
 
 registerLocaleData(en);
 
@@ -70,6 +71,7 @@ registerLocaleData(en);
 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   {
     provide: NZ_NOTIFICATION_CONFIG, useValue: {
       nzTop: '24px',

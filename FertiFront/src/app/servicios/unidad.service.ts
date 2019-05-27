@@ -4,11 +4,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +16,7 @@ export class UnidadService {
   private editSubject = new BehaviorSubject(new Unidad());
   private tiposFuente: Unidad[];
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET Unidad from the server */
   public getBackUnidad(): Observable<Unidad[]> {
