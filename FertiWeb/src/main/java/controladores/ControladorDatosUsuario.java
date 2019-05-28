@@ -21,27 +21,23 @@ public class ControladorDatosUsuario {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private ControladorSeguridad controladorSeguridad;
-	
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();
-		mapperDozer.map(
-				Optional.ofNullable(usuarioRepository.findByCedula(cedula)).orElseGet(() -> new UsuarioEntidad()),
-				usuario);
+		mapperDozer.map(Optional.ofNullable(usuarioRepository.findByCedula(cedula).get(0))
+				.orElseGet(() -> new UsuarioEntidad()), usuario);
 		return usuario;
 	}
 
 	public void guardarUsuarioNuevo(Usuario usuario) {
 		UsuarioEntidad usuarioEntidad = new UsuarioEntidad();
-		if (!usuarioExisteEnBd(usuario.getCedula())) {
+		if (usuarioExisteEnBd(usuario.getCedula())) {
 			mapperDozer.map(usuario, usuarioEntidad);
 			usuarioRepository.save(usuarioEntidad);
 			crearUsuarioSeguridad(usuario);
-			
-			
 		}
 
 	}
