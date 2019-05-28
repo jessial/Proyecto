@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SeguridadService } from './seguridad/servicios/seguridad.service'
+import { SeguridadService } from './seguridad/servicios/seguridad.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import { SeguridadService } from './seguridad/servicios/seguridad.service'
 export class AppComponent {
   title = 'FertiFront';
 
-  constructor(private seguridadService: SeguridadService) { }
+  constructor(public seguridadService: SeguridadService) { }
 }

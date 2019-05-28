@@ -1,17 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Elemento } from '../clases_dominio/elemento';
-import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
-import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { Elemento } from '../clases_dominio/elemento';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
+import { UtilidadService } from './utilidad.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ElementoService {
 
-  private elementoUrl = 'https://fertiweb.herokuapp.com/servicio_elemento';  // URL to web app
+  private elementoUrl = `${environment.URL_BASE}/servicio_elemento`;  // URL to web app
 
   constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 

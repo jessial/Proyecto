@@ -5,13 +5,14 @@ import { catchError } from 'rxjs/operators';
 import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
 import { SeguridadService } from '../seguridad/servicios/seguridad.service';
 import { UtilidadService } from './utilidad.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoCultivoService {
 
-  private tipoCultivoUrl = 'https://fertiweb.herokuapp.com/servicio_tipo_cultivo';  // URL to web api
+  private tipoCultivoUrl = `${environment.URL_BASE}/servicio_tipo_cultivo`;  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new TipoCultivo());
   private tiposCultivo: TipoCultivo[];

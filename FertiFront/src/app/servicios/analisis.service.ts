@@ -4,15 +4,17 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AnalisisPaginado } from '../clases_dominio/analisis-paginado';
 import { Filtro } from '../clases_dominio/filtro';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { environment } from 'src/environments/environment';
 import { UtilidadService } from './utilidad.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalisisService {
-  private analisisUrl = 'https://fertiweb.herokuapp.com/servicio_analisis';  // URL to web api
+  private analisisUrl = `${environment.URL_BASE}/servicio_analisis`;  // URL to web api
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET Analisis from the server */
   private getBackAnalisisPaginado(filtro: Filtro): Observable<AnalisisPaginado> {

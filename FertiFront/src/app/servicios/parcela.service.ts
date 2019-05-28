@@ -1,16 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { UtilidadService } from './utilidad.service';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { Parcela } from '../clases_dominio/parcela';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { Parcela } from '../clases_dominio/parcela';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
+import { UtilidadService } from './utilidad.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParcelaService {
-  private parcelaUrl = 'https://fertiweb.herokuapp.com/servicio_parcela';  // URL to web api
+  private parcelaUrl = `${environment.URL_BASE}/servicio_parcela`;  // URL to web api
   private parcelas: Parcela[];
   private tipoSubject = new BehaviorSubject([]);
   constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }

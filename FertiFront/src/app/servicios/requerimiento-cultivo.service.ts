@@ -6,13 +6,14 @@ import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 import { RequerimientoPorCultivo } from '../clases_dominio/requerimiento-por-cultivo';
 import { SeguridadService } from '../seguridad/servicios/seguridad.service';
 import { UtilidadService } from './utilidad.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequerimientoCultivoService {
 
-  private requerimientoUrl = 'https://fertiweb.herokuapp.com/servicio_requerimiento';  // URL to web api
+  private requerimientoUrl = `${environment.URL_BASE}/servicio_requerimiento`;  // URL to web api
   private httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new RequerimientoCultivo());
