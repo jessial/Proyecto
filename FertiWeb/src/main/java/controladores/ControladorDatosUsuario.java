@@ -27,17 +27,21 @@ public class ControladorDatosUsuario {
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();
-		mapperDozer.map(Optional.ofNullable(usuarioRepository.findByCedula(cedula).get(0))
-				.orElseGet(() -> new UsuarioEntidad()), usuario);
+		mapperDozer.map(
+				Optional.ofNullable(usuarioRepository.findFirstByCedula(cedula)).orElseGet(() -> new UsuarioEntidad()),
+				usuario);
 		return usuario;
 	}
 
 	public void guardarUsuarioNuevo(Usuario usuario) {
 		UsuarioEntidad usuarioEntidad = new UsuarioEntidad();
 		if (usuarioExisteEnBd(usuario.getCedula())) {
+			System.out.println("No encontré usuario");
 			mapperDozer.map(usuario, usuarioEntidad);
 			usuarioRepository.save(usuarioEntidad);
 			crearUsuarioSeguridad(usuario);
+		} else {
+			System.out.println("Encontré usuario");
 		}
 
 	}
@@ -51,7 +55,9 @@ public class ControladorDatosUsuario {
 	}
 
 	public boolean usuarioExisteEnBd(Long cedula) {
-		return null != usuarioRepository.findByCedula(cedula);
+		UsuarioEntidad u = usuarioRepository.findFirstByCedula(cedula);
+		System.out.println(u);
+		return null != usuarioRepository.findFirstByCedula(cedula);
 	}
 
 }

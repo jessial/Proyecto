@@ -14,11 +14,11 @@ import dominio.Rol;
 import persistencia.entidad.RolEntidad;
 import persistencia.repositorio.RolRepository;
 
-public class ControladorDatosRol  extends ControladorDatos{
+public class ControladorDatosRol extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
-	
+
 	@Autowired
 	private RolRepository rolRepository;
 
@@ -36,20 +36,19 @@ public class ControladorDatosRol  extends ControladorDatos{
 	@Cacheable("GlobalCacheConstant.CACHE_ROL")
 	public Rol consultarRolPorCodigo(Long codigoRol) {
 		Rol rol = new Rol();
-		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
+		mapperDozer.map(rolRepository.findFirstByCodigo(codigoRol), rol);
 		return rol;
 	}
-	
+
 	private List<Rol> mapearListaADominio(List<RolEntidad> rolEntidadList) {
-		return rolEntidadList.stream().map(a -> mapearADominio(a))
-				.collect(Collectors.toCollection(ArrayList::new));
+		return rolEntidadList.stream().map(a -> mapearADominio(a)).collect(Collectors.toCollection(ArrayList::new));
 	}
-	
+
 	@Override
 	protected Object construirDTO(Object object) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	protected Object construirDominio(Object object) {
 		throw new UnsupportedOperationException();
@@ -69,18 +68,16 @@ public class ControladorDatosRol  extends ControladorDatos{
 
 	@Transactional
 	@Override
-	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
-			"GlobalCacheConstant.CACHE_ROLES_APP", 
-			"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
+	@CacheEvict(value = { "GlobalCacheConstant.CACHE_ROL", "GlobalCacheConstant.CACHE_ROLES_APP",
+			"GlobalCacheConstant.CACHE_ROLES" }, allEntries = true)
 	public void guardar(Object object) {
 		Rol rol = (Rol) object;
 		rolRepository.save(mapearAEntidad(rol));
 	}
-	
+
 	@Transactional
-	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
-						"GlobalCacheConstant.CACHE_ROLES_APP", 
-						"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
+	@CacheEvict(value = { "GlobalCacheConstant.CACHE_ROL", "GlobalCacheConstant.CACHE_ROLES_APP",
+			"GlobalCacheConstant.CACHE_ROLES" }, allEntries = true)
 	public void eliminarRol(long codigoRol) {
 		rolRepository.deleteById(codigoRol);
 	}
