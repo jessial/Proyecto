@@ -5,13 +5,14 @@ import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { Observable, of, BehaviorSubject } from '../../../node_modules/rxjs';
 import { catchError } from '../../../node_modules/rxjs/operators';
 import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoFuenteService {
 
-  private tipoFuenteUrl = 'http://localhost:8080/servicio_tipoFuente';  // URL to web api
+  private tipoFuenteUrl = `${environment.URL_BASE}/servicio_tipoFuente`;  // URL to web api
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new TipoFuente());
   private tiposFuente: TipoFuente[];
