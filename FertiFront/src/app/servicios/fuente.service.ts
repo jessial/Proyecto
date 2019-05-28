@@ -5,13 +5,14 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
 import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuenteService {
 
-  private fuenteUrl = 'http://localhost:8080/servicio_fuente';  // URL to web api
+  private fuenteUrl = `${environment.URL_BASE}/servicio_fuente`;  // URL to web api
   private fuentes: Fuente[];
   private fuente: Fuente[];
   private tipoSubject = new BehaviorSubject([]);

@@ -1,17 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UtilidadService } from './utilidad.service';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Rol } from '../clases_dominio/rol';
-import { catchError, map, tap } from 'rxjs/operators';
-import { SeguridadService } from '../seguridad/servicios/seguridad.service'
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
+import { UtilidadService } from './utilidad.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  private rolUrl = 'http://localhost:8080/servicio_rol';  // URL to web api
+  private rolUrl = `${environment.URL_BASE}/servicio_rol`;  // URL to web api
   private roles: Rol[];
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Rol());
