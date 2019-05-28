@@ -15,3 +15,8 @@
     background: rgba(255, 255, 255, .2);
     margin: 16px;
   }
+
+.nz-button{
+    margin-left: 8px;
+    margin-bottom: 12px;
+  }

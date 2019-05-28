@@ -2,10 +2,10 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group nzPrefixIcon="anticon anticon-user">
-          <input type="text" nz-input formControlName="userName" placeholder="Documento">
+          <input type="text" nz-input formControlName="userName" placeholder="Cedula">
         </nz-input-group>
         <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Por favor
-          ingrese su numero de documento!</nz-form-explain>
+          ingrese su numero de cedula !</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -22,9 +22,7 @@
         <label nz-checkbox formControlName="remember">
           <span>Recordar mi contraseña</span>
         </label>
-        <a class="login-form-forgot" class="login-form-forgot">Olvidaste tu Contraseña ?</a>
         <button nz-button class="login-form-button" [nzType]="'primary'">Ingresar</button>
-        <a href="">Registrar Usuario</a>
       </nz-form-control>
     </nz-form-item>
   </form>

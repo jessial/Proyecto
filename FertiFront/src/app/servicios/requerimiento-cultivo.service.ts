@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UtilidadService } from './utilidad.service';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 import { RequerimientoPorCultivo } from '../clases_dominio/requerimiento-por-cultivo';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
+import { UtilidadService } from './utilidad.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +13,13 @@ const httpOptions = {
 export class RequerimientoCultivoService {
 
   private requerimientoUrl = 'https://fertiweb.herokuapp.com/servicio_requerimiento';  // URL to web api
+  private httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new RequerimientoCultivo());
   private requerimientosPorCultivo: RequerimientoPorCultivo[];
   private requerimientoCultivo: RequerimientoCultivo[];
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET RequerimientosPorCutivo from the server */
   public getBackRequerimientosPorCultivo(): Observable<RequerimientoPorCultivo[]> {
@@ -32,7 +30,7 @@ export class RequerimientoCultivoService {
   /** UPDATE RequerimientosCutivo from the server */
   public updateOrCreate(requerimientoCultivo: RequerimientoCultivo): Observable<RequerimientoCultivo> {
     const url = `${this.requerimientoUrl}/guardado`;
-    return this.http.post<RequerimientoCultivo>(url, requerimientoCultivo, httpOptions).pipe(catchError(this.handleError('', null)));
+    return this.http.post<RequerimientoCultivo>(url, requerimientoCultivo).pipe(catchError(this.handleError('', null)));
   }
 
   /**DELETE RequerimientoCultivo from the server */

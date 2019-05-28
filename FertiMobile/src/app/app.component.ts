@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-
-import { Platform, AlertController, MenuController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { AlertController, MenuController, NavController, Platform } from '@ionic/angular';
+import { SeguridadService } from './servicios/seguridad.service';
+
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ export class AppComponent {
   ];
 
   constructor(private platform: Platform, private splashScreen: SplashScreen,
-    private statusBar: StatusBar, private alertController: AlertController,
+    private statusBar: StatusBar, private alertController: AlertController, private seguridadService: SeguridadService,
     private router: Router, private navCtrl: NavController, public menu: MenuController) {
     this.initializeApp();
   }
@@ -63,7 +64,7 @@ export class AppComponent {
       buttons: [{ text: 'Cancelar' }, {
         text: 'Aceptar', handler: () => {
           // this.router.navigateByUrl('/', { replaceUrl: true });
-          this.navCtrl.navigateRoot('/');
+          this.seguridadService.logout();
         }
       }]
     });

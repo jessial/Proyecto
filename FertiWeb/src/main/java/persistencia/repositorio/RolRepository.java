@@ -11,5 +11,7 @@ public interface RolRepository extends JpaRepository<RolEntidad, Long> {
 	List<RolEntidad> findByEstado(boolean estado);
 
 	RolEntidad findByCodigo(Long codigoRol);
+
+	RolEntidad findByTipoRol(String string);
 	
 }

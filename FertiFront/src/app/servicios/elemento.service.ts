@@ -4,11 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Elemento } from '../clases_dominio/elemento';
 import { UtilidadService } from './utilidad.service';
 import { catchError } from 'rxjs/operators';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { SeguridadService } from '../seguridad/servicios/seguridad.service'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +13,7 @@ export class ElementoService {
 
   private elementoUrl = 'https://fertiweb.herokuapp.com/servicio_elemento';  // URL to web app
 
-  constructor(private http: HttpClient, private utilidad: UtilidadService) { }
+  constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET Elemento from the server */
   public getBackElementos(): Observable<Elemento[]> {

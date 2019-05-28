@@ -12,26 +12,21 @@ export class MenuComponent implements OnInit {
 
   isCollapsed = false;
   triggerTemplate = null;
-  isLogged = false;
+  isLoadingTwo = false;
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
 
 
   constructor(private seguridadService: SeguridadService) { }
 
   ngOnInit() {
-    this.logged();
   }
 
   changeTrigger(): void {
     this.triggerTemplate = this.customTrigger;
   }
 
-  logged(): void {
-    /*this.seguridadService.getAuth()
-    .subscribe(result => {
-      this.isLogged = result;
-    }
-    );*/
+  loadTwo(): void {
+    this.seguridadService.logout();
   }
 
 }
