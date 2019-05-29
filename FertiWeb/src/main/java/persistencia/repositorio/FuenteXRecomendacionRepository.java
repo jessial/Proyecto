@@ -10,4 +10,6 @@ public interface FuenteXRecomendacionRepository extends JpaRepository<FuenteXRec
 
 	List<FuenteXRecomendacionEntidad> findBycodigoRecomendacion(Long codigoRecomendacion);
 
+	FuenteXRecomendacionEntidad findFirstByCodigoFuente(Long codigoFuente);
+
 }

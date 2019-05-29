@@ -10,17 +10,24 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
 import dominio.Rol;
+import excepciones.ExcepcionClaveForanea;
 import persistencia.entidad.RolEntidad;
+import persistencia.entidad.UsuarioEntidad;
 import persistencia.repositorio.RolRepository;
+import persistencia.repositorio.UsuarioRepository;
 
-public class ControladorDatosRol  extends ControladorDatos{
+public class ControladorDatosRol extends ControladorDatos {
 
 	@Autowired
 	private DozerBeanMapper mapperDozer;
-	
+
 	@Autowired
 	private RolRepository rolRepository;
+
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@Cacheable("GlobalCacheConstant.CACHE_ROLES")
 	public List<Rol> consultarRoles() {
@@ -39,17 +46,16 @@ public class ControladorDatosRol  extends ControladorDatos{
 		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
 		return rol;
 	}
-	
+
 	private List<Rol> mapearListaADominio(List<RolEntidad> rolEntidadList) {
-		return rolEntidadList.stream().map(a -> mapearADominio(a))
-				.collect(Collectors.toCollection(ArrayList::new));
+		return rolEntidadList.stream().map(a -> mapearADominio(a)).collect(Collectors.toCollection(ArrayList::new));
 	}
-	
+
 	@Override
 	protected Object construirDTO(Object object) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	protected Object construirDominio(Object object) {
 		throw new UnsupportedOperationException();
@@ -69,19 +75,20 @@ public class ControladorDatosRol  extends ControladorDatos{
 
 	@Transactional
 	@Override
-	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
-			"GlobalCacheConstant.CACHE_ROLES_APP", 
-			"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
+	@CacheEvict(value = { "GlobalCacheConstant.CACHE_ROL", "GlobalCacheConstant.CACHE_ROLES_APP",
+			"GlobalCacheConstant.CACHE_ROLES" }, allEntries = true)
 	public void guardar(Object object) {
 		Rol rol = (Rol) object;
 		rolRepository.save(mapearAEntidad(rol));
 	}
-	
+
 	@Transactional
-	@CacheEvict(value= {"GlobalCacheConstant.CACHE_ROL",
-						"GlobalCacheConstant.CACHE_ROLES_APP", 
-						"GlobalCacheConstant.CACHE_ROLES"}, allEntries=true)
+	@CacheEvict(value = { "GlobalCacheConstant.CACHE_ROL", "GlobalCacheConstant.CACHE_ROLES_APP",
+			"GlobalCacheConstant.CACHE_ROLES" }, allEntries = true)
 	public void eliminarRol(long codigoRol) {
+		List<UsuarioEntidad> usuarios = usuarioRepository.findByCodigoRol(codigoRol);
+		if (!usuarios.isEmpty())
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_USUARIO);
 		rolRepository.deleteById(codigoRol);
 	}
 
