@@ -17,23 +17,29 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableResourceServer
-public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapter{
+public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/login").permitAll()
-		.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
-		
-		 //http.headers().frameOptions().disable();
-	     http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/login").permitAll().anyRequest().authenticated().and()
+				.cors().configurationSource(corsConfigurationSource());
+
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/servicio_usuario/guardadoUsuario").permitAll()
+				.anyRequest().anonymous().and().cors().configurationSource(corsConfigurationSource());
+
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/servicio_rol/consultaRoles").permitAll().anyRequest()
+				.anonymous().and().cors().configurationSource(corsConfigurationSource());
+
+		// http.headers().frameOptions().disable();
+		http.authorizeRequests().antMatchers("/h2-console/*").permitAll().anyRequest().anonymous().and().cors()
+				.configurationSource(corsConfigurationSource());
 
 	}
-	
+
 	@Bean
 	protected CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:8080"));
+		configuration.setAllowedOrigins(Arrays.asList("*"));
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "UPDATE", "DELETE", "PUT", "OPTIONS"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
@@ -43,8 +49,9 @@ public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapt
 	}
 
 	@Bean
-	public FilterRegistrationBean<CorsFilter> filtroCors(){
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
+	public FilterRegistrationBean<CorsFilter> filtroCors() {
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(
+				new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}

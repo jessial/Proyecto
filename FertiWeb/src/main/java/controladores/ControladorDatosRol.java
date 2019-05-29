@@ -43,7 +43,7 @@ public class ControladorDatosRol extends ControladorDatos {
 	@Cacheable("GlobalCacheConstant.CACHE_ROL")
 	public Rol consultarRolPorCodigo(Long codigoRol) {
 		Rol rol = new Rol();
-		mapperDozer.map(rolRepository.findByCodigo(codigoRol), rol);
+		mapperDozer.map(rolRepository.findFirstByCodigo(codigoRol), rol);
 		return rol;
 	}
 
