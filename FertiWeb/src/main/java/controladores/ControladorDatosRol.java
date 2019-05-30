@@ -92,10 +92,4 @@ public class ControladorDatosRol extends ControladorDatos {
 		rolRepository.deleteById(codigoRol);
 	}
 
-	public Rol obtenerRolUser() {
-		Rol rol = new Rol();
-		mapperDozer.map(rolRepository.findByTipoRol("ROLE_USER"), rol);
-		return rol;
-	}
-
 }

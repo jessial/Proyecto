@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ public class ControladorSeguridad implements UserDetailsService {
 
 	@Autowired
 	ControladorDatosRol controladorDatosRol;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -43,14 +47,13 @@ public class ControladorSeguridad implements UserDetailsService {
 	}
 	
 	public void guardarUsuario(UsuarioSeguridad usuario) {
-		usuario.setRol(controladorDatosRol.obtenerRolUser());
 		usuarioRepository.save(convertirAEntidad(usuario));
 	}
 
 	private UsuarioSeguridadEntidad convertirAEntidad(UsuarioSeguridad usuario) {
 		UsuarioSeguridadEntidad usuarioEntidad = new UsuarioSeguridadEntidad();
 		usuarioEntidad.setNombreUsuario(usuario.getNombreUsuario());
-		usuarioEntidad.setPassword(usuario.getPassword());
+		usuarioEntidad.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuarioEntidad.setEstado(usuario.isEstado());
 		usuarioEntidad.setCodigorol(usuario.getRol().getCodigo());
 		return usuarioEntidad;
