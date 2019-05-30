@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import dominio.Usuario;
 import dominio.UsuarioSeguridad;
+import excepciones.ExcepcionUsuarioDuplicado;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import persistencia.entidad.UsuarioEntidad;
@@ -16,6 +17,8 @@ import persistencia.repositorio.UsuarioRepository;
 @NoArgsConstructor
 public class ControladorDatosUsuario {
 
+	private static final String MENSAJE_ERROR = "El usuario %l ya se encuentra registrado";
+
 	@Autowired
 	private DozerBeanMapper mapperDozer;
 
@@ -24,6 +27,9 @@ public class ControladorDatosUsuario {
 
 	@Autowired
 	private ControladorSeguridad controladorSeguridad;
+	
+	@Autowired
+	ControladorDatosRol controladorDatosRol;
 
 	public Usuario consultarPorCedula(Long cedula) {
 		Usuario usuario = new Usuario();
@@ -33,15 +39,14 @@ public class ControladorDatosUsuario {
 		return usuario;
 	}
 
-	public void guardarUsuarioNuevo(Usuario usuario) {
+	public void guardarUsuarioNuevo(Usuario usuario) throws ExcepcionUsuarioDuplicado {
 		UsuarioEntidad usuarioEntidad = new UsuarioEntidad();
-		if (usuarioExisteEnBd(usuario.getCedula())) {
-			System.out.println("No encontré usuario");
+		if (usuarioNoExiste(usuario.getCedula())) {
 			mapperDozer.map(usuario, usuarioEntidad);
 			usuarioRepository.save(usuarioEntidad);
 			crearUsuarioSeguridad(usuario);
 		} else {
-			System.out.println("Encontré usuario");
+			throw new ExcepcionUsuarioDuplicado(String.format(MENSAJE_ERROR, usuario.getCedula()));
 		}
 
 	}
@@ -50,14 +55,14 @@ public class ControladorDatosUsuario {
 		UsuarioSeguridad usuarioSeguridad = new UsuarioSeguridad();
 		usuarioSeguridad.setNombreUsuario(usuario.getCedula().toString());
 		usuarioSeguridad.setPassword(usuario.getPassword());
+		usuarioSeguridad.setRol(controladorDatosRol.consultarRolPorCodigo(usuario.getCodigoRol()));
 		usuarioSeguridad.setEstado(true);
 		controladorSeguridad.guardarUsuario(usuarioSeguridad);
 	}
 
-	public boolean usuarioExisteEnBd(Long cedula) {
-		UsuarioEntidad u = usuarioRepository.findFirstByCedula(cedula);
-		System.out.println(u);
-		return null != usuarioRepository.findFirstByCedula(cedula);
+	public boolean usuarioNoExiste(Long cedula) {
+		UsuarioEntidad usuario = usuarioRepository.findFirstByCedula(cedula);
+		return null == usuario;
 	}
 
 }
