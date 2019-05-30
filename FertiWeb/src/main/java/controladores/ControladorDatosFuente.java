@@ -8,10 +8,13 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
 import dominio.Fuente;
 import dto.DTOFuente;
+import excepciones.ExcepcionClaveForanea;
 import persistencia.entidad.FuenteEntidad;
 import persistencia.repositorio.FuenteRepository;
+import persistencia.repositorio.FuenteXRecomendacionRepository;
 
 public class ControladorDatosFuente extends ControladorDatos {
 
@@ -20,6 +23,9 @@ public class ControladorDatosFuente extends ControladorDatos {
 
 	@Autowired
 	private FuenteRepository fuenteRepository;
+
+	@Autowired
+	private FuenteXRecomendacionRepository fuenteXRecomendacionRepository;
 
 	@Autowired
 	private ControladorDatosTipoFuente controladorDatosTipoFuente;
@@ -103,6 +109,8 @@ public class ControladorDatosFuente extends ControladorDatos {
 
 	@Transactional
 	public void eliminarFuente(long codigoFuente) {
+		if (fuenteXRecomendacionRepository.findFirstByCodigoFuente(codigoFuente) != null)
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_FUENTE_X_RECOMENDACION);
 		fuenteRepository.deleteById(codigoFuente);
 	}
 

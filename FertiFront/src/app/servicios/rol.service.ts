@@ -34,7 +34,7 @@ export class RolService {
   /**DELETE ROLES from the server */
   public deleteRoles(rol: Rol): void {
     const url = `${this.rolUrl}/borrarRol/${rol.codigo}`;
-    this.http.delete(url).subscribe(_ => this.cargarDatos());
+    this.http.delete(url).subscribe(_ => this.cargarDatos(), error => this.utilidad.mensajeErrorEliminar(error.error.message));
   }
 
   crearNuevo(rol: Rol) {

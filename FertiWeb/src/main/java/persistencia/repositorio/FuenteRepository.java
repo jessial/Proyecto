@@ -25,4 +25,6 @@ public interface FuenteRepository extends JpaRepository<FuenteEntidad, Long> {
 
 	List<FuenteEntidad> findAllByPotasio();
 
+	FuenteEntidad findFirstByCodigoTipoFuente(Long codigoTipoFuente);
+
 }

@@ -8,9 +8,12 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
 import dominio.TipoFuente;
 import dto.DTOTipoFuente;
+import excepciones.ExcepcionClaveForanea;
 import persistencia.entidad.TipoFuenteEntidad;
+import persistencia.repositorio.FuenteRepository;
 import persistencia.repositorio.TipoFuenteRepository;
 
 public class ControladorDatosTipoFuente extends ControladorDatos {
@@ -26,6 +29,9 @@ public class ControladorDatosTipoFuente extends ControladorDatos {
 
 	@Autowired
 	private ControladorDatosElemento controladorDatosElemento;
+
+	@Autowired
+	private FuenteRepository fuenteRepository;
 
 	public List<DTOTipoFuente> consultarTipoFuentes() {
 		List<TipoFuente> listTipoFuente = mapearListaADominio(tipoFuenteRepository.findAll());
@@ -96,6 +102,8 @@ public class ControladorDatosTipoFuente extends ControladorDatos {
 
 	@Transactional
 	public void eliminarTipoFuente(long codigo) {
+		if (fuenteRepository.findFirstByCodigoTipoFuente(codigo) != null)
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_FUENTE);
 		tipoFuenteRepository.deleteById(codigo);
 	}
 

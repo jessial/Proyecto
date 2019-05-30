@@ -38,6 +38,14 @@
             </div>
 
             <ion-item>
+              <ion-label position="floating">Teléfono</ion-label>
+              <ion-input formControlName="telefono" type="text"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.telefono.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+
+            <ion-item>
               <ion-label position="floating">Correo electrónico</ion-label>
               <ion-input formControlName="correo" type="text"></ion-input>
             </ion-item>
@@ -48,20 +56,12 @@
             <ion-item>
               <ion-label>Rol</ion-label>
               <ion-select placeholder="Rol" formControlName="rol">
-                <ion-select-option *ngFor="let rol of roles" [value]="rol">
+                <ion-select-option *ngFor="let rol of roles" [value]="rol.codigo">
                   {{rol.nombre}}
                 </ion-select-option>
               </ion-select>
             </ion-item>
             <div *ngIf="enviado && f.rol.errors?.required">
-              <p class="error-message">Campo obligatorio.</p>
-            </div>
-
-            <ion-item>
-              <ion-label position="floating">Nombre de usuario</ion-label>
-              <ion-input formControlName="nombreUsuario" type="text"></ion-input>
-            </ion-item>
-            <div *ngIf="enviado && f.nombreUsuario.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
 

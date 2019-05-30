@@ -1,9 +1,11 @@
-import { Rol } from './../../dominio/rol';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UsuarioSeguridad } from 'src/app/dominio/usuario-seguridad';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Usuario } from 'src/app/dominio/usuario';
+import { RegistroUsuarioService } from 'src/app/servicios/registro-usuario.service';
 import { RolService } from 'src/app/servicios/rol.service';
+import { Rol } from './../../dominio/rol';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -15,8 +17,11 @@ export class RegistroUsuarioPage implements OnInit {
   enviado = false;
   formularioRegistroUsuario: FormGroup;
   roles: Rol[] = [];
+  carga: any;
 
-  constructor(private fb: FormBuilder, private rolServicio: RolService) { }
+  constructor(private fb: FormBuilder, private rolServicio: RolService,
+    private loadingController: LoadingController, private toastController: ToastController,
+    private registroUsuarioServicio: RegistroUsuarioService, private location: Location) { }
 
   ngOnInit() {
     this.rolServicio.cargarDatos();
@@ -29,7 +34,7 @@ export class RegistroUsuarioPage implements OnInit {
       apellido: [null, Validators.required],
       correo: [null, Validators.required],
       rol: [null, Validators.required],
-      nombreUsuario: [null, [Validators.required]],
+      telefono: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
   }
@@ -39,11 +44,46 @@ export class RegistroUsuarioPage implements OnInit {
     if (this.f.invalid) {
       return null;
     }
-    const usuario = new UsuarioSeguridad();
-    usuario.nombreUsuario = this.f.nombreUsuario.value;
-    usuario.password = this.f.password.value;
-    // TODO: Consumir servicio incio de sesión...
-    console.log(usuario);
+    this.mostrarCarga().then(_ => {
+      const usuario = new Usuario();
+      usuario.cedula = this.f.numeroIdentificacion.value;
+      usuario.codigoRol = this.f.rol.value;
+      usuario.nombre = this.f.nombre.value;
+      usuario.apellido = this.f.apellido.value;
+      usuario.telefono = this.f.telefono.value;
+      usuario.email = this.f.correo.value;
+      usuario.password = this.f.password.value;
+      this.registroUsuarioServicio.updateOrCreate(usuario).subscribe(
+        resp => {
+          this.mostrarToast('Éxito registrando usuario');
+          this.location.back();
+          this.ocultarCarga();
+        },
+        error => {
+          this.mostrarToast('Error registrando usuario');
+          this.ocultarCarga();
+        }
+      );
+    });
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async mostrarCarga() {
+    this.carga = await this.loadingController.create({
+      message: 'Registrando usuario...'
+    });
+    return this.carga.present();
+  }
+
+  ocultarCarga() {
+    this.carga.dismiss();
   }
 
   get f() { return this.formularioRegistroUsuario.controls; }
