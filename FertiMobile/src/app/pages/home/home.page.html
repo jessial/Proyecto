@@ -13,7 +13,9 @@
   <ion-slides pager="true" class="slide-full">
     <ion-slide *ngFor="let slide of slides">
       <ion-card mode="ios">
-        <img [src]="slide.imagen" class="slide-image">
+        <div>
+          <img [src]="slide.imagen" class="slide-image">
+        </div>
         <ion-card-header>
           <ion-card-title>
             {{slide.titulo}}

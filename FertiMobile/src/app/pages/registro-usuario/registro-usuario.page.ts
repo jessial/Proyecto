@@ -41,7 +41,7 @@ export class RegistroUsuarioPage implements OnInit {
 
   registrarUsuario() {
     this.enviado = true;
-    if (this.f.invalid) {
+    if (this.formularioRegistroUsuario.invalid) {
       return null;
     }
     this.mostrarCarga().then(_ => {

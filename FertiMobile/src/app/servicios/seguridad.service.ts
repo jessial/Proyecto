@@ -48,6 +48,14 @@ export class SeguridadService {
     sessionStorage.setItem('token', token);
   }
 
+  guardarDocumentoUsuario(documento: any) {
+    sessionStorage.setItem('documento', documento);
+  }
+
+  obtenerDocumentoUsuario(): number {
+    return parseInt(sessionStorage.getItem('documento'), 10);
+  }
+
   logout(): void {
     this._token = null;
     this._isLogged = false;

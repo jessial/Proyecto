@@ -21,6 +21,7 @@ ion-card {
 
   position: relative;
   top: -50px;
+  touch-action: none;
 }
 
 ion-card-header {

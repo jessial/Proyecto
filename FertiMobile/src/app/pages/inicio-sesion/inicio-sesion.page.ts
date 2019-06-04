@@ -37,6 +37,7 @@ export class InicioSesionPage implements OnInit {
     usuario.password = this.f.password.value;
     this.seguridadService.getAuth(usuario).subscribe(response => {
       this.seguridadService.guardarToken(response.access_token);
+      this.seguridadService.guardarDocumentoUsuario(this.f.nombreUsuario.value);
       this.menu.enable(true);
       this.navCtrl.navigateRoot('home');
       // this.utilidad.mensajeExito('Éxito', 'Bienvenido');

@@ -39,7 +39,7 @@
 
             <ion-item>
               <ion-label position="floating">Teléfono</ion-label>
-              <ion-input formControlName="telefono" type="text"></ion-input>
+              <ion-input formControlName="telefono" type="number"></ion-input>
             </ion-item>
             <div *ngIf="enviado && f.telefono.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
@@ -47,7 +47,7 @@
 
             <ion-item>
               <ion-label position="floating">Correo electrónico</ion-label>
-              <ion-input formControlName="correo" type="text"></ion-input>
+              <ion-input formControlName="correo" type="email"></ion-input>
             </ion-item>
             <div *ngIf="enviado && f.correo.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
