@@ -103,4 +103,9 @@ public class ControladorDatosParcela extends ControladorDatos {
 		parcelaRepository.deleteById(codigoParcela);
 
 	}
+
+	public Object consultarParcelaPorUsuario(Long cedula) {
+		List<Parcela> listaParcela = mapearListaADominio(parcelaRepository.findAllByCodigoUsuario(cedula));
+		return construirListaDTO(listaParcela); 
+	}
 }
