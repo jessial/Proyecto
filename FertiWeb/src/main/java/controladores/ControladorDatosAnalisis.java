@@ -148,4 +148,10 @@ public class ControladorDatosAnalisis extends ControladorDatos {
 		Pageable paginador = PageRequest.of(pagina, 10);
 		return construirDTO(analisisRepository.findAllLikeLugarNombreUbicacion(filtro, paginador));
 	}
+
+	public Object consultarAnalisisPorUsuario(Long cedula) {
+		List<Analisis> listAnalisis = mapearListaADominio(analisisRepository.findAllByCodigoUsuarioParaApp(cedula));
+		return construirListaDTO(listAnalisis);
+
+	}
 }

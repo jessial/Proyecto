@@ -62,5 +62,10 @@ public class ServicioAnalisis {
 		return new ResponseEntity<>(controladorDatosAnalisis.consultarAnalisisPorParcelaPaginado(codigoParcela, pagina),
 				HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/consultaAnalisis/{cedula}")
+	public ResponseEntity<Object> consultarAnalisisPorUsuarioParaApp(@PathVariable("cedula") Long cedula) {
+		return new ResponseEntity<>(controladorDatosAnalisis.consultarAnalisisPorUsuario(cedula), HttpStatus.CREATED);
+	}
 
 }

@@ -38,4 +38,7 @@ public interface AnalisisRepository extends JpaRepository<AnalisisEntidad, Long>
 	Page<AnalisisEntidad> findAllLikeLugarNombreUbicacion(String filtro, Pageable paginador);
 
 	Page<AnalisisEntidad> findByCodigoParcela(long codigoParcela, Pageable paginador);
+
+	@Query(value = "select distinct a.* from analisis a where a.ana_cod_parcela in (select p.par_codigo from parcela p, lugar l where p.par_codigo_lugar = l.lug_codigo and l.lug_codigo_usuario = ?1)", nativeQuery = true)
+	List<AnalisisEntidad> findAllByCodigoUsuarioParaApp(Long codigoUsuario);
 }

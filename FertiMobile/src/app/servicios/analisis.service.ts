@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DTOAnalisis } from '../dto/dto-analisis';
 import { environment } from '../../environments/environment';
+import { SeguridadService } from './seguridad.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +19,7 @@ export class AnalisisService {
   private analisis: DTOAnalisis[];
   private analisisSubject = new BehaviorSubject([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private seguridadService: SeguridadService) { }
 
   /** UPDATE lugar from the server */
   public updateOrCreate(lugar: DTOAnalisis): Observable<DTOAnalisis> {
@@ -28,7 +29,7 @@ export class AnalisisService {
 
   /** GET parcelas from the server */
   public geBackAnalisis(): Observable<DTOAnalisis[]> {
-    const url = `${this.analisisUrl}/consultaTodos`;
+    const url = `${this.analisisUrl}/consultaAnalisis/${this.seguridadService.obtenerDocumentoUsuario()}`;
     return this.http.get<DTOAnalisis[]>(url);
   }
 
