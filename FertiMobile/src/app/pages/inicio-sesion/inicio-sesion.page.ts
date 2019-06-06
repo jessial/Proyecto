@@ -28,6 +28,7 @@ export class InicioSesionPage implements OnInit {
   }
 
   iniciarSesion() {
+    this.seguridadService.logout();
     this.enviado = true;
     if (this.f.invalid) {
       return null;
