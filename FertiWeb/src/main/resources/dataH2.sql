@@ -47,4 +47,4 @@ MERGE INTO elementoxanalisis VALUES(3,8,1,3,1);
 MERGE INTO recomendacion VALUES(1, 1, Sysdate);
 MERGE INTO fuentexrecomendacion VALUES(1, 23.0, 1, 1, 1);
 MERGE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(1, 'Administrador', '$2a$10$OErv.iLt03pww2NcIyTgWu3kmUc5mapfOzrNTdEae9KKFfYOw.Kqa', true, 1);
-MERGE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(2, 'Productor', '$2a$10$Hn49HhvxMX.NWuyQM5iJ6.511X/g6f0fL0R3GJ4Wv0hrbn5J8ExQ.', true, 2);
+MERGE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(2, 1047969124, '$2a$10$Hn49HhvxMX.NWuyQM5iJ6.511X/g6f0fL0R3GJ4Wv0hrbn5J8ExQ.', true, 2);
