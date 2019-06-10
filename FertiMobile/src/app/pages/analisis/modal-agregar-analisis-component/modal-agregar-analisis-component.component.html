@@ -33,6 +33,13 @@
             <div *ngIf="enviado && f.cantidad.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && f.cantidad.errors?.min">
+              <p class="error-message">Debe ser mínimo 1.</p>
+            </div>
+            <div *ngIf="enviado && f.cantidad.errors?.max">
+              <p class="error-message">Debe ser máximo 999999999.</p>
+            </div>
+
             <ion-item>
               <ion-label>Unidad</ion-label>
               <ion-select placeholder="Seleccione..." formControlName="unidad">

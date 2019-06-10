@@ -20,6 +20,9 @@
             </ion-item>
           </form>
         </div>
+        <div *ngIf="enviado && formularioInicioSesion.invalid">
+          <p class="error-message">Debe ingresar los datos de acceso.</p>
+        </div>
         <div padding>
           <ion-button expand="block" (click)="iniciarSesion()">Iniciar sesión</ion-button>
         </div>
