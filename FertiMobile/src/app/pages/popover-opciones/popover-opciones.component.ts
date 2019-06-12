@@ -1,5 +1,5 @@
-import { NavParams, PopoverController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { NavParams, PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover-opciones',
@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopoverOpcionesComponent implements OnInit {
 
-  constructor(private popoverController: PopoverController, private toastController: ToastController) { }
+  habilitadoEdicion = true;
+
+  constructor(private popoverController: PopoverController, navParams: NavParams) {
+    this.habilitadoEdicion = navParams.get('habilitadoEdicion');
+  }
 
   ngOnInit() {
   }

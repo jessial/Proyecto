@@ -8,8 +8,10 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
 import dominio.Lugar;
 import dto.DTOLugar;
+import excepciones.ExcepcionClaveForanea;
 import persistencia.entidad.LugarEntidad;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.repositorio.LugarRepository;
@@ -46,10 +48,9 @@ public class ControladorDatosLugar extends ControladorDatos {
 		}
 		return listDtoLugar;
 	}
-	
+
 	private List<Lugar> mapearListaADominio(List<LugarEntidad> lugarEntidadList) {
-		return lugarEntidadList.stream().map(a -> mapearADominio(a))
-				.collect(Collectors.toCollection(ArrayList::new));
+		return lugarEntidadList.stream().map(a -> mapearADominio(a)).collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public LugarEntidad consultarLugarPorId(Long id) {
@@ -72,7 +73,7 @@ public class ControladorDatosLugar extends ControladorDatos {
 		dtoLugar.setUsuario(controladorDatosUsuario.consultarPorCedula(lugar.getCodigoUsuario()));
 		return dtoLugar;
 	}
-	
+
 	@Override
 	public Lugar construirDominio(Object object) {
 		DTOLugar dtoLugar = (DTOLugar) object;
@@ -95,19 +96,19 @@ public class ControladorDatosLugar extends ControladorDatos {
 		Lugar lugar = (Lugar) object;
 		return mapperDozer.map(lugar, LugarEntidad.class);
 	}
-	
+
 	@Transactional
 	@Override
 	public void guardar(Object object) {
 		Lugar lugar = (Lugar) object;
 		lugarRepository.save(mapearAEntidad(lugar));
 	}
-	
+
 	@Transactional
 	public void eliminarLugar(Long codigoLugar) {
 		List<ParcelaEntidad> lugaresAsociados = parcelaRepository.findByCodigoLugar(codigoLugar);
-		if (lugaresAsociados.isEmpty()) {
-			lugarRepository.deleteById(codigoLugar);
-		}
+		if (!lugaresAsociados.isEmpty())
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_USUARIO);
+		lugarRepository.deleteById(codigoLugar);
 	}
 }

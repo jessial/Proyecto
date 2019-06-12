@@ -13,6 +13,7 @@ import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opcio
 export class ParcelaPage implements OnInit {
 
   parcelas: Parcela[] = [];
+  errorEdicion = false;
 
   constructor(public popoverController: PopoverController, private alertController: AlertController,
     private router: Router, private parcelaServicio: ParcelaService) { }
@@ -21,12 +22,18 @@ export class ParcelaPage implements OnInit {
     this.parcelaServicio.cargarDatos();
     this.parcelaServicio.getParcelas().subscribe(parcelas => {
       this.parcelas = parcelas;
+      this.validarSiEsPosibleEditar();
     });
   }
 
-  async mostrarPopover(evento: any, parcela: Parcela) {
+  validarSiEsPosibleEditar() {
+    this.errorEdicion = this.parcelas.filter(p => !p.tipoCultivo.estado).length > 0;
+  }
+
+  async mostrarPopover(evento: any, parcela: Parcela, habilitadoEdicion: boolean) {
     const popover = await this.popoverController.create({
       component: PopoverOpcionesComponent,
+      componentProps: { habilitadoEdicion },
       event: evento,
       mode: 'ios',
       translucent: true

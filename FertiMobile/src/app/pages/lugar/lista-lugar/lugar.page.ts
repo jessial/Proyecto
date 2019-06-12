@@ -25,8 +25,10 @@ export class LugarPage implements OnInit {
   }
 
   async mostrarPopover(evento: any, lugar: Lugar) {
+    const habilitadoEdicion = true;
     const popover = await this.popoverController.create({
       component: PopoverOpcionesComponent,
+      componentProps: { habilitadoEdicion },
       event: evento,
       mode: 'ios',
       translucent: true
