@@ -44,4 +44,35 @@
     left: 0px;
     background: #fff;
   }
+
+  .ant-btn-primary {
+    color: #fff;
+    background-color: #52c41a;
+    border-color: #1ac43fd3;
+}
+
+.ant-switch-checked {
+    background-color: #52c41a;
+}
+
+a {
+    color: #127a09;
+    background-color: transparent;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    transition: color .3s;
+    -webkit-text-decoration-skip: objects;
+}
+.ant-pagination-item-active a {
+    color: #52c41a;
+}
+.ant-pagination-item-active {
+    border-color: #52c41a;
+    font-weight: 500;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: #52c41a;
+}
   
