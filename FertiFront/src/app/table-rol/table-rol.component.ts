@@ -46,6 +46,8 @@ export class TableRolComponent implements OnInit {
     this.modalConfirmacionEliminado = this.modalEliminar.confirm({
       nzTitle: 'Eliminar',
       nzContent: '¿Desea eliminar el rol?',
+      nzOkText: 'Aceptar',
+      nzCancelText: 'Cancelar',
       nzOnOk: () => {
         this.rolService.deleteRoles(rol);
       }

@@ -45,6 +45,8 @@ export class TableComponent implements OnInit {
     this.modalConfirmacionEliminado = this.modalEliminar.confirm({
       nzTitle: 'Eliminar',
       nzContent: '¿Desea eliminar el tipo de fuente?',
+      nzOkText: 'Aceptar',
+      nzCancelText: 'Cancelar',
       nzOnOk: () => {
         this.tipoCultivoService.deleteTipoCultivo(tipoCultivo);
       }

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, en_US, es_ES } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { MenuComponent } from './menu/menu.component';
@@ -70,7 +70,7 @@ registerLocaleData(en);
   exports: [
 
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },
+  providers: [{ provide: NZ_I18N, useValue: es_ES },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   {
     provide: NZ_NOTIFICATION_CONFIG, useValue: {
