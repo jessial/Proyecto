@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ActionSheetController } from '@ionic/angular';
 import { Lugar } from 'src/app/dominio/lugar';
 import { LugarService } from 'src/app/servicios/lugar.service';
 import { PopoverOpcionesComponent } from '../../popover-opciones/popover-opciones.component';
@@ -15,7 +15,8 @@ export class LugarPage implements OnInit {
   lugares: Lugar[] = [];
 
   constructor(public popoverController: PopoverController, private alertController: AlertController,
-    private router: Router, private lugarServicio: LugarService) { }
+    private router: Router, private lugarServicio: LugarService,
+    public actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.lugarServicio.cargarDatos();
@@ -24,24 +25,29 @@ export class LugarPage implements OnInit {
     });
   }
 
-  async mostrarPopover(evento: any, lugar: Lugar) {
-    const habilitadoEdicion = true;
-    const popover = await this.popoverController.create({
-      component: PopoverOpcionesComponent,
-      componentProps: { habilitadoEdicion },
-      event: evento,
-      mode: 'ios',
-      translucent: true
+  async mostrarPopover(lugar: Lugar) {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Eliminar',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.confirmarEliminacion(lugar);
+        }
+      }, {
+        text: 'Editar',
+        icon: 'create',
+        handler: () => {
+          this.lugarServicio.editarLugar(lugar);
+          this.router.navigateByUrl('editar-lugar');
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel'
+      }]
     });
-    await popover.present();
-
-    const { data } = await popover.onDidDismiss();
-    if (data && data.accion === 'editar') {
-      this.lugarServicio.editarLugar(lugar);
-      this.router.navigateByUrl('editar-lugar');
-    } else if (data && data.accion === 'eliminar') {
-      this.confirmarEliminacion(lugar);
-    }
+    await actionSheet.present();
   }
 
   agregarLugar() {

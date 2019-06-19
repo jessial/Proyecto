@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ActionSheetController, ToastController } from '@ionic/angular';
 import { Parcela } from 'src/app/dominio/parcela';
 import { ParcelaService } from 'src/app/servicios/parcela.service';
 import { PopoverOpcionesComponent } from './../../popover-opciones/popover-opciones.component';
@@ -16,7 +16,8 @@ export class ParcelaPage implements OnInit {
   errorEdicion = false;
 
   constructor(public popoverController: PopoverController, private alertController: AlertController,
-    private router: Router, private parcelaServicio: ParcelaService) { }
+    private router: Router, private parcelaServicio: ParcelaService,
+    private actionSheetController: ActionSheetController, private toastController: ToastController) { }
 
   ngOnInit() {
     this.parcelaServicio.cargarDatos();
@@ -31,22 +32,32 @@ export class ParcelaPage implements OnInit {
   }
 
   async mostrarPopover(evento: any, parcela: Parcela, habilitadoEdicion: boolean) {
-    const popover = await this.popoverController.create({
-      component: PopoverOpcionesComponent,
-      componentProps: { habilitadoEdicion },
-      event: evento,
-      mode: 'ios',
-      translucent: true
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [{
+        text: 'Eliminar',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.confirmarEliminacion(parcela);
+        }
+      }, {
+        text: 'Editar',
+        icon: 'create',
+        handler: () => {
+          if (habilitadoEdicion) {
+            this.parcelaServicio.editarParcela(parcela);
+            this.router.navigateByUrl('editar-parcela');
+          } else {
+            this.mostrarToast('No es posible editar la parcela.');
+          }
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel'
+      }]
     });
-    await popover.present();
-
-    const { data } = await popover.onDidDismiss();
-    if (data && data.accion === 'editar') {
-      this.parcelaServicio.editarParcela(parcela);
-      this.router.navigateByUrl('editar-parcela');
-    } else if (data && data.accion === 'eliminar') {
-      this.confirmarEliminacion(parcela);
-    }
+    await actionSheet.present();
   }
 
   agregarParcela() {
@@ -64,5 +75,13 @@ export class ParcelaPage implements OnInit {
       }]
     });
     await alert.present();
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }
