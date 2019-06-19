@@ -27,7 +27,7 @@ export class ModalAgregarAnalisisComponent implements OnInit {
     this.formularioAgregarElemento = this.fb.group({
       elemento: [null, Validators.required],
       unidad: [null, Validators.required],
-      cantidad: [null, Validators.required]
+      cantidad: [null, [Validators.required, Validators.min(1), Validators.max(999999999)]]
     });
     this.unidadServicio.getBackUnidad().subscribe(unidades => {
       this.unidades = unidades;

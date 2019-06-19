@@ -3,6 +3,7 @@ import { Lugar } from './../dominio/lugar';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { SeguridadService } from './seguridad.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,18 +20,18 @@ export class LugarService {
   private lugarSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Lugar());
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private seguridadService: SeguridadService) { }
 
   /** GET lugares from the server */
   public geBackLugares(): Observable<Lugar[]> {
-    const url = `${this.lugarURL}/consultaTodos`;
+    const url = `${this.lugarURL}/consultaLugar/${this.seguridadService.obtenerDocumentoUsuario()}`;
     return this.http.get<Lugar[]>(url);
   }
 
   /** UPDATE lugar from the server */
   public updateOrCreate(lugar: Lugar): Observable<Lugar> {
-    const url = `${this.lugarURL}/actualizaRegistro`;
-    return this.http.put<Lugar>(url, lugar, httpOptions);
+    const url = `${this.lugarURL}/guardado`;
+    return this.http.post<Lugar>(url, lugar, httpOptions);
   }
 
   /**DELETE LUGAR from the server */

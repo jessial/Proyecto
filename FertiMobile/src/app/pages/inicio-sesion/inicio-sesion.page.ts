@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, ToastController, LoadingController } from '@ionic/angular';
 import { UsuarioSeguridad } from './../../dominio/usuario-seguridad';
 import { SeguridadService } from './../../servicios/seguridad.service';
 
@@ -14,9 +14,11 @@ export class InicioSesionPage implements OnInit {
 
   enviado = false;
   formularioInicioSesion: FormGroup;
+  carga: any;
 
   constructor(private fb: FormBuilder, private router: Router, private navCtrl: NavController,
-    private menu: MenuController, private seguridadService: SeguridadService) {
+    private menu: MenuController, private seguridadService: SeguridadService,
+    private toastController: ToastController, private loadingController: LoadingController) {
     this.menu.enable(false);
   }
 
@@ -28,23 +30,43 @@ export class InicioSesionPage implements OnInit {
   }
 
   iniciarSesion() {
+    this.seguridadService.logout();
     this.enviado = true;
-    if (this.f.invalid) {
+    if (this.formularioInicioSesion.invalid) {
       return null;
     }
-    const usuario = new UsuarioSeguridad();
-    usuario.nombreUsuario = this.f.nombreUsuario.value;
-    usuario.password = this.f.password.value;
-    this.seguridadService.getAuth(usuario).subscribe(response => {
-      this.seguridadService.guardarToken(response.access_token);
-      this.menu.enable(true);
-      this.navCtrl.navigateRoot('home');
-      // this.utilidad.mensajeExito('Éxito', 'Bienvenido');
-    }, err => {
-      if (err.status === 400) {
-        // this.utilidad.mensajeAlerta('Error', 'Usuario o clave incorrecta');
-      }
+    this.mostrarCarga().then(_ => {
+      const usuario = new UsuarioSeguridad();
+      usuario.nombreUsuario = this.f.nombreUsuario.value;
+      usuario.password = this.f.password.value;
+      this.seguridadService.getAuth(usuario).subscribe(response => {
+        this.seguridadService.guardarToken(response.access_token);
+        this.seguridadService.guardarDocumentoUsuario(this.f.nombreUsuario.value);
+        this.menu.enable(true);
+        this.navCtrl.navigateRoot('home');
+        this.ocultarCarga();
+      }, err => {
+        if (err.status === 400) {
+          this.mostrarToast('Número de identificación o contraseña incorrectos.');
+          this.ocultarCarga();
+        }
+      });
     });
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async mostrarCarga() {
+    this.carga = await this.loadingController.create({
+      message: 'Iniciando sesión...'
+    });
+    return this.carga.present();
   }
 
   get f() { return this.formularioInicioSesion.controls; }
@@ -53,4 +75,7 @@ export class InicioSesionPage implements OnInit {
     this.router.navigateByUrl('registro-usuario');
   }
 
+  ocultarCarga() {
+    this.carga.dismiss();
+  }
 }

@@ -8,10 +8,16 @@
 </ion-header>
 
 <ion-content>
+  <div padding *ngIf="!errorEdicion">
+    <ion-chip color="danger" style="width: 100%">
+      <ion-label color="danger">No será posible editar algunas parcelas, ya que los tipo cultivo que poseen se
+        encuentran actualmente inactivos.</ion-label>
+    </ion-chip>
+  </div>
   <ion-card *ngFor="let parcela of parcelas">
     <ion-item>
       <ion-label>{{parcela.tipoCultivo.nombre}} {{parcela.tipoCultivo.variedad}}</ion-label>
-      <ion-icon name="more" slot="end" (click)="mostrarPopover($event, parcela)"></ion-icon>
+      <ion-icon name="more" slot="end" (click)="mostrarPopover($event, parcela, parcela.tipoCultivo.estado)"></ion-icon>
     </ion-item>
     <ion-card-content>
       <ion-list>

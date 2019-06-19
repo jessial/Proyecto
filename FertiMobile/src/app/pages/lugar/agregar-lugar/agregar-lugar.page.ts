@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Lugar } from 'src/app/dominio/lugar';
+import { Usuario } from 'src/app/dominio/usuario';
+import { SeguridadService } from 'src/app/servicios/seguridad.service';
 
 @Component({
   selector: 'app-agregar-lugar',
@@ -17,12 +19,13 @@ export class AgregarLugarPage implements OnInit {
   carga: any;
 
   constructor(private fb: FormBuilder, private location: Location, private toastController: ToastController,
-    public loadingController: LoadingController, private lugarServicio: LugarService) { }
+    public loadingController: LoadingController, private lugarServicio: LugarService,
+    private seguridadService: SeguridadService) { }
 
   ngOnInit() {
     this.formularioAgregarLugar = this.fb.group({
-      nombre: [null, [Validators.required]],
-      ubicacion: [null, [Validators.required]]
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      ubicacion: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
     });
   }
 
@@ -36,10 +39,8 @@ export class AgregarLugarPage implements OnInit {
       const lugar = new Lugar();
       lugar.nombre = this.f.nombre.value;
       lugar.ubicacion = this.f.ubicacion.value;
-      lugar.usuario = {
-        apellido: 'londono', cedula: 1094, codigoRol: 1, email: 'asd@asd.co',
-        nombre: 'Cristian', password: '1234', telefono: 123
-      };
+      lugar.usuario = new Usuario();
+      lugar.usuario.cedula = this.seguridadService.obtenerDocumentoUsuario();
       this.lugarServicio.updateOrCreate(lugar).subscribe(
         resp => {
           this.mostrarToast('Éxito registrando finca');

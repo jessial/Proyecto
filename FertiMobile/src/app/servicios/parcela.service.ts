@@ -1,3 +1,4 @@
+import { SeguridadService } from './seguridad.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -19,11 +20,11 @@ export class ParcelaService {
   private parcelaSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Parcela());
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private seguridadService: SeguridadService) { }
 
   /** GET parcelas from the server */
   public geBackParcelas(): Observable<Parcela[]> {
-    const url = `${this.parcelaURL}/consultaTodos`;
+    const url = `${this.parcelaURL}/consultaParcela/${this.seguridadService.obtenerDocumentoUsuario()}`;
     return this.http.get<Parcela[]>(url);
   }
 

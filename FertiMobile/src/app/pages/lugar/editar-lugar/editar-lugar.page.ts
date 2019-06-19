@@ -22,8 +22,8 @@ export class EditarLugarPage implements OnInit {
 
   ngOnInit() {
     this.formularioEditarLugar = this.fb.group({
-      nombre: [null, [Validators.required]],
-      ubicacion: [null, [Validators.required]]
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      ubicacion: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
     });
     this.cargarLugar();
   }

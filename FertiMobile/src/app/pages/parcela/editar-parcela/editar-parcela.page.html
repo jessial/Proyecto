@@ -45,6 +45,12 @@
             <div *ngIf="enviado && f.area.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && f.area.errors?.min">
+              <p class="error-message">Debe ser mínimo 1 (m²).</p>
+            </div>
+            <div *ngIf="enviado && f.area.errors?.max">
+              <p class="error-message">Debe ser máximo 999999999 (m²).</p>
+            </div>
 
             <ion-item>
               <ion-label>Fecha siembra</ion-label>

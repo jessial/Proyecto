@@ -11,13 +11,13 @@ export class HomePage {
   constructor(private router: Router) {
   }
 
+  slideAgaucate = {
+    imagen: '/assets/slides/aguacate.png',
+    titulo: 'FertiApp',
+    descripcion: 'Para facilitar tu vida en el campo.'
+  };
+
   slides: { imagen: string, titulo: string, descripcion: string, url: string }[] = [
-    {
-      imagen: '/assets/slides/aguacate.svg',
-      titulo: 'FertiApp',
-      descripcion: 'Para facilitar tu vida en el campo.',
-      url: '/home'
-    },
     {
       imagen: '/assets/slides/finca.png',
       titulo: 'Finca',

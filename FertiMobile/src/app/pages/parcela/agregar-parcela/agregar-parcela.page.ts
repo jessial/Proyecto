@@ -32,7 +32,7 @@ export class AgregarParcelaPage implements OnInit {
     this.formularioAgregarParcela = this.fb.group({
       lugar: [null, Validators.required],
       tipoCultivo: [null, Validators.required],
-      area: [null, [Validators.required]],
+      area: [null, [Validators.required, Validators.min(1), Validators.max(999999999)]],
       fechaSiembra: [null, [Validators.required]],
     });
     this.lugarServicio.geBackLugares().subscribe(lugares => {

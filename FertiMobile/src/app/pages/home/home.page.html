@@ -11,9 +11,26 @@
 
 <ion-content>
   <ion-slides pager="true" class="slide-full">
+    <ion-slide>
+      <ion-card mode="ios">
+        <div>
+          <img [src]="slideAgaucate.imagen" class="slide-image">
+        </div>
+        <ion-card-header>
+          <ion-card-title>
+            {{slideAgaucate.titulo}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{slideAgaucate.descripcion}}
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
     <ion-slide *ngFor="let slide of slides">
       <ion-card mode="ios">
-        <img [src]="slide.imagen" class="slide-image">
+        <div>
+          <img [src]="slide.imagen" class="slide-image">
+        </div>
         <ion-card-header>
           <ion-card-title>
             {{slide.titulo}}

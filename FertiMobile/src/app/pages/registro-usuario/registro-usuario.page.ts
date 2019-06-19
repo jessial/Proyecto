@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/dominio/usuario';
 import { RegistroUsuarioService } from 'src/app/servicios/registro-usuario.service';
@@ -29,19 +29,24 @@ export class RegistroUsuarioPage implements OnInit {
       this.roles = roles;
     });
     this.formularioRegistroUsuario = this.fb.group({
-      numeroIdentificacion: [null, Validators.required],
-      nombre: [null, Validators.required],
-      apellido: [null, Validators.required],
-      correo: [null, Validators.required],
+      numeroIdentificacion: [null, [Validators.required, Validators.min(100), Validators.max(9999999999)]],
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      apellido: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      correo: [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       rol: [null, Validators.required],
-      telefono: [null, [Validators.required]],
-      password: [null, [Validators.required]]
-    });
+      telefono: [null, [Validators.required, Validators.min(1), Validators.max(9999999999)]],
+      password: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      confirmacionPassword: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(12)]]
+    },
+      {
+        validator: this.passwordMatchValidator
+      }
+    );
   }
 
   registrarUsuario() {
     this.enviado = true;
-    if (this.f.invalid) {
+    if (this.formularioRegistroUsuario.invalid) {
       return null;
     }
     this.mostrarCarga().then(_ => {
@@ -87,5 +92,13 @@ export class RegistroUsuarioPage implements OnInit {
   }
 
   get f() { return this.formularioRegistroUsuario.controls; }
+
+  private passwordMatchValidator(control: AbstractControl) {
+    const password: string = control.get('password').value;
+    const confirmPassword: string = control.get('confirmacionPassword').value;
+    if (password !== confirmPassword) {
+      control.get('confirmacionPassword').setErrors({ NoPassswordMatch: true });
+    }
+  }
 
 }

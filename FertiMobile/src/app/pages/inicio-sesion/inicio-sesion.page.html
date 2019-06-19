@@ -5,17 +5,23 @@
         <div text-center>
           <h1>FertiApp</h1>
         </div>
+        <div class="image">
+          <img src="/assets/usuario.png">
+        </div>
         <div padding>
           <form [formGroup]="formularioInicioSesion">
             <ion-item>
               <ion-label position="floating">Número de identificación</ion-label>
-              <ion-input formControlName="nombreUsuario" type="text"></ion-input>
+              <ion-input formControlName="nombreUsuario" type="number"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="password" type="password"></ion-input>
             </ion-item>
           </form>
+        </div>
+        <div *ngIf="enviado && formularioInicioSesion.invalid">
+          <p class="error-message">Debe ingresar los datos de acceso.</p>
         </div>
         <div padding>
           <ion-button expand="block" (click)="iniciarSesion()">Iniciar sesión</ion-button>

@@ -50,4 +50,8 @@ public class ServicioParcela {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@GetMapping("/consultaParcela/{cedula}")
+	public ResponseEntity<Object> consultarParcelaPorUsuarioParaApp(@PathVariable("cedula") Long cedula) {
+		return new ResponseEntity<>(controladorDatosParcela.consultarParcelaPorUsuario(cedula), HttpStatus.CREATED);
+	}
 }

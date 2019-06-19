@@ -20,6 +20,12 @@
             <div *ngIf="enviado && f.numeroIdentificacion.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && f.numeroIdentificacion.errors?.min">
+              <p class="error-message">Debe contener mínimo 3 caracteres.</p>
+            </div>
+            <div *ngIf="enviado && f.numeroIdentificacion.errors?.max">
+              <p class="error-message">Debe contener máximo 10 caracteres.</p>
+            </div>
 
             <ion-item>
               <ion-label position="floating">Nombre</ion-label>
@@ -27,6 +33,12 @@
             </ion-item>
             <div *ngIf="enviado && f.nombre.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
+            </div>
+            <div *ngIf="enviado && f.nombre.errors?.minlength">
+              <p class="error-message">Debe contener mínimo 3 caracteres.</p>
+            </div>
+            <div *ngIf="enviado && f.nombre.errors?.maxlength">
+              <p class="error-message">Debe contener máximo 20 caracteres.</p>
             </div>
 
             <ion-item>
@@ -36,21 +48,33 @@
             <div *ngIf="enviado && f.apellido.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && f.apellido.errors?.minlength">
+              <p class="error-message">Debe contener mínimo 3 caracteres.</p>
+            </div>
+            <div *ngIf="enviado && f.apellido.errors?.maxlength">
+              <p class="error-message">Debe contener máximo 20 caracteres.</p>
+            </div>
 
             <ion-item>
               <ion-label position="floating">Teléfono</ion-label>
-              <ion-input formControlName="telefono" type="text"></ion-input>
+              <ion-input formControlName="telefono" type="number"></ion-input>
             </ion-item>
             <div *ngIf="enviado && f.telefono.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && (f.telefono.errors?.minlength || f.telefono.errors?.maxlength)">
+              <p class="error-message">Número telefónico no válido.</p>
+            </div>
 
             <ion-item>
               <ion-label position="floating">Correo electrónico</ion-label>
-              <ion-input formControlName="correo" type="text"></ion-input>
+              <ion-input formControlName="correo" type="email"></ion-input>
             </ion-item>
             <div *ngIf="enviado && f.correo.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
+            </div>
+            <div *ngIf="enviado && f.correo.errors?.pattern">
+              <p class="error-message">Correo electrónico inválido.</p>
             </div>
 
             <ion-item>
@@ -72,14 +96,33 @@
             <div *ngIf="enviado && f.password.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
             </div>
+            <div *ngIf="enviado && f.password.errors?.minlength">
+              <p class="error-message">Debe contener mínimo 5 caracteres.</p>
+            </div>
+            <div *ngIf="enviado && f.password.errors?.maxlength">
+              <p class="error-message">Debe contener máximo 20 caracteres.</p>
+            </div>
+
+            <ion-item>
+              <ion-label position="floating">Confirmación contraseña</ion-label>
+              <ion-input formControlName="confirmacionPassword" type="password"></ion-input>
+            </ion-item>
+            <div *ngIf="enviado && f.confirmacionPassword.errors?.required">
+              <p class="error-message">Campo obligatorio.</p>
+            </div>
+            <div *ngIf="f.confirmacionPassword.hasError('NoPassswordMatch')">
+              <p class="error-message">Las contraseñas no coinciden.</p>
+            </div>
           </form>
         </div>
       </ion-col>
     </ion-row>
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <div padding style="text-align: center">
+          <ion-button expand="block" (click)="registrarUsuario()">Registrar usuario</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-  <div style="position: fixed; bottom: 0px; width: 100%">
-    <div padding style="text-align: center">
-      <ion-button expand="block" (click)="registrarUsuario()">Registrar usuario</ion-button>
-    </div>
-  </div>
 </ion-content>
