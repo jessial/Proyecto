@@ -108,7 +108,7 @@ public class FertiWebApplication implements CommandLineRunner{
 	}
 
 	@Bean
-	public ControladorDatosRecomendacion crearControladorDeDatosRecomendacion() {
+	public ControladorDatosRecomendacion crearControladorDatosRecomendacion() {
 		return new ControladorDatosRecomendacion();
 	}
 
