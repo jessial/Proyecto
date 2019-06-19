@@ -4,16 +4,17 @@
     padding: 0 24px;
     cursor: pointer;
     transition: color .3s;
+    color: #fff
   }
 
   :host ::ng-deep .trigger:hover {
-    color: #77AA41;
+    color: #fff;
 
   }
 
   :host ::ng-deep .logo {
     height: 32px;
-    background: rgba(255, 255, 255, .2);
+    background: #00838f;
     margin: 16px;
   }
 
@@ -21,3 +22,13 @@
     margin-left: 8px;
     margin-bottom: 12px;
   }
+
+  .ant-menu {
+    background: #00838f;
+    color: #fff;
+}
+
+
+
+
+  

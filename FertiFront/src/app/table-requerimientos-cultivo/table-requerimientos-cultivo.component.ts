@@ -45,8 +45,6 @@ export class TableRequerimientosCultivoComponent implements OnInit {
     this.modalConfirmacionEliminado = this.modalEliminar.confirm({
       nzTitle: 'Eliminar',
       nzContent: '¿Desea eliminar el requerimiento cultivo?',
-      nzOkText: 'Aceptar',
-      nzCancelText: 'Cancelar',
       nzOnOk: () => {
         this.requerimientoService.deleteRequerimientoCultivo(requerimiento);
       }
