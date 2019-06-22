@@ -2,6 +2,8 @@ package persistencia.entidad;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class FuenteXRecomendacionEntidad {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fuenteXrecomendacion")
 	@Column(name = "fuxrec_codigo_fuente_recomendacion")
 	private Long codigoFuenteXRecomendacion;
 	@Column(name = "fuxrec_codigo_fuente")

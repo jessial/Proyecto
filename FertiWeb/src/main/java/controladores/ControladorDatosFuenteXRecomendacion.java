@@ -11,7 +11,6 @@ import dominio.ElementoXAnalisis;
 import dominio.FuenteXRecomendacion;
 import dto.DTOElementoXAnalisis;
 import dto.DTOFuenteXRecomendacion;
-import persistencia.entidad.ElementoXAnalisisEntidad;
 import persistencia.entidad.FuenteXRecomendacionEntidad;
 import persistencia.repositorio.FuenteXRecomendacionRepository;
 
@@ -31,7 +30,7 @@ public class ControladorDatosFuenteXRecomendacion extends ControladorDatos {
 
 	public List<DTOFuenteXRecomendacion> consultarFuentePorRecomendacion(Long codigo) {
 		List<FuenteXRecomendacion> listFuenteXRecomendacion = mapearListaADominio(
-				fuenteXRecomendacionRepository.findBycodigoRecomendacion(codigo));
+				fuenteXRecomendacionRepository.findByCodigoRecomendacion(codigo));
 		return construirListaDTO(listFuenteXRecomendacion);
 	}
 
@@ -82,14 +81,15 @@ public class ControladorDatosFuenteXRecomendacion extends ControladorDatos {
 	}
 
 	@Override
-	protected ElementoXAnalisisEntidad mapearAEntidad(Object object) {
-		ElementoXAnalisis elementoXAnalisis = (ElementoXAnalisis) object;
-		return mapperDozer.map(elementoXAnalisis, ElementoXAnalisisEntidad.class);
+	protected FuenteXRecomendacionEntidad mapearAEntidad(Object object) {
+		FuenteXRecomendacion fuenteXRecomendacion = (FuenteXRecomendacion) object;
+		return mapperDozer.map(fuenteXRecomendacion, FuenteXRecomendacionEntidad.class);
 	}
 
 	@Override
 	void guardar(Object object) {
-		// TODO Auto-generated method stub
+		FuenteXRecomendacion fuenteXRecomendacion = (FuenteXRecomendacion) object;
+		fuenteXRecomendacionRepository.save(mapearAEntidad(fuenteXRecomendacion));
 
 	}
 
