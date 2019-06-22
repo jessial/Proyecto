@@ -25,6 +25,7 @@ import controladores.ControladorDatosTipoFuente;
 import controladores.ControladorDatosUnidad;
 import controladores.ControladorDatosUsuario;
 import controladores.ControladorSeguridad;
+import conversores.Conversor;
 
 @SpringBootApplication
 @EnableCaching
@@ -116,7 +117,12 @@ public class FertiWebApplication implements CommandLineRunner{
 	public ControladorDatosFuenteXRecomendacion crearControladorDeDatosFuentesXRecomendacion() {
 		return new ControladorDatosFuenteXRecomendacion();
 	}
-
+	
+	@Bean
+	public Conversor crearConversor() {
+		return new Conversor();
+	}
+	
 	@Override
 	public void run(String... args) throws Exception {
 		

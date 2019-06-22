@@ -36,6 +36,11 @@ public class ControladorDatosRequerimiento extends ControladorDatos {
 		 return construirListaDTO(requerimientosModelo);
 	}
 	
+	public List<DTORequerimiento> consultarRequerimientoPorTipoCultivo(Long codigoTipoCultivo) {
+		List<Requerimiento> requerimientosModelo = mapearListaADominio(requerimientoRepository.findByCodigoTipoCultivo(codigoTipoCultivo));
+		return construirListaDTO(requerimientosModelo);
+	}
+	
 	private List<Requerimiento> mapearListaADominio(List<RequerimientoEntidad> requerimientoEntidadList) {
 		return requerimientoEntidadList.stream().map(a -> mapearADominio(a))
 				.collect(Collectors.toCollection(ArrayList::new));
