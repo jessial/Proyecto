@@ -25,16 +25,7 @@
             Seleccione un elemento</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select placeholder="Unidad" nz-input formControlName="unidad">
-            <nz-option *ngFor="let unidad of unidades" placeholder="Unidad" [nzLabel]="unidad.nombreUnidad"
-              [nzValue]="unidad.codigoUnidad">
-            </nz-option>
-          </nz-select>
-          <nz-form-explain *ngIf="enviado && f.unidad.errors?.required">Seleccione la unidad</nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>
+
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzPrefixIcon="anticon anticon-edit">
@@ -42,6 +33,10 @@
           </nz-input-group>
           <nz-form-explain *ngIf="enviado && f.cantidad.errors?.required">Ingrese una
             cantidad</nz-form-explain>
+          <br>
+          <div>
+            <span>Recuerde ingresar la cantidad en Kilogramos</span>
+          </div>
         </nz-form-control>
       </nz-form-item>
 

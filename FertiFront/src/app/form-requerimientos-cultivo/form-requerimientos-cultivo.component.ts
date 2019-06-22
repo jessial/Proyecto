@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Elemento } from '../clases_dominio/elemento';
+import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 import { TipoCultivo } from '../clases_dominio/tipo-cultivo';
-import { UnidadService } from '../servicios/unidad.service';
+import { Unidad } from '../clases_dominio/unidad';
+import { ElementoService } from '../servicios/elemento.service';
 import { RequerimientoCultivoService } from '../servicios/requerimiento-cultivo.service';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
-import { Elemento } from '../clases_dominio/elemento';
-import { ElementoService } from '../servicios/elemento.service';
-import { Unidad } from '../clases_dominio/unidad';
-import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
 
 @Component({
   selector: 'app-form-requerimientos-cultivo',
@@ -19,11 +18,16 @@ export class FormRequerimientosCultivoComponent {
   formularioAgregarRequerimiento: FormGroup;
   public cultivos: TipoCultivo[];
   public elementos: Elemento[];
-  public unidades: Unidad[];
   enviado = false;
   visible = false;
+  unidad: Unidad =
+    {
+      codigoUnidad: 3,
+      nombreUnidad: 'kg/ha'
+    };
+
   constructor(private fb: FormBuilder, private servicioRequerimientos: RequerimientoCultivoService,
-    private unidadServicio: UnidadService, private tipoCultivoServicio: TipoCultivoService, private elementoServicio: ElementoService) {
+    private tipoCultivoServicio: TipoCultivoService, private elementoServicio: ElementoService) {
   }
 
   open() {
@@ -34,9 +38,6 @@ export class FormRequerimientosCultivoComponent {
     this.elementoServicio.getBackElementos().subscribe(result => {
       this.elementos = result;
     });
-    this.unidadServicio.getBackUnidad().subscribe(result => {
-      this.unidades = result;
-    });
     this.visible = true;
     this.enviado = false;
   }
@@ -45,7 +46,6 @@ export class FormRequerimientosCultivoComponent {
     this.formularioAgregarRequerimiento = this.fb.group({
       tipoCultivo: [null, [Validators.required]],
       elemento: [null, [Validators.required]],
-      unidad: [null, [Validators.required]],
       cantidad: [null, [Validators.required]],
       estado: [false, [Validators.required]]
     });
@@ -61,7 +61,7 @@ export class FormRequerimientosCultivoComponent {
     requerimiento.elemento = this.f.elemento.value;
     requerimiento.estado = this.f.estado.value;
     requerimiento.cantidad = this.f.cantidad.value;
-    requerimiento.unidad = this.f.unidad.value;
+    requerimiento.unidad = this.unidad;
 
     this.servicioRequerimientos.updateOrCreate(requerimiento).subscribe(accion => {
       this.servicioRequerimientos.cargarDatos();
