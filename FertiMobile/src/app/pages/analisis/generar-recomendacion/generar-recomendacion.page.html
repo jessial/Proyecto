@@ -21,10 +21,6 @@
                 </ion-select-option>
               </ion-select>
             </ion-item>
-            <div *ngIf="enviado && f.potasio.errors?.required">
-              <p class="error-message">Campo obligatorio.</p>
-            </div>
-
             <ion-item>
               <ion-label>Fósforo</ion-label>
               <ion-select formControlName="fosforo">
@@ -33,10 +29,6 @@
                 </ion-select-option>
               </ion-select>
             </ion-item>
-            <div *ngIf="enviado && f.fosforo.errors?.required">
-              <p class="error-message">Campo obligatorio.</p>
-            </div>
-
             <ion-item>
               <ion-label>Nitrógeno</ion-label>
               <ion-select formControlName="nitrogeno">
@@ -45,8 +37,9 @@
                 </ion-select-option>
               </ion-select>
             </ion-item>
-            <div *ngIf="enviado && f.nitrogeno.errors?.required">
-              <p class="error-message">Campo obligatorio.</p>
+            <br>
+            <div *ngIf="enviado && mostrarMensajeError">
+              <p class="error-message">Debe seleccionar por lo menos una fuente.</p>
             </div>
 
           </form>
