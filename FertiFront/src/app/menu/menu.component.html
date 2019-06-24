@@ -1,54 +1,56 @@
-<nz-layout >
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
-    <div class="logo">
-    </div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu>
-        <span title><i class="anticon anticon-info"></i><span class="nav-text">Información</span></span>
-        <ul>
-          <li nz-menu-item [routerLink]="['/lista_parcelas']">Cultivos por usuario</li>
-          <li nz-menu-item [routerLink]="['/lista_analisis']">Análisis por finca</li>
-
-        </ul>
-      </li>
-      <li nz-submenu>
-        <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestión</span></span>
-        <ul>
-          <li nz-menu-item [routerLink]="['/lista_roles']">
-            Roles
-          </li>
-          <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
-            Tipos de cultivo
-          </li>
-          <li nz-menu-item [routerLink]="['/lista_requerimientos']">
-            Requerimientos nutricionales
-          </li>
-          <li nz-menu-item [routerLink]="['/lista_tipo_fuente']">
-            Tipos de fuente
-          </li>
-          <li nz-menu-item [routerLink]="['/lista_fuente']">
-            Fuentes
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
+<nz-layout>
   <nz-layout>
-    <nz-header style="background: #fff; padding:0;">
-      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed"
-        (click)="isCollapsed=!isCollapsed"></i>
-        <button nz-button nzType="primary" [nzSize]="size" nzShape="circle" (click)="loadTwo()"><i nz-icon nzType="close" nzTheme="outline"></i></button>
-    </nz-header>
-    <nz-content style="margin:0 16px;">
-      <nz-breadcrumb style="margin:16px 0;">
-      </nz-breadcrumb>
-      <div style="padding:24px; background: #fff; min-height: 360px;">
-        <router-outlet ></router-outlet>
-      </div>
-    </nz-content>
-    <nz-footer style="text-align: center;">FertiWeb Design ©2019 V.1</nz-footer>
+    <nz-sider  nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+      <ul  nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+        <div class="logo">
+        </div>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-info"></i><span class="nav-text">Información</span></span>
+          <ul class="ant-menu-submenu">
+            <li nz-menu-item [routerLink]="['/lista_parcelas']">Cultivos por usuario</li>
+            <li nz-menu-item [routerLink]="['/lista_analisis']">Análisis por finca</li>
+
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-setting"></i><span class="nav-text">Gestión</span></span>
+          <ul>
+            <li nz-menu-item [routerLink]="['/lista_roles']">
+              Roles
+            </li>
+            <li nz-menu-item [routerLink]="['/lista_tipo_cultivo']">
+              Tipos de cultivo
+            </li>
+            <li nz-menu-item [routerLink]="['/lista_requerimientos']">
+              Requerimientos nutricionales
+            </li>
+            <li nz-menu-item [routerLink]="['/lista_tipo_fuente']">
+              Tipos de fuente
+            </li>
+            <li nz-menu-item [routerLink]="['/lista_fuente']">
+              Fuentes
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header style="background: #00838f; padding:0;">
+        <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed"
+          (click)="isCollapsed=!isCollapsed"></i>
+        <button nz-button nzType="secondary" [nzSize]="size" nzShape="circle" (click)="loadTwo()"><i
+            class="anticon anticon-logout"></i></button>
+      </nz-header>
+      <nz-content style="margin:0 16px;">
+        <nz-breadcrumb style="margin:16px 0;">
+        </nz-breadcrumb>
+        <div style="padding:24px; background: #fff; min-height: 360px;">
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+      <nz-footer style="text-align: center;">FertiWeb Design ©2019 V.1</nz-footer>
+    </nz-layout>
   </nz-layout>
-</nz-layout>
-<ng-template #trigger>
-  <i class="anticon anticon-up"></i>
-</ng-template>
+  <ng-template #trigger>
+    <i class="anticon anticon-up"></i>
+  </ng-template>

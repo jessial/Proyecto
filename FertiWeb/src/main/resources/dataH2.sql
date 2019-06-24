@@ -12,9 +12,12 @@ MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (1,'A
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (2,'Productor',true, 'ROLE_USER');
 MERGE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (3,'Almacenista',true, 'ROLE_USER');
 
+Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'ppm');
+Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'cmol/kg');
+Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (3,'kg/ha');
+Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (4,'%');
 
-Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'gramos/tonelada');
-Merge INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'kilogramos/tonelada');
+
 MERGE INTO elementos VALUES (1, 'Nitrógeno', 14.006, 5); 
 MERGE INTO elementos VALUES (2, 'Fósforo', 30.973, 5);
 MERGE INTO elementos VALUES (3, 'Potasio', 39.102, 1);
@@ -27,11 +30,11 @@ MERGE INTO elementos VALUES (9, 'Hierro', 55.847, 3);
 MERGE INTO elementos VALUES (10, 'Manganeso', 54.938, 3);
 MERGE INTO elementos VALUES (11, 'Molibdeno', 95.94, 6);
 MERGE INTO elementos VALUES (12, 'Zinc', 65.37, 2); 
-MERGE INTO requerimiento VALUES (1, 12.8, 1, true, 2, 1);
-MERGE INTO requerimiento VALUES (2, 14, 1, true, 1, 1);
-MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 1);
-MERGE INTO tipo_fuente VALUES (1, 14.8, 1, 'true', 'Nitritos', 1);
-MERGE INTO tipo_fuente VALUES (2, 13, 2, 'true', 'cloruro de potasio', 1);
+MERGE INTO requerimiento VALUES (1, 12.8, 1, true, 2, 3);
+MERGE INTO requerimiento VALUES (2, 14, 1, true, 1, 3);
+MERGE INTO requerimiento VALUES (3, 3.5, 1, true, 3, 3);
+MERGE INTO tipo_fuente VALUES (1, 14.8, 1, 'true', 'Nitritos', 3);
+MERGE INTO tipo_fuente VALUES (2, 13, 2, 'true', 'cloruro de potasio', 3);
 MERGE INTO fuente VALUES (1, 1, true, 'Triple 15');
 MERGE INTO fuente VALUES (2, 2, true, 'Cloruro');
 

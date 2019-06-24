@@ -8,7 +8,7 @@ import persistencia.entidad.FuenteXRecomendacionEntidad;
 
 public interface FuenteXRecomendacionRepository extends JpaRepository<FuenteXRecomendacionEntidad, Long> {
 
-	List<FuenteXRecomendacionEntidad> findBycodigoRecomendacion(Long codigoRecomendacion);
+	List<FuenteXRecomendacionEntidad> findByCodigoRecomendacion(Long codigoRecomendacion);
 
 	FuenteXRecomendacionEntidad findFirstByCodigoFuente(Long codigoFuente);
 

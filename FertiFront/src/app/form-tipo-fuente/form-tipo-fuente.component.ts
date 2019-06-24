@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angular/forms';
-import { TipoFuente } from '../clases_dominio/tipo-fuente';
-import { TipoFuenteService } from '../servicios/tipo-fuente.service';
-import { UnidadService } from '../servicios/unidad.service';
-import { Unidad } from '../clases_dominio/unidad';
+import { FormBuilder, FormGroup, Validators } from '../../../node_modules/@angular/forms';
 import { Elemento } from '../clases_dominio/elemento';
+import { TipoFuente } from '../clases_dominio/tipo-fuente';
+import { Unidad } from '../clases_dominio/unidad';
 import { ElementoService } from '../servicios/elemento.service';
+import { TipoFuenteService } from '../servicios/tipo-fuente.service';
 
 @Component({
   selector: 'app-form-tipo-fuente',
@@ -15,13 +14,18 @@ import { ElementoService } from '../servicios/elemento.service';
 export class FormTipoFuenteComponent {
 
   formularioAgregarTipoFuente: FormGroup;
-  public unidades: Unidad[];
   public elementos: Elemento[];
   enviado = false;
   visible = false;
 
+  unidad: Unidad =
+    {
+      codigoUnidad: 3,
+      nombreUnidad: 'kg/ha'
+    };
+
   constructor(private fb: FormBuilder, private servicioTipoFuente: TipoFuenteService,
-    private unidadServicio: UnidadService, private elementoServicio: ElementoService) {
+    private elementoServicio: ElementoService) {
   }
 
   private crearFormulario(): void {
@@ -29,7 +33,6 @@ export class FormTipoFuenteComponent {
       nombre: [null, [Validators.required]],
       elemento: [null, [Validators.required]],
       aporte: [null, [Validators.required]],
-      unidad: [null, [Validators.required]],
       estado: [false, [Validators.required]],
     });
   }
@@ -42,7 +45,7 @@ export class FormTipoFuenteComponent {
     const tipoFuente = new TipoFuente();
     tipoFuente.nombre = this.f.nombre.value;
     tipoFuente.aporte = this.f.aporte.value;
-    tipoFuente.unidad = this.f.unidad.value;
+    tipoFuente.unidad = this.unidad;
     tipoFuente.estado = this.f.estado.value;
     tipoFuente.elemento = this.f.elemento.value;
     this.servicioTipoFuente.updateOrCreate(tipoFuente).subscribe(accion => {
@@ -55,9 +58,6 @@ export class FormTipoFuenteComponent {
 
   open(): void {
     this.crearFormulario();
-    this.unidadServicio.getBackUnidad().subscribe(result => {
-      this.unidades = result;
-    });
     this.elementoServicio.getBackElementos().subscribe(result => {
       this.elementos = result;
     });
@@ -70,7 +70,7 @@ export class FormTipoFuenteComponent {
     this.visible = false;
   }
 
-  
+
 
 }
 

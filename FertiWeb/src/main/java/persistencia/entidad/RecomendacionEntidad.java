@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class RecomendacionEntidad {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_recomendacion")
 	@Column(name = "rec_codigo_recomendacion")
 	private Long codigoRecomendacion;
 	@Column(name = "rec_codigo_analisis")

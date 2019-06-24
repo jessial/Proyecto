@@ -39,11 +39,11 @@ export class TableAnalisisComponent implements OnInit {
     });
   }
 
-  getTipoCultivos(): void{
+  getTipoCultivos(): void {
 
   }
 
-  nzPageIndexChange(pagina: number): void{
+  nzPageIndexChange(pagina: number): void {
     this.filtro.pagina = pagina;
     this.getAnalisis();
   }
@@ -60,7 +60,4 @@ export class TableAnalisisComponent implements OnInit {
     this.search();
   }
 
-  filterAddressChange(value: string[]): void {
-    this.listaFiltros = value;
-  }
 }
