@@ -34,9 +34,9 @@
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ng-container *ngFor="let elemento of recomendacion.analisis.elementos">
-          <strong>{{elemento.elemento.elemento}}:&nbsp;</strong>
-          <ion-label>{{elemento.cantidad}}</ion-label>
+        <ng-container *ngFor="let recomendacionXFuente of recomendacion.recomendacionXFuente">
+          <strong>{{recomendacionXFuente.fuente.producto}}:&nbsp;</strong>
+          <ion-label>{{recomendacionXFuente.cantidad}}</ion-label>
           <br>
         </ng-container>
         <ion-chip style="padding-top: 25px; padding-bottom: 25px">

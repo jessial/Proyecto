@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Parcela } from '../dominio/parcela';
+import { ToastController } from '@ionic/angular';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +21,7 @@ export class ParcelaService {
   private parcelaSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Parcela());
 
-  constructor(private http: HttpClient, private seguridadService: SeguridadService) { }
+  constructor(private http: HttpClient, private seguridadService: SeguridadService, private toastController: ToastController) { }
 
   /** GET parcelas from the server */
   public geBackParcelas(): Observable<Parcela[]> {
@@ -37,7 +38,7 @@ export class ParcelaService {
   /**DELETE parcela from the server */
   public deleteParcela(parcela: Parcela): void {
     const url = `${this.parcelaURL}/borrarParcela/${parcela.codigoParcela}`;
-    this.http.delete(url).subscribe(_ => this.cargarDatos());
+    this.http.delete(url).subscribe(_ => this.cargarDatos(), error => this.mostrarToast(error.error.message));
   }
 
   crearNuevo(parcela: Parcela) {
@@ -68,5 +69,13 @@ export class ParcelaService {
 
   getParcela(): Observable<Parcela> {
     return this.editSubject.asObservable();
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }

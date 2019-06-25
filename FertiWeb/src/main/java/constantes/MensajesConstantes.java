@@ -14,6 +14,8 @@ public final class MensajesConstantes {
 
 	public static final String ERROR_ASOCIACION_FUENTE_X_RECOMENDACION = "No es posible eliminar la fuente ya que se encuentra asociado a una recomendación.";
 
+	public static final String ERROR_ASOCIACION_ANALISIS = "No es posible eliminar la parcela ya que se encuentra asociada a un análisis.";
+
 	private MensajesConstantes() {
 		// Vacío intencionalmente
 	}

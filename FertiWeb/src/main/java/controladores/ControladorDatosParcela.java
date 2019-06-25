@@ -8,9 +8,13 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
 import dominio.Parcela;
 import dto.DTOParcela;
+import excepciones.ExcepcionClaveForanea;
+import persistencia.entidad.AnalisisEntidad;
 import persistencia.entidad.ParcelaEntidad;
+import persistencia.repositorio.AnalisisRepository;
 import persistencia.repositorio.ParcelaRepository;
 
 public class ControladorDatosParcela extends ControladorDatos {
@@ -20,6 +24,9 @@ public class ControladorDatosParcela extends ControladorDatos {
 
 	@Autowired
 	private ParcelaRepository parcelaRepository;
+
+	@Autowired
+	private AnalisisRepository analisisRepository;
 
 	@Autowired
 	private ControladorDatosLugar controladorDatosLugar;
@@ -100,12 +107,15 @@ public class ControladorDatosParcela extends ControladorDatos {
 
 	@Transactional
 	public void eliminarParcela(Long codigoParcela) {
+		List<AnalisisEntidad> analisis = analisisRepository.findByCodigoParcela(codigoParcela);
+		if (!analisis.isEmpty())
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_ANALISIS);
 		parcelaRepository.deleteById(codigoParcela);
 
 	}
 
 	public Object consultarParcelaPorUsuario(Long cedula) {
 		List<Parcela> listaParcela = mapearListaADominio(parcelaRepository.findAllByCodigoUsuario(cedula));
-		return construirListaDTO(listaParcela); 
+		return construirListaDTO(listaParcela);
 	}
 }
