@@ -2,11 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { RequerimientoCultivo } from '../clases_dominio/requerimiento-cultivo';
-import { RequerimientoPorCultivo } from '../clases_dominio/requerimiento-por-cultivo';
 import { SeguridadService } from '../seguridad/servicios/seguridad.service';
 import { UtilidadService } from './utilidad.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +16,14 @@ export class RequerimientoCultivoService {
   private httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
   private tipoSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new RequerimientoCultivo());
-  private requerimientosPorCultivo: RequerimientoPorCultivo[];
   private requerimientoCultivo: RequerimientoCultivo[];
 
   constructor(private http: HttpClient, private utilidad: UtilidadService, private seguridadService: SeguridadService) { }
 
   /** GET RequerimientosPorCutivo from the server */
-  public getBackRequerimientosPorCultivo(): Observable<RequerimientoPorCultivo[]> {
+  public getBackRequerimientosPorCultivo(): Observable<RequerimientoCultivo[]> {
     const url = `${this.requerimientoUrl}/consultaTodos`;
-    return this.http.get<RequerimientoPorCultivo[]>(url).pipe(catchError(this.handleError('', [])));
+    return this.http.get<RequerimientoCultivo[]>(url).pipe(catchError(this.handleError('', [])));
   }
 
   /** UPDATE RequerimientosCutivo from the server */
@@ -43,14 +41,14 @@ export class RequerimientoCultivoService {
   cargarDatos() {
     this.getBackRequerimientosPorCultivo()
       .subscribe(result => {
-        this.requerimientosPorCultivo = result;
+        this.requerimientoCultivo = result;
         this.refresh();
       }
       );
   }
 
   private refresh() {
-    this.tipoSubject.next(this.requerimientosPorCultivo);
+    this.tipoSubject.next(this.requerimientoCultivo);
   }
 
   crearNuevo(requerimiento: RequerimientoCultivo) {
@@ -65,7 +63,7 @@ export class RequerimientoCultivoService {
     };
   }
 
-  getRequerimientosPorCultivo(): Observable<RequerimientoPorCultivo[]> {
+  getRequerimientosPorCultivo(): Observable<RequerimientoCultivo[]> {
     return this.tipoSubject.asObservable();
   }
 

@@ -29,4 +29,8 @@ export class UtilidadService {
   public mensajeErrorEliminar(mensaje: any): void {
     this.mensajeComponent.error('Ocurrió un error', mensaje);
   }
+
+  public mensajeErrorDinamico(titulo: string, mensaje: string) {
+    this.mensajeComponent.error(titulo, mensaje);
+  }
 }

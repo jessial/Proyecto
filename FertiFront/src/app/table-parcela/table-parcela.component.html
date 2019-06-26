@@ -1,8 +1,24 @@
 <h2>Cultivos por usuario</h2>
-<nz-table #basicTable [nzData]="dataSet">
+<nz-table nz-table #nzTable [nzData]="dataSet" [nzPageIndex]="numeroPagina" [nzTotal]="totalElementos"
+  [nzFooter]="piePagina" (nzPageIndexChange)="nzPageIndexChange($event)" [nzFrontPagination]="false">
   <thead>
     <tr>
-      <th>Usuario</th>
+        <th nzCustomFilter>Usuario
+            <nz-dropdown nzTrigger="click" nzPlacement="bottomLeft" [nzClickHide]="false" nzTableFilter #dropdown>
+                <i nz-icon
+                  nzType="search"
+                  class="anticon anticon-plus"
+                  [class.ant-table-filter-open]="dropdown.nzVisible"
+                  nz-dropdown ></i>
+                <div class="search-box" >
+                  <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                  <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                    Search
+                  </button>
+                  <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                </div>
+              </nz-dropdown>
+        </th>
       <th>Finca</th>
       <th>Área sembrada (m²)</th>
       <th>Cultivo</th>
@@ -10,12 +26,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of basicTable.data">
-      <td>{{data.lugar.usuario.nombre + ' ' + data.lugar.usuario.apellido}}</td>
-      <td>{{data.lugar.nombre + ' ' + '-' + data.lugar.ubicacion}}</td>
-      <td>{{data.area}}</td>
-      <td>{{data.tipoCultivo.nombre + ' '  + '-' + data.tipoCultivo.variedad }}</td>
-      <td>{{data.fechaSiembra | date: 'dd/MM/yyyy'}}</td>
-    </tr>
+    <ng-template ngFor let-data [ngForOf]="nzTable.data">
+      <tr>
+        <td>{{data.lugar.usuario.nombre + ' ' + data.lugar.usuario.apellido}}</td>
+        <td>{{data.lugar.nombre + ' ' + '-' + data.lugar.ubicacion}}</td>
+        <td>{{data.area}}</td>
+        <td>{{data.tipoCultivo.nombre + ' '  + '-' + data.tipoCultivo.variedad }}</td>
+        <td>{{data.fechaSiembra | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+    </ng-template>
   </tbody>
 </nz-table>
