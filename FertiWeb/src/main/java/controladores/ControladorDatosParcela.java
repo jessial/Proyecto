@@ -6,10 +6,15 @@ import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import dominio.Parcela;
 import dto.DTOParcela;
+import dto.DTOParcelaPaginado;
+import dto.Paginador;
 import persistencia.entidad.ParcelaEntidad;
 import persistencia.repositorio.ParcelaRepository;
 
@@ -106,6 +111,28 @@ public class ControladorDatosParcela extends ControladorDatos {
 
 	public Object consultarParcelaPorUsuario(Long cedula) {
 		List<Parcela> listaParcela = mapearListaADominio(parcelaRepository.findAllByCodigoUsuario(cedula));
-		return construirListaDTO(listaParcela); 
+		return construirListaDTO(listaParcela);
+	}
+
+	public DTOParcelaPaginado consultarTodosPaginado(int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTOPaginado(parcelaRepository.findAll(paginador));
+	}
+
+	private DTOParcelaPaginado construirDTOPaginado(Page<ParcelaEntidad> resultado) {
+		Paginador paginador = new Paginador();
+		paginador.setNumeroPagina(resultado.getNumber());
+		paginador.setTamano(resultado.getNumberOfElements());
+		paginador.setTotalElementos(resultado.getTotalElements());
+		paginador.setTotalPaginas(resultado.getTotalPages());
+		DTOParcelaPaginado dtoParcelaPaginado = new DTOParcelaPaginado();
+		dtoParcelaPaginado.setParcela(construirListaDTO(mapearListaADominio(resultado.getContent())));
+		dtoParcelaPaginado.setPaginador(paginador);
+		return dtoParcelaPaginado;
+	}
+
+	public DTOParcelaPaginado consultarConFiltroUsuario(String filtro, int pagina) {
+		Pageable paginador = PageRequest.of(pagina, 10);
+		return construirDTOPaginado(parcelaRepository.findAllLikeUsuarioNombre(filtro, paginador));
 	}
 }

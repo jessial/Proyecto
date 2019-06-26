@@ -7,6 +7,7 @@ import { Unidad } from '../clases_dominio/unidad';
 import { ElementoService } from '../servicios/elemento.service';
 import { RequerimientoCultivoService } from '../servicios/requerimiento-cultivo.service';
 import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
+import { UtilidadService } from '../servicios/utilidad.service';
 
 @Component({
   selector: 'app-form-requerimientos-cultivo',
@@ -27,7 +28,8 @@ export class FormRequerimientosCultivoComponent {
     };
 
   constructor(private fb: FormBuilder, private servicioRequerimientos: RequerimientoCultivoService,
-    private tipoCultivoServicio: TipoCultivoService, private elementoServicio: ElementoService) {
+    private tipoCultivoServicio: TipoCultivoService, private elementoServicio: ElementoService,
+    private utilidad: UtilidadService) {
   }
 
   open() {
@@ -53,20 +55,30 @@ export class FormRequerimientosCultivoComponent {
 
   submit() {
     this.enviado = true;
-    if (this.formularioAgregarRequerimiento.invalid) {
-      return null;
-    }
-    const requerimiento = new RequerimientoCultivo();
-    requerimiento.tipoCultivo = this.f.tipoCultivo.value;
-    requerimiento.elemento = this.f.elemento.value;
-    requerimiento.estado = this.f.estado.value;
-    requerimiento.cantidad = this.f.cantidad.value;
-    requerimiento.unidad = this.unidad;
+    this.servicioRequerimientos.getRequerimientosPorCultivo()
+      .subscribe(resultado => {
+        if (this.formularioAgregarRequerimiento.invalid) {
+          return null;
+        }
+        const numero = resultado
+          .filter(r => r.tipoCultivo.codigoTipoCultivo === this.f.tipoCultivo.value.codigoTipoCultivo)
+          .filter(r => r.elemento.codigoElemento === this.f.elemento.value.codigoElemento).length;
+        if (numero > 0) {
+          this.utilidad.mensajeErrorEliminar(`No es posible agregar el requerimiento, ya que para el tipo de cultivo existe el elemento.`);
+          return null;
+        }
+        const requerimiento = new RequerimientoCultivo();
+        requerimiento.tipoCultivo = this.f.tipoCultivo.value;
+        requerimiento.elemento = this.f.elemento.value;
+        requerimiento.estado = this.f.estado.value;
+        requerimiento.cantidad = this.f.cantidad.value;
+        requerimiento.unidad = this.unidad;
 
-    this.servicioRequerimientos.updateOrCreate(requerimiento).subscribe(accion => {
-      this.servicioRequerimientos.cargarDatos();
-      this.close();
-    });
+        this.servicioRequerimientos.updateOrCreate(requerimiento).subscribe(accion => {
+          this.servicioRequerimientos.cargarDatos();
+          this.close();
+        });
+      });
   }
 
   get f() { return this.formularioAgregarRequerimiento.controls; }

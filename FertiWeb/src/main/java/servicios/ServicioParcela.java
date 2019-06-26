@@ -54,4 +54,15 @@ public class ServicioParcela {
 	public ResponseEntity<Object> consultarParcelaPorUsuarioParaApp(@PathVariable("cedula") Long cedula) {
 		return new ResponseEntity<>(controladorDatosParcela.consultarParcelaPorUsuario(cedula), HttpStatus.CREATED);
 	}
+
+	@GetMapping("/consultaTodosPaginado/{pagina}")
+	public ResponseEntity<Object> consultar(@PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosParcela.consultarTodosPaginado(pagina), HttpStatus.CREATED);
+	}
+
+	@GetMapping("/consultaTodosFiltroUsuario/{filtro}/{pagina}")
+	public ResponseEntity<Object> consultarConFiltroUsuario(@PathVariable String filtro, @PathVariable int pagina) {
+		return new ResponseEntity<>(controladorDatosParcela.consultarConFiltroUsuario(filtro, pagina),
+				HttpStatus.CREATED);
+	}
 }

@@ -4,9 +4,9 @@
     <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioAgregarRequerimiento">
       <nz-form-item>
         <nz-form-control>
-          <nz-select placeholder="Cultivo" nz-input formControlName="tipoCultivo">
-            <nz-option *ngFor="let cultivo of cultivos" placeholder="Cultivo"
-              [nzLabel]="cultivo.nombre + ' ' + cultivo.variedad" [nzValue]="cultivo">
+          <nz-select nzPlaceHolder="Cultivo" nz-input formControlName="tipoCultivo">
+            <nz-option *ngFor="let cultivo of cultivos" [nzLabel]="cultivo.nombre + ' ' + cultivo.variedad"
+              [nzValue]="cultivo">
             </nz-option>
           </nz-select>
           <nz-form-explain *ngIf="enviado && f.tipoCultivo.errors?.required">
@@ -16,9 +16,8 @@
 
       <nz-form-item>
         <nz-form-control>
-          <nz-select placeholder="Elemento" nz-input formControlName="elemento">
-            <nz-option *ngFor="let elemento of elementos" placeholder="Elemento" [nzLabel]="elemento.elemento"
-              [nzValue]="elemento">
+          <nz-select nzPlaceHolder="Elemento" nz-input formControlName="elemento">
+            <nz-option *ngFor="let elemento of elementos" [nzLabel]="elemento.elemento" [nzValue]="elemento">
             </nz-option>
           </nz-select>
           <nz-form-explain *ngIf="enviado && f.elemento.errors?.required">
@@ -34,10 +33,6 @@
           <nz-form-explain *ngIf="enviado && f.cantidad.errors?.required">Ingrese una
             cantidad</nz-form-explain>
         </nz-form-control>
-        <br>
-        <div>
-          <span>Recuerde ingresar la cantidad en Kilogramos</span>
-        </div>
       </nz-form-item>
 
       <nz-form-item>
@@ -47,6 +42,8 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+    <nz-alert nzType="info" nzMessage="Recuerde ingresar la cantidad en Kilogramos" nzShowIcon></nz-alert>
+    <br>
     <div class="footer">
       <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
       <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Agregar</span></button>
