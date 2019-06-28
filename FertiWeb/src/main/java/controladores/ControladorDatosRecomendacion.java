@@ -111,12 +111,16 @@ public class ControladorDatosRecomendacion {
 			double cantidadRequerida = obtenerCantidadElementoRequerimiento(dtoRequerimientos, pair.getKey())
 					- kgElemento;
 			if (cantidadRequerida < 0) {
-				break;
+				fuenteXRecomendacion.setCantidad(0.0);
+				fuenteXRecomendacion.setCodigoFuente(pair.getKey());
+				fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
+				fuenteXRecomendacion.setCodigoUnidad(3L);
+			} else {
+				fuenteXRecomendacion.setCantidad(cantidadRequerida);
+				fuenteXRecomendacion.setCodigoFuente(pair.getKey());
+				fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
+				fuenteXRecomendacion.setCodigoUnidad(3L);
 			}
-			fuenteXRecomendacion.setCantidad(cantidadRequerida);
-			fuenteXRecomendacion.setCodigoFuente(pair.getKey());
-			fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
-			fuenteXRecomendacion.setCodigoUnidad(3L);
 			controladorDatosFuenteXRecomendacion.guardar(fuenteXRecomendacion);
 		}
 		return construirDTO(recomendacion);
