@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div padding *ngIf="!errorEdicion">
-    <ion-chip color="danger" style="width: 100%">
+  <div padding *ngIf="errorEdicion">
+    <ion-chip color="danger" style="width: 100%; height: auto;">
       <ion-label color="danger">No será posible editar algunas parcelas, ya que los tipo cultivo que poseen se
         encuentran actualmente inactivos.</ion-label>
     </ion-chip>

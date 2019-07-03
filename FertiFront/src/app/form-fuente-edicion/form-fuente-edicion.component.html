@@ -4,8 +4,8 @@
     <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioEditarFuente">
       <nz-form-item>
         <nz-form-control>
-          <nz-select placeholder="Tipo fuente" nz-input formControlName="tipoFuente">
-            <nz-option *ngFor="let tipoFuente of tipoFuentes" placeholder="Unidad" [nzLabel]="tipoFuente.nombre"
+          <nz-select nzPlaceHolder="Tipo de fuente" nz-input formControlName="tipoFuente">
+            <nz-option *ngFor="let tipoFuente of tipoFuentes" [nzLabel]="tipoFuente.nombre"
               [nzValue]="tipoFuente.codigo">
             </nz-option>
           </nz-select>

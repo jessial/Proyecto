@@ -15,9 +15,8 @@
 
       <nz-form-item>
         <nz-form-control>
-          <nz-select placeholder="Elemento" nz-input formControlName="elemento">
-            <nz-option *ngFor="let elemento of elementos" placeholder="Elemento" [nzLabel]="elemento.elemento"
-              [nzValue]="elemento">
+          <nz-select nzPlaceHolder="Elemento" nz-input formControlName="elemento">
+            <nz-option *ngFor="let elemento of elementos" [nzLabel]="elemento.elemento" [nzValue]="elemento">
             </nz-option>
           </nz-select>
           <nz-form-explain *ngIf="enviado && f.elemento.errors?.required">Seleccione
@@ -30,21 +29,10 @@
           <nz-input-group nzPrefixIcon="anticon anticon-edit">
             <input type="number" nz-input formControlName="aporte" placeholder="Aporte">
           </nz-input-group>
+
           <nz-form-explain *ngIf="enviado && f.aporte.errors?.required">Ingrese el
             aporte
           </nz-form-explain>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select placeholder="Unidad" nz-input formControlName="unidad">
-            <nz-option *ngFor="let unidad of unidades" placeholder="Unidad" [nzLabel]="unidad.nombreUnidad"
-              [nzValue]="unidad">
-            </nz-option>
-          </nz-select>
-          <nz-form-explain *ngIf="enviado && f.unidad.errors?.required">Seleccione
-            la unidad</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
 
@@ -55,6 +43,8 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+    <nz-alert nzType="info" nzMessage="Recuerde ingresar los aporte en Kilogramos" nzShowIcon></nz-alert>
+    <br>
     <div class="footer">
       <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancelar</span></button>
       <button type="button" (click)="submit();" class="ant-btn ant-btn-primary"><span>Agregar</span></button>

@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { AnalisisPaginado } from '../clases_dominio/analisis-paginado';
 import { Filtro } from '../clases_dominio/filtro';
-import { SeguridadService } from '../seguridad/servicios/seguridad.service'
-import { environment } from 'src/environments/environment';
+import { SeguridadService } from '../seguridad/servicios/seguridad.service';
 import { UtilidadService } from './utilidad.service';
 
 @Injectable({

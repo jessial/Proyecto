@@ -1,8 +1,10 @@
 INSERT IGNORE INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (1,'ppm');
 INSERT IGNORE INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (2,'cmol/kg');
 INSERT IGNORE INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (3,'kg/ha');
-INSERT IGNORE INTO elementos VALUES (1, 'Nitrógeno', 14.006, 5); 
-INSERT IGNORE INTO elementos VALUES (2, 'Fósforo', 30.973, 5);
+INSERT IGNORE INTO unidad(`uni_codigo`, `uni_nombre`) VALUES (4,'%')
+;
+INSERT IGNORE INTO elementos VALUES (1, 'Nitrogeno', 14.006, 5); 
+INSERT IGNORE INTO elementos VALUES (2, 'Fosforo', 30.973, 5);
 INSERT IGNORE INTO elementos VALUES (3, 'Potasio', 39.102, 1);
 INSERT IGNORE INTO elementos VALUES (4, 'Calcio', 40.08, 2);
 INSERT IGNORE INTO elementos VALUES (5, 'Magnesio', 24.312, 2);

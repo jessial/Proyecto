@@ -24,34 +24,25 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <br>
   <ion-list style="margin-bottom: 50px">
-    <ion-list-header>Histórico recomendaciones</ion-list-header>
-    <ion-card>
+    <ion-list-header>
+      <h4>Histórico recomendaciones</h4>
+    </ion-list-header>
+    <ion-card *ngFor="let recomendacion of recomendaciones">
       <ion-card-header>
-        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
+        <ion-card-title>{{recomendacion.fechaRecomendacion | date: 'dd/MM/yyyy'}}
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <h2>Recomendación</h2>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <h2>Recomendación</h2>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{analisisADetallar.parcela.lugar.nombre}}
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <h2>Recomendación</h2>
+        <ng-container *ngFor="let recomendacionXFuente of recomendacion.recomendacionXFuente">
+          <strong>{{recomendacionXFuente.fuente.producto}}:&nbsp;</strong>
+          <ion-label>{{recomendacionXFuente.cantidad}}</ion-label>
+          <br>
+        </ng-container>
+        <ion-chip style="padding-top: 25px; padding-bottom: 25px">
+          <ion-icon color="primary" style="height: auto;"></ion-icon>
+          <ion-label>Recuerde que la recomendación está dada en kg/ha.</ion-label>
+        </ion-chip>
       </ion-card-content>
     </ion-card>
   </ion-list>

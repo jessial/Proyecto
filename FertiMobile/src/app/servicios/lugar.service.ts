@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SeguridadService } from './seguridad.service';
+import { ToastController } from '@ionic/angular';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +21,8 @@ export class LugarService {
   private lugarSubject = new BehaviorSubject([]);
   private editSubject = new BehaviorSubject(new Lugar());
 
-  constructor(private http: HttpClient, private seguridadService: SeguridadService) { }
+  constructor(private http: HttpClient, private seguridadService: SeguridadService,
+    private toastController: ToastController) { }
 
   /** GET lugares from the server */
   public geBackLugares(): Observable<Lugar[]> {
@@ -37,7 +39,7 @@ export class LugarService {
   /**DELETE LUGAR from the server */
   public deleteLugar(lugar: Lugar): void {
     const url = `${this.lugarURL}/borrarLugar/${lugar.codigoLugar}`;
-    this.http.delete(url).subscribe(_ => this.cargarDatos());
+    this.http.delete(url).subscribe(_ => this.cargarDatos(), error => this.mostrarToast(error.error.message));
   }
 
   crearNuevo(lugar: Lugar) {
@@ -68,5 +70,13 @@ export class LugarService {
 
   getLugar(): Observable<Lugar> {
     return this.editSubject.asObservable();
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }

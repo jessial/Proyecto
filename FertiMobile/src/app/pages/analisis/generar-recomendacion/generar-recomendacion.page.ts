@@ -1,8 +1,13 @@
-import { FuenteService } from './../../../servicios/fuente.service';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Fuente } from 'src/app/dominio/fuente';
+import { DTOAnalisis } from 'src/app/dto/dto-analisis';
+import { FuenteParaRecomendacion } from 'src/app/dto/fuente-para-recomendacion';
+import { AnalisisService } from 'src/app/servicios/analisis.service';
+import { RecomendacionService } from 'src/app/servicios/recomendacion.service';
+import { FuenteService } from './../../../servicios/fuente.service';
 
 @Component({
   selector: 'app-generar-recomendacion',
@@ -14,18 +19,23 @@ export class GenerarRecomendacionPage implements OnInit {
   formularioGenerarRecomendacion: FormGroup;
   enviado = false;
   carga: any;
+  analisis: DTOAnalisis;
+  mostrarMensajeError = false;
   listaFuentesPotasio: Fuente[] = [];
   listaFuentesFosforo: Fuente[] = [];
   listaFuentesNitrogeno: Fuente[] = [];
 
   constructor(private fb: FormBuilder, private toastController: ToastController,
-    public loadingController: LoadingController, private fuenteServicio: FuenteService) { }
+    public loadingController: LoadingController, private fuenteServicio: FuenteService,
+    private analisisServicio: AnalisisService, private recomendacionServicio: RecomendacionService,
+    private location: Location) { }
 
   ngOnInit() {
+    this.analisis = this.analisisServicio.getDetalleAnalisis();
     this.formularioGenerarRecomendacion = this.fb.group({
-      potasio: [null, [Validators.required]],
-      fosforo: [null, [Validators.required]],
-      nitrogeno: [null, [Validators.required]]
+      potasio: [null],
+      fosforo: [null],
+      nitrogeno: [null]
     });
     this.fuenteServicio.cargarDatosFuenteFosforo();
     this.fuenteServicio.getFuentesFosforo().subscribe(fuentesFosforo => {
@@ -45,23 +55,29 @@ export class GenerarRecomendacionPage implements OnInit {
 
   agregar() {
     this.enviado = true;
-    if (this.formularioGenerarRecomendacion.invalid) {
+    if (!this.f.potasio.value && !this.f.fosforo.value && !this.f.nitrogeno.value) {
+      this.mostrarMensajeError = true;
       return null;
     }
-    /*
+    this.mostrarMensajeError = false;
+    const fuente = new FuenteParaRecomendacion();
+    fuente.dtoAnalisis = this.analisis;
+    fuente.fosforo = this.f.fosforo.value;
+    fuente.nitrogeno = this.f.nitrogeno.value;
+    fuente.potasio = this.f.potasio.value;
     this.mostrarCarga().then(_ => {
-      this.lugarServicio.updateOrCreate(lugar).subscribe(
+      this.recomendacionServicio.generarRecomendacion(fuente).subscribe(
         resp => {
-          this.mostrarToast('Éxito registrando finca');
-          this.lugarServicio.cargarDatos();
+          this.mostrarToast('Éxito generando recomendación');
+          this.recomendacionServicio.cargarDatos(this.analisisServicio.getDetalleAnalisis().codigoAnalisis);
           this.location.back();
           this.ocultarCarga();
         },
         error => {
-          this.mostrarToast('Error registrando finca');
+          this.mostrarToast('Error generando recomendación');
         }
       );
-    });*/
+    });
   }
 
   async mostrarToast(mensaje: string) {

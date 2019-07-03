@@ -1,7 +1,6 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import { AnalisisService } from '../servicios/analisis.service';
+import { Component, OnInit } from '@angular/core';
 import { Filtro } from '../clases_dominio/filtro';
-import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
+import { AnalisisService } from '../servicios/analisis.service';
 
 @Component({
   selector: 'app-table-analisis',
@@ -12,15 +11,15 @@ export class TableAnalisisComponent implements OnInit {
 
   searchValue = '';
   numeroPagina = 1;
-  filtro: Filtro ;
+  filtro: Filtro;
   totalElementos = 0;
-  piePagina = `Total Registros: 0`
+  piePagina = `Total Registros: 0`;
   dataSet = [];
-  listaFiltros: string[]=[];
+  listaFiltros: string[] = [];
   tiposCultivo = [];
   mapOfExpandData: { [key: string]: boolean } = {};
 
-  constructor(private analisisServicio: AnalisisService, private tipoCultivoService: TipoCultivoService) { }
+  constructor(private analisisServicio: AnalisisService) { }
 
   ngOnInit() {
     this.filtro = new Filtro();
@@ -28,19 +27,16 @@ export class TableAnalisisComponent implements OnInit {
     this.filtro.pagina = 1;
     this.filtro.valor = '';
     this.getAnalisis();
-    this.getTipoCultivos();
   }
 
   getAnalisis(): void {
     this.analisisServicio.getBackAnalisis(this.filtro).subscribe(result => {
-      this.dataSet = result.analisis;
-      this.totalElementos = result.paginador.totalElementos;
-      this.piePagina = `Total Registros: ${this.totalElementos}`;
+      if (!!result) {
+        this.dataSet = result.analisis;
+        this.totalElementos = result.paginador.totalElementos;
+        this.piePagina = `Total Registros: ${this.totalElementos}`;
+      }
     });
-  }
-
-  getTipoCultivos(): void {
-
   }
 
   nzPageIndexChange(pagina: number): void {
@@ -51,13 +47,14 @@ export class TableAnalisisComponent implements OnInit {
   search(): void {
     this.filtro.valor = this.searchValue;
     this.filtro.numeroFiltro = 1;
-    this.getAnalisis();
+    if (!!this.filtro.valor) {
+      this.getAnalisis();
+    }
   }
 
   reset(): void {
     this.searchValue = '';
     this.filtro.numeroFiltro = 0;
-    this.search();
   }
 
 }
