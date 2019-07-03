@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Filtro } from '../clases_dominio/filtro';
 import { AnalisisService } from '../servicios/analisis.service';
-import { TipoCultivoService } from '../servicios/tipo-cultivo.service';
 
 @Component({
   selector: 'app-table-analisis',
@@ -20,7 +19,7 @@ export class TableAnalisisComponent implements OnInit {
   tiposCultivo = [];
   mapOfExpandData: { [key: string]: boolean } = {};
 
-  constructor(private analisisServicio: AnalisisService, private tipoCultivoService: TipoCultivoService) { }
+  constructor(private analisisServicio: AnalisisService) { }
 
   ngOnInit() {
     this.filtro = new Filtro();
@@ -28,7 +27,6 @@ export class TableAnalisisComponent implements OnInit {
     this.filtro.pagina = 1;
     this.filtro.valor = '';
     this.getAnalisis();
-    this.getTipoCultivos();
   }
 
   getAnalisis(): void {
@@ -39,10 +37,6 @@ export class TableAnalisisComponent implements OnInit {
         this.piePagina = `Total Registros: ${this.totalElementos}`;
       }
     });
-  }
-
-  getTipoCultivos(): void {
-
   }
 
   nzPageIndexChange(pagina: number): void {

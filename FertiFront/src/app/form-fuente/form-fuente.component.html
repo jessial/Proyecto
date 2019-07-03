@@ -3,9 +3,8 @@
     <form nz-form [nzLayout]="'vertical'" [formGroup]="formularioAgregarFuente">
       <nz-form-item>
         <nz-form-control>
-          <nz-select placeholder="tipoFuente" nz-input formControlName="tipoFuente">
-            <nz-option *ngFor="let tipoFuente of tipoFuentes" placeholder="tipoFuente" [nzLabel]="tipoFuente.nombre"
-              [nzValue]="tipoFuente">
+          <nz-select nzPlaceHolder="tipo de fuente" nz-input formControlName="tipoFuente">
+            <nz-option *ngFor="let tipoFuente of tipoFuentes" [nzLabel]="tipoFuente.nombre" [nzValue]="tipoFuente">
             </nz-option>
           </nz-select>
           <nz-form-explain *ngIf="enviado && f.tipoFuente.errors?.required">Seleccione
