@@ -32,7 +32,7 @@ export class FormTipoFuenteComponent {
     this.formularioAgregarTipoFuente = this.fb.group({
       nombre: [null, [Validators.required]],
       elemento: [null, [Validators.required]],
-      aporte: [null, [Validators.required]],
+      aporte: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       estado: [false, [Validators.required]],
     });
   }
