@@ -1,6 +1,7 @@
 package controladores;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class ControladorSeguridad implements UserDetailsService {
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	private static final String semilla = "FERTIAPP_";
 
 	@Override
 	@Transactional(readOnly = true)
@@ -57,6 +60,26 @@ public class ControladorSeguridad implements UserDetailsService {
 		usuarioEntidad.setEstado(usuario.isEstado());
 		usuarioEntidad.setCodigorol(usuario.getRol().getCodigo());
 		return usuarioEntidad;
+	}
+	
+	public void guardarUsuario(UsuarioSeguridadEntidad usuario) {
+		usuarioRepository.save(usuario);
+	}
+	
+	public String cambiarClave(long codigoUsuario) {
+		String stringCodigoUsuario = (Long.toString(codigoUsuario));
+		UsuarioSeguridadEntidad usuarioEntidad = usuarioRepository.findByNombreUsuario(stringCodigoUsuario);
+		if (usuarioEntidad == null) {
+			throw new UsernameNotFoundException(stringCodigoUsuario);
+		}
+		String nuevoPassword = crearPassword(); 
+		usuarioEntidad.setPassword(passwordEncoder.encode(nuevoPassword));
+		guardarUsuario(usuarioEntidad);
+		return nuevoPassword;
+	}
+
+	private String crearPassword() {
+		return semilla + Calendar.getInstance().getTimeInMillis();	
 	}
 
 }

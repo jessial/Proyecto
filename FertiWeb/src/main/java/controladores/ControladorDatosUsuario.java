@@ -65,4 +65,10 @@ public class ControladorDatosUsuario {
 		return null == usuario;
 	}
 
+	public void guardarUsuario(Usuario usuario) {
+		UsuarioEntidad usuarioEntidad = usuarioRepository.findFirstByCedula(usuario.getCedula());
+		usuarioEntidad.setPassword(usuario.getPassword());
+		usuarioRepository.save(usuarioEntidad);
+	}
+
 }
