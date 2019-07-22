@@ -35,6 +35,8 @@ repositories {
 
 dependencies {
 
+	compile 'net.sargue:mailgun:1.9.0'
+	compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
 	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.4.RELEASE'
 	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
 	compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'

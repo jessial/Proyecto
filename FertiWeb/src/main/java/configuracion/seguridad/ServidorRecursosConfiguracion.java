@@ -22,9 +22,10 @@ public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapt
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/servicio_usuario/guardadoUsuario").permitAll()
-				.antMatchers(HttpMethod.GET, "/servicio_rol/consultaRoles").permitAll().anyRequest().authenticated()
+				.antMatchers(HttpMethod.GET, "/servicio_rol/consultaRoles").permitAll()
+				.antMatchers(HttpMethod.GET, "/servicio_seguridad/recuperar_cuenta/**").permitAll().anyRequest().authenticated()
 				.and().cors().configurationSource(corsConfigurationSource());
-		
+
 	}
 
 	@Bean
