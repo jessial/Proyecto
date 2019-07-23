@@ -24,5 +24,8 @@ public interface ParcelaRepository extends JpaRepository<ParcelaEntidad, Long> {
 
 	@Query(value = "select p.* from parcela p, lugar l, usuario u where p.par_codigo_lugar = l.lug_codigo and l.lug_codigo_usuario = u.usu_cedula and u.usu_nombre like %?1%", countQuery = "select count(*) from parcela p, lugar l, usuario u where p.par_codigo_lugar = l.lug_codigo and l.lug_codigo_usuario = u.usu_cedula and u.usu_nombre like %?1%", nativeQuery = true)
 	Page<ParcelaEntidad> findAllLikeUsuarioNombre(String filtro, Pageable paginador);
+	
+	@Query(value = "SELECT P.* FROM PARCELA P, LUGAR L, USUARIO U WHERE P.PAR_CODIGO_LUGAR = L.LUG_CODIGO AND L.LUG_CODIGO_USUARIO = U.USU_CEDULA ORDER BY U.USU_APELLIDO DESC, U.USU_NOMBRE DESC", countQuery = "SELECT COUNT(*) FROM PARCELA P, LUGAR L, USUARIO U WHERE P.PAR_CODIGO_LUGAR = L.LUG_CODIGO AND L.LUG_CODIGO_USUARIO = U.USU_CEDULA ORDER BY U.USU_APELLIDO DESC, U.USU_NOMBRE DESC", nativeQuery = true)
+	Page<ParcelaEntidad> findAllOrderByUsuario(Pageable paginador);
 
 }

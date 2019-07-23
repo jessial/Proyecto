@@ -126,7 +126,7 @@ public class ControladorDatosParcela extends ControladorDatos {
 
 	public DTOParcelaPaginado consultarTodosPaginado(int pagina) {
 		Pageable paginador = PageRequest.of(pagina, 10);
-		return construirDTOPaginado(parcelaRepository.findAll(paginador));
+		return construirDTOPaginado(parcelaRepository.findAllOrderByUsuario(paginador));
 	}
 
 	private DTOParcelaPaginado construirDTOPaginado(Page<ParcelaEntidad> resultado) {

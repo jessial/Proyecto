@@ -31,8 +31,8 @@ public class ServicicoSeguridad {
 			Usuario usuario = controladorDatosUsuario.consultarPorCedula(cedula);
 			usuario.setPassword(controladorSeguridad.cambiarClave(usuario.getCedula()));
 			controladorDatosUsuario.guardarUsuario(usuario);
-			ServicioEnvioCorreos.MGSample.sendSimpleMessage(usuario.getEmail(), usuario.getPassword());
-		} catch (UnirestException e) {
+			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario.getEmail(), usuario.getPassword());
+		} catch (Exception e) {
 			e.getStackTrace();
 		}
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
