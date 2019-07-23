@@ -15,7 +15,7 @@
           <form [formGroup]="formularioGenerarRecomendacion">
             <ion-item>
               <ion-label>Potasio</ion-label>
-              <ion-select formControlName="potasio">
+              <ion-select formControlName="potasio" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let fuentePotasio of listaFuentesPotasio" [value]="fuentePotasio">
                   {{fuentePotasio.producto}}
                 </ion-select-option>
@@ -23,7 +23,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Fósforo</ion-label>
-              <ion-select formControlName="fosforo">
+              <ion-select formControlName="fosforo" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let fuenteFosforo of listaFuentesFosforo" [value]="fuenteFosforo">
                   {{fuenteFosforo.producto}}
                 </ion-select-option>
@@ -31,7 +31,7 @@
             </ion-item>
             <ion-item>
               <ion-label>Nitrógeno</ion-label>
-              <ion-select formControlName="nitrogeno">
+              <ion-select formControlName="nitrogeno" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let fuenteNitrogeno of listaFuentesNitrogeno" [value]="fuenteNitrogeno">
                   {{fuenteNitrogeno.producto}}
                 </ion-select-option>

@@ -75,6 +75,7 @@ export class GenerarRecomendacionPage implements OnInit {
         },
         error => {
           this.mostrarToast('Error generando recomendación');
+          this.ocultarCarga();
         }
       );
     });

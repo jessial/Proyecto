@@ -3,7 +3,7 @@ import { ModalAgregarAnalisisComponent } from './../modal-agregar-analisis-compo
 import { Unidad } from './../../../dominio/unidad';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController, AlertController } from '@ionic/angular';
 import { ParcelaService } from 'src/app/servicios/parcela.service';
 import { Parcela } from 'src/app/dominio/parcela';
 import { DTOElementoXAnalisis } from 'src/app/dto/dto-elemento';
@@ -27,7 +27,7 @@ export class AgregarAnalisisPage implements OnInit {
   fechaMaximaAnalisis: string;
 
   constructor(private fb: FormBuilder, private location: Location, public loadingController: LoadingController,
-    private parcelaServicio: ParcelaService, private analisisServicio: AnalisisService,
+    private parcelaServicio: ParcelaService, private analisisServicio: AnalisisService, private alertController: AlertController,
     private modalController: ModalController, private toastController: ToastController) { }
 
   ngOnInit() {
@@ -78,6 +78,7 @@ export class AgregarAnalisisPage implements OnInit {
         },
         error => {
           this.mostrarToast('Error registrando análisis');
+          this.ocultarCarga();
         }
       );
       this.ocultarCarga();
@@ -102,6 +103,19 @@ export class AgregarAnalisisPage implements OnInit {
 
   ocultarCarga() {
     this.carga.dismiss();
+  }
+
+  async confirmarEliminacion(elementoPorAnalisis: DTOElementoXAnalisis) {
+    const alert = await this.alertController.create({
+      header: 'Eliminar',
+      message: '¿Desea eliminar el elemento?',
+      buttons: [{ text: 'Cancelar' }, {
+        text: 'Aceptar', handler: () => {
+          this.eliminarElementoPorAnalisis(elementoPorAnalisis);
+        }
+      }]
+    });
+    await alert.present();
   }
 
   eliminarElementoPorAnalisis(elementoPorAnalisis: DTOElementoXAnalisis) {

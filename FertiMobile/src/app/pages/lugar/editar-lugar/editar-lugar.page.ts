@@ -1,3 +1,4 @@
+import { municipios } from './../../../../assets/municipios';
 import { Component, OnInit } from '@angular/core';
 import { LugarService } from './../../../servicios/lugar.service';
 import { Location } from '@angular/common';
@@ -16,14 +17,16 @@ export class EditarLugarPage implements OnInit {
   enviado = false;
   carga: any;
   lugarSubject: Lugar;
+  municipios: any[];
 
   constructor(private fb: FormBuilder, private location: Location, private toastController: ToastController,
     public loadingController: LoadingController, private lugarServicio: LugarService) { }
 
   ngOnInit() {
+    this.municipios = municipios;
     this.formularioEditarLugar = this.fb.group({
       nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      ubicacion: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+      ubicacion: [null, [Validators.required]]
     });
     this.cargarLugar();
   }
@@ -56,6 +59,7 @@ export class EditarLugarPage implements OnInit {
         },
         error => {
           this.mostrarToast('Error registrando finca');
+          this.ocultarCarga();
         }
       );
     });

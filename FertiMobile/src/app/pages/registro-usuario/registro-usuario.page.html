@@ -79,7 +79,7 @@
 
             <ion-item>
               <ion-label>Rol</ion-label>
-              <ion-select placeholder="Rol" formControlName="rol">
+              <ion-select placeholder="Rol" formControlName="rol" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let rol of roles" [value]="rol.codigo">
                   {{rol.nombre}}
                 </ion-select-option>

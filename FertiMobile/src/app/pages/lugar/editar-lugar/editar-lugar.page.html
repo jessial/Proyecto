@@ -28,17 +28,15 @@
             </div>
 
             <ion-item>
-              <ion-label position="floating">Ubicación</ion-label>
-              <ion-input formControlName="ubicacion" type="text"></ion-input>
+              <ion-label>Municipio</ion-label>
+              <ion-select placeholder="Municipio" formControlName="ubicacion" okText="Aceptar" cancelText="Cancelar">
+                <ion-select-option *ngFor="let mun of municipios" [value]="mun.nombre">
+                  {{mun.nombre | titlecase}}
+                </ion-select-option>
+              </ion-select>
             </ion-item>
             <div *ngIf="enviado && f.ubicacion.errors?.required">
               <p class="error-message">Campo obligatorio.</p>
-            </div>
-            <div *ngIf="enviado && f.ubicacion.errors?.minlength">
-              <p class="error-message">Debe contener mínimo 3 caracteres.</p>
-            </div>
-            <div *ngIf="enviado && f.ubicacion.errors?.maxlength">
-              <p class="error-message">Debe contener máximo 20 caracteres.</p>
             </div>
 
           </form>
