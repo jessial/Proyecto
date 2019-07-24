@@ -33,6 +33,13 @@
           <nz-form-explain *ngIf="enviado && f.aporte.errors?.required">Ingrese el
             aporte
           </nz-form-explain>
+          <nz-form-explain *ngIf="f.aporte.errors?.min">
+            El valor no debe ser menor a 0.
+          </nz-form-explain>
+          <nz-form-explain *ngIf="f.aporte.errors?.max">
+              El valor no debe ser mayor a 100.
+          </nz-form-explain>
+
         </nz-form-control>
       </nz-form-item>
 

@@ -23,15 +23,9 @@ public class ServidorRecursosConfiguracion extends ResourceServerConfigurerAdapt
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/servicio_usuario/guardadoUsuario").permitAll()
 				.antMatchers(HttpMethod.GET, "/servicio_rol/consultaRoles").permitAll()
-				.antMatchers(HttpMethod.POST, "/servicio_recomendacion/generarRecomendacion").permitAll().anyRequest().authenticated()
+				.antMatchers(HttpMethod.GET, "/servicio_seguridad/recuperar_cuenta/**").permitAll().anyRequest().authenticated()
 				.and().cors().configurationSource(corsConfigurationSource());
 
-
-		 /*
-		 * // http.headers().frameOptions().disable();
-		 * http.authorizeRequests().antMatchers("/h2-console/*").permitAll().anyRequest(
-		 * ).anonymous().and().cors() .configurationSource(corsConfigurationSource());
-		 */
 	}
 
 	@Bean
