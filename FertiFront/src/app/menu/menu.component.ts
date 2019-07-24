@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   isCollapsed = false;
   triggerTemplate = null;
   isLoadingTwo = false;
+  size: any = 10;
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
 
 

@@ -102,7 +102,6 @@ public class ControladorDatosRecomendacion {
 		recomendacion.setFechaRecomendacion(new Date());
 		recomendacion.setCodigoRecomendacion(guardar(recomendacion));
 		for (Map.Entry<Long, DTOElementoXAnalisis> pair : elementos.entrySet()) {
-			FuenteXRecomendacion fuenteXRecomendacion = new FuenteXRecomendacion();
 			double ppmElemento = convertirAPPM(pair.getValue());
 			double kgElemento = conversor.convertirPPMAKg(ppmElemento);
 			List<DTORequerimiento> dtoRequerimientos = controladorDatosRequerimiento
@@ -110,20 +109,40 @@ public class ControladorDatosRecomendacion {
 							analisis.getParcela().getTipoCultivo().getCodigoTipoCultivo());
 			double cantidadRequerida = obtenerCantidadElementoRequerimiento(dtoRequerimientos, pair.getKey())
 					- kgElemento;
-			if (cantidadRequerida < 0) {
-				fuenteXRecomendacion.setCantidad(0.0);
-				fuenteXRecomendacion.setCodigoFuente(pair.getKey());
-				fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
-				fuenteXRecomendacion.setCodigoUnidad(3L);
-			} else {
-				fuenteXRecomendacion.setCantidad(cantidadRequerida);
-				fuenteXRecomendacion.setCodigoFuente(pair.getKey());
-				fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
-				fuenteXRecomendacion.setCodigoUnidad(3L);
-			}
-			controladorDatosFuenteXRecomendacion.guardar(fuenteXRecomendacion);
+			construirFuenteXRecomendacion(pair.getKey(), fuentes, cantidadRequerida, analisis, recomendacion);
 		}
 		return construirDTO(recomendacion);
+	}
+
+	private void construirFuenteXRecomendacion(Long key, FuenteParaRecomendacion fuentes,
+			double cantidadRequerida, DTOAnalisis analisis, Recomendacion recomendacion) {
+		double aporte = 0.0;
+		Long codigFuente = null;
+		double area = analisis.getParcela().getArea();
+		if (fuentes.getNitrogeno() != null && key == 1) {
+			aporte = fuentes.getNitrogeno().getTipoFuente().getAporte();
+			codigFuente = fuentes.getNitrogeno().getCodigoFuente();
+		} else if (fuentes.getFosforo() != null && key == 2) {
+			aporte = fuentes.getFosforo().getTipoFuente().getAporte();
+			codigFuente = fuentes.getFosforo().getCodigoFuente();
+		} else if (fuentes.getPotasio() != null && key == 3) {
+			aporte = fuentes.getPotasio().getTipoFuente().getAporte();
+			codigFuente = fuentes.getPotasio().getCodigoFuente();
+		}
+		if(codigFuente != null) {
+			FuenteXRecomendacion fuenteXRecomendacion = new FuenteXRecomendacion();
+			if (cantidadRequerida <= 0) {
+				fuenteXRecomendacion.setCantidad(0.0);
+			} else {
+				double unidad = (aporte * cantidadRequerida);
+				double resultado = area * unidad / 10000;
+				fuenteXRecomendacion.setCantidad(resultado);
+			}
+			fuenteXRecomendacion.setCodigoFuente(codigFuente);
+			fuenteXRecomendacion.setCodigoRecomendacion(recomendacion.getCodigoRecomendacion());
+			fuenteXRecomendacion.setCodigoUnidad(3L);
+			controladorDatosFuenteXRecomendacion.guardar(fuenteXRecomendacion);
+		}
 	}
 
 	private double obtenerCantidadElementoRequerimiento(List<DTORequerimiento> dtoRequerimientos, Long codigoElemento) {
