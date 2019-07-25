@@ -1,5 +1,7 @@
 package controladores;
 
+import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -15,9 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import constantes.MensajesConstantes;
+import dominio.Usuario;
 import dominio.UsuarioSeguridad;
+import excepciones.ExcepcionSeguridad;
 import persistencia.entidad.UsuarioSeguridadEntidad;
 import persistencia.repositorio.UsuarioSeguridadRepository;
+import utilidades.ServicioEnvioCorreos;
 
 @Service
 public class ControladorSeguridad implements UserDetailsService {
@@ -27,11 +33,14 @@ public class ControladorSeguridad implements UserDetailsService {
 
 	@Autowired
 	ControladorDatosRol controladorDatosRol;
-	
+
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
-	private static final String semilla = "FERTIAPP_";
+
+	@Autowired
+	private ControladorDatosUsuario controladorDatosUsuario;
+
+	private static final String SEMILLA = "FERTIAPP_";
 
 	@Override
 	@Transactional(readOnly = true)
@@ -44,11 +53,12 @@ public class ControladorSeguridad implements UserDetailsService {
 		}
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(controladorDatosRol.consultarRolPorCodigo(usuarioEntidad.getCodigorol()).getTipoRol()));
+		authorities.add(new SimpleGrantedAuthority(
+				controladorDatosRol.consultarRolPorCodigo(usuarioEntidad.getCodigorol()).getTipoRol()));
 		return new User(usuarioEntidad.getNombreUsuario(), usuarioEntidad.getPassword(), usuarioEntidad.isEstado(),
 				true, true, true, authorities);
 	}
-	
+
 	public void guardarUsuario(UsuarioSeguridad usuario) {
 		usuarioRepository.save(convertirAEntidad(usuario));
 	}
@@ -61,25 +71,32 @@ public class ControladorSeguridad implements UserDetailsService {
 		usuarioEntidad.setCodigorol(usuario.getRol().getCodigo());
 		return usuarioEntidad;
 	}
-	
+
 	public void guardarUsuario(UsuarioSeguridadEntidad usuario) {
 		usuarioRepository.save(usuario);
 	}
-	
-	public String cambiarClave(long codigoUsuario) {
-		String stringCodigoUsuario = (Long.toString(codigoUsuario));
+
+	public String cambiarClave(Long cedula) {
+		String stringCodigoUsuario = (Long.toString(cedula));
 		UsuarioSeguridadEntidad usuarioEntidad = usuarioRepository.findByNombreUsuario(stringCodigoUsuario);
 		if (usuarioEntidad == null) {
-			throw new UsernameNotFoundException(stringCodigoUsuario);
+			throw new ExcepcionSeguridad(MessageFormat
+					.format(MensajesConstantes.ERROR_RECUPERANDO_USUARIO_NO_ENCONTRADO, stringCodigoUsuario));
 		}
-		String nuevoPassword = crearPassword(); 
+		String nuevoPassword = crearPassword();
 		usuarioEntidad.setPassword(passwordEncoder.encode(nuevoPassword));
 		guardarUsuario(usuarioEntidad);
+		Usuario usuario = controladorDatosUsuario.consultarPorCedula(cedula);
+		try {
+			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario.getEmail(), nuevoPassword);
+		} catch (IOException e) {
+			throw new ExcepcionSeguridad(MensajesConstantes.ERROR_ENVIANDO_CORREO);
+		}
 		return nuevoPassword;
 	}
 
 	private String crearPassword() {
-		return semilla + Calendar.getInstance().getTimeInMillis();	
+		return SEMILLA + Calendar.getInstance().getTimeInMillis();
 	}
 
 }
