@@ -1,9 +1,9 @@
-import { Fuente } from './../clases_dominio/fuente';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoFuente } from '../clases_dominio/tipo-fuente';
 import { FuenteService } from '../servicios/fuente.service';
 import { TipoFuenteService } from '../servicios/tipo-fuente.service';
+import { Fuente } from './../clases_dominio/fuente';
 
 @Component({
   selector: 'app-form-fuente',
@@ -32,6 +32,10 @@ export class FormFuenteComponent {
   submit() {
     this.enviado = true;
     if (this.formularioAgregarFuente.invalid) {
+      this.f.tipoFuente.markAsDirty();
+      this.f.tipoFuente.updateValueAndValidity();
+      this.f.producto.markAsDirty();
+      this.f.producto.updateValueAndValidity();
       return null;
     }
     const fuente = new Fuente();

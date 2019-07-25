@@ -73,6 +73,12 @@ export class FormRequerimientosCultivoEdicionComponent implements OnInit {
     this.servicioRequerimientos.getRequerimientosPorCultivo()
       .subscribe(resultado => {
         if (this.formularioAgregarRequerimiento.invalid) {
+          this.f.tipoCultivo.markAsDirty();
+          this.f.tipoCultivo.updateValueAndValidity();
+          this.f.elemento.markAsDirty();
+          this.f.elemento.updateValueAndValidity();
+          this.f.cantidad.markAsDirty();
+          this.f.cantidad.updateValueAndValidity();
           return null;
         }
         const numero = resultado
