@@ -108,7 +108,7 @@ public class ControladorDatosLugar extends ControladorDatos {
 	public void eliminarLugar(Long codigoLugar) {
 		List<ParcelaEntidad> lugaresAsociados = parcelaRepository.findByCodigoLugar(codigoLugar);
 		if (!lugaresAsociados.isEmpty())
-			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_USUARIO);
+			throw new ExcepcionClaveForanea(MensajesConstantes.ERROR_ASOCIACION_LUGAR_PARCELA);
 		lugarRepository.deleteById(codigoLugar);
 	}
 }
