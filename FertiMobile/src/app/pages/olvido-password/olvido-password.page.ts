@@ -33,6 +33,7 @@ export class OlvidoPasswordPage implements OnInit {
       this.seguridadService.recuperarPassword(this.f.documento.value).subscribe(succ => {
         this.mostrarToast('Contraseña enviada.');
         this.ocultarCarga();
+        this.router.navigateByUrl('/');
       }, err => {
         this.mostrarToast(err.error.message);
         this.ocultarCarga();

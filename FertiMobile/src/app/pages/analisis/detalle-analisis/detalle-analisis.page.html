@@ -34,6 +34,9 @@
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <ion-label *ngIf="recomendacion.recomendacionXFuente.length === 0">El análisis seleccionado no contiene los
+          elementos
+          mayores (Nitrógeno, Fosforo, Potasio).</ion-label>
         <ng-container *ngFor="let recomendacionXFuente of recomendacion.recomendacionXFuente">
           <strong>{{recomendacionXFuente.fuente.producto}}:&nbsp;</strong>
           <ion-label>{{recomendacionXFuente.cantidad}}</ion-label>
