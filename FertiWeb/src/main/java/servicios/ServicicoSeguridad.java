@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-
 import controladores.ControladorDatosUsuario;
 import controladores.ControladorSeguridad;
 import dominio.Usuario;
@@ -21,7 +19,7 @@ public class ServicicoSeguridad {
 
 	@Autowired
 	private ControladorDatosUsuario controladorDatosUsuario;
-	
+
 	@Autowired
 	private ControladorSeguridad controladorSeguridad;
 
@@ -37,5 +35,5 @@ public class ServicicoSeguridad {
 		}
 		return new ResponseEntity<>(null, HttpStatus.CREATED);
 	}
-	
+
 }

@@ -6,7 +6,7 @@ public final class MensajesConstantes {
 
 	public static final String ERROR_ASOCIACION_PARCELA = "No es posible eliminar el tipo de cultivo ya que se encuentra asociado a una parcela.";
 
-	public static final String ERROR_ASOCIACION_LUGAR_PARCELA = "No es posible eliminar el lugar ya que se encuentra asociado a una parcela.";
+	public static final String ERROR_ASOCIACION_LUGAR_PARCELA = "No es posible eliminar la finca ya que se encuentra asociado a una parcela.";
 
 	public static final String ERROR_ASOCIACION_USUARIO = "No es posible eliminar el rol ya que se encuentra asociado a un usuario.";
 
