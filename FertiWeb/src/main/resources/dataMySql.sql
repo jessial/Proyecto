@@ -18,5 +18,7 @@ INSERT IGNORE INTO elementos VALUES (12, 'Zinc', 65.37, 2);
 INSERT IGNORE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (1,'Administrador',false, 'ROLE_ADMIN');
 INSERT IGNORE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (2,'Productor',true, 'ROLE_USER');
 INSERT IGNORE INTO rol (`rol_codigo`,`rol_nombre`,`rol_estado`, `rol_tipo`) VALUES (3,'Almacenista',true, 'ROLE_USER');
-INSERT IGNORE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(1, 'Administrador', '$2a$10$OErv.iLt03pww2NcIyTgWu3kmUc5mapfOzrNTdEae9KKFfYOw.Kqa', true, 1);
+INSERT IGNORE INTO Usuario_Seguridad (`id_usuario`, `nombre_usuario`,`password`,`estado`,`codigorol`) VALUES(1, 159753, '$2a$10$OErv.iLt03pww2NcIyTgWu3kmUc5mapfOzrNTdEae9KKFfYOw.Kqa', true, 1);
+INSERT IGNORE INTO usuario (`usu_cedula`, `usu_apellido`, `usu_codigo_rol`, `usu_email`, `usu_nombre`, `usu_password`, `usu_telefono`) VALUES (159753, 'Administrador', '1', 'jessica.alarcon9124@gmail.com', 'Administrador', 'administrador', '123456789');
+
 

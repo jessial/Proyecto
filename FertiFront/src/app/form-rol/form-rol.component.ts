@@ -29,6 +29,8 @@ export class FormRolComponent {
   submit() {
     this.enviado = true;
     if (this.formularioAgregarRol.invalid) {
+      this.f.nombre.markAsDirty();
+      this.f.nombre.updateValueAndValidity();
       return null;
     }
     const rol = new Rol();

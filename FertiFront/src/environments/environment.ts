@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  URL_BASE: 'https://fertiweb-pruebas.herokuapp.com'
+  // URL_BASE: 'https://fertiweb-pruebas.herokuapp.com'
+  URL_BASE: 'http://localhost:8080'
+
 };
 
 /*

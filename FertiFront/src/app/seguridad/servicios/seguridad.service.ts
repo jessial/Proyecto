@@ -22,6 +22,7 @@ export class SeguridadService {
   private loginUrl = `${environment.URL_BASE}/oauth/token`;  // URL to web api
   private router: Router;
   private _isLogged: boolean = false;
+  private seguridadUrl = `${environment.URL_BASE}/servicio_seguridad`;
   private _token: string;
 
   constructor(private http: HttpClient, private servicioLocal: LocalService) { }
@@ -67,5 +68,10 @@ export class SeguridadService {
 
   hasRolAdmin(role: string): boolean {
     return true;
+  }
+
+  recuperarPassword() {
+    const url = `${this.seguridadUrl}/recuperar_cuenta/159753`;
+    return this.http.get(url);
   }
 }
