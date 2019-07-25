@@ -3,7 +3,6 @@ package controladores;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class ControladorSeguridad implements UserDetailsService {
 	@Autowired
 	private ControladorDatosUsuario controladorDatosUsuario;
 
-	private static final String SEMILLA = "FERTIAPP_";
 
 	@Override
 	@Transactional(readOnly = true)
@@ -76,27 +74,19 @@ public class ControladorSeguridad implements UserDetailsService {
 		usuarioRepository.save(usuario);
 	}
 
-	public String cambiarClave(Long cedula) {
+	public void cambiarClave(Long cedula) {
 		String stringCodigoUsuario = (Long.toString(cedula));
 		UsuarioSeguridadEntidad usuarioEntidad = usuarioRepository.findByNombreUsuario(stringCodigoUsuario);
 		if (usuarioEntidad == null) {
 			throw new ExcepcionSeguridad(MessageFormat
 					.format(MensajesConstantes.ERROR_RECUPERANDO_USUARIO_NO_ENCONTRADO, stringCodigoUsuario));
 		}
-		String nuevoPassword = crearPassword();
-		usuarioEntidad.setPassword(passwordEncoder.encode(nuevoPassword));
-		guardarUsuario(usuarioEntidad);
 		Usuario usuario = controladorDatosUsuario.consultarPorCedula(cedula);
 		try {
-			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario.getEmail(), nuevoPassword);
+			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario.getEmail(), usuario.getPassword());
 		} catch (IOException e) {
 			throw new ExcepcionSeguridad(MensajesConstantes.ERROR_ENVIANDO_CORREO);
 		}
-		return nuevoPassword;
-	}
-
-	private String crearPassword() {
-		return SEMILLA + Calendar.getInstance().getTimeInMillis();
 	}
 
 }
