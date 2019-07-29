@@ -83,7 +83,7 @@ public class ControladorSeguridad implements UserDetailsService {
 		}
 		Usuario usuario = controladorDatosUsuario.consultarPorCedula(cedula);
 		try {
-			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario.getEmail(), usuario.getPassword());
+			ServicioEnvioCorreos.EnviarCorreoSG.enviarCorreo(usuario);
 		} catch (IOException e) {
 			throw new ExcepcionSeguridad(MensajesConstantes.ERROR_ENVIANDO_CORREO);
 		}
