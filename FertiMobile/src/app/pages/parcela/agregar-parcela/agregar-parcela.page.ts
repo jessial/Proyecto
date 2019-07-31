@@ -64,6 +64,7 @@ export class AgregarParcelaPage implements OnInit {
         },
         error => {
           this.mostrarToast('Éxito registrando parcela');
+          this.ocultarCarga();
         }
       );
     });

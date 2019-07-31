@@ -18,6 +18,7 @@ const httpOptions = {
 export class SeguridadService {
 
   private loginUrl = `${environment.URL_BASE}/oauth/token`;
+  private seguridadUrl = `${environment.URL_BASE}/servicio_seguridad`;
   private _isLogged = false;
   private _token: string;
 
@@ -68,6 +69,11 @@ export class SeguridadService {
       return httpHeaders.append('Authorization', 'Bearer ' + this._token);
     }
     return httpHeaders;
+  }
+
+  recuperarPassword(documento: number) {
+    const url = `${this.seguridadUrl}/recuperar_cuenta/${documento}`;
+    return this.http.get(url);
   }
 
 }

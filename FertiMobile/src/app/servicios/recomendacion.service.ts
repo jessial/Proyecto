@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DTORecomendacion } from '../dto/dto-recomendacion';
 import { FuenteParaRecomendacion } from './../dto/fuente-para-recomendacion';
@@ -15,6 +15,8 @@ const httpOptions = {
 export class RecomendacionService {
 
   private recomendacionURL = `${environment.URL_BASE}/servicio_recomendacion`;  // URL to web api
+  private recomendaciones: DTORecomendacion[];
+  private recomendacionesSubject = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +29,23 @@ export class RecomendacionService {
   public generarRecomendacion(fuenteParaRecomendacion: FuenteParaRecomendacion): Observable<DTORecomendacion> {
     const url = `${this.recomendacionURL}/generarRecomendacion`;
     return this.http.post<DTORecomendacion>(url, fuenteParaRecomendacion, httpOptions);
+  }
+
+  cargarDatos(idAnalisis: number) {
+    this.getBackRecomendaciones(idAnalisis)
+      .subscribe(result => {
+        this.recomendaciones = result;
+        this.refresh();
+      }
+      );
+  }
+
+  private refresh() {
+    this.recomendacionesSubject.next(this.recomendaciones);
+  }
+
+  getRecomendaciones(): Observable<DTORecomendacion[]> {
+    return this.recomendacionesSubject.asObservable();
   }
 
 }

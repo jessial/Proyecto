@@ -4,7 +4,7 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzPrefixIcon="anticon anticon-edit">
-            <input type="text" nz-input formControlName="nombre" placeholder="Nombre">
+            <input type="text" nz-input formControlName="nombre" placeholder="Nombre" nzRequired>
           </nz-input-group>
           <nz-form-explain *ngIf="enviado && f.nombre.errors?.required">Ingrese el
             nombre

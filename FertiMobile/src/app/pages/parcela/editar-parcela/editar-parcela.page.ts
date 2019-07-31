@@ -76,6 +76,7 @@ export class EditarParcelaPage implements OnInit {
         },
         error => {
           this.mostrarToast('Error registrando parcela');
+          this.ocultarCarga();
         }
       );
     });

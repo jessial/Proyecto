@@ -40,6 +40,12 @@ export class FormTipoFuenteComponent {
   submit() {
     this.enviado = true;
     if (this.formularioAgregarTipoFuente.invalid) {
+      this.f.nombre.markAsDirty();
+      this.f.nombre.updateValueAndValidity();
+      this.f.elemento.markAsDirty();
+      this.f.elemento.updateValueAndValidity();
+      this.f.aporte.markAsDirty();
+      this.f.aporte.updateValueAndValidity();
       return null;
     }
     const tipoFuente = new TipoFuente();

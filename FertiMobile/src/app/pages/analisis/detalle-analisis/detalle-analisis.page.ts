@@ -19,7 +19,8 @@ export class DetalleAnalisisPage implements OnInit {
 
   ngOnInit() {
     this.analisisADetallar = this.analisisServicio.getDetalleAnalisis();
-    this.recomendacionServicio.getBackRecomendaciones(this.analisisADetallar.codigoAnalisis).subscribe(recomendaciones => {
+    this.recomendacionServicio.cargarDatos(this.analisisADetallar.codigoAnalisis);
+    this.recomendacionServicio.getRecomendaciones().subscribe(recomendaciones => {
       this.recomendaciones = recomendaciones;
     });
   }

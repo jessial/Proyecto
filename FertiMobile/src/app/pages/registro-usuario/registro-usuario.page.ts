@@ -26,7 +26,7 @@ export class RegistroUsuarioPage implements OnInit {
   ngOnInit() {
     this.rolServicio.cargarDatos();
     this.rolServicio.getRoles().subscribe(roles => {
-      this.roles = roles;
+      this.roles = roles.filter(rol => rol.codigo !== 1);
     });
     this.formularioRegistroUsuario = this.fb.group({
       numeroIdentificacion: [null, [Validators.required, Validators.min(100), Validators.max(9999999999)]],

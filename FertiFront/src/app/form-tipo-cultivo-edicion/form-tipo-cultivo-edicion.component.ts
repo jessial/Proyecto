@@ -43,6 +43,10 @@ export class FormTipoCultivoEdicionComponent implements OnInit {
   submit() {
     this.enviado = true;
     if (this.formularioEditarTipoCultivo.invalid) {
+      this.f.nombre.markAsDirty();
+      this.f.nombre.updateValueAndValidity();
+      this.f.variedad.markAsDirty();
+      this.f.variedad.updateValueAndValidity();
       return null;
     }
     this.tipoCultivoSubject.nombre = this.f.nombre.value;

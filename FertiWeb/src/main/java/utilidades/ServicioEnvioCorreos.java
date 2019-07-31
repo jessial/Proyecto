@@ -1,6 +1,9 @@
 package utilidades;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -13,6 +16,8 @@ import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
+
+import dominio.Usuario;
 
 public class ServicioEnvioCorreos {
 
@@ -39,8 +44,6 @@ public class ServicioEnvioCorreos {
 
 			return request.getBody();
 		}
-
-
 	}
 
 	public static class EnviarCorreoSG {
@@ -49,11 +52,11 @@ public class ServicioEnvioCorreos {
 			throw new IllegalStateException("EnviarCorreoSG class");
 		}
 
-		public static void enviarCorreo(String correo, String nuevaClave) throws IOException {
+		public static void enviarCorreo(Usuario usuario) throws IOException {
 			Email from = new Email("app138744986@heroku.com");
 			String subject = "Cambio de clave FERTIAPP";
-			Email to = new Email(correo);
-			Content content = new Content("text/plain",  "NUEVA CLAVE: " + nuevaClave);
+			Email to = new Email(usuario.getEmail());
+			Content content = new Content("text/html",  crearMensajeEmail(usuario));
 			Mail mail = new Mail(from, subject, to, content);
 
 			SendGrid sg = new SendGrid(API_KEY);
@@ -69,6 +72,30 @@ public class ServicioEnvioCorreos {
 			} catch (IOException ex) {
 				throw ex;
 			}
+		}
+		
+		public static String crearMensajeEmail(Usuario usuario) {
+			StringBuilder correo = new StringBuilder();
+			String fechaSolicitud = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
+			correo.append("<head><style type=\"text/css\">  .green { color: #28bc51; }</style><meta charset=\"utf-8\"></head>")
+					.append("Cordial saludo, <strong>")
+					.append(usuario.getNombre() + " " + usuario.getApellido())
+					.append( " </strong><br><br>Se le informa que se ha solicitado una recuperacion de clave en <strong class=\"green\">")
+					.append("FertiApp </strong> ")
+					.append("<br></h4> <br>Los datos del usuario son los siguientes:  </strong><br> <br><strong> Nombre del Usuario: </strong>")
+					.append(usuario.getNombre() + " " + usuario.getApellido())
+					.append("<br><strong>Identificacion Usuario: </strong> ")
+					.append(usuario.getCedula())
+					.append("<br><strong>Clave Usuario: </strong> ")
+					.append(usuario.getPassword())
+					.append("<br><strong>Fecha de solicitud: </strong>")
+					.append(fechaSolicitud)
+					.append("<br><strong>Telefono: </strong>")
+					.append(usuario.getTelefono())
+					.append("<br><strong>Correo Electronico: </strong>")
+					.append(usuario.getEmail())
+					.append("<br> <br>Gracias.");
+			return correo.toString();
 		}
 
 	}

@@ -15,7 +15,7 @@
           <form [formGroup]="formularioAgregarAnalisis">
             <ion-item>
               <ion-label>Parcela</ion-label>
-              <ion-select placeholder="Seleccione..." formControlName="parcela">
+              <ion-select placeholder="Seleccione..." formControlName="parcela" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let parcela of parcelas" [value]="parcela">
                   {{parcela.lugar.nombre}} {{parcela.area | number}} (m²)
                 </ion-select-option>
@@ -26,7 +26,9 @@
             </div>
             <ion-item>
               <ion-label>Fecha análisis</ion-label>
-              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaAnalisis" [max]="fechaMaximaAnalisis">
+              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaAnalisis" [max]="fechaMaximaAnalisis"
+                doneText="Aceptar" cancelText="Cancelar"
+                monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic">
               </ion-datetime>
             </ion-item>
             <div *ngIf="enviado && f.fechaAnalisis.errors?.required">
@@ -42,7 +44,7 @@
             <ion-item *ngFor="let elementoXAnalisis of elementosXAnalisis">
               <ion-label>{{elementoXAnalisis.elemento.elemento}} -
                 {{elementoXAnalisis.cantidad}} {{elementoXAnalisis.unidad.nombreUnidad}}</ion-label>
-              <ion-icon side="end" name="trash" (click)="eliminarElementoPorAnalisis(elementoXAnalisis)"></ion-icon>
+              <ion-icon side="end" name="trash" (click)="confirmarEliminacion(elementoXAnalisis)"></ion-icon>
             </ion-item>
           </ion-list>
         </div>

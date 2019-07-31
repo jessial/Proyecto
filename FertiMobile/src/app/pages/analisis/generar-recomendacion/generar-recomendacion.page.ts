@@ -69,11 +69,13 @@ export class GenerarRecomendacionPage implements OnInit {
       this.recomendacionServicio.generarRecomendacion(fuente).subscribe(
         resp => {
           this.mostrarToast('Éxito generando recomendación');
+          this.recomendacionServicio.cargarDatos(this.analisisServicio.getDetalleAnalisis().codigoAnalisis);
           this.location.back();
           this.ocultarCarga();
         },
         error => {
           this.mostrarToast('Error generando recomendación');
+          this.ocultarCarga();
         }
       );
     });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rol } from '../clases_dominio/rol';
 import { RolService } from '../servicios/rol.service';
 
@@ -42,6 +42,8 @@ export class FormRolEdicionComponent implements OnInit {
   submit() {
     this.enviado = true;
     if (this.formularioEditarRol.invalid) {
+      this.f.nombre.markAsDirty();
+      this.f.nombre.updateValueAndValidity();
       return null;
     }
     this.rolSubject.nombre = this.f.nombre.value;

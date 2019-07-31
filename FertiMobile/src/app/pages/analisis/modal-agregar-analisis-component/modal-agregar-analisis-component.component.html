@@ -17,7 +17,7 @@
           <form [formGroup]="formularioAgregarElemento">
             <ion-item>
               <ion-label>Elemento</ion-label>
-              <ion-select placeholder="Seleccione..." formControlName="elemento">
+              <ion-select placeholder="Seleccione..." formControlName="elemento" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let elemento of elementos" [value]="elemento">
                   {{elemento.elemento}}
                 </ion-select-option>
@@ -37,12 +37,12 @@
               <p class="error-message">Debe ser mínimo 1.</p>
             </div>
             <div *ngIf="enviado && f.cantidad.errors?.max">
-              <p class="error-message">Debe ser máximo 999999999.</p>
+              <p class="error-message">Debe ser máximo 100.</p>
             </div>
 
             <ion-item>
               <ion-label>Unidad</ion-label>
-              <ion-select placeholder="Seleccione..." formControlName="unidad">
+              <ion-select placeholder="Seleccione..." formControlName="unidad" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let unidad of unidades" [value]="unidad">
                   {{unidad.nombreUnidad}}
                 </ion-select-option>

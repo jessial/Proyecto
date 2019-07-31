@@ -30,7 +30,8 @@ const routes: Routes = [
   { path: 'inicio-sesion', loadChildren: './pages/inicio-sesion/inicio-sesion.module#InicioSesionPageModule' },
   { path: 'registro-usuario', loadChildren: './pages/registro-usuario/registro-usuario.module#RegistroUsuarioPageModule' },
   { path: 'agregar-analisis', loadChildren: './pages/analisis/agregar-analisis/agregar-analisis.module#AgregarAnalisisPageModule' },
-  { path: 'detalle-analisis', loadChildren: './pages/analisis/detalle-analisis/detalle-analisis.module#DetalleAnalisisPageModule' },  { path: 'generar-recomendacion', loadChildren: './pages/analisis/generar-recomendacion/generar-recomendacion.module#GenerarRecomendacionPageModule' }
+  { path: 'detalle-analisis', loadChildren: './pages/analisis/detalle-analisis/detalle-analisis.module#DetalleAnalisisPageModule' },  { path: 'generar-recomendacion', loadChildren: './pages/analisis/generar-recomendacion/generar-recomendacion.module#GenerarRecomendacionPageModule' },
+  { path: 'olvido-password', loadChildren: './pages/olvido-password/olvido-password.module#OlvidoPasswordPageModule' }
 
 
 ];

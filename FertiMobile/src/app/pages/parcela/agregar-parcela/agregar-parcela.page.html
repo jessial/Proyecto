@@ -16,7 +16,7 @@
 
             <ion-item>
               <ion-label>Lugar</ion-label>
-              <ion-select placeholder="Lugar" formControlName="lugar">
+              <ion-select placeholder="Lugar" formControlName="lugar" okText="Aceptar" cancelText="Cancelar">
                 <ion-select-option *ngFor="let lugar of lugares" [value]="lugar">
                   {{lugar.nombre}}
                 </ion-select-option>
@@ -28,7 +28,8 @@
 
             <ion-item>
               <ion-label>Tipo cultivo</ion-label>
-              <ion-select placeholder="Tipo cultivo" formControlName="tipoCultivo">
+              <ion-select placeholder="Tipo cultivo" formControlName="tipoCultivo" okText="Aceptar"
+                cancelText="Cancelar">
                 <ion-select-option *ngFor="let tipoCultivo of tiposCultivo" [value]="tipoCultivo">
                   {{tipoCultivo.nombre}} {{tipoCultivo.variedad}}
                 </ion-select-option>
@@ -54,7 +55,9 @@
 
             <ion-item>
               <ion-label>Fecha siembra</ion-label>
-              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra">
+              <ion-datetime display-format="DD MMM YYYY" formControlName="fechaSiembra" [max]="fechaMaximaSiembra"
+                doneText="Aceptar" cancelText="Cancelar"
+                monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic">
               </ion-datetime>
             </ion-item>
             <div *ngIf="enviado && f.fechaSiembra.errors?.required">

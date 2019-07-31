@@ -48,6 +48,10 @@ export class FormFuenteEdicionComponent implements OnInit {
   submit() {
     this.enviado = true;
     if (this.formularioEditarFuente.invalid) {
+      this.f.tipoFuente.markAsDirty();
+      this.f.tipoFuente.updateValueAndValidity();
+      this.f.producto.markAsDirty();
+      this.f.producto.updateValueAndValidity();
       return null;
     }
     this.fuenteSubject.producto = this.f.producto.value;

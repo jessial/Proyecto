@@ -1,28 +1,36 @@
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-control>
-        <nz-input-group nzPrefixIcon="anticon anticon-user">
-          <input type="text" nz-input formControlName="userName" placeholder="Cedula">
-        </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Por favor
-          ingrese su numero de cedula !</nz-form-explain>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control>
-        <nz-input-group nzPrefixIcon="anticon anticon-lock">
-          <input type="password" nz-input formControlName="password" placeholder="Contraseña">
-        </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Por favor
-          ingrese su contraseña!</nz-form-explain>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control>
-        <label nz-checkbox formControlName="remember">
-          <span>Recordar mi contraseña</span>
-        </label>
-        <button nz-button class="login-form-button" [nzType]="'primary'">Ingresar</button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-user">
+        <input type="text" nz-input formControlName="userName" placeholder="Cedula">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Por favor
+        ingrese su numero de cedula !</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-lock">
+        <input type="password" nz-input formControlName="password" placeholder="Contraseña">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Por favor
+        ingrese su contraseña!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox formControlName="remember">
+        <span>Recordar mi contraseña</span>
+      </label>
+      <button nz-button class="login-form-button" [nzType]="'primary'">Ingresar</button>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row>
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <label>
+        <span><a (click)="recuperarContrasena()">Recuperar contraseña</a></span>
+      </label>
+    </nz-form-control>
+  </nz-form-item>
+</form>

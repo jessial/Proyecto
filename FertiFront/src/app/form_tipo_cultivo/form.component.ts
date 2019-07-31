@@ -32,6 +32,10 @@ export class FormComponent {
   submit() {
     this.enviado = true;
     if (this.formularioAgregarTipoCultivo.invalid) {
+      this.f.nombre.markAsDirty();
+      this.f.nombre.updateValueAndValidity();
+      this.f.variedad.markAsDirty();
+      this.f.variedad.updateValueAndValidity();
       return null;
     }
     const tipoCultivo = new TipoCultivo();
