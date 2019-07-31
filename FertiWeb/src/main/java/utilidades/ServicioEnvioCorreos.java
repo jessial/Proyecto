@@ -3,6 +3,7 @@ package utilidades;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -75,7 +76,7 @@ public class ServicioEnvioCorreos {
 		
 		public static String crearMensajeEmail(Usuario usuario) {
 			StringBuilder correo = new StringBuilder();
-			String fechaSolicitud = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance());
+			String fechaSolicitud = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
 			correo.append("<head><style type=\"text/css\">  .green { color: #28bc51; }</style><meta charset=\"utf-8\"></head>")
 					.append("Cordial saludo, <strong>")
 					.append(usuario.getNombre() + " " + usuario.getApellido())
