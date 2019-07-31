@@ -16,7 +16,7 @@ public final class MensajesConstantes {
 
 	public static final String ERROR_ASOCIACION_ANALISIS = "No es posible eliminar la parcela ya que se encuentra asociada a un análisis.";
 
-	public static final String ERROR_RECUPERANDO_USUARIO_NO_ENCONTRADO = "No se encontr&oacute; usuario registrado con el documento {0}.";
+	public static final String ERROR_RECUPERANDO_USUARIO_NO_ENCONTRADO = "No se encuentra usuario registrado con el documento {0}.";
 
 	public static final String ERROR_ENVIANDO_CORREO = "No fue posible enviar el correo electrónico, por favor contacta con el administrador.";
 

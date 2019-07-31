@@ -1,6 +1,7 @@
 package utilidades;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.mashape.unirest.http.HttpResponse;
@@ -74,10 +75,11 @@ public class ServicioEnvioCorreos {
 		
 		public static String crearMensajeEmail(Usuario usuario) {
 			StringBuilder correo = new StringBuilder();
+			String fechaSolicitud = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(Calendar.getInstance());
 			correo.append("<head><style type=\"text/css\">  .green { color: #28bc51; }</style><meta charset=\"utf-8\"></head>")
 					.append("Cordial saludo, <strong>")
 					.append(usuario.getNombre() + " " + usuario.getApellido())
-					.append( " </strong><br><br>Se le informa que se ha solicitud una recuperacion de clave en <strong class=\"green\">")
+					.append( " </strong><br><br>Se le informa que se ha solicitado una recuperacion de clave en <strong class=\"green\">")
 					.append("FertiApp </strong> ")
 					.append("<br></h4> <br>Los datos del usuario son los siguientes:  </strong><br> <br><strong> Nombre del Usuario: </strong>")
 					.append(usuario.getNombre() + " " + usuario.getApellido())
@@ -86,7 +88,7 @@ public class ServicioEnvioCorreos {
 					.append("<br><strong>Clave Usuario: </strong> ")
 					.append(usuario.getPassword())
 					.append("<br><strong>Fecha de solicitud: </strong>")
-					.append(Calendar.getInstance())
+					.append(fechaSolicitud)
 					.append("<br><strong>Telefono: </strong>")
 					.append(usuario.getTelefono())
 					.append("<br><strong>Correo Electronico: </strong>")
